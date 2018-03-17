@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.GongyingshangMapperPro">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Gongyingshang">
+		<id column="Id" property="id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="fdid" property="fdid" jdbcType="INTEGER" />
+		<result column="gysbh" property="gysbh" jdbcType="VARCHAR" />
+		<result column="gysmc" property="gysmc" jdbcType="VARCHAR" />
+		<result column="gysmcjp" property="gysmcjp" jdbcType="VARCHAR" />
+		<result column="gyslxdh" property="gyslxdh" jdbcType="VARCHAR" />
+		<result column="gyslxr" property="gyslxr" jdbcType="VARCHAR" />
+		<result column="gysxxdz" property="gysxxdz" jdbcType="VARCHAR" />
+		<result column="gysywy" property="gysywy" jdbcType="VARCHAR" />
+		<result column="gysywydh" property="gysywydh" jdbcType="VARCHAR" />
+		<result column="gysywysfz" property="gysywysfz" jdbcType="VARCHAR" />
+		<result column="gysyzbm" property="gysyzbm" jdbcType="VARCHAR" />
+		<result column="gyslyxdz" property="gyslyxdz" jdbcType="VARCHAR" />
+		<result column="gysyyzz" property="gysyyzz" jdbcType="VARCHAR" />
+		<result column="gysyyzzqx" property="gysyyzzqx" jdbcType="DATE" />
+		<result column="gysyyzzfzrq" property="gysyyzzfzrq" jdbcType="DATE" />
+		<result column="gysfrdb" property="gysfrdb" jdbcType="VARCHAR" />
+		<result column="gysjyxz" property="gysjyxz" jdbcType="VARCHAR" />
+		<result column="gyszczb" property="gyszczb" jdbcType="VARCHAR" />
+		<result column="gysjyfs" property="gysjyfs" jdbcType="VARCHAR" />
+		<result column="gysscjyxkz" property="gysscjyxkz" jdbcType="VARCHAR" />
+		<result column="gysxkzmc" property="gysxkzmc" jdbcType="VARCHAR" />
+		<result column="gysxkzdz" property="gysxkzdz" jdbcType="VARCHAR" />
+		<result column="gysxkzbh" property="gysxkzbh" jdbcType="VARCHAR" />
+		<result column="gysxkzfzdw" property="gysxkzfzdw" jdbcType="VARCHAR" />
+		<result column="gysxkzyxq" property="gysxkzyxq" jdbcType="DATE" />
+		<result column="gysxkzfzrq" property="gysxkzfzrq" jdbcType="DATE" />
+		<result column="gysgspzj" property="gysgspzj" jdbcType="VARCHAR" />
+		<result column="gysgspfzr" property="gysgspfzr" jdbcType="VARCHAR" />
+		<result column="gysgspzjyxq" property="gysgspzjyxq" jdbcType="DATE" />
+		<result column="gysinfo1" property="gysinfo1" jdbcType="VARCHAR" />
+		<result column="gysinfo2" property="gysinfo2" jdbcType="VARCHAR" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+		<result column="dm" property="dm" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs"
+		extends="BaseResultMap">
+		<result column="gysjyfw" property="gysjyfw" jdbcType="LONGVARCHAR" />
+		<result column="gysbz" property="gysbz" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		Id, jtid, fdid, gysbh, gysmc, gysmcjp, gyslxdh, gyslxr,
+		gysxxdz, gysywy,
+		gysywydh,
+		gysywysfz, gysyzbm, gyslyxdz, gysyyzz,
+		gysyyzzqx, gysyyzzfzrq, gysfrdb, gysjyxz,
+		gyszczb, gysjyfs, gysscjyxkz,
+		gysxkzmc, gysxkzdz, gysxkzbh,
+		gysxkzfzdw, gysxkzyxq,
+		gysxkzfzrq,
+		gysgspzj, gysgspfzr, gysgspzjyxq, gysinfo1, gysinfo2, zt, dm
+	</sql>
+	<sql id="Blob_Column_List">
+		gysjyfw, gysbz
+	</sql>
+
+	<select id="Gongyingshangquery" resultMap="BaseResultMap">
+		select *
+		from
+		hjt_gongyingshang
+		where zt=0
+	</select>
+	<select id="selectBygysbhWithBLOBs" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.String">
+		select *
+		from hjt_gongyingshang
+		where gysbh=#{_parameter}
+		and zt=0
+	</select>
+
+</mapper>

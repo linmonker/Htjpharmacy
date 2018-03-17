@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.YsxyfMxMapper">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.YsxyfMx">
+		<id column="ID" property="ID" jdbcType="INTEGER" />
+		<result column="xyfid" property="xyfid" jdbcType="INTEGER" />
+		<result column="ypid" property="ypid" jdbcType="INTEGER" />
+		<result column="ypsl" property="ypsl" jdbcType="DECIMAL" />
+		<result column="ypdw" property="ypdw" jdbcType="VARCHAR" />
+		<result column="ypbz" property="ypbz" jdbcType="VARCHAR" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+		<result column="dm" property="dm" jdbcType="INTEGER" />
+		<result column="ct" property="ct" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, xyfid, ypid, ypsl, ypdw, ypbz, zt, dm, ct
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from hjt_ysxyf_mx
+		where ID = #{ID,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from hjt_ysxyf_mx
+		where ID = #{ID,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.sdhqtj.hjt.entity.YsxyfMx">
+		insert into hjt_ysxyf_mx (ID, xyfid, ypid,
+		ypsl, ypdw, ypbz, zt,
+		dm, ct)
+		values (#{ID,jdbcType=INTEGER}, #{xyfid,jdbcType=INTEGER},
+		#{ypid,jdbcType=INTEGER},
+		#{ypsl,jdbcType=DECIMAL}, #{ypdw,jdbcType=VARCHAR}, #{ypbz,jdbcType=VARCHAR},
+		#{zt,jdbcType=INTEGER},
+		#{dm,jdbcType=INTEGER}, #{ct,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.YsxyfMx">
+		insert into hjt_ysxyf_mx
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				ID,
+			</if>
+			<if test="xyfid != null">
+				xyfid,
+			</if>
+			<if test="ypid != null">
+				ypid,
+			</if>
+			<if test="ypsl != null">
+				ypsl,
+			</if>
+			<if test="ypdw != null">
+				ypdw,
+			</if>
+			<if test="ypbz != null">
+				ypbz,
+			</if>
+			<if test="zt != null">
+				zt,
+			</if>
+			<if test="dm != null">
+				dm,
+			</if>
+			<if test="ct != null">
+				ct,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				#{ID,jdbcType=INTEGER},
+			</if>
+			<if test="xyfid != null">
+				#{xyfid,jdbcType=INTEGER},
+			</if>
+			<if test="ypid != null">
+				#{ypid,jdbcType=INTEGER},
+			</if>
+			<if test="ypsl != null">
+				#{ypsl,jdbcType=DECIMAL},
+			</if>
+			<if test="ypdw != null">
+				#{ypdw,jdbcType=VARCHAR},
+			</if>
+			<if test="ypbz != null">
+				#{ypbz,jdbcType=VARCHAR},
+			</if>
+			<if test="zt != null">
+				#{zt,jdbcType=INTEGER},
+			</if>
+			<if test="dm != null">
+				#{dm,jdbcType=INTEGER},
+			</if>
+			<if test="ct != null">
+				#{ct,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.YsxyfMx">
+		update hjt_ysxyf_mx
+		<set>
+			<if test="xyfid != null">
+				xyfid = #{xyfid,jdbcType=INTEGER},
+			</if>
+			<if test="ypid != null">
+				ypid = #{ypid,jdbcType=INTEGER},
+			</if>
+			<if test="ypsl != null">
+				ypsl = #{ypsl,jdbcType=DECIMAL},
+			</if>
+			<if test="ypdw != null">
+				ypdw = #{ypdw,jdbcType=VARCHAR},
+			</if>
+			<if test="ypbz != null">
+				ypbz = #{ypbz,jdbcType=VARCHAR},
+			</if>
+			<if test="zt != null">
+				zt = #{zt,jdbcType=INTEGER},
+			</if>
+			<if test="dm != null">
+				dm = #{dm,jdbcType=INTEGER},
+			</if>
+			<if test="ct != null">
+				ct = #{ct,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.YsxyfMx">
+		update hjt_ysxyf_mx
+		set xyfid = #{xyfid,jdbcType=INTEGER},
+		ypid = #{ypid,jdbcType=INTEGER},
+		ypsl = #{ypsl,jdbcType=DECIMAL},
+		ypdw = #{ypdw,jdbcType=VARCHAR},
+		ypbz = #{ypbz,jdbcType=VARCHAR},
+		zt = #{zt,jdbcType=INTEGER},
+		dm = #{dm,jdbcType=INTEGER},
+		ct = #{ct,jdbcType=TIMESTAMP}
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
+</mapper>

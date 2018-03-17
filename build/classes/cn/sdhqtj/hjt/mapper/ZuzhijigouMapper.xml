@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.ZuzhijigouMapper">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Zuzhijigou">
+		<id column="Id" property="id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="fdid" property="fdid" jdbcType="INTEGER" />
+		<result column="csbh" property="csbh" jdbcType="VARCHAR" />
+		<result column="csmc" property="csmc" jdbcType="VARCHAR" />
+		<result column="csmcjp" property="csmcjp" jdbcType="VARCHAR" />
+		<result column="cslxdh" property="cslxdh" jdbcType="VARCHAR" />
+		<result column="cszr" property="cszr" jdbcType="VARCHAR" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+		<result column="dm" property="dm" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Zuzhijigou"
+		extends="BaseResultMap">
+		<result column="csbz" property="csbz" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		Id, jtid, fdid, csbh, csmc, csmcjp, cslxdh, cszr, zt, dm
+	</sql>
+	<sql id="Blob_Column_List">
+		csbz
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from hjt_zuzhijigou
+		where Id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from hjt_zuzhijigou
+		where Id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">
+		insert into hjt_zuzhijigou (Id, jtid, fdid,
+		csbh, csmc, csmcjp,
+		cslxdh, cszr, zt, dm,
+		csbz)
+		values (#{id,jdbcType=INTEGER}, #{jtid,jdbcType=INTEGER},
+		#{fdid,jdbcType=INTEGER},
+		#{csbh,jdbcType=VARCHAR}, #{csmc,jdbcType=VARCHAR}, #{csmcjp,jdbcType=VARCHAR},
+		#{cslxdh,jdbcType=VARCHAR}, #{cszr,jdbcType=VARCHAR},
+		#{zt,jdbcType=INTEGER}, #{dm,jdbcType=INTEGER},
+		#{csbz,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">
+		insert into hjt_zuzhijigou
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				Id,
+			</if>
+			<if test="jtid != null">
+				jtid,
+			</if>
+			<if test="fdid != null">
+				fdid,
+			</if>
+			<if test="csbh != null">
+				csbh,
+			</if>
+			<if test="csmc != null">
+				csmc,
+			</if>
+			<if test="csmcjp != null">
+				csmcjp,
+			</if>
+			<if test="cslxdh != null">
+				cslxdh,
+			</if>
+			<if test="cszr != null">
+				cszr,
+			</if>
+			<if test="zt != null">
+				zt,
+			</if>
+			<if test="dm != null">
+				dm,
+			</if>
+			<if test="csbz != null">
+				csbz,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="jtid != null">
+				#{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="fdid != null">
+				#{fdid,jdbcType=INTEGER},
+			</if>
+			<if test="csbh != null">
+				#{csbh,jdbcType=VARCHAR},
+			</if>
+			<if test="csmc != null">
+				#{csmc,jdbcType=VARCHAR},
+			</if>
+			<if test="csmcjp != null">
+				#{csmcjp,jdbcType=VARCHAR},
+			</if>
+			<if test="cslxdh != null">
+				#{cslxdh,jdbcType=VARCHAR},
+			</if>
+			<if test="cszr != null">
+				#{cszr,jdbcType=VARCHAR},
+			</if>
+			<if test="zt != null">
+				#{zt,jdbcType=INTEGER},
+			</if>
+			<if test="dm != null">
+				#{dm,jdbcType=INTEGER},
+			</if>
+			<if test="csbz != null">
+				#{csbz,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">
+		update hjt_zuzhijigou
+		<set>
+			<if test="jtid != null">
+				jtid = #{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="fdid != null">
+				fdid = #{fdid,jdbcType=INTEGER},
+			</if>
+			<if test="csbh != null">
+				csbh = #{csbh,jdbcType=VARCHAR},
+			</if>
+			<if test="csmc != null">
+				csmc = #{csmc,jdbcType=VARCHAR},
+			</if>
+			<if test="csmcjp != null">
+				csmcjp = #{csmcjp,jdbcType=VARCHAR},
+			</if>
+			<if test="cslxdh != null">
+				cslxdh = #{cslxdh,jdbcType=VARCHAR},
+			</if>
+			<if test="cszr != null">
+				cszr = #{cszr,jdbcType=VARCHAR},
+			</if>
+			<if test="zt != null">
+				zt = #{zt,jdbcType=INTEGER},
+			</if>
+			<if test="dm != null">
+				dm = #{dm,jdbcType=INTEGER},
+			</if>
+			<if test="csbz != null">
+				csbz = #{csbz,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">
+		update hjt_zuzhijigou
+		set jtid = #{jtid,jdbcType=INTEGER},
+		fdid = #{fdid,jdbcType=INTEGER},
+		csbh = #{csbh,jdbcType=VARCHAR},
+		csmc = #{csmc,jdbcType=VARCHAR},
+		csmcjp = #{csmcjp,jdbcType=VARCHAR},
+		cslxdh = #{cslxdh,jdbcType=VARCHAR},
+		cszr = #{cszr,jdbcType=VARCHAR},
+		zt = #{zt,jdbcType=INTEGER},
+		dm = #{dm,jdbcType=INTEGER},
+		csbz = #{csbz,jdbcType=LONGVARCHAR}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">
+		update hjt_zuzhijigou
+		set jtid = #{jtid,jdbcType=INTEGER},
+		fdid = #{fdid,jdbcType=INTEGER},
+		csbh = #{csbh,jdbcType=VARCHAR},
+		csmc = #{csmc,jdbcType=VARCHAR},
+		csmcjp = #{csmcjp,jdbcType=VARCHAR},
+		cslxdh = #{cslxdh,jdbcType=VARCHAR},
+		cszr = #{cszr,jdbcType=VARCHAR},
+		zt = #{zt,jdbcType=INTEGER},
+		dm = #{dm,jdbcType=INTEGER}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

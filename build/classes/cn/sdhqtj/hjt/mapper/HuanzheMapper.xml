@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.HuanzheMapper">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Huanzhe">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="u_code" property="u_code" jdbcType="VARCHAR" />
+		<result column="u_name" property="u_name" jdbcType="VARCHAR" />
+		<result column="u_phone" property="u_phone" jdbcType="VARCHAR" />
+		<result column="u_password" property="u_password" jdbcType="VARCHAR" />
+		<result column="u_sfzhm" property="u_sfzhm" jdbcType="VARCHAR" />
+		<result column="u_sex" property="u_sex" jdbcType="INTEGER" />
+		<result column="u_csrq" property="u_csrq" jdbcType="DATE" />
+		<result column="u_yzbm" property="u_yzbm" jdbcType="VARCHAR" />
+		<result column="u_jtzz" property="u_jtzz" jdbcType="VARCHAR" />
+		<result column="u_zhiye" property="u_zhiye" jdbcType="VARCHAR" />
+		<result column="u_status" property="u_status" jdbcType="INTEGER" />
+		<result column="u_ct" property="u_ct" jdbcType="TIMESTAMP" />
+		<result column="uid" property="uid" jdbcType="INTEGER" />
+		<result column="openid" property="openid" jdbcType="VARCHAR" />
+		<result column="token" property="token" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Huanzhe"
+		extends="BaseResultMap">
+		<result column="u_jianjie" property="u_jianjie" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, jtid, u_code, u_name, u_phone, u_password, u_sfzhm, u_sex, u_csrq,
+		u_yzbm, u_jtzz,
+		u_zhiye, u_status, u_ct, uid, openid, token
+	</sql>
+	<sql id="Blob_Column_List">
+		u_jianjie
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from hjt_huanzhe
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from hjt_huanzhe
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="cn.sdhqtj.hjt.entity.Huanzhe">
+		insert into hjt_huanzhe (id, jtid, u_code,
+		u_name, u_phone, u_password,
+		u_sfzhm, u_sex, u_csrq,
+		u_yzbm, u_jtzz, u_zhiye,
+		u_status, u_ct, uid,
+		openid, token, u_jianjie
+		)
+		values (#{id,jdbcType=BIGINT}, #{jtid,jdbcType=INTEGER},
+		#{u_code,jdbcType=VARCHAR},
+		#{u_name,jdbcType=VARCHAR}, #{u_phone,jdbcType=VARCHAR}, #{u_password,jdbcType=VARCHAR},
+		#{u_sfzhm,jdbcType=VARCHAR}, #{u_sex,jdbcType=INTEGER},
+		#{u_csrq,jdbcType=DATE},
+		#{u_yzbm,jdbcType=VARCHAR}, #{u_jtzz,jdbcType=VARCHAR}, #{u_zhiye,jdbcType=VARCHAR},
+		#{u_status,jdbcType=INTEGER}, #{u_ct,jdbcType=TIMESTAMP},
+		#{uid,jdbcType=INTEGER},
+		#{openid,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{u_jianjie,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Huanzhe">
+		insert into hjt_huanzhe
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="jtid != null">
+				jtid,
+			</if>
+			<if test="u_code != null">
+				u_code,
+			</if>
+			<if test="u_name != null">
+				u_name,
+			</if>
+			<if test="u_phone != null">
+				u_phone,
+			</if>
+			<if test="u_password != null">
+				u_password,
+			</if>
+			<if test="u_sfzhm != null">
+				u_sfzhm,
+			</if>
+			<if test="u_sex != null">
+				u_sex,
+			</if>
+			<if test="u_csrq != null">
+				u_csrq,
+			</if>
+			<if test="u_yzbm != null">
+				u_yzbm,
+			</if>
+			<if test="u_jtzz != null">
+				u_jtzz,
+			</if>
+			<if test="u_zhiye != null">
+				u_zhiye,
+			</if>
+			<if test="u_status != null">
+				u_status,
+			</if>
+			<if test="u_ct != null">
+				u_ct,
+			</if>
+			<if test="uid != null">
+				uid,
+			</if>
+			<if test="openid != null">
+				openid,
+			</if>
+			<if test="token != null">
+				token,
+			</if>
+			<if test="u_jianjie != null">
+				u_jianjie,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="jtid != null">
+				#{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="u_code != null">
+				#{u_code,jdbcType=VARCHAR},
+			</if>
+			<if test="u_name != null">
+				#{u_name,jdbcType=VARCHAR},
+			</if>
+			<if test="u_phone != null">
+				#{u_phone,jdbcType=VARCHAR},
+			</if>
+			<if test="u_password != null">
+				#{u_password,jdbcType=VARCHAR},
+			</if>
+			<if test="u_sfzhm != null">
+				#{u_sfzhm,jdbcType=VARCHAR},
+			</if>
+			<if test="u_sex != null">
+				#{u_sex,jdbcType=INTEGER},
+			</if>
+			<if test="u_csrq != null">
+				#{u_csrq,jdbcType=DATE},
+			</if>
+			<if test="u_yzbm != null">
+				#{u_yzbm,jdbcType=VARCHAR},
+			</if>
+			<if test="u_jtzz != null">
+				#{u_jtzz,jdbcType=VARCHAR},
+			</if>
+			<if test="u_zhiye != null">
+				#{u_zhiye,jdbcType=VARCHAR},
+			</if>
+			<if test="u_status != null">
+				#{u_status,jdbcType=INTEGER},
+			</if>
+			<if test="u_ct != null">
+				#{u_ct,jdbcType=TIMESTAMP},
+			</if>
+			<if test="uid != null">
+				#{uid,jdbcType=INTEGER},
+			</if>
+			<if test="openid != null">
+				#{openid,jdbcType=VARCHAR},
+			</if>
+			<if test="token != null">
+				#{token,jdbcType=VARCHAR},
+			</if>
+			<if test="u_jianjie != null">
+				#{u_jianjie,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.Huanzhe">
+		update hjt_huanzhe
+		<set>
+			<if test="jtid != null">
+				jtid = #{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="u_code != null">
+				u_code = #{u_code,jdbcType=VARCHAR},
+			</if>
+			<if test="u_name != null">
+				u_name = #{u_name,jdbcType=VARCHAR},
+			</if>
+			<if test="u_phone != null">
+				u_phone = #{u_phone,jdbcType=VARCHAR},
+			</if>
+			<if test="u_password != null">
+				u_password = #{u_password,jdbcType=VARCHAR},
+			</if>
+			<if test="u_sfzhm != null">
+				u_sfzhm = #{u_sfzhm,jdbcType=VARCHAR},
+			</if>
+			<if test="u_sex != null">
+				u_sex = #{u_sex,jdbcType=INTEGER},
+			</if>
+			<if test="u_csrq != null">
+				u_csrq = #{u_csrq,jdbcType=DATE},
+			</if>
+			<if test="u_yzbm != null">
+				u_yzbm = #{u_yzbm,jdbcType=VARCHAR},
+			</if>
+			<if test="u_jtzz != null">
+				u_jtzz = #{u_jtzz,jdbcType=VARCHAR},
+			</if>
+			<if test="u_zhiye != null">
+				u_zhiye = #{u_zhiye,jdbcType=VARCHAR},
+			</if>
+			<if test="u_status != null">
+				u_status = #{u_status,jdbcType=INTEGER},
+			</if>
+			<if test="u_ct != null">
+				u_ct = #{u_ct,jdbcType=TIMESTAMP},
+			</if>
+			<if test="uid != null">
+				uid = #{uid,jdbcType=INTEGER},
+			</if>
+			<if test="openid != null">
+				openid = #{openid,jdbcType=VARCHAR},
+			</if>
+			<if test="token != null">
+				token = #{token,jdbcType=VARCHAR},
+			</if>
+			<if test="u_jianjie != null">
+				u_jianjie = #{u_jianjie,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.Huanzhe">
+		update hjt_huanzhe
+		set jtid = #{jtid,jdbcType=INTEGER},
+		u_code = #{u_code,jdbcType=VARCHAR},
+		u_name = #{u_name,jdbcType=VARCHAR},
+		u_phone = #{u_phone,jdbcType=VARCHAR},
+		u_password = #{u_password,jdbcType=VARCHAR},
+		u_sfzhm = #{u_sfzhm,jdbcType=VARCHAR},
+		u_sex = #{u_sex,jdbcType=INTEGER},
+		u_csrq = #{u_csrq,jdbcType=DATE},
+		u_yzbm = #{u_yzbm,jdbcType=VARCHAR},
+		u_jtzz = #{u_jtzz,jdbcType=VARCHAR},
+		u_zhiye = #{u_zhiye,jdbcType=VARCHAR},
+		u_status = #{u_status,jdbcType=INTEGER},
+		u_ct = #{u_ct,jdbcType=TIMESTAMP},
+		uid = #{uid,jdbcType=INTEGER},
+		openid = #{openid,jdbcType=VARCHAR},
+		token = #{token,jdbcType=VARCHAR},
+		u_jianjie = #{u_jianjie,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Huanzhe">
+		update hjt_huanzhe
+		set jtid = #{jtid,jdbcType=INTEGER},
+		u_code = #{u_code,jdbcType=VARCHAR},
+		u_name = #{u_name,jdbcType=VARCHAR},
+		u_phone = #{u_phone,jdbcType=VARCHAR},
+		u_password = #{u_password,jdbcType=VARCHAR},
+		u_sfzhm = #{u_sfzhm,jdbcType=VARCHAR},
+		u_sex = #{u_sex,jdbcType=INTEGER},
+		u_csrq = #{u_csrq,jdbcType=DATE},
+		u_yzbm = #{u_yzbm,jdbcType=VARCHAR},
+		u_jtzz = #{u_jtzz,jdbcType=VARCHAR},
+		u_zhiye = #{u_zhiye,jdbcType=VARCHAR},
+		u_status = #{u_status,jdbcType=INTEGER},
+		u_ct = #{u_ct,jdbcType=TIMESTAMP},
+		uid = #{uid,jdbcType=INTEGER},
+		openid = #{openid,jdbcType=VARCHAR},
+		token = #{token,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>

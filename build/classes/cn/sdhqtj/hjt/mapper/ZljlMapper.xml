@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.ZljlMapper">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Zljl">
+		<id column="ID" property="ID" jdbcType="BIGINT" />
+		<result column="fdid" property="fdid" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="zlcode" property="zlcode" jdbcType="VARCHAR" />
+		<result column="zlysid" property="zlysid" jdbcType="BIGINT" />
+		<result column="hzid" property="hzid" jdbcType="INTEGER" />
+		<result column="ct" property="ct" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Zljl"
+		extends="BaseResultMap">
+		<result column="zd" property="zd" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, fdid, jtid, zlcode, zlysid, hzid, ct
+	</sql>
+	<sql id="Blob_Column_List">
+		zd
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from hjt_zljl
+		where ID = #{ID,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from hjt_zljl
+		where ID = #{ID,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="cn.sdhqtj.hjt.entity.Zljl">
+		insert into hjt_zljl (ID, fdid, jtid,
+		zlcode, zlysid, hzid,
+		ct, zd)
+		values (#{ID,jdbcType=BIGINT}, #{fdid,jdbcType=INTEGER},
+		#{jtid,jdbcType=INTEGER},
+		#{zlcode,jdbcType=VARCHAR}, #{zlysid,jdbcType=BIGINT}, #{hzid,jdbcType=INTEGER},
+		#{ct,jdbcType=TIMESTAMP}, #{zd,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Zljl">
+		insert into hjt_zljl
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				ID,
+			</if>
+			<if test="fdid != null">
+				fdid,
+			</if>
+			<if test="jtid != null">
+				jtid,
+			</if>
+			<if test="zlcode != null">
+				zlcode,
+			</if>
+			<if test="zlysid != null">
+				zlysid,
+			</if>
+			<if test="hzid != null">
+				hzid,
+			</if>
+			<if test="ct != null">
+				ct,
+			</if>
+			<if test="zd != null">
+				zd,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				#{ID,jdbcType=BIGINT},
+			</if>
+			<if test="fdid != null">
+				#{fdid,jdbcType=INTEGER},
+			</if>
+			<if test="jtid != null">
+				#{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="zlcode != null">
+				#{zlcode,jdbcType=VARCHAR},
+			</if>
+			<if test="zlysid != null">
+				#{zlysid,jdbcType=BIGINT},
+			</if>
+			<if test="hzid != null">
+				#{hzid,jdbcType=INTEGER},
+			</if>
+			<if test="ct != null">
+				#{ct,jdbcType=TIMESTAMP},
+			</if>
+			<if test="zd != null">
+				#{zd,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.Zljl">
+		update hjt_zljl
+		<set>
+			<if test="fdid != null">
+				fdid = #{fdid,jdbcType=INTEGER},
+			</if>
+			<if test="jtid != null">
+				jtid = #{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="zlcode != null">
+				zlcode = #{zlcode,jdbcType=VARCHAR},
+			</if>
+			<if test="zlysid != null">
+				zlysid = #{zlysid,jdbcType=BIGINT},
+			</if>
+			<if test="hzid != null">
+				hzid = #{hzid,jdbcType=INTEGER},
+			</if>
+			<if test="ct != null">
+				ct = #{ct,jdbcType=TIMESTAMP},
+			</if>
+			<if test="zd != null">
+				zd = #{zd,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{ID,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.Zljl">
+		update hjt_zljl
+		set fdid = #{fdid,jdbcType=INTEGER},
+		jtid = #{jtid,jdbcType=INTEGER},
+		zlcode = #{zlcode,jdbcType=VARCHAR},
+		zlysid = #{zlysid,jdbcType=BIGINT},
+		hzid = #{hzid,jdbcType=INTEGER},
+		ct = #{ct,jdbcType=TIMESTAMP},
+		zd = #{zd,jdbcType=LONGVARCHAR}
+		where ID = #{ID,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Zljl">
+		update hjt_zljl
+		set fdid = #{fdid,jdbcType=INTEGER},
+		jtid = #{jtid,jdbcType=INTEGER},
+		zlcode = #{zlcode,jdbcType=VARCHAR},
+		zlysid = #{zlysid,jdbcType=BIGINT},
+		hzid = #{hzid,jdbcType=INTEGER},
+		ct = #{ct,jdbcType=TIMESTAMP}
+		where ID = #{ID,jdbcType=BIGINT}
+	</update>
+</mapper>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.YaopinMapperPro">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Yaopin">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="yplb" property="yplb" jdbcType="INTEGER" />
+		<result column="ypgys" property="ypgys" jdbcType="INTEGER" />
+		<result column="ypbh" property="ypbh" jdbcType="VARCHAR" />
+		<result column="ypspm" property="ypspm" jdbcType="VARCHAR" />
+		<result column="yptym" property="yptym" jdbcType="VARCHAR" />
+		<result column="ypgg" property="ypgg" jdbcType="VARCHAR" />
+		<result column="ypbzgg" property="ypbzgg" jdbcType="VARCHAR" />
+		<result column="ypcd" property="ypcd" jdbcType="VARCHAR" />
+		<result column="ypzddcgml" property="ypzddcgml" jdbcType="DECIMAL" />
+		<result column="ypsx" property="ypsx" jdbcType="VARCHAR" />
+		<result column="ypyytx" property="ypyytx" jdbcType="INTEGER" />
+		<result column="ypyytxnr" property="ypyytxnr" jdbcType="VARCHAR" />
+		<result column="ypscdw" property="ypscdw" jdbcType="VARCHAR" />
+		<result column="ypjx" property="ypjx" jdbcType="VARCHAR" />
+		<result column="ypdw" property="ypdw" jdbcType="VARCHAR" />
+		<result column="ypzcsb" property="ypzcsb" jdbcType="VARCHAR" />
+		<result column="yppzwh" property="yppzwh" jdbcType="VARCHAR" />
+		<result column="ypysbz" property="ypysbz" jdbcType="VARCHAR" />
+		<result column="ypcctj" property="ypcctj" jdbcType="VARCHAR" />
+		<result column="ypjhj" property="ypjhj" jdbcType="DECIMAL" />
+		<result column="yppfj" property="yppfj" jdbcType="DECIMAL" />
+		<result column="yplsj" property="yplsj" jdbcType="DECIMAL" />
+		<result column="yphyj" property="yphyj" jdbcType="DECIMAL" />
+		<result column="ypyxq" property="ypyxq" jdbcType="VARCHAR" />
+		<result column="ypkcxx" property="ypkcxx" jdbcType="DECIMAL" />
+		<result column="ypkcsx" property="ypkcsx" jdbcType="DECIMAL" />
+		<result column="ypshzt" property="ypshzt" jdbcType="INTEGER" />
+		<result column="ypyhzq" property="ypyhzq" jdbcType="INTEGER" />
+		<result column="ypsfdz" property="ypsfdz" jdbcType="INTEGER" />
+		<result column="ypsfcyhyjf" property="ypsfcyhyjf" jdbcType="INTEGER" />
+		<result column="ypcwbj1" property="ypcwbj1" jdbcType="VARCHAR" />
+		<result column="ypcwbj2" property="ypcwbj2" jdbcType="VARCHAR" />
+		<result column="ypcjr" property="ypcjr" jdbcType="INTEGER" />
+		<result column="ypkcsl" property="ypkcsl" jdbcType="DECIMAL" />
+		<result column="ct" property="ct" jdbcType="TIMESTAMP" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+		<result column="dm" property="dm" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.YaopinWithBLOBs"
+		extends="BaseResultMap">
+		<result column="ypsms" property="ypsms" jdbcType="LONGVARCHAR" />
+		<result column="ypxf" property="ypxf" jdbcType="LONGVARCHAR" />
+		<result column="ypxw" property="ypxw" jdbcType="LONGVARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, jtid, yplb, ypgys, ypbh, ypspm, yptym, ypgg, ypbzgg,
+		ypcd, ypzddcgml,
+		ypsx, ypyytx,
+		ypyytxnr, ypscdw, ypjx, ypdw, ypzcsb,
+		yppzwh, ypysbz, ypcctj, ypjhj, yppfj,
+		yplsj,
+		yphyj, ypyxq, ypkcxx,
+		ypkcsx, ypshzt, ypyhzq, ypsfdz, ypsfcyhyjf, ypcwbj1,
+		ypcwbj2,
+		ypcjr,
+		ypkcsl, ct, zt, dm
+	</sql>
+	<sql id="Blob_Column_List">
+		ypsms, ypxf, ypxw
+	</sql>
+
+	<select id="yaopinquery" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hjt_yaopin
+		where zt=0 and dm=0
+	</select>
+	<select id="selectByypbh" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.String">
+		select
+		*
+		from
+		hjt_yaopin
+		where
+		ypbh=#{_parameter} and zt=0
+	</select>
+	<select id="selectByypmc" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.String">
+		select
+		*
+		from
+		hjt_yaopin
+		where
+		ypmc=#{_parameter} and zt=0
+	</select>
+
+</mapper>

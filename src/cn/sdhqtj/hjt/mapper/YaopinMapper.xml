@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.YaopinMapper">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Yaopin">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="yplb" property="yplb" jdbcType="INTEGER" />
+		<result column="ypgys" property="ypgys" jdbcType="INTEGER" />
+		<result column="ypbh" property="ypbh" jdbcType="VARCHAR" />
+		<result column="ypspm" property="ypspm" jdbcType="VARCHAR" />
+		<result column="yptym" property="yptym" jdbcType="VARCHAR" />
+		<result column="ypgg" property="ypgg" jdbcType="VARCHAR" />
+		<result column="ypbzgg" property="ypbzgg" jdbcType="VARCHAR" />
+		<result column="ypcd" property="ypcd" jdbcType="VARCHAR" />
+		<result column="ypzddcgml" property="ypzddcgml" jdbcType="DECIMAL" />
+		<result column="ypsx" property="ypsx" jdbcType="VARCHAR" />
+		<result column="ypyytx" property="ypyytx" jdbcType="INTEGER" />
+		<result column="ypyytxnr" property="ypyytxnr" jdbcType="VARCHAR" />
+		<result column="ypscdw" property="ypscdw" jdbcType="VARCHAR" />
+		<result column="ypjx" property="ypjx" jdbcType="VARCHAR" />
+		<result column="ypdw" property="ypdw" jdbcType="VARCHAR" />
+		<result column="ypzcsb" property="ypzcsb" jdbcType="VARCHAR" />
+		<result column="yppzwh" property="yppzwh" jdbcType="VARCHAR" />
+		<result column="ypysbz" property="ypysbz" jdbcType="VARCHAR" />
+		<result column="ypcctj" property="ypcctj" jdbcType="VARCHAR" />
+		<result column="ypjhj" property="ypjhj" jdbcType="DECIMAL" />
+		<result column="yppfj" property="yppfj" jdbcType="DECIMAL" />
+		<result column="yplsj" property="yplsj" jdbcType="DECIMAL" />
+		<result column="yphyj" property="yphyj" jdbcType="DECIMAL" />
+		<result column="ypyxq" property="ypyxq" jdbcType="VARCHAR" />
+		<result column="ypkcxx" property="ypkcxx" jdbcType="DECIMAL" />
+		<result column="ypkcsx" property="ypkcsx" jdbcType="DECIMAL" />
+		<result column="ypshzt" property="ypshzt" jdbcType="INTEGER" />
+		<result column="ypyhzq" property="ypyhzq" jdbcType="INTEGER" />
+		<result column="ypsfdz" property="ypsfdz" jdbcType="INTEGER" />
+		<result column="ypsfcyhyjf" property="ypsfcyhyjf" jdbcType="INTEGER" />
+		<result column="ypcwbj1" property="ypcwbj1" jdbcType="VARCHAR" />
+		<result column="ypcwbj2" property="ypcwbj2" jdbcType="VARCHAR" />
+		<result column="ypcjr" property="ypcjr" jdbcType="INTEGER" />
+		<result column="ypkcsl" property="ypkcsl" jdbcType="DECIMAL" />
+		<result column="ct" property="ct" jdbcType="TIMESTAMP" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+		<result column="dm" property="dm" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.YaopinWithBLOBs"
+		extends="BaseResultMap">
+		<result column="ypsms" property="ypsms" jdbcType="LONGVARCHAR" />
+		<result column="ypxf" property="ypxf" jdbcType="LONGVARCHAR" />
+		<result column="ypxw" property="ypxw" jdbcType="LONGVARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, jtid, yplb, ypgys, ypbh, ypspm, yptym, ypgg, ypbzgg, ypcd, ypzddcgml,
+		ypsx, ypyytx,
+		ypyytxnr, ypscdw, ypjx, ypdw, ypzcsb, yppzwh, ypysbz, ypcctj, ypjhj, yppfj,
+		yplsj,
+		yphyj, ypyxq, ypkcxx, ypkcsx, ypshzt, ypyhzq, ypsfdz, ypsfcyhyjf, ypcwbj1,
+		ypcwbj2,
+		ypcjr, ypkcsl, ct, zt, dm
+	</sql>
+	<sql id="Blob_Column_List">
+		ypsms, ypxf, ypxw
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from hjt_yaopin
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from hjt_yaopin
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="insert" parameterType="cn.sdhqtj.hjt.entity.YaopinWithBLOBs">
+		insert into hjt_yaopin (id, jtid, yplb,
+		ypgys, ypbh, ypspm,
+		yptym, ypgg, ypbzgg,
+		ypcd, ypzddcgml, ypsx,
+		ypyytx, ypyytxnr, ypscdw,
+		ypjx, ypdw, ypzcsb,
+		yppzwh, ypysbz, ypcctj,
+		ypjhj, yppfj, yplsj,
+		yphyj, ypyxq, ypkcxx,
+		ypkcsx, ypshzt, ypyhzq,
+		ypsfdz, ypsfcyhyjf, ypcwbj1,
+		ypcwbj2, ypcjr, ypkcsl,
+		ct, zt, dm, ypsms,
+		ypxf, ypxw)
+		values (#{id,jdbcType=INTEGER}, #{jtid,jdbcType=INTEGER},
+		#{yplb,jdbcType=INTEGER},
+		#{ypgys,jdbcType=INTEGER}, #{ypbh,jdbcType=VARCHAR}, #{ypspm,jdbcType=VARCHAR},
+		#{yptym,jdbcType=VARCHAR}, #{ypgg,jdbcType=VARCHAR},
+		#{ypbzgg,jdbcType=VARCHAR},
+		#{ypcd,jdbcType=VARCHAR}, #{ypzddcgml,jdbcType=DECIMAL}, #{ypsx,jdbcType=VARCHAR},
+		#{ypyytx,jdbcType=INTEGER}, #{ypyytxnr,jdbcType=VARCHAR},
+		#{ypscdw,jdbcType=VARCHAR},
+		#{ypjx,jdbcType=VARCHAR}, #{ypdw,jdbcType=VARCHAR}, #{ypzcsb,jdbcType=VARCHAR},
+		#{yppzwh,jdbcType=VARCHAR}, #{ypysbz,jdbcType=VARCHAR},
+		#{ypcctj,jdbcType=VARCHAR},
+		#{ypjhj,jdbcType=DECIMAL}, #{yppfj,jdbcType=DECIMAL}, #{yplsj,jdbcType=DECIMAL},
+		#{yphyj,jdbcType=DECIMAL}, #{ypyxq,jdbcType=VARCHAR},
+		#{ypkcxx,jdbcType=DECIMAL},
+		#{ypkcsx,jdbcType=DECIMAL}, #{ypshzt,jdbcType=INTEGER}, #{ypyhzq,jdbcType=INTEGER},
+		#{ypsfdz,jdbcType=INTEGER}, #{ypsfcyhyjf,jdbcType=INTEGER},
+		#{ypcwbj1,jdbcType=VARCHAR},
+		#{ypcwbj2,jdbcType=VARCHAR}, #{ypcjr,jdbcType=INTEGER}, #{ypkcsl,jdbcType=DECIMAL},
+		#{ct,jdbcType=TIMESTAMP}, #{zt,jdbcType=INTEGER},
+		#{dm,jdbcType=INTEGER}, #{ypsms,jdbcType=LONGVARCHAR},
+		#{ypxf,jdbcType=LONGVARCHAR}, #{ypxw,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.YaopinWithBLOBs">
+		insert into hjt_yaopin
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="jtid != null">
+				jtid,
+			</if>
+			<if test="yplb != null">
+				yplb,
+			</if>
+			<if test="ypgys != null">
+				ypgys,
+			</if>
+			<if test="ypbh != null">
+				ypbh,
+			</if>
+			<if test="ypspm != null">
+				ypspm,
+			</if>
+			<if test="yptym != null">
+				yptym,
+			</if>
+			<if test="ypgg != null">
+				ypgg,
+			</if>
+			<if test="ypbzgg != null">
+				ypbzgg,
+			</if>
+			<if test="ypcd != null">
+				ypcd,
+			</if>
+			<if test="ypzddcgml != null">
+				ypzddcgml,
+			</if>
+			<if test="ypsx != null">
+				ypsx,
+			</if>
+			<if test="ypyytx != null">
+				ypyytx,
+			</if>
+			<if test="ypyytxnr != null">
+				ypyytxnr,
+			</if>
+			<if test="ypscdw != null">
+				ypscdw,
+			</if>
+			<if test="ypjx != null">
+				ypjx,
+			</if>
+			<if test="ypdw != null">
+				ypdw,
+			</if>
+			<if test="ypzcsb != null">
+				ypzcsb,
+			</if>
+			<if test="yppzwh != null">
+				yppzwh,
+			</if>
+			<if test="ypysbz != null">
+				ypysbz,
+			</if>
+			<if test="ypcctj != null">
+				ypcctj,
+			</if>
+			<if test="ypjhj != null">
+				ypjhj,
+			</if>
+			<if test="yppfj != null">
+				yppfj,
+			</if>
+			<if test="yplsj != null">
+				yplsj,
+			</if>
+			<if test="yphyj != null">
+				yphyj,
+			</if>
+			<if test="ypyxq != null">
+				ypyxq,
+			</if>
+			<if test="ypkcxx != null">
+				ypkcxx,
+			</if>
+			<if test="ypkcsx != null">
+				ypkcsx,
+			</if>
+			<if test="ypshzt != null">
+				ypshzt,
+			</if>
+			<if test="ypyhzq != null">
+				ypyhzq,
+			</if>
+			<if test="ypsfdz != null">
+				ypsfdz,
+			</if>
+			<if test="ypsfcyhyjf != null">
+				ypsfcyhyjf,
+			</if>
+			<if test="ypcwbj1 != null">
+				ypcwbj1,
+			</if>
+			<if test="ypcwbj2 != null">
+				ypcwbj2,
+			</if>
+			<if test="ypcjr != null">
+				ypcjr,
+			</if>
+			<if test="ypkcsl != null">
+				ypkcsl,
+			</if>
+			<if test="ct != null">
+				ct,
+			</if>
+			<if test="zt != null">
+				zt,
+			</if>
+			<if test="dm != null">
+				dm,
+			</if>
+			<if test="ypsms != null">
+				ypsms,
+			</if>
+			<if test="ypxf != null">
+				ypxf,
+			</if>
+			<if test="ypxw != null">
+				ypxw,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="jtid != null">
+				#{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="yplb != null">
+				#{yplb,jdbcType=INTEGER},
+			</if>
+			<if test="ypgys != null">
+				#{ypgys,jdbcType=INTEGER},
+			</if>
+			<if test="ypbh != null">
+				#{ypbh,jdbcType=VARCHAR},
+			</if>
+			<if test="ypspm != null">
+				#{ypspm,jdbcType=VARCHAR},
+			</if>
+			<if test="yptym != null">
+				#{yptym,jdbcType=VARCHAR},
+			</if>
+			<if test="ypgg != null">
+				#{ypgg,jdbcType=VARCHAR},
+			</if>
+			<if test="ypbzgg != null">
+				#{ypbzgg,jdbcType=VARCHAR},
+			</if>
+			<if test="ypcd != null">
+				#{ypcd,jdbcType=VARCHAR},
+			</if>
+			<if test="ypzddcgml != null">
+				#{ypzddcgml,jdbcType=DECIMAL},
+			</if>
+			<if test="ypsx != null">
+				#{ypsx,jdbcType=VARCHAR},
+			</if>
+			<if test="ypyytx != null">
+				#{ypyytx,jdbcType=INTEGER},
+			</if>
+			<if test="ypyytxnr != null">
+				#{ypyytxnr,jdbcType=VARCHAR},
+			</if>
+			<if test="ypscdw != null">
+				#{ypscdw,jdbcType=VARCHAR},
+			</if>
+			<if test="ypjx != null">
+				#{ypjx,jdbcType=VARCHAR},
+			</if>
+			<if test="ypdw != null">
+				#{ypdw,jdbcType=VARCHAR},
+			</if>
+			<if test="ypzcsb != null">
+				#{ypzcsb,jdbcType=VARCHAR},
+			</if>
+			<if test="yppzwh != null">
+				#{yppzwh,jdbcType=VARCHAR},
+			</if>
+			<if test="ypysbz != null">
+				#{ypysbz,jdbcType=VARCHAR},
+			</if>
+			<if test="ypcctj != null">
+				#{ypcctj,jdbcType=VARCHAR},
+			</if>
+			<if test="ypjhj != null">
+				#{ypjhj,jdbcType=DECIMAL},
+			</if>
+			<if test="yppfj != null">
+				#{yppfj,jdbcType=DECIMAL},
+			</if>
+			<if test="yplsj != null">
+				#{yplsj,jdbcType=DECIMAL},
+			</if>
+			<if test="yphyj != null">
+				#{yphyj,jdbcType=DECIMAL},
+			</if>
+			<if test="ypyxq != null">
+				#{ypyxq,jdbcType=VARCHAR},
+			</if>
+			<if test="ypkcxx != null">
+				#{ypkcxx,jdbcType=DECIMAL},
+			</if>
+			<if test="ypkcsx != null">
+				#{ypkcsx,jdbcType=DECIMAL},
+			</if>
+			<if test="ypshzt != null">
+				#{ypshzt,jdbcType=INTEGER},
+			</if>
+			<if test="ypyhzq != null">
+				#{ypyhzq,jdbcType=INTEGER},
+			</if>
+			<if test="ypsfdz != null">
+				#{ypsfdz,jdbcType=INTEGER},
+			</if>
+			<if test="ypsfcyhyjf != null">
+				#{ypsfcyhyjf,jdbcType=INTEGER},
+			</if>
+			<if test="ypcwbj1 != null">
+				#{ypcwbj1,jdbcType=VARCHAR},
+			</if>
+			<if test="ypcwbj2 != null">
+				#{ypcwbj2,jdbcType=VARCHAR},
+			</if>
+			<if test="ypcjr != null">
+				#{ypcjr,jdbcType=INTEGER},
+			</if>
+			<if test="ypkcsl != null">
+				#{ypkcsl,jdbcType=DECIMAL},
+			</if>
+			<if test="ct != null">
+				#{ct,jdbcType=TIMESTAMP},
+			</if>
+			<if test="zt != null">
+				#{zt,jdbcType=INTEGER},
+			</if>
+			<if test="dm != null">
+				#{dm,jdbcType=INTEGER},
+			</if>
+			<if test="ypsms != null">
+				#{ypsms,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="ypxf != null">
+				#{ypxf,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="ypxw != null">
+				#{ypxw,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.YaopinWithBLOBs">
+		update hjt_yaopin
+		<set>
+			<if test="jtid != null">
+				jtid = #{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="yplb != null">
+				yplb = #{yplb,jdbcType=INTEGER},
+			</if>
+			<if test="ypgys != null">
+				ypgys = #{ypgys,jdbcType=INTEGER},
+			</if>
+			<if test="ypbh != null">
+				ypbh = #{ypbh,jdbcType=VARCHAR},
+			</if>
+			<if test="ypspm != null">
+				ypspm = #{ypspm,jdbcType=VARCHAR},
+			</if>
+			<if test="yptym != null">
+				yptym = #{yptym,jdbcType=VARCHAR},
+			</if>
+			<if test="ypgg != null">
+				ypgg = #{ypgg,jdbcType=VARCHAR},
+			</if>
+			<if test="ypbzgg != null">
+				ypbzgg = #{ypbzgg,jdbcType=VARCHAR},
+			</if>
+			<if test="ypcd != null">
+				ypcd = #{ypcd,jdbcType=VARCHAR},
+			</if>
+			<if test="ypzddcgml != null">
+				ypzddcgml = #{ypzddcgml,jdbcType=DECIMAL},
+			</if>
+			<if test="ypsx != null">
+				ypsx = #{ypsx,jdbcType=VARCHAR},
+			</if>
+			<if test="ypyytx != null">
+				ypyytx = #{ypyytx,jdbcType=INTEGER},
+			</if>
+			<if test="ypyytxnr != null">
+				ypyytxnr = #{ypyytxnr,jdbcType=VARCHAR},
+			</if>
+			<if test="ypscdw != null">
+				ypscdw = #{ypscdw,jdbcType=VARCHAR},
+			</if>
+			<if test="ypjx != null">
+				ypjx = #{ypjx,jdbcType=VARCHAR},
+			</if>
+			<if test="ypdw != null">
+				ypdw = #{ypdw,jdbcType=VARCHAR},
+			</if>
+			<if test="ypzcsb != null">
+				ypzcsb = #{ypzcsb,jdbcType=VARCHAR},
+			</if>
+			<if test="yppzwh != null">
+				yppzwh = #{yppzwh,jdbcType=VARCHAR},
+			</if>
+			<if test="ypysbz != null">
+				ypysbz = #{ypysbz,jdbcType=VARCHAR},
+			</if>
+			<if test="ypcctj != null">
+				ypcctj = #{ypcctj,jdbcType=VARCHAR},
+			</if>
+			<if test="ypjhj != null">
+				ypjhj = #{ypjhj,jdbcType=DECIMAL},
+			</if>
+			<if test="yppfj != null">
+				yppfj = #{yppfj,jdbcType=DECIMAL},
+			</if>
+			<if test="yplsj != null">
+				yplsj = #{yplsj,jdbcType=DECIMAL},
+			</if>
+			<if test="yphyj != null">
+				yphyj = #{yphyj,jdbcType=DECIMAL},
+			</if>
+			<if test="ypyxq != null">
+				ypyxq = #{ypyxq,jdbcType=VARCHAR},
+			</if>
+			<if test="ypkcxx != null">
+				ypkcxx = #{ypkcxx,jdbcType=DECIMAL},
+			</if>
+			<if test="ypkcsx != null">
+				ypkcsx = #{ypkcsx,jdbcType=DECIMAL},
+			</if>
+			<if test="ypshzt != null">
+				ypshzt = #{ypshzt,jdbcType=INTEGER},
+			</if>
+			<if test="ypyhzq != null">
+				ypyhzq = #{ypyhzq,jdbcType=INTEGER},
+			</if>
+			<if test="ypsfdz != null">
+				ypsfdz = #{ypsfdz,jdbcType=INTEGER},
+			</if>
+			<if test="ypsfcyhyjf != null">
+				ypsfcyhyjf = #{ypsfcyhyjf,jdbcType=INTEGER},
+			</if>
+			<if test="ypcwbj1 != null">
+				ypcwbj1 = #{ypcwbj1,jdbcType=VARCHAR},
+			</if>
+			<if test="ypcwbj2 != null">
+				ypcwbj2 = #{ypcwbj2,jdbcType=VARCHAR},
+			</if>
+			<if test="ypcjr != null">
+				ypcjr = #{ypcjr,jdbcType=INTEGER},
+			</if>
+			<if test="ypkcsl != null">
+				ypkcsl = #{ypkcsl,jdbcType=DECIMAL},
+			</if>
+			<if test="ct != null">
+				ct = #{ct,jdbcType=TIMESTAMP},
+			</if>
+			<if test="zt != null">
+				zt = #{zt,jdbcType=INTEGER},
+			</if>
+			<if test="dm != null">
+				dm = #{dm,jdbcType=INTEGER},
+			</if>
+			<if test="ypsms != null">
+				ypsms = #{ypsms,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="ypxf != null">
+				ypxf = #{ypxf,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="ypxw != null">
+				ypxw = #{ypxw,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.YaopinWithBLOBs">
+		update hjt_yaopin
+		set jtid = #{jtid,jdbcType=INTEGER},
+		yplb = #{yplb,jdbcType=INTEGER},
+		ypgys = #{ypgys,jdbcType=INTEGER},
+		ypbh = #{ypbh,jdbcType=VARCHAR},
+		ypspm = #{ypspm,jdbcType=VARCHAR},
+		yptym = #{yptym,jdbcType=VARCHAR},
+		ypgg = #{ypgg,jdbcType=VARCHAR},
+		ypbzgg = #{ypbzgg,jdbcType=VARCHAR},
+		ypcd = #{ypcd,jdbcType=VARCHAR},
+		ypzddcgml = #{ypzddcgml,jdbcType=DECIMAL},
+		ypsx = #{ypsx,jdbcType=VARCHAR},
+		ypyytx = #{ypyytx,jdbcType=INTEGER},
+		ypyytxnr = #{ypyytxnr,jdbcType=VARCHAR},
+		ypscdw = #{ypscdw,jdbcType=VARCHAR},
+		ypjx = #{ypjx,jdbcType=VARCHAR},
+		ypdw = #{ypdw,jdbcType=VARCHAR},
+		ypzcsb = #{ypzcsb,jdbcType=VARCHAR},
+		yppzwh = #{yppzwh,jdbcType=VARCHAR},
+		ypysbz = #{ypysbz,jdbcType=VARCHAR},
+		ypcctj = #{ypcctj,jdbcType=VARCHAR},
+		ypjhj = #{ypjhj,jdbcType=DECIMAL},
+		yppfj = #{yppfj,jdbcType=DECIMAL},
+		yplsj = #{yplsj,jdbcType=DECIMAL},
+		yphyj = #{yphyj,jdbcType=DECIMAL},
+		ypyxq = #{ypyxq,jdbcType=VARCHAR},
+		ypkcxx = #{ypkcxx,jdbcType=DECIMAL},
+		ypkcsx = #{ypkcsx,jdbcType=DECIMAL},
+		ypshzt = #{ypshzt,jdbcType=INTEGER},
+		ypyhzq = #{ypyhzq,jdbcType=INTEGER},
+		ypsfdz = #{ypsfdz,jdbcType=INTEGER},
+		ypsfcyhyjf = #{ypsfcyhyjf,jdbcType=INTEGER},
+		ypcwbj1 = #{ypcwbj1,jdbcType=VARCHAR},
+		ypcwbj2 = #{ypcwbj2,jdbcType=VARCHAR},
+		ypcjr = #{ypcjr,jdbcType=INTEGER},
+		ypkcsl = #{ypkcsl,jdbcType=DECIMAL},
+		ct = #{ct,jdbcType=TIMESTAMP},
+		zt = #{zt,jdbcType=INTEGER},
+		dm = #{dm,jdbcType=INTEGER},
+		ypsms = #{ypsms,jdbcType=LONGVARCHAR},
+		ypxf = #{ypxf,jdbcType=LONGVARCHAR},
+		ypxw = #{ypxw,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Yaopin">
+		update hjt_yaopin
+		set jtid = #{jtid,jdbcType=INTEGER},
+		yplb = #{yplb,jdbcType=INTEGER},
+		ypgys = #{ypgys,jdbcType=INTEGER},
+		ypbh = #{ypbh,jdbcType=VARCHAR},
+		ypspm = #{ypspm,jdbcType=VARCHAR},
+		yptym = #{yptym,jdbcType=VARCHAR},
+		ypgg = #{ypgg,jdbcType=VARCHAR},
+		ypbzgg = #{ypbzgg,jdbcType=VARCHAR},
+		ypcd = #{ypcd,jdbcType=VARCHAR},
+		ypzddcgml = #{ypzddcgml,jdbcType=DECIMAL},
+		ypsx = #{ypsx,jdbcType=VARCHAR},
+		ypyytx = #{ypyytx,jdbcType=INTEGER},
+		ypyytxnr = #{ypyytxnr,jdbcType=VARCHAR},
+		ypscdw = #{ypscdw,jdbcType=VARCHAR},
+		ypjx = #{ypjx,jdbcType=VARCHAR},
+		ypdw = #{ypdw,jdbcType=VARCHAR},
+		ypzcsb = #{ypzcsb,jdbcType=VARCHAR},
+		yppzwh = #{yppzwh,jdbcType=VARCHAR},
+		ypysbz = #{ypysbz,jdbcType=VARCHAR},
+		ypcctj = #{ypcctj,jdbcType=VARCHAR},
+		ypjhj = #{ypjhj,jdbcType=DECIMAL},
+		yppfj = #{yppfj,jdbcType=DECIMAL},
+		yplsj = #{yplsj,jdbcType=DECIMAL},
+		yphyj = #{yphyj,jdbcType=DECIMAL},
+		ypyxq = #{ypyxq,jdbcType=VARCHAR},
+		ypkcxx = #{ypkcxx,jdbcType=DECIMAL},
+		ypkcsx = #{ypkcsx,jdbcType=DECIMAL},
+		ypshzt = #{ypshzt,jdbcType=INTEGER},
+		ypyhzq = #{ypyhzq,jdbcType=INTEGER},
+		ypsfdz = #{ypsfdz,jdbcType=INTEGER},
+		ypsfcyhyjf = #{ypsfcyhyjf,jdbcType=INTEGER},
+		ypcwbj1 = #{ypcwbj1,jdbcType=VARCHAR},
+		ypcwbj2 = #{ypcwbj2,jdbcType=VARCHAR},
+		ypcjr = #{ypcjr,jdbcType=INTEGER},
+		ypkcsl = #{ypkcsl,jdbcType=DECIMAL},
+		ct = #{ct,jdbcType=TIMESTAMP},
+		zt = #{zt,jdbcType=INTEGER},
+		dm = #{dm,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

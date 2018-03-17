@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.KeshiMapper">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Keshi">
+		<id column="Id" property="id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="fdid" property="fdid" jdbcType="INTEGER" />
+		<result column="ksbh" property="ksbh" jdbcType="VARCHAR" />
+		<result column="ksmc" property="ksmc" jdbcType="VARCHAR" />
+		<result column="ksmcjp" property="ksmcjp" jdbcType="VARCHAR" />
+		<result column="kslxdh" property="kslxdh" jdbcType="VARCHAR" />
+		<result column="kszr" property="kszr" jdbcType="VARCHAR" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+		<result column="dm" property="dm" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Keshi"
+		extends="BaseResultMap">
+		<result column="ksbz" property="ksbz" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		Id, jtid, fdid, ksbh, ksmc, ksmcjp, kslxdh, kszr, zt, dm
+	</sql>
+	<sql id="Blob_Column_List">
+		ksbz
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from hjt_keshi
+		where Id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from hjt_keshi
+		where Id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.sdhqtj.hjt.entity.Keshi">
+		insert into hjt_keshi (Id, jtid, fdid,
+		ksbh, ksmc, ksmcjp,
+		kslxdh, kszr, zt, dm,
+		ksbz)
+		values (#{id,jdbcType=INTEGER}, #{jtid,jdbcType=INTEGER},
+		#{fdid,jdbcType=INTEGER},
+		#{ksbh,jdbcType=VARCHAR}, #{ksmc,jdbcType=VARCHAR}, #{ksmcjp,jdbcType=VARCHAR},
+		#{kslxdh,jdbcType=VARCHAR}, #{kszr,jdbcType=VARCHAR},
+		#{zt,jdbcType=INTEGER}, #{dm,jdbcType=INTEGER},
+		#{ksbz,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Keshi">
+		insert into hjt_keshi
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				Id,
+			</if>
+			<if test="jtid != null">
+				jtid,
+			</if>
+			<if test="fdid != null">
+				fdid,
+			</if>
+			<if test="ksbh != null">
+				ksbh,
+			</if>
+			<if test="ksmc != null">
+				ksmc,
+			</if>
+			<if test="ksmcjp != null">
+				ksmcjp,
+			</if>
+			<if test="kslxdh != null">
+				kslxdh,
+			</if>
+			<if test="kszr != null">
+				kszr,
+			</if>
+			<if test="zt != null">
+				zt,
+			</if>
+			<if test="dm != null">
+				dm,
+			</if>
+			<if test="ksbz != null">
+				ksbz,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="jtid != null">
+				#{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="fdid != null">
+				#{fdid,jdbcType=INTEGER},
+			</if>
+			<if test="ksbh != null">
+				#{ksbh,jdbcType=VARCHAR},
+			</if>
+			<if test="ksmc != null">
+				#{ksmc,jdbcType=VARCHAR},
+			</if>
+			<if test="ksmcjp != null">
+				#{ksmcjp,jdbcType=VARCHAR},
+			</if>
+			<if test="kslxdh != null">
+				#{kslxdh,jdbcType=VARCHAR},
+			</if>
+			<if test="kszr != null">
+				#{kszr,jdbcType=VARCHAR},
+			</if>
+			<if test="zt != null">
+				#{zt,jdbcType=INTEGER},
+			</if>
+			<if test="dm != null">
+				#{dm,jdbcType=INTEGER},
+			</if>
+			<if test="ksbz != null">
+				#{ksbz,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.Keshi">
+		update hjt_keshi
+		<set>
+			<if test="jtid != null">
+				jtid = #{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="fdid != null">
+				fdid = #{fdid,jdbcType=INTEGER},
+			</if>
+			<if test="ksbh != null">
+				ksbh = #{ksbh,jdbcType=VARCHAR},
+			</if>
+			<if test="ksmc != null">
+				ksmc = #{ksmc,jdbcType=VARCHAR},
+			</if>
+			<if test="ksmcjp != null">
+				ksmcjp = #{ksmcjp,jdbcType=VARCHAR},
+			</if>
+			<if test="kslxdh != null">
+				kslxdh = #{kslxdh,jdbcType=VARCHAR},
+			</if>
+			<if test="kszr != null">
+				kszr = #{kszr,jdbcType=VARCHAR},
+			</if>
+			<if test="zt != null">
+				zt = #{zt,jdbcType=INTEGER},
+			</if>
+			<if test="dm != null">
+				dm = #{dm,jdbcType=INTEGER},
+			</if>
+			<if test="ksbz != null">
+				ksbz = #{ksbz,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.Keshi">
+		update hjt_keshi
+		set jtid = #{jtid,jdbcType=INTEGER},
+		fdid = #{fdid,jdbcType=INTEGER},
+		ksbh = #{ksbh,jdbcType=VARCHAR},
+		ksmc = #{ksmc,jdbcType=VARCHAR},
+		ksmcjp = #{ksmcjp,jdbcType=VARCHAR},
+		kslxdh = #{kslxdh,jdbcType=VARCHAR},
+		kszr = #{kszr,jdbcType=VARCHAR},
+		zt = #{zt,jdbcType=INTEGER},
+		dm = #{dm,jdbcType=INTEGER},
+		ksbz = #{ksbz,jdbcType=LONGVARCHAR}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Keshi">
+		update hjt_keshi
+		set jtid = #{jtid,jdbcType=INTEGER},
+		fdid = #{fdid,jdbcType=INTEGER},
+		ksbh = #{ksbh,jdbcType=VARCHAR},
+		ksmc = #{ksmc,jdbcType=VARCHAR},
+		ksmcjp = #{ksmcjp,jdbcType=VARCHAR},
+		kslxdh = #{kslxdh,jdbcType=VARCHAR},
+		kszr = #{kszr,jdbcType=VARCHAR},
+		zt = #{zt,jdbcType=INTEGER},
+		dm = #{dm,jdbcType=INTEGER}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

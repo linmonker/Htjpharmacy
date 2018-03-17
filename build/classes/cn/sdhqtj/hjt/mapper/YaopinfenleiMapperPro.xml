@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.YaopinfenleiMapperPro">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Yaopinfenlei">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="flbh" property="flbh" jdbcType="VARCHAR" />
+		<result column="flmc" property="flmc" jdbcType="VARCHAR" />
+		<result column="fldj" property="fldj" jdbcType="SMALLINT" />
+		<result column="sjflid" property="sjflid" jdbcType="INTEGER" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Yaopinfenlei"
+		extends="BaseResultMap">
+		<result column="flbz" property="flbz" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, jtid, flbh, flmc, fldj, sjflid, zt
+	</sql>
+	<sql id="Blob_Column_List">
+		flbz
+	</sql>
+	<select id="Yaopinfenleiquery" resultMap="BaseResultMap">
+		selece *
+		from hjt_yaopinfenlei
+		where zt=0
+	</select>
+	<select id="selectByypflbh" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.String">
+		select *
+		from hjt_yaopinfenlei
+		where flbh = #{flbh}
+	</select>
+	<select id="lastinsertid" resultType="java.lang.String">
+		select last_insert_id()
+		from hjt_yaopinfenlei
+	</select>
+
+</mapper>

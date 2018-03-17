@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.XsdjMapper">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Xsdj">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="fdid" property="fdid" jdbcType="INTEGER" />
+		<result column="djbh" property="djbh" jdbcType="VARCHAR" />
+		<result column="djlx" property="djlx" jdbcType="INTEGER" />
+		<result column="zlid" property="zlid" jdbcType="BIGINT" />
+		<result column="zlysid" property="zlysid" jdbcType="BIGINT" />
+		<result column="hzid" property="hzid" jdbcType="BIGINT" />
+		<result column="hjje" property="hjje" jdbcType="DECIMAL" />
+		<result column="ssje" property="ssje" jdbcType="DECIMAL" />
+		<result column="zffs" property="zffs" jdbcType="VARCHAR" />
+		<result column="djzzr" property="djzzr" jdbcType="BIGINT" />
+		<result column="djshr" property="djshr" jdbcType="BIGINT" />
+		<result column="djshzt" property="djshzt" jdbcType="INTEGER" />
+		<result column="djshsj" property="djshsj" jdbcType="TIMESTAMP" />
+		<result column="djjdzt" property="djjdzt" jdbcType="VARCHAR" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+		<result column="dm" property="dm" jdbcType="INTEGER" />
+		<result column="ct" property="ct" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Xsdj"
+		extends="BaseResultMap">
+		<result column="bz" property="bz" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, jtid, fdid, djbh, djlx, zlid, zlysid, hzid, hjje, ssje, zffs, djzzr,
+		djshr, djshzt,
+		djshsj, djjdzt, zt, dm, ct
+	</sql>
+	<sql id="Blob_Column_List">
+		bz
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from hjt_xsdj
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from hjt_xsdj
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.sdhqtj.hjt.entity.Xsdj">
+		insert into hjt_xsdj (id, jtid, fdid,
+		djbh, djlx, zlid, zlysid,
+		hzid, hjje, ssje, zffs,
+		djzzr, djshr, djshzt,
+		djshsj, djjdzt, zt,
+		dm, ct, bz)
+		values (#{id,jdbcType=INTEGER}, #{jtid,jdbcType=INTEGER},
+		#{fdid,jdbcType=INTEGER},
+		#{djbh,jdbcType=VARCHAR}, #{djlx,jdbcType=INTEGER}, #{zlid,jdbcType=BIGINT},
+		#{zlysid,jdbcType=BIGINT},
+		#{hzid,jdbcType=BIGINT}, #{hjje,jdbcType=DECIMAL}, #{ssje,jdbcType=DECIMAL},
+		#{zffs,jdbcType=VARCHAR},
+		#{djzzr,jdbcType=BIGINT}, #{djshr,jdbcType=BIGINT}, #{djshzt,jdbcType=INTEGER},
+		#{djshsj,jdbcType=TIMESTAMP}, #{djjdzt,jdbcType=VARCHAR},
+		#{zt,jdbcType=INTEGER},
+		#{dm,jdbcType=INTEGER}, #{ct,jdbcType=TIMESTAMP}, #{bz,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Xsdj">
+		insert into hjt_xsdj
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="jtid != null">
+				jtid,
+			</if>
+			<if test="fdid != null">
+				fdid,
+			</if>
+			<if test="djbh != null">
+				djbh,
+			</if>
+			<if test="djlx != null">
+				djlx,
+			</if>
+			<if test="zlid != null">
+				zlid,
+			</if>
+			<if test="zlysid != null">
+				zlysid,
+			</if>
+			<if test="hzid != null">
+				hzid,
+			</if>
+			<if test="hjje != null">
+				hjje,
+			</if>
+			<if test="ssje != null">
+				ssje,
+			</if>
+			<if test="zffs != null">
+				zffs,
+			</if>
+			<if test="djzzr != null">
+				djzzr,
+			</if>
+			<if test="djshr != null">
+				djshr,
+			</if>
+			<if test="djshzt != null">
+				djshzt,
+			</if>
+			<if test="djshsj != null">
+				djshsj,
+			</if>
+			<if test="djjdzt != null">
+				djjdzt,
+			</if>
+			<if test="zt != null">
+				zt,
+			</if>
+			<if test="dm != null">
+				dm,
+			</if>
+			<if test="ct != null">
+				ct,
+			</if>
+			<if test="bz != null">
+				bz,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="jtid != null">
+				#{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="fdid != null">
+				#{fdid,jdbcType=INTEGER},
+			</if>
+			<if test="djbh != null">
+				#{djbh,jdbcType=VARCHAR},
+			</if>
+			<if test="djlx != null">
+				#{djlx,jdbcType=INTEGER},
+			</if>
+			<if test="zlid != null">
+				#{zlid,jdbcType=BIGINT},
+			</if>
+			<if test="zlysid != null">
+				#{zlysid,jdbcType=BIGINT},
+			</if>
+			<if test="hzid != null">
+				#{hzid,jdbcType=BIGINT},
+			</if>
+			<if test="hjje != null">
+				#{hjje,jdbcType=DECIMAL},
+			</if>
+			<if test="ssje != null">
+				#{ssje,jdbcType=DECIMAL},
+			</if>
+			<if test="zffs != null">
+				#{zffs,jdbcType=VARCHAR},
+			</if>
+			<if test="djzzr != null">
+				#{djzzr,jdbcType=BIGINT},
+			</if>
+			<if test="djshr != null">
+				#{djshr,jdbcType=BIGINT},
+			</if>
+			<if test="djshzt != null">
+				#{djshzt,jdbcType=INTEGER},
+			</if>
+			<if test="djshsj != null">
+				#{djshsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="djjdzt != null">
+				#{djjdzt,jdbcType=VARCHAR},
+			</if>
+			<if test="zt != null">
+				#{zt,jdbcType=INTEGER},
+			</if>
+			<if test="dm != null">
+				#{dm,jdbcType=INTEGER},
+			</if>
+			<if test="ct != null">
+				#{ct,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bz != null">
+				#{bz,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.Xsdj">
+		update hjt_xsdj
+		<set>
+			<if test="jtid != null">
+				jtid = #{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="fdid != null">
+				fdid = #{fdid,jdbcType=INTEGER},
+			</if>
+			<if test="djbh != null">
+				djbh = #{djbh,jdbcType=VARCHAR},
+			</if>
+			<if test="djlx != null">
+				djlx = #{djlx,jdbcType=INTEGER},
+			</if>
+			<if test="zlid != null">
+				zlid = #{zlid,jdbcType=BIGINT},
+			</if>
+			<if test="zlysid != null">
+				zlysid = #{zlysid,jdbcType=BIGINT},
+			</if>
+			<if test="hzid != null">
+				hzid = #{hzid,jdbcType=BIGINT},
+			</if>
+			<if test="hjje != null">
+				hjje = #{hjje,jdbcType=DECIMAL},
+			</if>
+			<if test="ssje != null">
+				ssje = #{ssje,jdbcType=DECIMAL},
+			</if>
+			<if test="zffs != null">
+				zffs = #{zffs,jdbcType=VARCHAR},
+			</if>
+			<if test="djzzr != null">
+				djzzr = #{djzzr,jdbcType=BIGINT},
+			</if>
+			<if test="djshr != null">
+				djshr = #{djshr,jdbcType=BIGINT},
+			</if>
+			<if test="djshzt != null">
+				djshzt = #{djshzt,jdbcType=INTEGER},
+			</if>
+			<if test="djshsj != null">
+				djshsj = #{djshsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="djjdzt != null">
+				djjdzt = #{djjdzt,jdbcType=VARCHAR},
+			</if>
+			<if test="zt != null">
+				zt = #{zt,jdbcType=INTEGER},
+			</if>
+			<if test="dm != null">
+				dm = #{dm,jdbcType=INTEGER},
+			</if>
+			<if test="ct != null">
+				ct = #{ct,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bz != null">
+				bz = #{bz,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.Xsdj">
+		update hjt_xsdj
+		set jtid = #{jtid,jdbcType=INTEGER},
+		fdid = #{fdid,jdbcType=INTEGER},
+		djbh = #{djbh,jdbcType=VARCHAR},
+		djlx = #{djlx,jdbcType=INTEGER},
+		zlid = #{zlid,jdbcType=BIGINT},
+		zlysid = #{zlysid,jdbcType=BIGINT},
+		hzid = #{hzid,jdbcType=BIGINT},
+		hjje = #{hjje,jdbcType=DECIMAL},
+		ssje = #{ssje,jdbcType=DECIMAL},
+		zffs = #{zffs,jdbcType=VARCHAR},
+		djzzr = #{djzzr,jdbcType=BIGINT},
+		djshr = #{djshr,jdbcType=BIGINT},
+		djshzt = #{djshzt,jdbcType=INTEGER},
+		djshsj = #{djshsj,jdbcType=TIMESTAMP},
+		djjdzt = #{djjdzt,jdbcType=VARCHAR},
+		zt = #{zt,jdbcType=INTEGER},
+		dm = #{dm,jdbcType=INTEGER},
+		ct = #{ct,jdbcType=TIMESTAMP},
+		bz = #{bz,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Xsdj">
+		update hjt_xsdj
+		set jtid = #{jtid,jdbcType=INTEGER},
+		fdid = #{fdid,jdbcType=INTEGER},
+		djbh = #{djbh,jdbcType=VARCHAR},
+		djlx = #{djlx,jdbcType=INTEGER},
+		zlid = #{zlid,jdbcType=BIGINT},
+		zlysid = #{zlysid,jdbcType=BIGINT},
+		hzid = #{hzid,jdbcType=BIGINT},
+		hjje = #{hjje,jdbcType=DECIMAL},
+		ssje = #{ssje,jdbcType=DECIMAL},
+		zffs = #{zffs,jdbcType=VARCHAR},
+		djzzr = #{djzzr,jdbcType=BIGINT},
+		djshr = #{djshr,jdbcType=BIGINT},
+		djshzt = #{djshzt,jdbcType=INTEGER},
+		djshsj = #{djshsj,jdbcType=TIMESTAMP},
+		djjdzt = #{djjdzt,jdbcType=VARCHAR},
+		zt = #{zt,jdbcType=INTEGER},
+		dm = #{dm,jdbcType=INTEGER},
+		ct = #{ct,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

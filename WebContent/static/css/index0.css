@@ -1,0 +1,80 @@
+a:hover {
+	text-decoration: none;
+}
+
+.input {
+	display: block;
+	width: 100%;
+	height: 34px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	zoom: 1;
+}
+
+.body {
+	padding: 10px;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.claer {
+	clear: both;
+}
+
+.num1 {
+	width: 100%;
+	margin: 10px auto;
+	overflow: hidden;
+}
+
+.top {
+	width: 100%;
+}
+
+.btn {
+	margin-left: 10px;
+}
+
+.w-6 {
+	width: 40%;
+}
+
+.w6 {
+	width: 70%;
+}
+
+.w4 {
+	width: 30%;
+}
+
+.lp {
+	padding: 0px 10px;
+}
+
+.fayao {
+	width: 100%;
+	margin: 10px 0px;
+}
+
+th {
+	background-color: #b8ebcb
+}

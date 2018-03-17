@@ -1,0 +1,332 @@
+html, body {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+}
+
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.body {
+	padding: 10px;
+}
+
+.clear {
+	clear: both;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.top {
+	width: 100%;
+	height: 35px;
+	border-bottom: 1px solid #dcdcdc;
+	line-height: 35px;
+	color: #141414;
+	text-indent: 2em;
+}
+
+.top-t {
+	float: left;
+}
+
+.top-t li {
+	margin: 0px 10px;
+	width: 25px;
+	height: 90px;
+	background-color: #2e8bcc;
+	color: #141414;
+	text-align: center;
+	cursor: pointer;
+	margin-bottom: 2px;
+	color: #eaeaea;
+}
+
+.index {
+	width: 95%;
+	height: 670px;
+	background-color: #e5e5e5;
+	float: left;
+	margin-left: -10px;
+	display: none;
+	overflow: hidden;
+}
+
+.n1 .xtop, .n2 .xtops {
+	width: 100%;
+	height: 33px;
+	background-color: #ffffff;
+}
+
+.n1 .i-body, .n2 .i-bodys {
+	width: 750px;
+	height: 620px;
+	background-color: white;
+	margin: 10px 20px;
+	box-shadow: 1px 1px 2px 2px rgba(1, 2, 1, .3);
+	position: relative;
+}
+
+.i-body .i-title {
+	width: 750px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #090909;
+	margin: 20px 0px;
+}
+
+.select {
+	display: block;
+	width: 100px;
+	height: 34px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.input {
+	display: block;
+	width: 100px;
+	height: 34px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	zoom: 1;
+}
+
+.neirong {
+	width: 98%;
+	height: 40px;
+	margin: 10px auto;
+}
+
+.noborder {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+}
+
+.wl {
+	width: 150px;
+}
+
+.wll {
+	width: 230px;
+}
+
+.ws {
+	width: 60px;
+}
+
+.wss {
+	width: 45px;
+}
+
+span {
+	line-height: 35px;
+	margin: 0px 5px;
+}
+
+.i-body .foots {
+	width: 100%;
+	position: absolute;
+	bottom: 10px;
+	left: 20px;
+	right: 0px;
+	font-size: 12px;
+}
+
+.i-body .foots select {
+	height: 30px;
+	font-size: 12px
+}
+
+.i-body .foots .btn {
+	height: 30px;
+}
+
+/*n2*/
+.inpadd .ds {
+	padding: 0px 10px;
+	margin: 10px auto;
+}
+
+.tn .vs {
+	width: 340px;
+	margin: 10px 5px;
+}
+
+.tn .vsl {
+	width: 98%;
+	margin: 10px 5px;
+}
+
+.tn .vs textarea, .tn .vsl textarea {
+	width: 100%;
+	height: 60px;
+	resize: none;
+	border-radius: 5px;
+	box-shadow: 1px 1px 1px 1px rgba(2, 2, 2, .2)
+}
+
+.xia {
+	overflow-y: auto;
+	min-height: 400px;
+}
+/*body right*/
+.op {
+	margin-top: -40px;
+	margin-bottom: 20px;
+	position: relative;
+	right: 30px;
+}
+
+.ap-r {
+	width: 30%;
+	min-height: 636px;
+	background-color: white;
+	float: right;
+	padding: 10px;
+}
+
+.tops-t, .table {
+	margin: 10px 0px;
+}
+
+.xiangmu {
+	margin: 10px 0px;
+	display: none;
+}
+
+.xc {
+	cursor: pointer;
+}
+
+.cf {
+	width: 100px;
+	height: 33px;
+	line-height: 33px;
+	background-color: #f9f9f9;
+	text-align: center;
+	float: left;
+}
+/*-- 弹框--*/
+.c-body, .c-body1 {
+	width: 80%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 177px;
+	margin: auto;
+	z-index: 999;
+	display: none;
+}
+
+.c-body .btn, .c-body1 .btn {
+	margin-right: 20px;
+}
+
+.c-body .panel-heading span, .c-body1 .panel-heading span {
+	line-height: 20px;
+	cursor: pointer;
+}
+
+.c-body1 .t1 {
+	width: 20%;
+	float: left;
+}
+
+.c-body1 .t2 {
+	width: 80%;
+	float: left;
+}
+
+.tbs {
+	height: 250px;
+	overflow-y: auto;
+}
+
+.tjp {
+	width: 300px;
+	height: 30px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	display: none;
+}
+
+.tjp .page-header {
+	padding: 9px;
+	border-bottom: 1px solid #eee;
+	margin: 0;
+	line-height: 30px;
+	background-color: #69f2f9;
+	color: #090909
+}
+
+.guahao {
+	width: 60%;
+	min-height: 400px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 170px;
+	bottom: 0;
+	margin: auto;
+	z-index: 999;
+	display: none;
+}
+
+.bljz {
+	width: 60%;
+	min-height: 400px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 170px;
+	bottom: 0;
+	margin: auto;
+	z-index: 999;
+	display: none;
+}
+
+.daizx {
+	cursor: pointer;
+}

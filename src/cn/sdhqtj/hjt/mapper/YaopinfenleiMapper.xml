@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.YaopinfenleiMapper">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Yaopinfenlei">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="flbh" property="flbh" jdbcType="VARCHAR" />
+		<result column="flmc" property="flmc" jdbcType="VARCHAR" />
+		<result column="fldj" property="fldj" jdbcType="SMALLINT" />
+		<result column="sjflid" property="sjflid" jdbcType="INTEGER" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Yaopinfenlei"
+		extends="BaseResultMap">
+		<result column="flbz" property="flbz" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, jtid, flbh, flmc, fldj, sjflid, zt
+	</sql>
+	<sql id="Blob_Column_List">
+		flbz
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from hjt_yaopinfenlei
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from hjt_yaopinfenlei
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
+		insert into hjt_yaopinfenlei (id, jtid,
+		flbh, flmc, fldj,
+		sjflid, zt, flbz
+		)
+		values (#{id,jdbcType=INTEGER}, #{jtid,jdbcType=INTEGER},
+		#{flbh,jdbcType=VARCHAR}, #{flmc,jdbcType=VARCHAR},
+		#{fldj,jdbcType=SMALLINT},
+		#{sjflid,jdbcType=INTEGER}, #{zt,jdbcType=INTEGER}, #{flbz,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
+		insert into hjt_yaopinfenlei
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="jtid != null">
+				jtid,
+			</if>
+			<if test="flbh != null">
+				flbh,
+			</if>
+			<if test="flmc != null">
+				flmc,
+			</if>
+			<if test="fldj != null">
+				fldj,
+			</if>
+			<if test="sjflid != null">
+				sjflid,
+			</if>
+			<if test="zt != null">
+				zt,
+			</if>
+			<if test="flbz != null">
+				flbz,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="jtid != null">
+				#{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="flbh != null">
+				#{flbh,jdbcType=VARCHAR},
+			</if>
+			<if test="flmc != null">
+				#{flmc,jdbcType=VARCHAR},
+			</if>
+			<if test="fldj != null">
+				#{fldj,jdbcType=SMALLINT},
+			</if>
+			<if test="sjflid != null">
+				#{sjflid,jdbcType=INTEGER},
+			</if>
+			<if test="zt != null">
+				#{zt,jdbcType=INTEGER},
+			</if>
+			<if test="flbz != null">
+				#{flbz,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
+		update hjt_yaopinfenlei
+		<set>
+			<if test="jtid != null">
+				jtid = #{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="flbh != null">
+				flbh = #{flbh,jdbcType=VARCHAR},
+			</if>
+			<if test="flmc != null">
+				flmc = #{flmc,jdbcType=VARCHAR},
+			</if>
+			<if test="fldj != null">
+				fldj = #{fldj,jdbcType=SMALLINT},
+			</if>
+			<if test="sjflid != null">
+				sjflid = #{sjflid,jdbcType=INTEGER},
+			</if>
+			<if test="zt != null">
+				zt = #{zt,jdbcType=INTEGER},
+			</if>
+			<if test="flbz != null">
+				flbz = #{flbz,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
+		update hjt_yaopinfenlei
+		set jtid = #{jtid,jdbcType=INTEGER},
+		flbh = #{flbh,jdbcType=VARCHAR},
+		flmc = #{flmc,jdbcType=VARCHAR},
+		fldj = #{fldj,jdbcType=SMALLINT},
+		sjflid = #{sjflid,jdbcType=INTEGER},
+		zt = #{zt,jdbcType=INTEGER},
+		flbz = #{flbz,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
+		update hjt_yaopinfenlei
+		set jtid = #{jtid,jdbcType=INTEGER},
+		flbh = #{flbh,jdbcType=VARCHAR},
+		flmc = #{flmc,jdbcType=VARCHAR},
+		fldj = #{fldj,jdbcType=SMALLINT},
+		sjflid = #{sjflid,jdbcType=INTEGER},
+		zt = #{zt,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

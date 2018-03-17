@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.FendianMapper">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Fendian">
+		<id column="Id" property="id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="fdbh" property="fdbh" jdbcType="VARCHAR" />
+		<result column="fdmc" property="fdmc" jdbcType="VARCHAR" />
+		<result column="fddz" property="fddz" jdbcType="VARCHAR" />
+		<result column="fdlxdh" property="fdlxdh" jdbcType="VARCHAR" />
+		<result column="fddzxm" property="fddzxm" jdbcType="VARCHAR" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Fendian"
+		extends="BaseResultMap">
+		<result column="fdbz" property="fdbz" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		Id, jtid, fdbh, fdmc, fddz, fdlxdh, fddzxm, zt
+	</sql>
+	<sql id="Blob_Column_List">
+		fdbz
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from hjt_fendian
+		where Id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from hjt_fendian
+		where Id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.sdhqtj.hjt.entity.Fendian">
+		insert into hjt_fendian (Id, jtid, fdbh,
+		fdmc, fddz, fdlxdh,
+		fddzxm, zt, fdbz
+		)
+		values (#{id,jdbcType=INTEGER}, #{jtid,jdbcType=INTEGER},
+		#{fdbh,jdbcType=VARCHAR},
+		#{fdmc,jdbcType=VARCHAR}, #{fddz,jdbcType=VARCHAR}, #{fdlxdh,jdbcType=VARCHAR},
+		#{fddzxm,jdbcType=VARCHAR}, #{zt,jdbcType=INTEGER},
+		#{fdbz,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Fendian">
+		insert into hjt_fendian
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				Id,
+			</if>
+			<if test="jtid != null">
+				jtid,
+			</if>
+			<if test="fdbh != null">
+				fdbh,
+			</if>
+			<if test="fdmc != null">
+				fdmc,
+			</if>
+			<if test="fddz != null">
+				fddz,
+			</if>
+			<if test="fdlxdh != null">
+				fdlxdh,
+			</if>
+			<if test="fddzxm != null">
+				fddzxm,
+			</if>
+			<if test="zt != null">
+				zt,
+			</if>
+			<if test="fdbz != null">
+				fdbz,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="jtid != null">
+				#{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="fdbh != null">
+				#{fdbh,jdbcType=VARCHAR},
+			</if>
+			<if test="fdmc != null">
+				#{fdmc,jdbcType=VARCHAR},
+			</if>
+			<if test="fddz != null">
+				#{fddz,jdbcType=VARCHAR},
+			</if>
+			<if test="fdlxdh != null">
+				#{fdlxdh,jdbcType=VARCHAR},
+			</if>
+			<if test="fddzxm != null">
+				#{fddzxm,jdbcType=VARCHAR},
+			</if>
+			<if test="zt != null">
+				#{zt,jdbcType=INTEGER},
+			</if>
+			<if test="fdbz != null">
+				#{fdbz,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.Fendian">
+		update hjt_fendian
+		<set>
+			<if test="jtid != null">
+				jtid = #{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="fdbh != null">
+				fdbh = #{fdbh,jdbcType=VARCHAR},
+			</if>
+			<if test="fdmc != null">
+				fdmc = #{fdmc,jdbcType=VARCHAR},
+			</if>
+			<if test="fddz != null">
+				fddz = #{fddz,jdbcType=VARCHAR},
+			</if>
+			<if test="fdlxdh != null">
+				fdlxdh = #{fdlxdh,jdbcType=VARCHAR},
+			</if>
+			<if test="fddzxm != null">
+				fddzxm = #{fddzxm,jdbcType=VARCHAR},
+			</if>
+			<if test="zt != null">
+				zt = #{zt,jdbcType=INTEGER},
+			</if>
+			<if test="fdbz != null">
+				fdbz = #{fdbz,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.Fendian">
+		update hjt_fendian
+		set jtid = #{jtid,jdbcType=INTEGER},
+		fdbh = #{fdbh,jdbcType=VARCHAR},
+		fdmc = #{fdmc,jdbcType=VARCHAR},
+		fddz = #{fddz,jdbcType=VARCHAR},
+		fdlxdh = #{fdlxdh,jdbcType=VARCHAR},
+		fddzxm = #{fddzxm,jdbcType=VARCHAR},
+		zt = #{zt,jdbcType=INTEGER},
+		fdbz = #{fdbz,jdbcType=LONGVARCHAR}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Fendian">
+		update hjt_fendian
+		set jtid = #{jtid,jdbcType=INTEGER},
+		fdbh = #{fdbh,jdbcType=VARCHAR},
+		fdmc = #{fdmc,jdbcType=VARCHAR},
+		fddz = #{fddz,jdbcType=VARCHAR},
+		fdlxdh = #{fdlxdh,jdbcType=VARCHAR},
+		fddzxm = #{fddzxm,jdbcType=VARCHAR},
+		zt = #{zt,jdbcType=INTEGER}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

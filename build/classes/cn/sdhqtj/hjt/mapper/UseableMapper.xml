@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.UseableMapper">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Useable">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="useAble" property="useAble" jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="gmt_create" property="gmt_create" jdbcType="TIMESTAMP" />
+		<result column="gmt_modified" property="gmt_modified" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, jtid, useAble, url, gmt_create, gmt_modified
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from hjt_useable
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from hjt_useable
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.sdhqtj.hjt.entity.Useable">
+		insert into hjt_useable (id, jtid, useAble,
+		url, gmt_create, gmt_modified
+		)
+		values (#{id,jdbcType=INTEGER}, #{jtid,jdbcType=INTEGER},
+		#{useAble,jdbcType=VARCHAR},
+		#{url,jdbcType=VARCHAR}, #{gmt_create,jdbcType=TIMESTAMP}, #{gmt_modified,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Useable">
+		insert into hjt_useable
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="jtid != null">
+				jtid,
+			</if>
+			<if test="useAble != null">
+				useAble,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="gmt_create != null">
+				gmt_create,
+			</if>
+			<if test="gmt_modified != null">
+				gmt_modified,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="jtid != null">
+				#{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="useAble != null">
+				#{useAble,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="gmt_create != null">
+				#{gmt_create,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmt_modified != null">
+				#{gmt_modified,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.Useable">
+		update hjt_useable
+		<set>
+			<if test="jtid != null">
+				jtid = #{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="useAble != null">
+				useAble = #{useAble,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				url = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="gmt_create != null">
+				gmt_create = #{gmt_create,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmt_modified != null">
+				gmt_modified = #{gmt_modified,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Useable">
+		update hjt_useable
+		set jtid = #{jtid,jdbcType=INTEGER},
+		useAble = #{useAble,jdbcType=VARCHAR},
+		url = #{url,jdbcType=VARCHAR},
+		gmt_create = #{gmt_create,jdbcType=TIMESTAMP},
+		gmt_modified = #{gmt_modified,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -9,6 +9,6 @@ public interface YaopinfenleiMapperPro {
 	List<Yaopinfenlei> Yaopinfenleiquery();
 	
 	Yaopinfenlei selectByypflbh(String ypflbh);
-	
-	String lastinsertid();
+
+	Integer insertSelective(Yaopinfenlei ypfl);
 }

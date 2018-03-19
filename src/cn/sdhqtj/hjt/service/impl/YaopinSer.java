@@ -1,3 +1,9 @@
+/**  
+* Title: YaopinfenleiSer.java  
+* Description:药品service实现类 
+* @author LIN  
+* @date 2018年3月10日  
+*/
 package cn.sdhqtj.hjt.service.impl;
 
 import java.util.List;
@@ -20,6 +26,7 @@ public class YaopinSer implements YaopinService {
 	Yaopin yaopintemp;
 	YaopinWithBLOBs yaopinBtemp;
 	
+	//获取药品列表
 	@Override
 	public List<Yaopin> yaopinquery() {
 		// TODO Auto-generated method stub
@@ -27,6 +34,7 @@ public class YaopinSer implements YaopinService {
 		return list;
 	}
 
+	//根据药品id获取药品信息
 	@Override
 	public YaopinWithBLOBs yaopinget(Integer id) {
 		// TODO Auto-generated method stub
@@ -34,7 +42,7 @@ public class YaopinSer implements YaopinService {
 		return yaopinBtemp;
 	}
 
-
+    //根据药品编号获取药品信息
 	@Override
 	public YaopinWithBLOBs selectByypbh(String ypbh) {
 		// TODO Auto-generated method stub
@@ -42,15 +50,7 @@ public class YaopinSer implements YaopinService {
 		return yaopinBtemp;
 	}
 
-
-	@Override
-	public YaopinWithBLOBs selectByypmc(String ypmc) {
-		// TODO Auto-generated method stub
-		yaopinBtemp = yaopinMapperPro.selectByypmc(ypmc);
-		return yaopinBtemp;
-	}
-
-
+	//添加药品
 	@Override
 	public void yaopinadd(YaopinWithBLOBs yaopin) {
 		// TODO Auto-generated method stub
@@ -58,20 +58,17 @@ public class YaopinSer implements YaopinService {
 		
 	}
 
-
+    //根据药品id删除药品
 	@Override
 	public void yaopindelete(int id) {
 		// TODO Auto-generated method stub
 		yaopinMapper.deleteByPrimaryKey(id);
 	}
 
-
+    //更新药品
 	@Override
 	public void yaopinUpdate(YaopinWithBLOBs yaopin) {
 		// TODO Auto-generated method stub
 		yaopinMapper.updateByPrimaryKeySelective(yaopin);
 	}
-
-	
-
 }

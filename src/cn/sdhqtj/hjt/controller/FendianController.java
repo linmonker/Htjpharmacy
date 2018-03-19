@@ -1,3 +1,9 @@
+/**  
+* Title: FendianController.java  
+* Description:分店控制器
+* @author LIN  
+* @date 2018年2月19日  
+*/  
 package cn.sdhqtj.hjt.controller;
 
 import java.util.List;

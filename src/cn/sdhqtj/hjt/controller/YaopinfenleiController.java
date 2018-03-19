@@ -1,3 +1,9 @@
+/**  
+* Title: YaopinfenleiController.java  
+* Description:药品分类控制器  
+* @author LIN  
+* @date 2018年3月10日  
+*/  
 package cn.sdhqtj.hjt.controller;
 
 import java.util.List;
@@ -26,43 +32,55 @@ public class YaopinfenleiController {
 	YaopinflNode ypflnodetemp;
 	List<YaopinflNode> ypflnodelist;
 
+	 
+    // 跳转药品分类页面 
+     @RequestMapping("/list")  
+     public String toListLibrary(){  
+          return "yaopinfenlei/list";  
+     }  
+	
 	// 列表
-	@RequestMapping("/list")
-	public @ResponseBody List<YaopinflNode> list() {
-		ypflnodelist = ypflservice.Yaopinfenleiquery();
-
-		return ypflnodelist;
+	@RequestMapping("/getlist")
+	@ResponseBody
+	public List<Object> list() {
+		return ypflservice.Yaopinfenleiquery();
+		
 	}
 
 	// 执行添加药品分类
 	@RequestMapping("/doadd")
-	public @ResponseBody String doadd(@RequestBody YaopinflNode ypflnodetemp) {
+	@ResponseBody
+	public String doadd(@RequestBody YaopinflNode ypflnodetemp) {
 
+		ypfltemp = new Yaopinfenlei();
 		ypfltemp.setSjflid(ypflnodetemp.getId());
-		ypfltemp.setFldj((short) (ypflnodetemp.getLevel_id() + 1));
+		ypfltemp.setFldj((short)(ypflnodetemp.getLevelid() + 1));
 		ypfltemp.setFlmc("新分类");
 		ypfltemp.setZt(0);
 		
-		return ypflservice.yaopinfenleiadd(ypfltemp);
-		
+		Integer lastid =  ypflservice.yaopinfenleiadd(ypfltemp);
+		System.out.println("最后插入"+lastid);
+		return String.valueOf(lastid);
 	}
 
 	// 执行修改药品分类
 	@RequestMapping("/doedit")
-	public @ResponseBody String doedit(@RequestBody YaopinflNode ypflnodetemp) {
+	@ResponseBody
+	public String doedit(@RequestBody YaopinflNode ypflnodetemp) {
+		ypfltemp = new Yaopinfenlei();
 		ypfltemp.setId(ypflnodetemp.getId());
-		ypfltemp.setFldj(ypflnodetemp.getLevel_id());
-		ypfltemp.setSjflid(ypflnodetemp.getPid());
+		ypfltemp.setFldj((short) (ypflnodetemp.getLevelid()+1));
+		ypfltemp.setSjflid(ypflnodetemp.getPId());
 		ypfltemp.setFlmc(ypflnodetemp.getName());
 		ypfltemp.setZt(0);
 		ypflservice.yaopinfenleiupdate(ypfltemp);
 		return "success";
-
 	}
 
 	// 删除药品分类
 	@RequestMapping("/delete")
-	public @ResponseBody String delete(HttpServletRequest request,@RequestParam(value = "id") Integer id) {
+	@ResponseBody
+	public String delete(HttpServletRequest request,@RequestParam(value = "id") Integer id) {
 	
 		ypflservice.yaopinfenleidelete(id);
 		return "success";

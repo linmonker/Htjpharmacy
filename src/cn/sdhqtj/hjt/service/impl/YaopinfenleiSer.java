@@ -1,3 +1,9 @@
+/**  
+* Title: YaopinfenleiSer.java  
+* Description:药品分类service实现类  
+* @author LIN  
+* @date 2018年3月10日  
+*/
 package cn.sdhqtj.hjt.service.impl;
 
 import java.util.ArrayList;
@@ -23,43 +29,41 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 	YaopinflNode ypflnodetemp;
 	List<YaopinflNode> ypflnodelist;
 
+	//获取药品分类列表
 	@Override
-	public List<YaopinflNode> Yaopinfenleiquery() {
+	public List<Object> Yaopinfenleiquery() {
 		// TODO Auto-generated method stub
-		List<YaopinflNode> listZTree = new ArrayList<YaopinflNode>();
-        List<Yaopinfenlei> ypfllist  = ypflMapperPro.Yaopinfenleiquery();
-        
-        for (int i = 0; i < ypfllist.size(); i++) {  
-        	ypfltemp = ypfllist.get(i);//分类信息  
-        	ypflnodetemp.setId(ypfltemp.getId());
-        	ypflnodetemp.setPid(ypfltemp.getSjflid());
-        	ypflnodetemp.setName(ypfltemp.getFlmc());
-        	
-            listZTree.add(ypflnodetemp);  
-        }  
-        return listZTree;  
+		List<Object> listZTree = new ArrayList<Object>();
+		List<Yaopinfenlei> ypfllist = ypflMapperPro.Yaopinfenleiquery();
+		String str = "0";
+
+		for (int i = 0; i < ypfllist.size(); i++) {
+			ypfltemp = ypfllist.get(i);// 分类信息
+
+			str = "{id:'" + ypfltemp.getId() + "', pId:'" + ypfltemp.getSjflid() + "', name:\"" + ypfltemp.getFlmc()
+					+ "\" }";// 封装ztree需要格式的字符串
+
+			listZTree.add(str);
+		}
+		return listZTree;
 	}
 
+	//添加药品分类
 	@Override
-	public Yaopinfenlei selectByypflbh(String ypflbh) {
+	public Integer yaopinfenleiadd(Yaopinfenlei ypfl) {
 		// TODO Auto-generated method stub
-		return ypflMapperPro.selectByypflbh(ypflbh);
+		ypflMapperPro.insertSelective(ypfl);
+		return ypfl.getId();
+ 	}
 
-	}
-
-	@Override
-	public String yaopinfenleiadd(Yaopinfenlei ypfl) {
-		// TODO Auto-generated method stub
-		ypflMapper.insert(ypfl);
-		return ypflMapperPro.lastinsertid();
-	}
-
+	//更新药品分类
 	@Override
 	public void yaopinfenleiupdate(Yaopinfenlei ypfl) {
 		// TODO Auto-generated method stub
 		ypflMapper.updateByPrimaryKeySelective(ypfl);
 	}
 
+	//删除药品分类
 	@Override
 	public void yaopinfenleidelete(Integer id) {
 		// TODO Auto-generated method stub

@@ -21,8 +21,9 @@
 		flbz
 	</sql>
 	<select id="Yaopinfenleiquery" resultMap="BaseResultMap">
-		selece *
-		from hjt_yaopinfenlei
+		select *
+		from
+		hjt_yaopinfenlei
 		where zt=0
 	</select>
 	<select id="selectByypflbh" resultMap="ResultMapWithBLOBs"
@@ -35,5 +36,62 @@
 		select last_insert_id()
 		from hjt_yaopinfenlei
 	</select>
-
+	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
+		insert into hjt_yaopinfenlei
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="jtid != null">
+				jtid,
+			</if>
+			<if test="flbh != null">
+				flbh,
+			</if>
+			<if test="flmc != null">
+				flmc,
+			</if>
+			<if test="fldj != null">
+				fldj,
+			</if>
+			<if test="sjflid != null">
+				sjflid,
+			</if>
+			<if test="zt != null">
+				zt,
+			</if>
+			<if test="flbz != null">
+				flbz,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="jtid != null">
+				#{jtid,jdbcType=INTEGER},
+			</if>
+			<if test="flbh != null">
+				#{flbh,jdbcType=VARCHAR},
+			</if>
+			<if test="flmc != null">
+				#{flmc,jdbcType=VARCHAR},
+			</if>
+			<if test="fldj != null">
+				#{fldj,jdbcType=SMALLINT},
+			</if>
+			<if test="sjflid != null">
+				#{sjflid,jdbcType=INTEGER},
+			</if>
+			<if test="zt != null">
+				#{zt,jdbcType=INTEGER},
+			</if>
+			<if test="flbz != null">
+				#{flbz,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
 </mapper>

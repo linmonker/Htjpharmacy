@@ -1,3 +1,9 @@
+/**  
+* Title: YaopinController.java  
+* Description:药品控制器  
+* @author LIN  
+* @date 2018年2月19日  
+*/  
 package cn.sdhqtj.hjt.controller;
 
 import java.util.List;
@@ -62,7 +68,7 @@ public class YaopinController {
 		}
 	}
 	
-	// 修改分店
+	// 修改药品
 	@RequestMapping("/edit")
 	public String edit(HttpServletRequest request,Model model) {
 		String ypbh = request.getParameter("ypbh");
@@ -71,7 +77,7 @@ public class YaopinController {
 		return "yaopin/edit";
 	}
 	
-	// 执行修改分店
+	// 执行修改药品
 	@RequestMapping("/doedit")
 	public String doedit(YaopinWithBLOBs yaopin,Model model) {
 		yaopin.setZt(0);

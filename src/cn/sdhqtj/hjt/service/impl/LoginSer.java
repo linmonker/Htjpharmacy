@@ -1,3 +1,9 @@
+/**  
+* Title: LoginSer.java  
+* Description:登录service实现类  
+* @author LIN  
+* @date 2018年3月10日  
+*/
 package cn.sdhqtj.hjt.service.impl;
 
 import java.util.List;
@@ -14,6 +20,7 @@ public class LoginSer implements LoginService {
 	@Resource
 	private LoginMapper loginMapper;
 
+	//登录验证
 	@Override
 	public List<Login> login(Login login) {
 		

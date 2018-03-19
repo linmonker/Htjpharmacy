@@ -1,3 +1,9 @@
+/**  
+* Title: test.java  
+* Description:  
+* @author LIN  
+* @date 2018年3月19日  
+*/  
 package cn.sdhqtj.hjt.controller;
 
 import java.util.List;
@@ -12,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.sdhqtj.hjt.entity.Gongyingshang;
 import cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs;
 import cn.sdhqtj.hjt.service.GongyingshangService;
-
+ 
 @Controller
 @RequestMapping("/gongyingshang")
 public class GongyingshangController {

@@ -80,4 +80,5 @@ public class Yaopinfenlei {
     public void setFlbz(String flbz) {
         this.flbz = flbz == null ? null : flbz.trim();
     }
+    
 }

@@ -3,19 +3,19 @@ package cn.sdhqtj.hjt.entity;
 public class YaopinflNode {
 
 	private Integer id;
-	private Integer pid;
+	private Integer pId;
 	private String name;
-	private short level_id;
+	private short levelid;
 	
 	public YaopinflNode() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public YaopinflNode(Integer id, Integer pid, String name, short level_id) {
+	public YaopinflNode(Integer id, Integer pId, String name, short levelid) {
 		this.id = id;
-		this.pid = pid;
+		this.pId = pId;
 		this.name = name;
-		this.level_id = level_id;
+		this.levelid = levelid;
 	}
 
 	public Integer getId() {
@@ -26,12 +26,12 @@ public class YaopinflNode {
 		this.id = id;
 	}
 
-	public Integer getPid() {
-		return pid;
+	public Integer getPId() {
+		return pId;
 	}
 
-	public void setPid(Integer pid) {
-		this.pid = pid;
+	public void setPId(Integer pId) {
+		this.pId = pId;
 	}
 
 	public String getName() {
@@ -42,12 +42,12 @@ public class YaopinflNode {
 		this.name = name;
 	}
 
-	public short getLevel_id() {
-		return level_id;
+	public short getLevelid() {
+		return levelid;
 	}
 
-	public void setLevel_id(short level_id) {
-		this.level_id = level_id;
+	public void setLevelid(short levelid) {
+		this.levelid = levelid;
 	}
 	
 }

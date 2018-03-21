@@ -16,17 +16,16 @@ import cn.sdhqtj.hjt.service.LoginService;
 
 @Service
 public class LoginSer implements LoginService {
-	
+
 	@Resource
 	private LoginMapper loginMapper;
 
-	//登录验证
+	// 登录验证
 	@Override
 	public List<Login> login(Login login) {
-		
+
 		List<Login> list = loginMapper.login(login);
 		return list;
 	}
 
-	
 }

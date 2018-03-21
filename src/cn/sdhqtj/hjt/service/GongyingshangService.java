@@ -16,19 +16,22 @@ import cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs;
 @Service
 public interface GongyingshangService {
 
-	//获取供应商列表
+	// 获取供应商列表
 	public List<Gongyingshang> gongyingshangquery();
 
-	//通过供应商编号获取供应商信息
+	// 通过供应商id获取供应商信息
+	GongyingshangWithBLOBs selectByPrimaryKey(Integer id);
+	
+	// 通过供应商编号获取供应商信息
 	public GongyingshangWithBLOBs selectBygysbhWithBLOBs(String gysbh);
 
-	//添加供应商
+	// 添加供应商
 	public void gongyingshangadd(GongyingshangWithBLOBs gysB);
-	
-	//更新供应商
+
+	// 更新供应商
 	public void gongyingshangupdate(GongyingshangWithBLOBs gysB);
 
-	//根据供应商id删除供应商
+	// 根据供应商id删除供应商
 	public void gongyingshangdelete(Integer id);
-	
+
 }

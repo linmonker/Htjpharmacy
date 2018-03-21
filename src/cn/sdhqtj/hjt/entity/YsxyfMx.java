@@ -4,93 +4,93 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class YsxyfMx {
-    private Integer ID;
+	private Integer ID;
 
-    private Integer xyfid;
+	private Integer xyfid;
 
-    private Integer ypid;
+	private Integer ypid;
 
-    private BigDecimal ypsl;
+	private BigDecimal ypsl;
 
-    private String ypdw;
+	private String ypdw;
 
-    private String ypbz;
+	private String ypbz;
 
-    private Integer zt;
+	private Integer zt;
 
-    private Integer dm;
+	private Integer dm;
 
-    private Date ct;
+	private Date ct;
 
-    public Integer getID() {
-        return ID;
-    }
+	public Integer getID() {
+		return ID;
+	}
 
-    public void setID(Integer ID) {
-        this.ID = ID;
-    }
+	public void setID(Integer ID) {
+		this.ID = ID;
+	}
 
-    public Integer getXyfid() {
-        return xyfid;
-    }
+	public Integer getXyfid() {
+		return xyfid;
+	}
 
-    public void setXyfid(Integer xyfid) {
-        this.xyfid = xyfid;
-    }
+	public void setXyfid(Integer xyfid) {
+		this.xyfid = xyfid;
+	}
 
-    public Integer getYpid() {
-        return ypid;
-    }
+	public Integer getYpid() {
+		return ypid;
+	}
 
-    public void setYpid(Integer ypid) {
-        this.ypid = ypid;
-    }
+	public void setYpid(Integer ypid) {
+		this.ypid = ypid;
+	}
 
-    public BigDecimal getYpsl() {
-        return ypsl;
-    }
+	public BigDecimal getYpsl() {
+		return ypsl;
+	}
 
-    public void setYpsl(BigDecimal ypsl) {
-        this.ypsl = ypsl;
-    }
+	public void setYpsl(BigDecimal ypsl) {
+		this.ypsl = ypsl;
+	}
 
-    public String getYpdw() {
-        return ypdw;
-    }
+	public String getYpdw() {
+		return ypdw;
+	}
 
-    public void setYpdw(String ypdw) {
-        this.ypdw = ypdw == null ? null : ypdw.trim();
-    }
+	public void setYpdw(String ypdw) {
+		this.ypdw = ypdw == null ? null : ypdw.trim();
+	}
 
-    public String getYpbz() {
-        return ypbz;
-    }
+	public String getYpbz() {
+		return ypbz;
+	}
 
-    public void setYpbz(String ypbz) {
-        this.ypbz = ypbz == null ? null : ypbz.trim();
-    }
+	public void setYpbz(String ypbz) {
+		this.ypbz = ypbz == null ? null : ypbz.trim();
+	}
 
-    public Integer getZt() {
-        return zt;
-    }
+	public Integer getZt() {
+		return zt;
+	}
 
-    public void setZt(Integer zt) {
-        this.zt = zt;
-    }
+	public void setZt(Integer zt) {
+		this.zt = zt;
+	}
 
-    public Integer getDm() {
-        return dm;
-    }
+	public Integer getDm() {
+		return dm;
+	}
 
-    public void setDm(Integer dm) {
-        this.dm = dm;
-    }
+	public void setDm(Integer dm) {
+		this.dm = dm;
+	}
 
-    public Date getCt() {
-        return ct;
-    }
+	public Date getCt() {
+		return ct;
+	}
 
-    public void setCt(Date ct) {
-        this.ct = ct;
-    }
+	public void setCt(Date ct) {
+		this.ct = ct;
+	}
 }

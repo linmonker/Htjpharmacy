@@ -14,9 +14,27 @@
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
 
 <script>
-	function del(bh) {
-		if (confirm("您确定要删除 " + bh + " 吗?")) {
-			location = "${ctx}/yaopin/delete?ypbh=" + bh;
+	function setid(element, id) {
+		$("tr.active").removeClass("active");
+		$(element).addClass("active");
+		$("#tempid").text(id);
+	}
+	function edit() {
+		if($("tr.active").length > 0){
+			var id = $("#tempid").text();
+			location = "${ctx}/yaopin/edit?id=" + id;
+		}else{
+			alert("请先选择对象");
+		}
+	}
+	function del() {
+		if($("tr.active").length > 0){
+			if (confirm("您确定要删除 " + $("tr.active td:eq(1)").text() + " 吗?")) {	
+				var id = $("#tempid").text();
+				location = "${ctx}/yaopin/delete?id=" + id;
+			}
+		}else{
+			alert("请先选择对象");
 		}
 	}
 </script>
@@ -63,8 +81,9 @@
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
 								<li><a href="add.action">添加药品</a></li>
-								<li><span style="margin-left: 50px; font-size: 20px">${adddata}</span></li>
-								<li><span style="margin-left: 50px; font-size: 20px">${deletedata}</span></li>
+								<li><a onclick="return edit()">修改药品</a></li>
+								<li><a onclick="return del()">删除药品</a></li>
+								<li><span id="tempid" style="display: none"></span></li>
 							</ul>
 
 							<div class="nav navbar-nav navbar-right">
@@ -80,20 +99,21 @@
 						</div>
 					</div>
 					</nav>
+					<span style="margin-left: 50px; font-size: 20px">${adddata}</span>
+					<span style="margin-left: 50px; font-size: 20px">${deletedata}</span>
 				</div>
 				<div class="row">
 					<div class="table-responsive">
-						<table class="table table-striped">
+						<table class="table table-bordered table-condensed">
 							<thead>
 								<tr>
-									<th width="10%">药品编号</th>
+									<th>药品编号</th>
 									<th>药品名称</th>
 									<th>通用名</th>
 									<th>生产单位</th>
 									<th>剂型</th>
 									<th>零售价</th>
 									<th>库存</th>
-									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -106,14 +126,6 @@
 										<td>${list.ypjx }</td>
 										<td>${list.yplsj }</td>
 										<td>${list.ypkcsl }</td>
-										<td>
-											<div class="button-group">
-												<a type="button" class="button border-main"
-													href="${ctx }/yaopin/edit?ypbh=${list.ypbh }">修改</a> <a
-													type="button" class="button border-red"
-													onclick="return del('${list.ypbh}')">删除</a>
-											</div>
-										</td>
 									</tr>
 								</c:forEach>
 							</tbody>

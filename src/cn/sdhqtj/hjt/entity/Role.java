@@ -3,93 +3,93 @@ package cn.sdhqtj.hjt.entity;
 import java.util.Date;
 
 public class Role {
-    private Integer role_id;
+	private Integer role_id;
 
-    private Integer jtid;
+	private Integer jtid;
 
-    private String role_name;
+	private String role_name;
 
-    private Long user_id_create;
+	private Long user_id_create;
 
-    private Date gmt_create;
+	private Date gmt_create;
 
-    private Date gmt_modified;
+	private Date gmt_modified;
 
-    private Integer zt;
+	private Integer zt;
 
-    private Integer dm;
+	private Integer dm;
 
-    private String remark;
+	private String remark;
 
-    public Integer getRole_id() {
-        return role_id;
-    }
+	public Integer getRole_id() {
+		return role_id;
+	}
 
-    public void setRole_id(Integer role_id) {
-        this.role_id = role_id;
-    }
+	public void setRole_id(Integer role_id) {
+		this.role_id = role_id;
+	}
 
-    public Integer getJtid() {
-        return jtid;
-    }
+	public Integer getJtid() {
+		return jtid;
+	}
 
-    public void setJtid(Integer jtid) {
-        this.jtid = jtid;
-    }
+	public void setJtid(Integer jtid) {
+		this.jtid = jtid;
+	}
 
-    public String getRole_name() {
-        return role_name;
-    }
+	public String getRole_name() {
+		return role_name;
+	}
 
-    public void setRole_name(String role_name) {
-        this.role_name = role_name == null ? null : role_name.trim();
-    }
+	public void setRole_name(String role_name) {
+		this.role_name = role_name == null ? null : role_name.trim();
+	}
 
-    public Long getUser_id_create() {
-        return user_id_create;
-    }
+	public Long getUser_id_create() {
+		return user_id_create;
+	}
 
-    public void setUser_id_create(Long user_id_create) {
-        this.user_id_create = user_id_create;
-    }
+	public void setUser_id_create(Long user_id_create) {
+		this.user_id_create = user_id_create;
+	}
 
-    public Date getGmt_create() {
-        return gmt_create;
-    }
+	public Date getGmt_create() {
+		return gmt_create;
+	}
 
-    public void setGmt_create(Date gmt_create) {
-        this.gmt_create = gmt_create;
-    }
+	public void setGmt_create(Date gmt_create) {
+		this.gmt_create = gmt_create;
+	}
 
-    public Date getGmt_modified() {
-        return gmt_modified;
-    }
+	public Date getGmt_modified() {
+		return gmt_modified;
+	}
 
-    public void setGmt_modified(Date gmt_modified) {
-        this.gmt_modified = gmt_modified;
-    }
+	public void setGmt_modified(Date gmt_modified) {
+		this.gmt_modified = gmt_modified;
+	}
 
-    public Integer getZt() {
-        return zt;
-    }
+	public Integer getZt() {
+		return zt;
+	}
 
-    public void setZt(Integer zt) {
-        this.zt = zt;
-    }
+	public void setZt(Integer zt) {
+		this.zt = zt;
+	}
 
-    public Integer getDm() {
-        return dm;
-    }
+	public Integer getDm() {
+		return dm;
+	}
 
-    public void setDm(Integer dm) {
-        this.dm = dm;
-    }
+	public void setDm(Integer dm) {
+		this.dm = dm;
+	}
 
-    public String getRemark() {
-        return remark;
-    }
+	public String getRemark() {
+		return remark;
+	}
 
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
+	public void setRemark(String remark) {
+		this.remark = remark == null ? null : remark.trim();
+	}
 }

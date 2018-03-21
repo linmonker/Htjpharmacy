@@ -1,63 +1,63 @@
 package cn.sdhqtj.hjt.entity;
 
 public class Yspbb {
-    private Integer id;
+	private Integer id;
 
-    private Integer jtid;
+	private Integer jtid;
 
-    private Integer fdid;
+	private Integer fdid;
 
-    private Long ysid;
+	private Long ysid;
 
-    private Integer zbrq;
+	private Integer zbrq;
 
-    private Integer zbqj;
+	private Integer zbqj;
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getJtid() {
-        return jtid;
-    }
+	public Integer getJtid() {
+		return jtid;
+	}
 
-    public void setJtid(Integer jtid) {
-        this.jtid = jtid;
-    }
+	public void setJtid(Integer jtid) {
+		this.jtid = jtid;
+	}
 
-    public Integer getFdid() {
-        return fdid;
-    }
+	public Integer getFdid() {
+		return fdid;
+	}
 
-    public void setFdid(Integer fdid) {
-        this.fdid = fdid;
-    }
+	public void setFdid(Integer fdid) {
+		this.fdid = fdid;
+	}
 
-    public Long getYsid() {
-        return ysid;
-    }
+	public Long getYsid() {
+		return ysid;
+	}
 
-    public void setYsid(Long ysid) {
-        this.ysid = ysid;
-    }
+	public void setYsid(Long ysid) {
+		this.ysid = ysid;
+	}
 
-    public Integer getZbrq() {
-        return zbrq;
-    }
+	public Integer getZbrq() {
+		return zbrq;
+	}
 
-    public void setZbrq(Integer zbrq) {
-        this.zbrq = zbrq;
-    }
+	public void setZbrq(Integer zbrq) {
+		this.zbrq = zbrq;
+	}
 
-    public Integer getZbqj() {
-        return zbqj;
-    }
+	public Integer getZbqj() {
+		return zbqj;
+	}
 
-    public void setZbqj(Integer zbqj) {
-        this.zbqj = zbqj;
-    }
+	public void setZbqj(Integer zbqj) {
+		this.zbqj = zbqj;
+	}
 }

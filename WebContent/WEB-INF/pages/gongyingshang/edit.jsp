@@ -50,7 +50,8 @@
 				<h4 class="sub-header">修改供应商</h4>
 				<span style="margin-left: 50px; color: red; font-size: 20px">${bhdata}</span>
 				<span style="margin-left: 50px; color: red; font-size: 20px">${mcdata}</span>
-				<form method="post" class="form-x" action="${ctx }/gongyingshang/doedit">
+				<form method="post" class="form-x"
+					action="${ctx }/gongyingshang/doedit">
 					<div>
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">

@@ -13,8 +13,8 @@ import cn.sdhqtj.hjt.entity.Login;
 
 @Service
 public interface LoginService {
-	
-	//登录验证
-	public List<Login> login( Login login );
-	
+
+	// 登录验证
+	public List<Login> login(Login login);
+
 }

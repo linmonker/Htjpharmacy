@@ -1,33 +1,33 @@
 package cn.sdhqtj.hjt.entity;
 
 public class YaopinWithBLOBs extends Yaopin {
-    private String ypsms;
+	private String ypsms;
 
-    private String ypxf;
+	private String ypxf;
 
-    private String ypxw;
+	private String ypxw;
 
-    public String getYpsms() {
-        return ypsms;
-    }
+	public String getYpsms() {
+		return ypsms;
+	}
 
-    public void setYpsms(String ypsms) {
-        this.ypsms = ypsms == null ? null : ypsms.trim();
-    }
+	public void setYpsms(String ypsms) {
+		this.ypsms = ypsms == null ? null : ypsms.trim();
+	}
 
-    public String getYpxf() {
-        return ypxf;
-    }
+	public String getYpxf() {
+		return ypxf;
+	}
 
-    public void setYpxf(String ypxf) {
-        this.ypxf = ypxf == null ? null : ypxf.trim();
-    }
+	public void setYpxf(String ypxf) {
+		this.ypxf = ypxf == null ? null : ypxf.trim();
+	}
 
-    public String getYpxw() {
-        return ypxw;
-    }
+	public String getYpxw() {
+		return ypxw;
+	}
 
-    public void setYpxw(String ypxw) {
-        this.ypxw = ypxw == null ? null : ypxw.trim();
-    }
+	public void setYpxw(String ypxw) {
+		this.ypxw = ypxw == null ? null : ypxw.trim();
+	}
 }

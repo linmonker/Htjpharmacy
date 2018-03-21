@@ -6,11 +6,11 @@ public class YaopinflNode {
 	private Integer pId;
 	private String name;
 	private short levelid;
-	
+
 	public YaopinflNode() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public YaopinflNode(Integer id, Integer pId, String name, short levelid) {
 		this.id = id;
 		this.pId = pId;
@@ -49,5 +49,5 @@ public class YaopinflNode {
 	public void setLevelid(short levelid) {
 		this.levelid = levelid;
 	}
-	
+
 }

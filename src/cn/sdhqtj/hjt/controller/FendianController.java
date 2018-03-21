@@ -3,7 +3,7 @@
 * Description:分店控制器
 * @author LIN  
 * @date 2018年2月19日  
-*/  
+*/
 package cn.sdhqtj.hjt.controller;
 
 import java.util.List;
@@ -31,9 +31,7 @@ public class FendianController {
 	@RequestMapping("/list")
 	public String list(Model model) {
 		fendianlist = fendianservice.fendianquery();
-
 		model.addAttribute("fendianlist", fendianlist);
-
 		return "fendian/list";
 	}
 
@@ -62,42 +60,39 @@ public class FendianController {
 		if (fo == 0) {// 添加失败
 			model.addAttribute("fendian", fendian);
 			return "fendian/add";
-		}
-		else {
+		} else {
 			fendian.setZt(0);
 			fendianservice.fendianadd(fendian);
 			model.addAttribute("adddate", "分店添加成功");
 			return "redirect:list.action";
 		}
 	}
-	
+
 	// 修改分店
 	@RequestMapping("/edit")
-	public String edit(HttpServletRequest request,Model model) {
-		String fdbh = request.getParameter("fdbh");
-		fendiantemp = fendianservice.selectByfdbh(fdbh);
+	public String edit(HttpServletRequest request, Model model) {
+		Integer id = Integer.valueOf(request.getParameter("id"));
+		fendiantemp = fendianservice.fendianget(id);
 		model.addAttribute("fendian", fendiantemp);
 		return "fendian/edit";
 	}
-	
+
 	// 执行修改分店
 	@RequestMapping("/doedit")
-	public String doedit(Fendian fendian,Model model) {
+	public String doedit(Fendian fendian, Model model) {
 		fendian.setZt(0);
 		fendianservice.fendianUpdate(fendian);
 		model.addAttribute("editdate", "修改成功");
 		return "redirect:list.action";
-		
+
 	}
-    
+
 	// 删除分店
 	@RequestMapping("/delete")
-	public String delete(HttpServletRequest request,Model model) {
-		
-		fendiantemp = fendianservice.selectByfdbh(request.getParameter("fdbh"));
-		fendianservice.fendiandelete(fendiantemp.getId());
+	public String delete(HttpServletRequest request, Model model) {
+		Integer id = Integer.valueOf(request.getParameter("id"));
+		fendianservice.fendiandelete(id);
 		model.addAttribute("deletedate", "删除成功");
 		return "redirect:list.action";
 	}
-
 }

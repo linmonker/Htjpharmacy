@@ -7,9 +7,9 @@ import cn.sdhqtj.hjt.entity.YaopinWithBLOBs;
 
 public interface YaopinMapperPro {
 
-    List<Yaopin> yaopinquery();
-    
-    YaopinWithBLOBs selectByypbh(String ypbh);
+	List<Yaopin> yaopinquery();
 
-    YaopinWithBLOBs selectByypmc(String ypmc);
+	YaopinWithBLOBs selectByypbh(String ypbh);
+
+	YaopinWithBLOBs selectByypmc(String ypmc);
 }

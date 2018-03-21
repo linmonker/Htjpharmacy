@@ -38,7 +38,11 @@
              showRemoveBtn: setRemoveBtn,  
              removeTitle:"删除分类",  
              renameTitle:"编辑分类",  
-             editNameSelectAll: true  
+             editNameSelectAll: true,
+             drag: {
+            	 isCopy = false,
+            	 isMove = false,
+             }
          },  
          data: {  
              simpleData: {  
@@ -323,7 +327,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 </body>
 
 </html>

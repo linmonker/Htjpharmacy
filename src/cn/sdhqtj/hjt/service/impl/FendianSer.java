@@ -19,12 +19,12 @@ public class FendianSer implements FendianService {
 
 	@Resource
 	private FendianMapperPro fendianMapperPro;
-	
+
 	@Resource
 	private FendianMapper fendianMapper;
 	Fendian fendiantemp;
 
-	//获取分店列表
+	// 获取分店列表
 	@Override
 	public List<Fendian> fendianquery() {
 		// TODO Auto-generated method stub
@@ -32,15 +32,15 @@ public class FendianSer implements FendianService {
 		return list;
 	}
 
-	//通过分店id获取分店信息
+	// 通过分店id获取分店信息
 	@Override
 	public Fendian fendianget(Integer id) {
 		// TODO Auto-generated method stub
 		fendiantemp = fendianMapper.selectByPrimaryKey(id);
 		return fendiantemp;
 	}
-	
-	//通过分店编号获取分店信息
+
+	// 通过分店编号获取分店信息
 	@Override
 	public Fendian selectByfdbh(String fdbh) {
 		// TODO Auto-generated method stub
@@ -48,7 +48,7 @@ public class FendianSer implements FendianService {
 		return fendiantemp;
 	}
 
-	//通过分店名称获取分店信息
+	// 通过分店名称获取分店信息
 	@Override
 	public Fendian selectByfdmc(String fdmc) {
 		// TODO Auto-generated method stub
@@ -56,28 +56,37 @@ public class FendianSer implements FendianService {
 		return fendiantemp;
 	}
 
-	//添加分店
+	// 添加分店
 	@Override
 	public void fendianadd(Fendian fendian) {
 		// TODO Auto-generated method stub
 		fendianMapper.insertSelective(fendian);
 	}
 
-	//根据分店id删除分店
+	// 根据分店id删除分店
 	@Override
 	public void fendiandelete(int id) {
 		// TODO Auto-generated method stub
 		fendiantemp = fendianMapper.selectByPrimaryKey(id);
-		if(fendiantemp != null) {
-			fendianMapper.deleteByPrimaryKey(id);
+		if (fendiantemp != null) {
+			try {
+				fendianMapper.deleteByPrimaryKey(id);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
-	//更新分店信息
+	// 更新分店信息
 	@Override
 	public void fendianUpdate(Fendian fendian) {
 		// TODO Auto-generated method stub
-		fendianMapper.updateByPrimaryKeySelective(fendian);
+		try {
+			fendianMapper.updateByPrimaryKeySelective(fendian);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
 }

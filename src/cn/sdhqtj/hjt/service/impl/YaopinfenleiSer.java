@@ -29,7 +29,7 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 	YaopinflNode ypflnodetemp;
 	List<YaopinflNode> ypflnodelist;
 
-	//获取药品分类列表
+	// 获取药品分类列表
 	@Override
 	public List<Object> Yaopinfenleiquery() {
 		// TODO Auto-generated method stub
@@ -48,22 +48,22 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 		return listZTree;
 	}
 
-	//添加药品分类
+	// 添加药品分类
 	@Override
 	public Integer yaopinfenleiadd(Yaopinfenlei ypfl) {
 		// TODO Auto-generated method stub
 		ypflMapperPro.insertSelective(ypfl);
 		return ypfl.getId();
- 	}
+	}
 
-	//更新药品分类
+	// 更新药品分类
 	@Override
 	public void yaopinfenleiupdate(Yaopinfenlei ypfl) {
 		// TODO Auto-generated method stub
 		ypflMapper.updateByPrimaryKeySelective(ypfl);
 	}
 
-	//删除药品分类
+	// 删除药品分类
 	@Override
 	public void yaopinfenleidelete(Integer id) {
 		// TODO Auto-generated method stub

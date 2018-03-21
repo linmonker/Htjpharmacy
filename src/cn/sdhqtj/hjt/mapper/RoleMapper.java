@@ -3,17 +3,17 @@ package cn.sdhqtj.hjt.mapper;
 import cn.sdhqtj.hjt.entity.Role;
 
 public interface RoleMapper {
-    int deleteByPrimaryKey(Integer role_id);
+	int deleteByPrimaryKey(Integer role_id);
 
-    int insert(Role record);
+	int insert(Role record);
 
-    int insertSelective(Role record);
+	int insertSelective(Role record);
 
-    Role selectByPrimaryKey(Integer role_id);
+	Role selectByPrimaryKey(Integer role_id);
 
-    int updateByPrimaryKeySelective(Role record);
+	int updateByPrimaryKeySelective(Role record);
 
-    int updateByPrimaryKeyWithBLOBs(Role record);
+	int updateByPrimaryKeyWithBLOBs(Role record);
 
-    int updateByPrimaryKey(Role record);
+	int updateByPrimaryKey(Role record);
 }

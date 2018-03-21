@@ -3,7 +3,7 @@
 * Description:药品分类控制器  
 * @author LIN  
 * @date 2018年3月10日  
-*/  
+*/
 package cn.sdhqtj.hjt.controller;
 
 import java.util.List;
@@ -32,19 +32,18 @@ public class YaopinfenleiController {
 	YaopinflNode ypflnodetemp;
 	List<YaopinflNode> ypflnodelist;
 
-	 
-    // 跳转药品分类页面 
-     @RequestMapping("/list")  
-     public String toListLibrary(){  
-          return "yaopinfenlei/list";  
-     }  
-	
+	// 跳转药品分类页面
+	@RequestMapping("/list")
+	public String toListLibrary() {
+		return "yaopinfenlei/list";
+	}
+
 	// 列表
 	@RequestMapping("/getlist")
 	@ResponseBody
 	public List<Object> list() {
 		return ypflservice.Yaopinfenleiquery();
-		
+
 	}
 
 	// 执行添加药品分类
@@ -54,12 +53,12 @@ public class YaopinfenleiController {
 
 		ypfltemp = new Yaopinfenlei();
 		ypfltemp.setSjflid(ypflnodetemp.getId());
-		ypfltemp.setFldj((short)(ypflnodetemp.getLevelid() + 1));
+		ypfltemp.setFldj((short) (ypflnodetemp.getLevelid() + 1));
 		ypfltemp.setFlmc("新分类");
 		ypfltemp.setZt(0);
-		
-		Integer lastid =  ypflservice.yaopinfenleiadd(ypfltemp);
-		System.out.println("最后插入"+lastid);
+
+		Integer lastid = ypflservice.yaopinfenleiadd(ypfltemp);
+		System.out.println("最后插入" + lastid);
 		return String.valueOf(lastid);
 	}
 
@@ -69,7 +68,7 @@ public class YaopinfenleiController {
 	public String doedit(@RequestBody YaopinflNode ypflnodetemp) {
 		ypfltemp = new Yaopinfenlei();
 		ypfltemp.setId(ypflnodetemp.getId());
-		ypfltemp.setFldj((short) (ypflnodetemp.getLevelid()+1));
+		ypfltemp.setFldj((short) (ypflnodetemp.getLevelid() + 1));
 		ypfltemp.setSjflid(ypflnodetemp.getPId());
 		ypfltemp.setFlmc(ypflnodetemp.getName());
 		ypfltemp.setZt(0);
@@ -80,8 +79,8 @@ public class YaopinfenleiController {
 	// 删除药品分类
 	@RequestMapping("/delete")
 	@ResponseBody
-	public String delete(HttpServletRequest request,@RequestParam(value = "id") Integer id) {
-	
+	public String delete(HttpServletRequest request, @RequestParam(value = "id") Integer id) {
+
 		ypflservice.yaopinfenleidelete(id);
 		return "success";
 	}

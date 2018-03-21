@@ -3,7 +3,7 @@
 * Description:  
 * @author LIN  
 * @date 2018年3月19日  
-*/  
+*/
 package cn.sdhqtj.hjt.controller;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.sdhqtj.hjt.entity.Gongyingshang;
 import cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs;
 import cn.sdhqtj.hjt.service.GongyingshangService;
- 
+
 @Controller
 @RequestMapping("/gongyingshang")
 public class GongyingshangController {
@@ -33,9 +33,7 @@ public class GongyingshangController {
 	@RequestMapping("/list")
 	public String list(Model model) {
 		gyslist = gysservice.gongyingshangquery();
-
 		model.addAttribute("gyslist", gyslist);
-
 		return "gongyingshang/list";
 	}
 
@@ -59,8 +57,7 @@ public class GongyingshangController {
 		if (fo == 0) {// 添加失败
 			model.addAttribute("gys", gysB);
 			return "gongyingshang/add";
-		}
-		else {
+		} else {
 			gysB.setZt(0);
 			gysB.setDm(0);
 			gysservice.gongyingshangadd(gysB);
@@ -68,35 +65,36 @@ public class GongyingshangController {
 			return "redirect:list.action";
 		}
 	}
-	
+
 	// 修改分店
 	@RequestMapping("/edit")
-	public String edit(HttpServletRequest request,Model model) {
-		
-		gysBtemp = gysservice.selectBygysbhWithBLOBs(request.getParameter("gysbh"));
-		model.addAttribute("gys", gystemp);
-		return "gongyingshang/edit";
+	public String edit(HttpServletRequest request, Model model) {
+		gysBtemp = gysservice.selectByPrimaryKey(Integer.valueOf(request.getParameter("id")));
+		if (gysBtemp == null) {
+			model.addAttribute("editdate", "修改失败，数据已被删除");
+			return "redirect:list.action";
+		} else {
+			model.addAttribute("gys", gystemp);
+			return "gongyingshang/edit";
+		}
 	}
-	
+
 	// 执行修改分店
 	@RequestMapping("/doedit")
-	public String doedit(GongyingshangWithBLOBs gysB,Model model) {
+	public String doedit(GongyingshangWithBLOBs gysB, Model model) {
 		gysB.setZt(0);
 		gysB.setDm(0);
 		gysservice.gongyingshangupdate(gysB);
 		model.addAttribute("editdate", "修改成功");
 		return "redirect:list.action";
-		
+
 	}
-    
+
 	// 删除分店
 	@RequestMapping("/delete")
-	public String delete(HttpServletRequest request,Model model) {
-		
-		gystemp = gysservice.selectBygysbhWithBLOBs(request.getParameter("gysbh"));
-		gysservice.gongyingshangdelete(gystemp.getId());
+	public String delete(HttpServletRequest request, Model model) {
+		gysservice.gongyingshangdelete(Integer.valueOf(request.getParameter("id")));
 		model.addAttribute("deletedate", "删除成功");
 		return "redirect:list.action";
 	}
-
 }

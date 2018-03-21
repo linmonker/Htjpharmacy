@@ -30,7 +30,8 @@
 								<div class="field field-icon-right">
 									<input type="text" class="input input-big" name="login"
 										placeholder="登录账号" data-validate="required:请填写账号"
-										value="${login }" /> <span class="icon icon-user margin-small"></span>
+										value="${login }" /> <span
+										class="icon icon-user margin-small"></span>
 								</div>
 							</div>
 							<div class="form-group">

@@ -12,11 +12,10 @@ public class PermFilter extends AuthorizationFilter {
 
 	@Override
 	protected boolean isAccessAllowed(ServletRequest req, ServletResponse arg1, Object arg2) throws Exception {
-		
-		
+
 		HttpServletRequest requeest = (HttpServletRequest) req;
 		Subject subject = SecurityUtils.getSubject();
-		
+
 		return subject.isPermitted(requeest.getServletPath());
 	}
 

@@ -20,13 +20,13 @@ public class YaopinSer implements YaopinService {
 
 	@Resource
 	private YaopinMapperPro yaopinMapperPro;
-	
+
 	@Resource
 	private YaopinMapper yaopinMapper;
 	Yaopin yaopintemp;
 	YaopinWithBLOBs yaopinBtemp;
-	
-	//获取药品列表
+
+	// 获取药品列表
 	@Override
 	public List<Yaopin> yaopinquery() {
 		// TODO Auto-generated method stub
@@ -34,7 +34,7 @@ public class YaopinSer implements YaopinService {
 		return list;
 	}
 
-	//根据药品id获取药品信息
+	// 根据药品id获取药品信息
 	@Override
 	public YaopinWithBLOBs yaopinget(Integer id) {
 		// TODO Auto-generated method stub
@@ -42,7 +42,7 @@ public class YaopinSer implements YaopinService {
 		return yaopinBtemp;
 	}
 
-    //根据药品编号获取药品信息
+	// 根据药品编号获取药品信息
 	@Override
 	public YaopinWithBLOBs selectByypbh(String ypbh) {
 		// TODO Auto-generated method stub
@@ -50,25 +50,35 @@ public class YaopinSer implements YaopinService {
 		return yaopinBtemp;
 	}
 
-	//添加药品
+	// 添加药品
 	@Override
 	public void yaopinadd(YaopinWithBLOBs yaopin) {
 		// TODO Auto-generated method stub
 		yaopinMapper.insert(yaopin);
-		
+
 	}
 
-    //根据药品id删除药品
+	// 根据药品id删除药品
 	@Override
 	public void yaopindelete(int id) {
 		// TODO Auto-generated method stub
-		yaopinMapper.deleteByPrimaryKey(id);
+		try {
+			yaopinMapper.deleteByPrimaryKey(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-    //更新药品
+	// 更新药品
 	@Override
 	public void yaopinUpdate(YaopinWithBLOBs yaopin) {
 		// TODO Auto-generated method stub
-		yaopinMapper.updateByPrimaryKeySelective(yaopin);
+		try {
+			yaopinMapper.updateByPrimaryKeySelective(yaopin);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

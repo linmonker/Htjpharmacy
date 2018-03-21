@@ -16,16 +16,16 @@ import cn.sdhqtj.hjt.entity.YaopinflNode;
 @Service
 public interface YaopinfenleiService {
 
-	//获取药品分类列表
+	// 获取药品分类列表
 	public List<Object> Yaopinfenleiquery();
 
-	//添加药品分类
+	// 添加药品分类
 	public Integer yaopinfenleiadd(Yaopinfenlei ypfl);
-	
-	//更新药品分类
+
+	// 更新药品分类
 	public void yaopinfenleiupdate(Yaopinfenlei ypfl);
 
-	//删除药品分类
+	// 删除药品分类
 	public void yaopinfenleidelete(Integer id);
-	
+
 }

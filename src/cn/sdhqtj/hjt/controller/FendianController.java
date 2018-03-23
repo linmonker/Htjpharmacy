@@ -81,7 +81,7 @@ public class FendianController {
 	@RequestMapping("/doedit")
 	public String doedit(Fendian fendian, Model model) {
 		fendian.setZt(0);
-		fendianservice.fendianUpdate(fendian);
+		fendianservice.fendianupdate(fendian);
 		model.addAttribute("editdate", "修改成功");
 		return "redirect:list.action";
 

@@ -31,9 +31,9 @@ public interface FendianService {
 	public void fendianadd(Fendian fendian);
 
 	// 根据分店id删除分店
-	public void fendiandelete(int id);
+	public void fendiandelete(Integer id);
 
 	// 更新分店信息
-	public void fendianUpdate(Fendian fendian);
+	public void fendianupdate(Fendian fendian);
 
 }

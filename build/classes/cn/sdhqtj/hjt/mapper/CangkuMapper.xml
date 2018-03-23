@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.CangkuMapper" >
+  <resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Cangku" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="jtid" property="jtid" jdbcType="INTEGER" />
+    <result column="fdid" property="fdid" jdbcType="INTEGER" />
+    <result column="ckbh" property="ckbh" jdbcType="VARCHAR" />
+    <result column="ckmc" property="ckmc" jdbcType="VARCHAR" />
+    <result column="ckmcjp" property="ckmcjp" jdbcType="VARCHAR" />
+    <result column="zt" property="zt" jdbcType="INTEGER" />
+    <result column="dm" property="dm" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Cangku" extends="BaseResultMap" >
+    <result column="ckbz" property="ckbz" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, jtid, fdid, ckbh, ckmc, ckmcjp, zt, dm
+  </sql>
+  <sql id="Blob_Column_List" >
+    ckbz
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hjt_cangku
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hjt_cangku
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.sdhqtj.hjt.entity.Cangku" >
+    insert into hjt_cangku (Id, jtid, fdid, 
+      ckbh, ckmc, ckmcjp, 
+      zt, dm, ckbz)
+    values (#{id,jdbcType=INTEGER}, #{jtid,jdbcType=INTEGER}, #{fdid,jdbcType=INTEGER}, 
+      #{ckbh,jdbcType=VARCHAR}, #{ckmc,jdbcType=VARCHAR}, #{ckmcjp,jdbcType=VARCHAR}, 
+      #{zt,jdbcType=INTEGER}, #{dm,jdbcType=INTEGER}, #{ckbz,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Cangku" >
+    insert into hjt_cangku
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="jtid != null" >
+        jtid,
+      </if>
+      <if test="fdid != null" >
+        fdid,
+      </if>
+      <if test="ckbh != null" >
+        ckbh,
+      </if>
+      <if test="ckmc != null" >
+        ckmc,
+      </if>
+      <if test="ckmcjp != null" >
+        ckmcjp,
+      </if>
+      <if test="zt != null" >
+        zt,
+      </if>
+      <if test="dm != null" >
+        dm,
+      </if>
+      <if test="ckbz != null" >
+        ckbz,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="jtid != null" >
+        #{jtid,jdbcType=INTEGER},
+      </if>
+      <if test="fdid != null" >
+        #{fdid,jdbcType=INTEGER},
+      </if>
+      <if test="ckbh != null" >
+        #{ckbh,jdbcType=VARCHAR},
+      </if>
+      <if test="ckmc != null" >
+        #{ckmc,jdbcType=VARCHAR},
+      </if>
+      <if test="ckmcjp != null" >
+        #{ckmcjp,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        #{zt,jdbcType=INTEGER},
+      </if>
+      <if test="dm != null" >
+        #{dm,jdbcType=INTEGER},
+      </if>
+      <if test="ckbz != null" >
+        #{ckbz,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.Cangku" >
+    update hjt_cangku
+    <set >
+      <if test="jtid != null" >
+        jtid = #{jtid,jdbcType=INTEGER},
+      </if>
+      <if test="fdid != null" >
+        fdid = #{fdid,jdbcType=INTEGER},
+      </if>
+      <if test="ckbh != null" >
+        ckbh = #{ckbh,jdbcType=VARCHAR},
+      </if>
+      <if test="ckmc != null" >
+        ckmc = #{ckmc,jdbcType=VARCHAR},
+      </if>
+      <if test="ckmcjp != null" >
+        ckmcjp = #{ckmcjp,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        zt = #{zt,jdbcType=INTEGER},
+      </if>
+      <if test="dm != null" >
+        dm = #{dm,jdbcType=INTEGER},
+      </if>
+      <if test="ckbz != null" >
+        ckbz = #{ckbz,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.Cangku" >
+    update hjt_cangku
+    set jtid = #{jtid,jdbcType=INTEGER},
+      fdid = #{fdid,jdbcType=INTEGER},
+      ckbh = #{ckbh,jdbcType=VARCHAR},
+      ckmc = #{ckmc,jdbcType=VARCHAR},
+      ckmcjp = #{ckmcjp,jdbcType=VARCHAR},
+      zt = #{zt,jdbcType=INTEGER},
+      dm = #{dm,jdbcType=INTEGER},
+      ckbz = #{ckbz,jdbcType=LONGVARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Cangku" >
+    update hjt_cangku
+    set jtid = #{jtid,jdbcType=INTEGER},
+      fdid = #{fdid,jdbcType=INTEGER},
+      ckbh = #{ckbh,jdbcType=VARCHAR},
+      ckmc = #{ckmc,jdbcType=VARCHAR},
+      ckmcjp = #{ckmcjp,jdbcType=VARCHAR},
+      zt = #{zt,jdbcType=INTEGER},
+      dm = #{dm,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

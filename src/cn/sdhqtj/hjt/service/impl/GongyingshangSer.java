@@ -67,15 +67,15 @@ public class GongyingshangSer implements GongyingshangService {
 	@Override
 	public void gongyingshangdelete(Integer id) {
 		// TODO Auto-generated method stub
-		gysBtemp = gysMapper.selectByPrimaryKey(id);
-		if(gysBtemp != null) {
+		gysBtemp = new GongyingshangWithBLOBs();
+		gysBtemp.setId(id);
+		gysBtemp.setDm(1);
 			try {
-				gysMapper.deleteByPrimaryKey(id);
+				gysMapper.updateByPrimaryKeySelective(gysBtemp);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
 	}
 
 	/* (non-Javadoc)

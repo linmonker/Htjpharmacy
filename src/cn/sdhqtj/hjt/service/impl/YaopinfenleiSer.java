@@ -24,9 +24,9 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 
 	@Resource
 	private YaopinfenleiMapper ypflMapper;
-	Yaopinfenlei ypfltemp;
+	Yaopinfenlei ypfl;
 	List<Yaopinfenlei> ypfllist;
-	YaopinflNode ypflnodetemp;
+	YaopinflNode ypflnode;
 	List<YaopinflNode> ypflnodelist;
 
 	// 获取药品分类列表
@@ -38,10 +38,10 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 		String str = "0";
 
 		for (int i = 0; i < ypfllist.size(); i++) {
-			ypfltemp = ypfllist.get(i);// 分类信息
+			ypfl = ypfllist.get(i);// 分类信息
 
-			str = "{id:'" + ypfltemp.getId() + "', pId:'" + ypfltemp.getSjflid() + "', name:\"" + ypfltemp.getFlmc()
-					+ "\" }";// 封装ztree需要格式的字符串
+			str = "{id:'" + ypfl.getId() + "', pId:'" + ypfl.getSjflid() + "', name:\"" + ypfl.getFlmc()
+					+ "\",flbz:\"" + ypfl.getFlbz() +"\" }";// 封装ztree需要格式的字符串
 
 			listZTree.add(str);
 		}
@@ -50,24 +50,54 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 
 	// 添加药品分类
 	@Override
-	public Integer yaopinfenleiadd(Yaopinfenlei ypfl) {
+	public Integer yaopinfenleiadd(Yaopinfenlei record) {
 		// TODO Auto-generated method stub
-		ypflMapperPro.insertSelective(ypfl);
-		return ypfl.getId();
+		ypflMapperPro.insertSelective(record);
+		return record.getId();
 	}
 
 	// 更新药品分类
 	@Override
-	public void yaopinfenleiupdate(Yaopinfenlei ypfl) {
+	public void yaopinfenleiupdate(Yaopinfenlei record) {
 		// TODO Auto-generated method stub
-		ypflMapper.updateByPrimaryKeySelective(ypfl);
+		ypflMapper.updateByPrimaryKey(record);
 	}
 
 	// 删除药品分类
 	@Override
 	public void yaopinfenleidelete(Integer id) {
 		// TODO Auto-generated method stub
-		ypflMapper.deleteByPrimaryKey(id);
+		ypfl = new Yaopinfenlei();
+		ypfl.setId(id);
+		ypfl.setZt(1);
+		try {
+			ypflMapper.updateByPrimaryKeySelective(ypfl);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 更新药品分类名称
+	 * @param record
+	 */
+	@Override
+	public void mingchenupdate(Yaopinfenlei record) {
+		// TODO Auto-generated method stub
+		ypflMapper.updateByPrimaryKeySelective(record);
+	}
+
+	/**
+	 * 根据药品分类id获取药品分类信息
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public Yaopinfenlei yaopinfenleiget(Integer id) {
+		// TODO Auto-generated method stub
+		ypfl = ypflMapper.selectByPrimaryKey(id);
+		return ypfl;
 	}
 
 }

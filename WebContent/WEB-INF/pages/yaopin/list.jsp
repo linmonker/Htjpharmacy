@@ -22,7 +22,7 @@
 	function edit() {
 		if($("tr.active").length > 0){
 			var id = $("#tempid").text();
-			location = "${ctx}/yaopin/edit?id=" + id;
+			location = "${ctx}/yaopin/edit.action?id=" + id;
 		}else{
 			alert("请先选择对象");
 		}
@@ -31,7 +31,7 @@
 		if($("tr.active").length > 0){
 			if (confirm("您确定要删除 " + $("tr.active td:eq(1)").text() + " 吗?")) {	
 				var id = $("#tempid").text();
-				location = "${ctx}/yaopin/delete?id=" + id;
+				location = "${ctx}/yaopin/delete.action?id=" + id;
 			}
 		}else{
 			alert("请先选择对象");
@@ -80,14 +80,14 @@
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="add.action">添加药品</a></li>
+								<li><a href="${ctx}/yaopin/add.action">添加药品</a></li>
 								<li><a onclick="return edit()">修改药品</a></li>
 								<li><a onclick="return del()">删除药品</a></li>
 								<li><span id="tempid" style="display: none"></span></li>
 							</ul>
 
 							<div class="nav navbar-nav navbar-right">
-								<form action="${ctx }/yaopin/search" method="post">
+								<form action="${ctx }/yaopin/search.action" method="post">
 									<input type="text" placeholder="请输入搜索关键字" name="searchword"
 										class="input"
 										style="width: 250px; line-height: 15px; display: inline-block;"

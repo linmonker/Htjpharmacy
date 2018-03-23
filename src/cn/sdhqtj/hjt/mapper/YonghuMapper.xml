@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.YonghuMapper" >
+  <resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Yonghu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="jtid" property="jtid" jdbcType="INTEGER" />
+    <result column="fdid" property="fdid" jdbcType="INTEGER" />
+    <result column="yhbh" property="yhbh" jdbcType="VARCHAR" />
+    <result column="yhdlm" property="yhdlm" jdbcType="VARCHAR" />
+    <result column="yhmm" property="yhmm" jdbcType="VARCHAR" />
+    <result column="yhxm" property="yhxm" jdbcType="VARCHAR" />
+    <result column="yhxmjp" property="yhxmjp" jdbcType="VARCHAR" />
+    <result column="yhxb" property="yhxb" jdbcType="VARCHAR" />
+    <result column="yhsfzh" property="yhsfzh" jdbcType="VARCHAR" />
+    <result column="yhsj" property="yhsj" jdbcType="VARCHAR" />
+    <result column="yhdzyx" property="yhdzyx" jdbcType="VARCHAR" />
+    <result column="yhbmid" property="yhbmid" jdbcType="INTEGER" />
+    <result column="yhcsrq" property="yhcsrq" jdbcType="DATE" />
+    <result column="yhdz" property="yhdz" jdbcType="VARCHAR" />
+    <result column="yhyb" property="yhyb" jdbcType="VARCHAR" />
+    <result column="yhjsid" property="yhjsid" jdbcType="INTEGER" />
+    <result column="yhrzrq" property="yhrzrq" jdbcType="DATE" />
+    <result column="ct" property="ct" jdbcType="TIMESTAMP" />
+    <result column="zt" property="zt" jdbcType="INTEGER" />
+    <result column="dm" property="dm" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Yonghu" extends="BaseResultMap" >
+    <result column="yhbz" property="yhbz" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, jtid, fdid, yhbh, yhdlm, yhmm, yhxm, yhxmjp, yhxb, yhsfzh, yhsj, yhdzyx, yhbmid, 
+    yhcsrq, yhdz, yhyb, yhjsid, yhrzrq, ct, zt, dm
+  </sql>
+  <sql id="Blob_Column_List" >
+    yhbz
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hjt_yonghu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hjt_yonghu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.sdhqtj.hjt.entity.Yonghu" >
+    insert into hjt_yonghu (id, jtid, fdid, 
+      yhbh, yhdlm, yhmm, 
+      yhxm, yhxmjp, yhxb, 
+      yhsfzh, yhsj, yhdzyx, 
+      yhbmid, yhcsrq, yhdz, 
+      yhyb, yhjsid, yhrzrq, 
+      ct, zt, dm, yhbz
+      )
+    values (#{id,jdbcType=INTEGER}, #{jtid,jdbcType=INTEGER}, #{fdid,jdbcType=INTEGER}, 
+      #{yhbh,jdbcType=VARCHAR}, #{yhdlm,jdbcType=VARCHAR}, #{yhmm,jdbcType=VARCHAR}, 
+      #{yhxm,jdbcType=VARCHAR}, #{yhxmjp,jdbcType=VARCHAR}, #{yhxb,jdbcType=VARCHAR}, 
+      #{yhsfzh,jdbcType=VARCHAR}, #{yhsj,jdbcType=VARCHAR}, #{yhdzyx,jdbcType=VARCHAR}, 
+      #{yhbmid,jdbcType=INTEGER}, #{yhcsrq,jdbcType=DATE}, #{yhdz,jdbcType=VARCHAR}, 
+      #{yhyb,jdbcType=VARCHAR}, #{yhjsid,jdbcType=INTEGER}, #{yhrzrq,jdbcType=DATE}, 
+      #{ct,jdbcType=TIMESTAMP}, #{zt,jdbcType=INTEGER}, #{dm,jdbcType=INTEGER}, #{yhbz,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Yonghu" >
+    insert into hjt_yonghu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="jtid != null" >
+        jtid,
+      </if>
+      <if test="fdid != null" >
+        fdid,
+      </if>
+      <if test="yhbh != null" >
+        yhbh,
+      </if>
+      <if test="yhdlm != null" >
+        yhdlm,
+      </if>
+      <if test="yhmm != null" >
+        yhmm,
+      </if>
+      <if test="yhxm != null" >
+        yhxm,
+      </if>
+      <if test="yhxmjp != null" >
+        yhxmjp,
+      </if>
+      <if test="yhxb != null" >
+        yhxb,
+      </if>
+      <if test="yhsfzh != null" >
+        yhsfzh,
+      </if>
+      <if test="yhsj != null" >
+        yhsj,
+      </if>
+      <if test="yhdzyx != null" >
+        yhdzyx,
+      </if>
+      <if test="yhbmid != null" >
+        yhbmid,
+      </if>
+      <if test="yhcsrq != null" >
+        yhcsrq,
+      </if>
+      <if test="yhdz != null" >
+        yhdz,
+      </if>
+      <if test="yhyb != null" >
+        yhyb,
+      </if>
+      <if test="yhjsid != null" >
+        yhjsid,
+      </if>
+      <if test="yhrzrq != null" >
+        yhrzrq,
+      </if>
+      <if test="ct != null" >
+        ct,
+      </if>
+      <if test="zt != null" >
+        zt,
+      </if>
+      <if test="dm != null" >
+        dm,
+      </if>
+      <if test="yhbz != null" >
+        yhbz,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="jtid != null" >
+        #{jtid,jdbcType=INTEGER},
+      </if>
+      <if test="fdid != null" >
+        #{fdid,jdbcType=INTEGER},
+      </if>
+      <if test="yhbh != null" >
+        #{yhbh,jdbcType=VARCHAR},
+      </if>
+      <if test="yhdlm != null" >
+        #{yhdlm,jdbcType=VARCHAR},
+      </if>
+      <if test="yhmm != null" >
+        #{yhmm,jdbcType=VARCHAR},
+      </if>
+      <if test="yhxm != null" >
+        #{yhxm,jdbcType=VARCHAR},
+      </if>
+      <if test="yhxmjp != null" >
+        #{yhxmjp,jdbcType=VARCHAR},
+      </if>
+      <if test="yhxb != null" >
+        #{yhxb,jdbcType=VARCHAR},
+      </if>
+      <if test="yhsfzh != null" >
+        #{yhsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="yhsj != null" >
+        #{yhsj,jdbcType=VARCHAR},
+      </if>
+      <if test="yhdzyx != null" >
+        #{yhdzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="yhbmid != null" >
+        #{yhbmid,jdbcType=INTEGER},
+      </if>
+      <if test="yhcsrq != null" >
+        #{yhcsrq,jdbcType=DATE},
+      </if>
+      <if test="yhdz != null" >
+        #{yhdz,jdbcType=VARCHAR},
+      </if>
+      <if test="yhyb != null" >
+        #{yhyb,jdbcType=VARCHAR},
+      </if>
+      <if test="yhjsid != null" >
+        #{yhjsid,jdbcType=INTEGER},
+      </if>
+      <if test="yhrzrq != null" >
+        #{yhrzrq,jdbcType=DATE},
+      </if>
+      <if test="ct != null" >
+        #{ct,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zt != null" >
+        #{zt,jdbcType=INTEGER},
+      </if>
+      <if test="dm != null" >
+        #{dm,jdbcType=INTEGER},
+      </if>
+      <if test="yhbz != null" >
+        #{yhbz,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.Yonghu" >
+    update hjt_yonghu
+    <set >
+      <if test="jtid != null" >
+        jtid = #{jtid,jdbcType=INTEGER},
+      </if>
+      <if test="fdid != null" >
+        fdid = #{fdid,jdbcType=INTEGER},
+      </if>
+      <if test="yhbh != null" >
+        yhbh = #{yhbh,jdbcType=VARCHAR},
+      </if>
+      <if test="yhdlm != null" >
+        yhdlm = #{yhdlm,jdbcType=VARCHAR},
+      </if>
+      <if test="yhmm != null" >
+        yhmm = #{yhmm,jdbcType=VARCHAR},
+      </if>
+      <if test="yhxm != null" >
+        yhxm = #{yhxm,jdbcType=VARCHAR},
+      </if>
+      <if test="yhxmjp != null" >
+        yhxmjp = #{yhxmjp,jdbcType=VARCHAR},
+      </if>
+      <if test="yhxb != null" >
+        yhxb = #{yhxb,jdbcType=VARCHAR},
+      </if>
+      <if test="yhsfzh != null" >
+        yhsfzh = #{yhsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="yhsj != null" >
+        yhsj = #{yhsj,jdbcType=VARCHAR},
+      </if>
+      <if test="yhdzyx != null" >
+        yhdzyx = #{yhdzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="yhbmid != null" >
+        yhbmid = #{yhbmid,jdbcType=INTEGER},
+      </if>
+      <if test="yhcsrq != null" >
+        yhcsrq = #{yhcsrq,jdbcType=DATE},
+      </if>
+      <if test="yhdz != null" >
+        yhdz = #{yhdz,jdbcType=VARCHAR},
+      </if>
+      <if test="yhyb != null" >
+        yhyb = #{yhyb,jdbcType=VARCHAR},
+      </if>
+      <if test="yhjsid != null" >
+        yhjsid = #{yhjsid,jdbcType=INTEGER},
+      </if>
+      <if test="yhrzrq != null" >
+        yhrzrq = #{yhrzrq,jdbcType=DATE},
+      </if>
+      <if test="ct != null" >
+        ct = #{ct,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zt != null" >
+        zt = #{zt,jdbcType=INTEGER},
+      </if>
+      <if test="dm != null" >
+        dm = #{dm,jdbcType=INTEGER},
+      </if>
+      <if test="yhbz != null" >
+        yhbz = #{yhbz,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.Yonghu" >
+    update hjt_yonghu
+    set jtid = #{jtid,jdbcType=INTEGER},
+      fdid = #{fdid,jdbcType=INTEGER},
+      yhbh = #{yhbh,jdbcType=VARCHAR},
+      yhdlm = #{yhdlm,jdbcType=VARCHAR},
+      yhmm = #{yhmm,jdbcType=VARCHAR},
+      yhxm = #{yhxm,jdbcType=VARCHAR},
+      yhxmjp = #{yhxmjp,jdbcType=VARCHAR},
+      yhxb = #{yhxb,jdbcType=VARCHAR},
+      yhsfzh = #{yhsfzh,jdbcType=VARCHAR},
+      yhsj = #{yhsj,jdbcType=VARCHAR},
+      yhdzyx = #{yhdzyx,jdbcType=VARCHAR},
+      yhbmid = #{yhbmid,jdbcType=INTEGER},
+      yhcsrq = #{yhcsrq,jdbcType=DATE},
+      yhdz = #{yhdz,jdbcType=VARCHAR},
+      yhyb = #{yhyb,jdbcType=VARCHAR},
+      yhjsid = #{yhjsid,jdbcType=INTEGER},
+      yhrzrq = #{yhrzrq,jdbcType=DATE},
+      ct = #{ct,jdbcType=TIMESTAMP},
+      zt = #{zt,jdbcType=INTEGER},
+      dm = #{dm,jdbcType=INTEGER},
+      yhbz = #{yhbz,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Yonghu" >
+    update hjt_yonghu
+    set jtid = #{jtid,jdbcType=INTEGER},
+      fdid = #{fdid,jdbcType=INTEGER},
+      yhbh = #{yhbh,jdbcType=VARCHAR},
+      yhdlm = #{yhdlm,jdbcType=VARCHAR},
+      yhmm = #{yhmm,jdbcType=VARCHAR},
+      yhxm = #{yhxm,jdbcType=VARCHAR},
+      yhxmjp = #{yhxmjp,jdbcType=VARCHAR},
+      yhxb = #{yhxb,jdbcType=VARCHAR},
+      yhsfzh = #{yhsfzh,jdbcType=VARCHAR},
+      yhsj = #{yhsj,jdbcType=VARCHAR},
+      yhdzyx = #{yhdzyx,jdbcType=VARCHAR},
+      yhbmid = #{yhbmid,jdbcType=INTEGER},
+      yhcsrq = #{yhcsrq,jdbcType=DATE},
+      yhdz = #{yhdz,jdbcType=VARCHAR},
+      yhyb = #{yhyb,jdbcType=VARCHAR},
+      yhjsid = #{yhjsid,jdbcType=INTEGER},
+      yhrzrq = #{yhrzrq,jdbcType=DATE},
+      ct = #{ct,jdbcType=TIMESTAMP},
+      zt = #{zt,jdbcType=INTEGER},
+      dm = #{dm,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

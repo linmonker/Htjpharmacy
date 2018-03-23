@@ -22,7 +22,7 @@
 	function edit() {
 		if($("tr.active").length > 0){
 			var id = $("#tempid").text();
-			location = "${ctx}/gongyingshang/edit?id=" + id;
+			location = "${ctx}/gongyingshang/edit.action?id=" + id;
 		}else{
 			alert("请先选择对象");
 		}
@@ -31,7 +31,7 @@
 		if($("tr.active").length > 0){
 			if (confirm("您确定要删除 " + $("tr.active td:eq(1)").text() + " 吗?")) {	
 				var id = $("#tempid").text();
-				location = "${ctx}/gongyingshang/delete?id=" + id;
+				location = "${ctx}/gongyingshang/delete.action?id=" + id;
 			}
 		}else{
 			alert("请先选择对象");
@@ -80,13 +80,13 @@
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="add.action">添加供应商</a></li>
+								<li><a href="${ctx}/gongyingshang/add.action">添加供应商</a></li>
 								<li><a onclick="return edit()">修改供应商</a></li>
 								<li><a onclick="return del()">删除供应商</a></li>
 								<li><span id="tempid" style="display: none"></span></li>
 							</ul>
 							<div class="nav navbar-nav navbar-right">
-								<form action="${ctx }/gongyingshang/search" method="post">
+								<form action="${ctx }/gongyingshang/search.action" method="post">
 									<input type="text" placeholder="请输入搜索关键字" name="searchword"
 										class="input"
 										style="width: 250px; line-height: 15px; display: inline-block;"

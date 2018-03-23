@@ -60,10 +60,13 @@ public class YaopinSer implements YaopinService {
 
 	// 根据药品id删除药品
 	@Override
-	public void yaopindelete(int id) {
+	public void yaopindelete(Integer id) {
 		// TODO Auto-generated method stub
-		try {
-			yaopinMapper.deleteByPrimaryKey(id);
+		yaopinBtemp = new YaopinWithBLOBs();
+		yaopinBtemp.setId(id);
+		yaopinBtemp.setDm(1);
+		try {	
+			yaopinMapper.updateByPrimaryKeySelective(yaopinBtemp);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -72,7 +75,7 @@ public class YaopinSer implements YaopinService {
 
 	// 更新药品
 	@Override
-	public void yaopinUpdate(YaopinWithBLOBs yaopin) {
+	public void yaopinupdate(YaopinWithBLOBs yaopin) {
 		// TODO Auto-generated method stub
 		try {
 			yaopinMapper.updateByPrimaryKeySelective(yaopin);

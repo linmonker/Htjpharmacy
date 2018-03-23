@@ -47,7 +47,11 @@
          data: {  
              simpleData: {  
                  enable: true  
-             }  
+             },
+             key: {
+            	 title: "flbz"
+             }
+         
          },  
          callback: {  
              beforeEditName: beforeEditName,  
@@ -143,7 +147,7 @@
 			type : "post",
 			data : data,
 			contentType: 'application/json',
-			url : "${ctx}/yaopinfenlei/doedit.action ",
+			url : "${ctx}/yaopinfenlei/editname.action ",
 			success : function(json) {
 				if (json == "success") {
 					alert('操作成功!');
@@ -218,7 +222,7 @@
 	function onclick(event, treeId, treeNode) {
 		$("#addParent").bind("click", {
 			isParent : true
-		}, alert(treeNode.id + ", " + treeNode.name));
+		}, location = "${ctx}/yaopinfenlei/edit.action?id=" + treeNode.id);
 	}
 
 	//移除分类  

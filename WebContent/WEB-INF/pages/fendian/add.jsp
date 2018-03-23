@@ -48,7 +48,7 @@
 			</div>
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">添加分店</h4>
-				<form method="post" class="form-x" action="${ctx}/fendian/doadd">
+				<form method="post" class="form-x" action="${ctx}/fendian/doadd.action">
 					<span style="margin-left: 50px; color: red; font-size: 20px">${bhdata}</span>
 					<span style="margin-left: 50px; color: red; font-size: 20px">${mcdata}</span>
 					<div class="form-group">

@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,18 +63,36 @@ public class YaopinfenleiController {
 		return String.valueOf(lastid);
 	}
 
+	// 执行修改药品分类名称
+	@RequestMapping("/editname")
+	@ResponseBody
+	public String editname(@RequestBody YaopinflNode ypflnodetemp) {
+		ypfltemp = new Yaopinfenlei();
+		ypfltemp.setId(ypflnodetemp.getId());	
+		ypfltemp.setFlmc(ypflnodetemp.getName());
+		ypflservice.mingchenupdate(ypfltemp);
+		return "success";
+	}
+
+	// 修改药品分类
+	@RequestMapping("/edit")
+	public String edit(Model model, @RequestParam(value = "id") Integer id) {
+		ypfltemp = ypflservice.yaopinfenleiget(id);
+		model.addAttribute("yaopinfenlei", ypfltemp);
+		return "yaopinfenlei/edit";
+	}
+
 	// 执行修改药品分类
 	@RequestMapping("/doedit")
 	@ResponseBody
-	public String doedit(@RequestBody YaopinflNode ypflnodetemp) {
+	public String doedit(Yaopinfenlei record) {
 		ypfltemp = new Yaopinfenlei();
-		ypfltemp.setId(ypflnodetemp.getId());
-		ypfltemp.setFldj((short) (ypflnodetemp.getLevelid() + 1));
-		ypfltemp.setSjflid(ypflnodetemp.getPId());
+		ypfltemp.setId(record.getId());
+		ypfltemp.setJtid(record.getJtid());
+		ypfltemp.setSjflid(ypflnodetemp.getpId());
 		ypfltemp.setFlmc(ypflnodetemp.getName());
-		ypfltemp.setZt(0);
 		ypflservice.yaopinfenleiupdate(ypfltemp);
-		return "success";
+		return "redirect:list.action";
 	}
 
 	// 删除药品分类

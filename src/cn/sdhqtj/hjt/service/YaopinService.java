@@ -29,9 +29,9 @@ public interface YaopinService {
 	public void yaopinadd(YaopinWithBLOBs yaopin);
 
 	// 根据药品id删除药品
-	public void yaopindelete(int id);
+	public void yaopindelete(Integer id);
 
 	// 更新药品
-	public void yaopinUpdate(YaopinWithBLOBs yaopin);
+	public void yaopinupdate(YaopinWithBLOBs yaopin);
 
 }

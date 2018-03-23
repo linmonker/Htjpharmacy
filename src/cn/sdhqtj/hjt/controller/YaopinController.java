@@ -79,7 +79,7 @@ public class YaopinController {
 	@RequestMapping("/doedit")
 	public String doedit(YaopinWithBLOBs yaopin, Model model) {
 		yaopin.setZt(0);
-		yaopinservice.yaopinUpdate(yaopin);
+		yaopinservice.yaopinupdate(yaopin);
 		model.addAttribute("editdate", "修改成功");
 		return "redirect:list.action";
 

@@ -65,22 +65,22 @@ public class FendianSer implements FendianService {
 
 	// 根据分店id删除分店
 	@Override
-	public void fendiandelete(int id) {
+	public void fendiandelete(Integer id) {
 		// TODO Auto-generated method stub
-		fendiantemp = fendianMapper.selectByPrimaryKey(id);
-		if (fendiantemp != null) {
+		fendiantemp = new Fendian();
+		fendiantemp.setId(id);
+		fendiantemp.setZt(1);
 			try {
-				fendianMapper.deleteByPrimaryKey(id);
+				fendianMapper.updateByPrimaryKeySelective(fendiantemp);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
 	}
 
 	// 更新分店信息
 	@Override
-	public void fendianUpdate(Fendian fendian) {
+	public void fendianupdate(Fendian fendian) {
 		// TODO Auto-generated method stub
 		try {
 			fendianMapper.updateByPrimaryKeySelective(fendian);

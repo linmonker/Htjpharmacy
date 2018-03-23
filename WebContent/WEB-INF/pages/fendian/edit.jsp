@@ -48,7 +48,7 @@
 			</div>
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">修改分店</h4>
-				<form method="post" class="form-x" action="${ctx }/fendian/doedit">
+				<form method="post" class="form-x" action="${ctx }/fendian/doedit.action">
 					<span style="margin-left: 50px; color: red; font-size: 20px">${editdate}</span>
 					<input type="hidden" name="id" value="${fendian.id }" />
 					<div class="form-group">

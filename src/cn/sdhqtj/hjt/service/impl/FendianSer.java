@@ -60,7 +60,12 @@ public class FendianSer implements FendianService {
 	@Override
 	public void fendianadd(Fendian fendian) {
 		// TODO Auto-generated method stub
-		fendianMapper.insertSelective(fendian);
+		try {
+			fendianMapper.insertSelective(fendian);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// 根据分店id删除分店

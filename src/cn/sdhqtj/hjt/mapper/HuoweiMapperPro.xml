@@ -28,7 +28,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from hjt_cangku_huowei
-		where ckid = #{id,jdbcType=INTEGER}
+		where ckid = #{ckid,jdbcType=INTEGER}
 	</select>
 
 </mapper>

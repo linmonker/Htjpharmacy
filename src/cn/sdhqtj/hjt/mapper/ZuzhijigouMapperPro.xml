@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.ZuzhijigouMapper">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Zuzhijigou">
+		<id column="Id" property="id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="fdid" property="fdid" jdbcType="INTEGER" />
+		<result column="csbh" property="csbh" jdbcType="VARCHAR" />
+		<result column="csmc" property="csmc" jdbcType="VARCHAR" />
+		<result column="csmcjp" property="csmcjp" jdbcType="VARCHAR" />
+		<result column="cslxdh" property="cslxdh" jdbcType="VARCHAR" />
+		<result column="cszr" property="cszr" jdbcType="VARCHAR" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+		<result column="dm" property="dm" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Zuzhijigou"
+		extends="BaseResultMap">
+		<result column="csbz" property="csbz" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		Id, jtid, fdid, csbh, csmc, csmcjp, cslxdh, cszr, zt, dm
+	</sql>
+	<sql id="Blob_Column_List">
+		csbz
+	</sql>
+	<select id="chushiquery" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from hjt_zuzhijigou
+		where fdid = #{fdid,jdbcType=INTEGER}
+	</select>
+	<select id="checkrepeat" resultMap="BaseResultMap" parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">
+		select
+		<include refid="Base_Column_List" />
+		from hjt_zuzhijigou
+		where fdid = #{fdid,jdbcType=INTEGER} and (csbh = #{csbh,jdbcType=VARCHAR} or csmc = #{csmc,jdbcType=VARCHAR})
+	</select>
+</mapper>

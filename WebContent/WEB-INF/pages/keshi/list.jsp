@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>货位列表</title>
+<title>科室列表</title>
 <link rel="stylesheet" href="${ctx}/static/css/pintuer.css">
 <link rel="stylesheet" href="${ctx}/static/css/admin.css">
 <link rel="stylesheet" href="${ctx}/static/css/bootstrap.min.css">
@@ -22,19 +22,19 @@
 	function edit() {
 		if($("tr.active").length > 0){
 			var id = $("#tempid").text();
-			location = "${ctx}/huowei/edit.action?id=" + id;
+			location = "${ctx}/keshi/edit.action?id=" + id;
 		}else{
-			alert("请先选择货位");
+			alert("请先选择对象");
 		}
 	}
 	function del() {
 		if($("tr.active").length > 0){	
 			if (confirm("您确定要删除 " + $("tr.active td:eq(1)").text() + " 吗?")) {	
 				var id = $("#tempid").text();
-				location = "${ctx}/huowei/delete.action?id=" + id;
+				location = "${ctx}/keshi/delete.action?id=" + id;
 			}
 		}else{
-			alert("请先选择货位");
+			alert("请先选择对象");
 		}
 	}
 </script>
@@ -65,12 +65,12 @@
 			<div class="col-sm-2 col-md-2 sidebar">
 				<h4>管理项目</h4>
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="${ctx }/fendian/list.action">分店管理</a></li>
+					<li><a href="${ctx }/fendian/list.action">分店管理</a></li>
 					<li><a href="${ctx }/yaopinfenlei/list.action">药品分类</a></li>
 					<li><a href="${ctx }/yaopin/list.action">药品信息管理</a></li>
 					<li><a href="${ctx }/gongyingshang/list.action">供应商管理</a></li>
-					<li class="active"><a href="${ctx}/cangku/sylist.action">仓库管理</a></li>
-					<li><a href="${ctx}/keshi/list.action">科室管理</a></li>
+					<li><a href="${ctx}/cangku/sylist.action">仓库管理</a></li>
+					<li class="active"><a href="${ctx}/keshi/list.action">科室管理</a></li>
 					<li><a href="${ctx}/zhuzhijigou/list.action">组织机构</a></li>
 				</ul>
 			</div>
@@ -79,17 +79,17 @@
 					<nav class="navbar navbar-default">
 					<div class="container-fluid">
 						<div class="navbar-header">
-							<a class="navbar-brand">货位列表</a>
+							<a class="navbar-brand">科室列表</a>
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="${ctx}/huowei/add.action?ckid=" +${ckid }>添加货位</a></li>
-								<li><a onclick="return edit()">修改货位</a></li>
-								<li><a onclick="return del()">删除货位</a></li>
+								<li><a href="${ctx}/keshi/add.action">添加科室</a></li>
+								<li><a onclick="return edit()">修改科室</a></li>
+								<li><a onclick="return del()">删除科室</a></li>
 								<li><span id="tempid" style="display: none"></span></li>
 							</ul>
 							<div class="nav navbar-nav navbar-right">
-								<form action="${ctx }/huowei/search.action" method="post">
+								<form action="${ctx }/keshi/search.action" method="post">
 									<input type="text" placeholder="请输入搜索关键字" name="searchword"
 										class="input"
 										style="width: 250px; line-height: 15px; display: inline-block;"
@@ -109,22 +109,22 @@
 						<table class="table table-bordered table-condensed">
 							<thead>
 								<tr>
-									<th>货位编号</th>
-									<th>货位名称</th>
-									<th>货位名称简拼</th>
-									<th>货位状态</th>
+									<th>科室编号</th>
+									<th>科室名称</th>
+									<th>科室电话</th>
+									<th>科室主任</th>
 									<th>备注信息</th>
 									<th>状态</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${huoweilist }" var="list">
+								<c:forEach items="${keshilist }" var="list">
 									<tr onclick="setid(this,${list.id })">
-										<td>${list.hwbh }</td>
-										<td>${list.hwmc }</td>
-										<td>${list.hwmcjp }</td>
-										<td>${list.zt }</td>
-										<td>${list.hwbz }</td>
+										<td>${list.ksbh }</td>
+										<td>${list.ksmc }</td>
+										<td>${list.kslxdh }</td>
+										<td>${list.kszr }</td>
+										<td>${list.ksbz }</td>
 										<td><c:choose>
 												<c:when test="${list.zt == 0}">启用</c:when>
 												<c:otherwise>禁用</c:otherwise>

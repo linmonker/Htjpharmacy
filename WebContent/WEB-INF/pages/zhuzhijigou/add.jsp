@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>修改分店</title>
+<title>添加处室</title>
 <link rel="stylesheet" href="${ctx}/static/css/pintuer.css">
 <link rel="stylesheet" href="${ctx}/static/css/admin.css">
 <link rel="stylesheet" href="${ctx}/static/css/bootstrap.min.css">
@@ -13,9 +13,7 @@
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
 </head>
-
 <body>
-
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -23,7 +21,7 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="${ctx }index.action">首页</a></li>
+				<li><a href="${ctx}/index.action">首页</a></li>
 				<li><a href="#">关于</a></li>
 
 			</ul>
@@ -37,77 +35,81 @@
 	</nav>
 	<div class="container-fluid">
 		<div class="row">
+
 			<div class="col-sm-2 col-md-2 sidebar">
 				<h4>管理项目</h4>
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="${ctx }/fendian/list.action">分店管理</a></li>
-					<li><a href="${ctx }/yaopinfenlei/list.action">药品分类</a></li>
-					<li><a href="${ctx }/yaopin/list.action">药品信息管理</a></li>
-					<li><a href="${ctx }/gongyingshang/list.action">供应商管理</a></li>
+					<li><a href="${ctx}/fendian/list.action">分店管理</a></li>
+					<li><a href="${ctx}/yaopinfenlei/list.action">药品分类</a></li>
+					<li><a href="${ctx}/yaopin/list.action">药品信息管理</a></li>
+					<li><a href="${ctx}/gongyingshang/list.action">供应商管理</a></li>
 					<li><a href="${ctx}/cangku/sylist.action">仓库管理</a></li>
 					<li><a href="${ctx}/keshi/list.action">科室管理</a></li>
-					<li><a href="${ctx}/zhuzhijigou/list.action">组织机构</a></li>
+					<li class="active"><a href="${ctx}/zhuzhijigou/list.action">组织机构</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
-				<h4 class="sub-header">修改分店</h4>
-				<form method="post" class="form-x" action="${ctx }/fendian/doedit.action">
-					<span style="margin-left: 50px; color: red; font-size: 20px">${editdate}</span>
-					<input type="hidden" name="id" value="${fendian.id }" />
+				<h4 class="sub-header">添加处室</h4>
+				<form method="post" class="form-x" action="${ctx}/zhuzhijigou/doadd.action">
+					<span style="margin-left: 50px; color: red; font-size: 20px">${bhdata}</span>
+					<span style="margin-left: 50px; color: red; font-size: 20px">${mcdata}</span>
+					<input type="hidden" name="fdid" value="${session.loginer.fdid }">
 					<div class="form-group">
 						<div class="label">
-							<label>集团ID：</label>
+							<label>处室编号：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="jtid"
-								value="${fendian.jtid }" />
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="label">
-							<label>分店编号：</label>
-						</div>
-						<div class="field">
-							<input type="text" class="input w50" name="fdbh"
-								value="${fendian.fdbh }" data-validate="required:请输入分店编号" />
+							<input type="text" class="input w50" name="csbh"
+								value="${chushi.csbh }" data-validate="required:请输入处室编号" />
 							<div class="tips"></div>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="label">
-							<label>分店名称：</label>
+							<label>处室名称：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="fdmc"
-								value="${fendian.fdmc }" data-validate="required:请输入分店名称" />
+							<input type="text" class="input w50" name="csmc"
+								value="${chushi.csmc }" data-validate="required:请输入处室名称" />
 							<div class="tips"></div>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="label">
-							<label>联系电话：</label>
+							<label>处室名称简拼：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="fdlxdh"
-								value="${fendian.fdlxdh }" />
+							<input type="text" class="input w50" name="csmcjp"
+								value="${chushi.csmcjp }" />
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="label">
-							<label>店长姓名：</label>
+							<label>处室电话：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="fddzxm"
-								value="${fendian.fddzxm }" />
+							<input type="text" class="input w50" name="cslxdh"
+								value="${chushi.cslxdh }" />
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="label">
-							<label>分店地址：</label>
+							<label>处室主任：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input" name="fddz"
-								value="${fendian.fddz }" />
+							<input type="text" class="input w80" name="cszr"
+								value="${chushi.cszr }" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="label">
+							<label>处室状态：</label>
+						</div>
+						<div class="field">
+							<select class="form-control" name="zt">
+								<option value="0">启用</option>
+								<option value="1">禁用</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group">
@@ -115,7 +117,7 @@
 							<label>备注信息：</label>
 						</div>
 						<div class="field">
-							<textarea class="input" rows="3" name="fdbz">${fendian.fdbz }</textarea>
+							<textarea class="form-control w50" rows="3" name="ksbz">${chushi.csbz }</textarea>
 						</div>
 					</div>
 					<div class="form-group">
@@ -124,7 +126,8 @@
 						</div>
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
-							<button class="button bg-main" type="reset">重置</button>
+							<a class="button bg-red" href="${ctx}/fendian/list.action"
+								style="margin-left: 10px;"> 取消</a>
 						</div>
 					</div>
 				</form>

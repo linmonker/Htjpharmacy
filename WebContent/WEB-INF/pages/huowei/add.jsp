@@ -14,7 +14,6 @@
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
 </head>
 <body>
-
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -45,6 +44,8 @@
 					<li><a href="${ctx}/yaopin/list.action">药品信息管理</a></li>
 					<li><a href="${ctx}/gongyingshang/list.action">供应商管理</a></li>
 					<li class="active"><a href="${ctx}/cangku/sylist.action">仓库管理</a></li>
+					<li><a href="${ctx}/keshi/list.action">科室管理</a></li>
+					<li><a href="${ctx}/zhuzhijigou/list.action">组织机构</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">

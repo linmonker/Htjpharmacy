@@ -7,6 +7,8 @@ public class Login {
 	private String createDate;
 	private String loginDate;
 	private String ip;
+	private int fdid;
+	private String fdmc;
 
 	public Login() {
 	}
@@ -66,6 +68,22 @@ public class Login {
 
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+	
+	public int getFdid() {
+		return fdid;
+	}
+
+	public void setFdid(int fdid) {
+		this.fdid = fdid;
+	}
+
+	public String getFdmc() {
+		return fdmc;
+	}
+
+	public void setFdmc(String fdmc) {
+		this.fdmc = fdmc;
 	}
 
 	@Override

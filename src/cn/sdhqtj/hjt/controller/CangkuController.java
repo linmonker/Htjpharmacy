@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.sdhqtj.hjt.entity.Cangku;
 import cn.sdhqtj.hjt.entity.Fendian;
+import cn.sdhqtj.hjt.entity.Login;
 import cn.sdhqtj.hjt.service.CangkuService;
 import cn.sdhqtj.hjt.service.FendianService;
 
@@ -44,7 +45,9 @@ public class CangkuController {
 		Integer fdid = 0;
 		if (fdids != null) {
 			fdid = Integer.valueOf(request.getParameter("fdid"));
-			session.setAttribute("fdid", fdid);
+			Login loginer = new Login();
+			loginer.setFdid(fdid);
+			session.setAttribute("loginer", loginer);
 		}
 		fdid = (Integer) session.getAttribute("fdid");
 		cangkulist = cangkuservice.cangkuquery(fdid);
@@ -65,7 +68,9 @@ public class CangkuController {
 	// 执行添加仓库
 	@RequestMapping("/doadd")
 	public String doadd(Cangku record, Model model, HttpSession session) {
-		record.setFdid((Integer) session.getAttribute("fdid"));
+		Login loginer = new Login();
+		loginer = (Login) session.getAttribute("loginer");
+		record.setFdid(loginer.getFdid());
 		record.setDm(0);
 		cangkuservice.cangkuadd(record);
 		model.addAttribute("adddate", "仓库添加成功");

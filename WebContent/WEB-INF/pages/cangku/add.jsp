@@ -40,10 +40,11 @@
 			<div class="col-sm-2 col-md-2 sidebar">
 				<h4>管理项目</h4>
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="${ctx}/fendian/list.action">分店管理</a></li>
+					<li><a href="${ctx}/fendian/list.action">分店管理</a></li>
 					<li><a href="${ctx}/yaopinfenlei/list.action">药品分类</a></li>
 					<li><a href="${ctx}/yaopin/list.action">药品信息管理</a></li>
 					<li><a href="${ctx}/gongyingshang/list.action">供应商管理</a></li>
+					<li class="active"><a href="${ctx}/cangku/sylist.action">仓库管理</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">

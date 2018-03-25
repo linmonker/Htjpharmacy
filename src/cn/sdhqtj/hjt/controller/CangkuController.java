@@ -30,18 +30,23 @@ public class CangkuController {
 	Cangku cangku;
 
 	// 仓库管理首页分店列表
-	@RequestMapping("/shouyelist")
-	public String shouyelist(Model model) {
+	@RequestMapping("/sylist")
+	public String sylist(Model model) {
 		fendianlist = fendianservice.fendianquery();
 		model.addAttribute("fendianlist", fendianlist);
-		return "cangku/shouyelist";
+		return "cangku/sylist";
 	}
 
 	// 仓库列表
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model, HttpSession session) {
-		Integer fdid = Integer.valueOf(request.getParameter("fdid"));
-		session.setAttribute("fdid", fdid);
+		String fdids = request.getParameter("fdid");
+		Integer fdid = 0;
+		if (fdids != null) {
+			fdid = Integer.valueOf(request.getParameter("fdid"));
+			session.setAttribute("fdid", fdid);
+		}
+		fdid = (Integer) session.getAttribute("fdid");
 		cangkulist = cangkuservice.cangkuquery(fdid);
 		fendianlist = fendianservice.fendianquery();
 		model.addAttribute("cangkulist", cangkulist);
@@ -59,9 +64,9 @@ public class CangkuController {
 
 	// 执行添加仓库
 	@RequestMapping("/doadd")
-	public String doadd(Cangku record, Model model,HttpSession session) {
-		record.setFdid((Integer) session.getAttribute("fdid")); 
-		record.setZt(0);
+	public String doadd(Cangku record, Model model, HttpSession session) {
+		record.setFdid((Integer) session.getAttribute("fdid"));
+		record.setDm(0);
 		cangkuservice.cangkuadd(record);
 		model.addAttribute("adddate", "仓库添加成功");
 		return "redirect:list.action";
@@ -79,8 +84,7 @@ public class CangkuController {
 	// 执行修改仓库
 	@RequestMapping("/doedit")
 	public String doedit(Cangku record, Model model) {
-		cangku.setZt(0);
-		cangkuservice.cangkuupdate(cangku);
+		cangkuservice.cangkuupdate(record);
 		model.addAttribute("editdate", "修改成功");
 		return "redirect:list.action";
 	}

@@ -69,6 +69,7 @@
 					<li><a href="${ctx }/yaopinfenlei/list.action">药品分类</a></li>
 					<li><a href="${ctx }/yaopin/list.action">药品信息管理</a></li>
 					<li><a href="${ctx }/gongyingshang/list.action">供应商管理</a></li>
+					<li><a href="${ctx}/cangku/sylist.action">仓库管理</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">

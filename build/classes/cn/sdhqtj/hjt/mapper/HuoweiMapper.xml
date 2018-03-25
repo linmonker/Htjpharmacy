@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.sdhqtj.hjt.mapper.CKhuoweiMapper" >
-  <resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.CKhuowei" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.HuoweiMapper" >
+  <resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Huowei" >
     <id column="Id" property="id" jdbcType="INTEGER" />
     <result column="jtid" property="jtid" jdbcType="INTEGER" />
     <result column="fdid" property="fdid" jdbcType="INTEGER" />
@@ -12,14 +12,14 @@
     <result column="zt" property="zt" jdbcType="INTEGER" />
     <result column="dm" property="dm" jdbcType="INTEGER" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.CKhuowei" extends="BaseResultMap" >
-    <result column="ckbz" property="ckbz" jdbcType="LONGVARCHAR" />
+  <resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Huowei" extends="BaseResultMap" >
+    <result column="hwbz" property="hwbz" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     Id, jtid, fdid, ckid, hwbh, hwmc, hwmcjp, zt, dm
   </sql>
   <sql id="Blob_Column_List" >
-    ckbz
+    hwbz
   </sql>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
@@ -33,15 +33,15 @@
     delete from hjt_cangku_huowei
     where Id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.sdhqtj.hjt.entity.CKhuowei" >
+  <insert id="insert" parameterType="cn.sdhqtj.hjt.entity.Huowei" >
     insert into hjt_cangku_huowei (Id, jtid, fdid, 
       ckid, hwbh, hwmc, hwmcjp, 
-      zt, dm, ckbz)
+      zt, dm, hwbz)
     values (#{id,jdbcType=INTEGER}, #{jtid,jdbcType=INTEGER}, #{fdid,jdbcType=INTEGER}, 
       #{ckid,jdbcType=INTEGER}, #{hwbh,jdbcType=VARCHAR}, #{hwmc,jdbcType=VARCHAR}, #{hwmcjp,jdbcType=VARCHAR}, 
-      #{zt,jdbcType=INTEGER}, #{dm,jdbcType=INTEGER}, #{ckbz,jdbcType=LONGVARCHAR})
+      #{zt,jdbcType=INTEGER}, #{dm,jdbcType=INTEGER}, #{hwbz,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.CKhuowei" >
+  <insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Huowei" >
     insert into hjt_cangku_huowei
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -71,8 +71,8 @@
       <if test="dm != null" >
         dm,
       </if>
-      <if test="ckbz != null" >
-        ckbz,
+      <if test="hwbz != null" >
+        hwbz,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -103,12 +103,12 @@
       <if test="dm != null" >
         #{dm,jdbcType=INTEGER},
       </if>
-      <if test="ckbz != null" >
-        #{ckbz,jdbcType=LONGVARCHAR},
+      <if test="hwbz != null" >
+        #{hwbz,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.CKhuowei" >
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.Huowei" >
     update hjt_cangku_huowei
     <set >
       <if test="jtid != null" >
@@ -135,13 +135,13 @@
       <if test="dm != null" >
         dm = #{dm,jdbcType=INTEGER},
       </if>
-      <if test="ckbz != null" >
-        ckbz = #{ckbz,jdbcType=LONGVARCHAR},
+      <if test="hwbz != null" >
+        hwbz = #{hwbz,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where Id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.CKhuowei" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.Huowei" >
     update hjt_cangku_huowei
     set jtid = #{jtid,jdbcType=INTEGER},
       fdid = #{fdid,jdbcType=INTEGER},
@@ -151,10 +151,10 @@
       hwmcjp = #{hwmcjp,jdbcType=VARCHAR},
       zt = #{zt,jdbcType=INTEGER},
       dm = #{dm,jdbcType=INTEGER},
-      ckbz = #{ckbz,jdbcType=LONGVARCHAR}
+      hwbz = #{hwbz,jdbcType=LONGVARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.CKhuowei" >
+  <update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Huowei" >
     update hjt_cangku_huowei
     set jtid = #{jtid,jdbcType=INTEGER},
       fdid = #{fdid,jdbcType=INTEGER},

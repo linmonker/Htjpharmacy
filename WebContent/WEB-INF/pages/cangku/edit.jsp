@@ -20,7 +20,6 @@
 	})
 </script>
 </head>
-
 <body>
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -50,6 +49,7 @@
 					<li><a href="${ctx }/yaopinfenlei/list.action">药品分类</a></li>
 					<li><a href="${ctx }/yaopin/list.action">药品信息管理</a></li>
 					<li><a href="${ctx }/gongyingshang/list.action">供应商管理</a></li>
+					<li class="active"><a href="${ctx}/cangku/sylist.action">仓库管理</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
@@ -57,8 +57,8 @@
 				<form method="post" class="form-x"
 					action="${ctx }/cangku/doedit.action">
 					<span style="margin-left: 50px; color: red; font-size: 20px">${editdate}</span>
-					<input type="hidden" name="id" value="${cangku.id }" /> <input
-						id="ckzt" type="hidden" value="${cangku.zt }" />
+					<input type="hidden" name="id" value="${cangku.id }" /> 
+					<input id="ckzt" type="hidden" value="${cangku.zt }" />
 					<div class="form-group">
 						<div class="label">
 							<label>仓库编号：</label>

@@ -24,7 +24,7 @@
 			var id = $("#tempid").text();
 			location = "${ctx}/cangku/edit.action?id=" + id;
 		}else{
-			alert("请先选择对象");
+			alert("请先选择仓库");
 		}
 	}
 	function del() {
@@ -34,7 +34,15 @@
 				location = "${ctx}/cangku/delete.action?id=" + id;
 			}
 		}else{
-			alert("请先选择对象");
+			alert("请先选择仓库");
+		}
+	}
+	function huowei() {
+		if($("tr.active").length > 0){	
+			var id = $("#tempid").text();
+			location = "${ctx}/huowei/list.action?id=" + id;
+		}else{
+			alert("请先选择仓库");
 		}
 	}
 	$(document).ready(function(){
@@ -73,6 +81,7 @@
 					<li><a href="${ctx }/yaopinfenlei/list.action">药品分类</a></li>
 					<li><a href="${ctx }/yaopin/list.action">药品信息管理</a></li>
 					<li><a href="${ctx }/gongyingshang/list.action">供应商管理</a></li>
+					<li class="active"><a href="${ctx}/cangku/sylist.action">仓库管理</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
@@ -87,6 +96,7 @@
 								<li><a href="${ctx}/cangku/add.action">添加仓库</a></li>
 								<li><a onclick="return edit()">修改仓库</a></li>
 								<li><a onclick="return del()">删除仓库</a></li>
+								<li><a onclick="return huowei()">货位管理</a></li>
 								<li><span id="tempid" style="display: none"></span></li>
 							</ul>
 							<div class="nav navbar-nav navbar-right">
@@ -110,7 +120,8 @@
 						<h5>分店列表</h5>
 						<ul class="nav nav-sidebar">
 							<c:forEach items="${fendianlist }" var="fdlist">
-								<li id="fdid${fdlist.id }"><a href="${ctx }/cangku/list.action?fdid=${fdlist.id }">${fdlist.fdmc }</a></li>
+								<li id="fdid${fdlist.id }"><a
+									href="${ctx }/cangku/list.action?fdid=${fdlist.id }">${fdlist.fdmc }</a></li>
 							</c:forEach>
 						</ul>
 					</div>

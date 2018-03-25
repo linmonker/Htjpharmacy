@@ -1,6 +1,6 @@
 package cn.sdhqtj.hjt.entity;
 
-public class CKhuowei {
+public class Huowei {
     private Integer id;
 
     private Integer jtid;
@@ -19,7 +19,7 @@ public class CKhuowei {
 
     private Integer dm;
 
-    private String ckbz;
+    private String hwbz;
 
     public Integer getId() {
         return id;
@@ -93,11 +93,11 @@ public class CKhuowei {
         this.dm = dm;
     }
 
-    public String getCkbz() {
-        return ckbz;
+    public String getHwbz() {
+        return hwbz;
     }
 
-    public void setCkbz(String ckbz) {
-        this.ckbz = ckbz == null ? null : ckbz.trim();
+    public void setHwbz(String hwbz) {
+        this.hwbz = hwbz == null ? null : hwbz.trim();
     }
 }

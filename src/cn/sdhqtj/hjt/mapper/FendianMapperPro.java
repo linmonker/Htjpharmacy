@@ -4,12 +4,23 @@ import java.util.List;
 
 import cn.sdhqtj.hjt.entity.Fendian;
 
+/**
+ * 分店mapper补充
+ */
 public interface FendianMapperPro {
 
+	/**
+	 * 获取分店列表
+	 */
 	List<Fendian> fendianquery();
 
-	Fendian selectByfdbh(String fdbh);
+	/**
+	 * 检查重复，分店编号和分店名称
+	 */
+	List<Fendian> checkrepeat(Fendian record);
 
-	Fendian selectByfdmc(String fdmc);
-
+	/**
+	 * 更新分店信息，选择字段
+	 */
+	int fendianupdate(Fendian record);
 }

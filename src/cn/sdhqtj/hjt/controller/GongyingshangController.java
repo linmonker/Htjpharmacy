@@ -1,9 +1,3 @@
-/**  
-* Title: test.java  
-* Description:  
-* @author LIN  
-* @date 2018年3月19日  
-*/
 package cn.sdhqtj.hjt.controller;
 
 import java.util.List;
@@ -19,6 +13,9 @@ import cn.sdhqtj.hjt.entity.Gongyingshang;
 import cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs;
 import cn.sdhqtj.hjt.service.GongyingshangService;
 
+/**
+ * 供应商controller
+ */
 @Controller
 @RequestMapping("/gongyingshang")
 public class GongyingshangController {
@@ -26,75 +23,100 @@ public class GongyingshangController {
 	@Resource
 	GongyingshangService gysservice;
 	List<Gongyingshang> gyslist;
-	Gongyingshang gystemp;
-	GongyingshangWithBLOBs gysBtemp;
+	Gongyingshang gys;
+	GongyingshangWithBLOBs gysB;
 
-	// 列表
+	/**
+	 * 列表
+	 */
 	@RequestMapping("/list")
-	public String list(Model model) {
+	public String list(HttpServletRequest request, Model model) {
 		gyslist = gysservice.gongyingshangquery();
 		model.addAttribute("gyslist", gyslist);
+
+		String data = request.getParameter("adddata");
+		if (data != null) {
+			model.addAttribute("adddata", "供应商添加成功");
+		}
+		data = request.getParameter("editdata");
+		if (data != null) {
+			model.addAttribute("editdata", "供应商修改成功");
+		}
+		data = request.getParameter("deletedata");
+		if (data != null) {
+			model.addAttribute("deletedata", "供应商删除成功");
+		}
 		return "gongyingshang/list";
 	}
 
-	// 新增供应商
+	/**
+	 * 新增供应商
+	 */
 	@RequestMapping("/add")
 	public String add() {
 
 		return "gongyingshang/add";
 	}
 
-	// 执行添加供应商
+	/**
+	 * 执行添加供应商
+	 */
 	@RequestMapping("/doadd")
-	public String doadd(GongyingshangWithBLOBs gysB, Model model) {
-		int fo = 1;
-		gystemp = gysservice.selectBygysbhWithBLOBs(gysB.getGysbh());
+	public String doadd(GongyingshangWithBLOBs record, Model model) {
+		gys = gysservice.checkrepeat(record);
 
-		if (gystemp != null) {
-			model.addAttribute("bhdate", "此供应商编号已存在");
-			fo = 0;
-		}
-		if (fo == 0) {// 添加失败
-			model.addAttribute("gys", gysB);
+		if (record.getGysbh() == null || record.getGysmc() == null || gys != null) {
+			// 添加失败
+			if (gys != null) {
+				model.addAttribute("bhdata", "此供应商编号已存在");
+			}
+			model.addAttribute("adddata", "供应商添加失败");
+			model.addAttribute("gys", record);
 			return "gongyingshang/add";
-		} else {
-			gysB.setZt(0);
-			gysB.setDm(0);
-			gysservice.gongyingshangadd(gysB);
-			model.addAttribute("adddate", "分店添加成功");
-			return "redirect:list.action";
+		} else {// 添加成功
+			gysservice.gongyingshangadd(record);
+			return "redirect:list.action?adddata=1";
 		}
 	}
 
-	// 修改分店
+	/**
+	 * 修改供应商
+	 */
 	@RequestMapping("/edit")
 	public String edit(HttpServletRequest request, Model model) {
-		gysBtemp = gysservice.selectByPrimaryKey(Integer.valueOf(request.getParameter("id")));
-		if (gysBtemp == null) {
-			model.addAttribute("editdate", "修改失败，数据已被删除");
-			return "redirect:list.action";
-		} else {
-			model.addAttribute("gys", gystemp);
+		gysB = gysservice.selectByPrimaryKey(Integer.valueOf(request.getParameter("id")));
+		model.addAttribute("gys", gysB);
+		return "gongyingshang/edit";
+
+	}
+
+	/**
+	 * 执行修改分店
+	 */
+	@RequestMapping("/doedit")
+	public String doedit(GongyingshangWithBLOBs record, Model model) {
+		gys = gysservice.checkrepeat(record);
+
+		if (record.getGysbh() == null || record.getGysmc() == null || gys != null) {
+			// 修改失败
+			if (gys != null) {
+				model.addAttribute("bhdata", "此供应商编号已存在");
+			}
+			model.addAttribute("adddata", "供应商添加失败");
+			model.addAttribute("gys", record);
 			return "gongyingshang/edit";
+		} else {// 修改成功
+			gysservice.gongyingshangupdate(record);
+			return "redirect:list.action?editdata=1";
 		}
 	}
 
-	// 执行修改分店
-	@RequestMapping("/doedit")
-	public String doedit(GongyingshangWithBLOBs gysB, Model model) {
-		gysB.setZt(0);
-		gysB.setDm(0);
-		gysservice.gongyingshangupdate(gysB);
-		model.addAttribute("editdate", "修改成功");
-		return "redirect:list.action";
-
-	}
-
-	// 删除分店
+	/**
+	 * 删除分店
+	 */
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
 		gysservice.gongyingshangdelete(Integer.valueOf(request.getParameter("id")));
-		model.addAttribute("deletedate", "删除成功");
-		return "redirect:list.action";
+		return "redirect:list.action?deletedata=1";
 	}
 }

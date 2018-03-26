@@ -60,17 +60,49 @@
 	</sql>
 
 	<select id="Gongyingshangquery" resultMap="BaseResultMap">
-		select *
-		from
-		hjt_gongyingshang
-		where zt=0
-	</select>
-	<select id="selectBygysbhWithBLOBs" resultMap="ResultMapWithBLOBs"
-		parameterType="java.lang.String">
-		select *
+		select <include refid="Base_Column_List" />
 		from hjt_gongyingshang
-		where gysbh=#{_parameter}
-		and zt=0
+		where dm = 0
 	</select>
-
+	<select id="checkrepeat" resultMap="BaseResultMap"
+		parameterType="cn.sdhqtj.hjt.entity.Gongyingshang">
+		select <include refid="Base_Column_List" />
+		from hjt_gongyingshang
+		where gysbh = #{gysbh,jdbcType=VARCHAR}
+	</select>
+    <update id="gongyingshangupdate" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs">
+		update hjt_gongyingshang
+		set gysbh = #{gysbh,jdbcType=VARCHAR},
+		gysmc = #{gysmc,jdbcType=VARCHAR},
+		gysmcjp = #{gysmcjp,jdbcType=VARCHAR},
+		gyslxdh = #{gyslxdh,jdbcType=VARCHAR},
+		gyslxr = #{gyslxr,jdbcType=VARCHAR},
+		gysxxdz = #{gysxxdz,jdbcType=VARCHAR},
+		gysywy = #{gysywy,jdbcType=VARCHAR},
+		gysywydh = #{gysywydh,jdbcType=VARCHAR},
+		gysywysfz = #{gysywysfz,jdbcType=VARCHAR},
+		gysyzbm = #{gysyzbm,jdbcType=VARCHAR},
+		gyslyxdz = #{gyslyxdz,jdbcType=VARCHAR},
+		gysyyzz = #{gysyyzz,jdbcType=VARCHAR},
+		gysyyzzqx = #{gysyyzzqx,jdbcType=DATE},
+		gysyyzzfzrq = #{gysyyzzfzrq,jdbcType=DATE},
+		gysfrdb = #{gysfrdb,jdbcType=VARCHAR},
+		gysjyxz = #{gysjyxz,jdbcType=VARCHAR},
+		gyszczb = #{gyszczb,jdbcType=VARCHAR},
+		gysjyfs = #{gysjyfs,jdbcType=VARCHAR},
+		gysscjyxkz = #{gysscjyxkz,jdbcType=VARCHAR},
+		gysxkzmc = #{gysxkzmc,jdbcType=VARCHAR},
+		gysxkzdz = #{gysxkzdz,jdbcType=VARCHAR},
+		gysxkzbh = #{gysxkzbh,jdbcType=VARCHAR},
+		gysxkzfzdw = #{gysxkzfzdw,jdbcType=VARCHAR},
+		gysxkzyxq = #{gysxkzyxq,jdbcType=DATE},
+		gysxkzfzrq = #{gysxkzfzrq,jdbcType=DATE},
+		gysgspzj = #{gysgspzj,jdbcType=VARCHAR},
+		gysgspfzr = #{gysgspfzr,jdbcType=VARCHAR},
+		gysgspzjyxq = #{gysgspzjyxq,jdbcType=DATE},
+		zt = #{zt,jdbcType=INTEGER},
+		gysjyfw = #{gysjyfw,jdbcType=LONGVARCHAR},
+		gysbz = #{gysbz,jdbcType=LONGVARCHAR}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
 </mapper>

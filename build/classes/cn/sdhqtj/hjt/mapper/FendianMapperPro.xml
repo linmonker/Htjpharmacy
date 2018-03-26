@@ -1,32 +1,48 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.sdhqtj.hjt.mapper.FendianMapperPro">
-
-	<select id="fendianquery" resultType="cn.sdhqtj.hjt.entity.Fendian">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Fendian">
+		<id column="Id" property="id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="fdbh" property="fdbh" jdbcType="VARCHAR" />
+		<result column="fdmc" property="fdmc" jdbcType="VARCHAR" />
+		<result column="fddz" property="fddz" jdbcType="VARCHAR" />
+		<result column="fdlxdh" property="fdlxdh" jdbcType="VARCHAR" />
+		<result column="fddzxm" property="fddzxm" jdbcType="VARCHAR" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Fendian"
+		extends="BaseResultMap">
+		<result column="fdbz" property="fdbz" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		Id, jtid, fdbh, fdmc, fddz, fdlxdh, fddzxm, zt
+	</sql>
+	<sql id="Blob_Column_List">
+		fdbz
+	</sql>
+	<select id="fendianquery" resultType="ResultMapWithBLOBs">
 		select
-		*
-		from
-		hjt_fendian
-		where zt=0
+		<include refid="Base_Column_List" />
+		from hjt_fendian
+		where zt = 0
 	</select>
-	<select id="selectByfdbh" resultType="cn.sdhqtj.hjt.entity.Fendian"
-		parameterType="java.lang.String">
+	<select id="checkrepeat" resultType="BaseResultMap"
+		parameterType="cn.sdhqtj.hjt.entity.Fendian">
 		select
-		*
-		from
-		hjt_fendian
-		where
-		fdbh=#{_parameter} and zt=0
+		<include refid="Base_Column_List" />
+		from hjt_fendian
+		where 
+		fdbh = #{fdbh,jdbcType=VARCHAR} or fdmc = #{fdmc,jdbcType=VARCHAR}
 	</select>
-	<select id="selectByfdmc" resultType="cn.sdhqtj.hjt.entity.Fendian"
-		parameterType="java.lang.String">
-		select
-		*
-		from
-		hjt_fendian
-		where
-		fdmc=#{_parameter} and zt=0
-	</select>
+    <update id="fendianupdate" parameterType="cn.sdhqtj.hjt.entity.Fendian">
+		update hjt_fendian
+		set fdbh = #{fdbh,jdbcType=VARCHAR},
+		fdmc = #{fdmc,jdbcType=VARCHAR},
+		fddz = #{fddz,jdbcType=VARCHAR},
+		fdlxdh = #{fdlxdh,jdbcType=VARCHAR},
+		fddzxm = #{fddzxm,jdbcType=VARCHAR},
+		fdbz = #{fdbz,jdbcType=LONGVARCHAR}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
 </mapper>

@@ -23,19 +23,14 @@ public interface FendianService {
 	public Fendian fendianget(Integer id);
 
 	/**
-	 * 通过分店编号获取分店信息
+	 * 检查重复，分店编号和分店名称
 	 */
-	public Fendian selectByfdbh(String fdbh);
-
-	/**
-	 * 通过分店名称获取分店信息
-	 */
-	public Fendian selectByfdmc(String fdmc);
+	public List<Fendian> checkrepeat(Fendian record);
 
 	/**
 	 * 添加分店
 	 */
-	public void fendianadd(Fendian fendian);
+	public void fendianadd(Fendian record);
 
 	/**
 	 * 根据分店id删除分店
@@ -45,6 +40,6 @@ public interface FendianService {
 	/**
 	 * 更新分店信息
 	 */
-	public void fendianupdate(Fendian fendian);
+	public void fendianupdate(Fendian record);
 
 }

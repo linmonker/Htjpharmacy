@@ -13,9 +13,7 @@
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
 </head>
-
 <body>
-
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -24,8 +22,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -51,24 +50,15 @@
 			</div>
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">修改分店</h4>
+				<span>${editdata}</span> <span>${bhdata}</span> <span>${mcdata}</span>
 				<form method="post" class="form-x" action="${ctx }/fendian/doedit.action">
-					<span style="margin-left: 50px; color: red; font-size: 20px">${editdate}</span>
 					<input type="hidden" name="id" value="${fendian.id }" />
-					<div class="form-group">
-						<div class="label">
-							<label>集团ID：</label>
-						</div>
-						<div class="field">
-							<input type="text" class="input w50" name="jtid"
-								value="${fendian.jtid }" />
-						</div>
-					</div>
 					<div class="form-group">
 						<div class="label">
 							<label>分店编号：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="fdbh"
+							<input type="text" class="form-control" name="fdbh"
 								value="${fendian.fdbh }" data-validate="required:请输入分店编号" />
 							<div class="tips"></div>
 						</div>
@@ -78,7 +68,7 @@
 							<label>分店名称：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="fdmc"
+							<input type="text" class="form-control" name="fdmc"
 								value="${fendian.fdmc }" data-validate="required:请输入分店名称" />
 							<div class="tips"></div>
 						</div>
@@ -88,7 +78,7 @@
 							<label>联系电话：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="fdlxdh"
+							<input type="text" class="form-control" name="fdlxdh"
 								value="${fendian.fdlxdh }" />
 						</div>
 					</div>
@@ -97,7 +87,7 @@
 							<label>店长姓名：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="fddzxm"
+							<input type="text" class="form-control" name="fddzxm"
 								value="${fendian.fddzxm }" />
 						</div>
 					</div>
@@ -106,7 +96,7 @@
 							<label>分店地址：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input" name="fddz"
+							<input type="text" class="form-control" name="fddz"
 								value="${fendian.fddz }" />
 						</div>
 					</div>
@@ -115,7 +105,7 @@
 							<label>备注信息：</label>
 						</div>
 						<div class="field">
-							<textarea class="input" rows="3" name="fdbz">${fendian.fdbz }</textarea>
+							<textarea class="form-control" rows="3" name="fdbz">${fendian.fdbz }</textarea>
 						</div>
 					</div>
 					<div class="form-group">

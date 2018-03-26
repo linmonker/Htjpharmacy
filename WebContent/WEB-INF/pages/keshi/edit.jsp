@@ -29,8 +29,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -56,11 +57,11 @@
 			</div>
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">修改科室</h4>
+				<input id="kszt" type="hidden" value="${keshi.zt }" />
+				<span>${editdata}</span> <span>${bhdata}</span> <span>${mcdata}</span>
 				<form method="post" class="form-x"
 					action="${ctx }/keshi/doedit.action">
-					<span style="margin-left: 50px; color: red; font-size: 20px">${editdate}</span>
 					<input type="hidden" name="fdid" value="${session.loginer.fdid }">
-					<input id="kszt" type="hidden" value="${keshi.zt }" />
 					<div class="form-group">
 						<div class="label">
 							<label>科室编号：</label>

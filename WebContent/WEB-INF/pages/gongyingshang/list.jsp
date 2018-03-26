@@ -12,9 +12,8 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
-
 <script>
-	function setid(element, id) {
+	function setid(element,id) {
 		$("tr.active").removeClass("active");
 		$(element).addClass("active");
 		$("#tempid").text(id);
@@ -24,7 +23,7 @@
 			var id = $("#tempid").text();
 			location = "${ctx}/gongyingshang/edit.action?id=" + id;
 		}else{
-			alert("请先选择对象");
+			alert("请先选择供应商");
 		}
 	}
 	function del() {
@@ -34,7 +33,7 @@
 				location = "${ctx}/gongyingshang/delete.action?id=" + id;
 			}
 		}else{
-			alert("请先选择对象");
+			alert("请先选择供应商");
 		}
 	}
 </script>
@@ -49,8 +48,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -100,8 +100,7 @@
 						</div>
 					</div>
 					</nav>
-					<span style="margin-left: 50px; font-size: 20px">${adddata}</span>
-					<span style="margin-left: 50px; font-size: 20px">${deletedata}</span>
+					<span>${adddata}</span> <span>${editdata}</span> <span>${deletedata}</span>
 				</div>
 				<div class="row">
 					<div class="table-responsive">
@@ -110,11 +109,13 @@
 								<tr>
 									<th>供应商编号</th>
 									<th>供应商名称</th>
-									<th>联系人</th>
 									<th>供应商电话</th>
+									<th>联系人</th>				
 									<th>业务员</th>
 									<th>业务员电话</th>
 									<th>供应商地址</th>
+									<th>邮政编码</th>
+									<th>状态</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -122,11 +123,13 @@
 									<tr onclick="setid(this,${list.id })">
 										<td>${list.gysbh }</td>
 										<td>${list.gysmc }</td>
-										<td>${list.gyslxr }</td>
 										<td>${list.gyslxdh }</td>
+										<td>${list.gyslxr }</td>
 										<td>${list.gysywy}</td>
 										<td>${list.gysywydh}</td>
 										<td>${list.gysxxdz}</td>
+										<td>${list.gysyzbm}</td>
+										<td>${list.zt}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -136,7 +139,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
-
 </html>

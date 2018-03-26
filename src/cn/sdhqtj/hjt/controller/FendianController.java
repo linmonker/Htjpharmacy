@@ -1,9 +1,3 @@
-/**  
-* Title: FendianController.java  
-* Description:分店控制器
-* @author LIN  
-* @date 2018年2月19日  
-*/
 package cn.sdhqtj.hjt.controller;
 
 import java.util.List;
@@ -18,81 +12,118 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.sdhqtj.hjt.entity.Fendian;
 import cn.sdhqtj.hjt.service.FendianService;
 
+/**
+ * 分店controller
+ */
 @Controller
 @RequestMapping("/fendian")
 public class FendianController {
 
 	@Resource
 	FendianService fendianservice;
+	Fendian fendian;
 	List<Fendian> fendianlist;
-	Fendian fendiantemp;
 
-	// 列表
+	/**
+	 * 列表
+	 */
 	@RequestMapping("/list")
-	public String list(Model model) {
+	public String list(HttpServletRequest request, Model model) {
 		fendianlist = fendianservice.fendianquery();
 		model.addAttribute("fendianlist", fendianlist);
+
+		String data = request.getParameter("adddata");
+		if (data != null) {
+			model.addAttribute("adddata", "分店添加成功");
+		}
+		data = request.getParameter("editdata");
+		if (data != null) {
+			model.addAttribute("editdata", "分店修改成功");
+		}
+		data = request.getParameter("deletedata");
+		if (data != null) {
+			model.addAttribute("deletedata", "分店删除成功");
+		}
 		return "fendian/list";
 	}
 
-	// 新增分店
+	/**
+	 * 添加分店
+	 */
 	@RequestMapping("/add")
 	public String add() {
 
 		return "fendian/add";
 	}
 
-	// 执行添加分店
+	/**
+	 * 执行添加分店
+	 */
 	@RequestMapping("/doadd")
-	public String doadd(Fendian fendian, Model model) {
-		int fo = 1;
-		fendiantemp = fendianservice.selectByfdbh(fendian.getFdbh());
+	public String doadd(Fendian record, Model model) {
+		fendianlist = fendianservice.checkrepeat(record);
 
-		if (fendiantemp != null) {
-			model.addAttribute("bhdate", "此分店编号已存在");
-			fo = 0;
-		}
-		fendiantemp = fendianservice.selectByfdmc(fendian.getFdmc());
-		if (fendiantemp != null) {
-			model.addAttribute("mcdate", "此分店名称已存在");
-			fo = 0;
-		}
-		if (fo == 0) {// 添加失败
-			model.addAttribute("fendian", fendian);
+		if (record.getFdbh() == null || record.getFdmc() == null || fendianlist.size() > 0) {
+			// 添加失败
+			for (Fendian temp : fendianlist) {
+				if (temp.getFdbh() != null) {
+					model.addAttribute("bhdata", "此分店编号已存在");
+				}
+				if (temp.getFdmc() != null) {
+					model.addAttribute("mcdata", "此分店名称已存在");
+				}
+			}
+			model.addAttribute("adddata", "分店添加失败");
+			model.addAttribute("fendian", record);
 			return "fendian/add";
-		} else {
-			fendian.setZt(0);
-			fendianservice.fendianadd(fendian);
-			model.addAttribute("adddate", "分店添加成功");
-			return "redirect:list.action";
+		} else {// 添加成功
+			fendianservice.fendianadd(record);
+			return "redirect:list.action?adddata=1";
 		}
 	}
 
-	// 修改分店
+	/**
+	 * 修改分店
+	 */
 	@RequestMapping("/edit")
 	public String edit(HttpServletRequest request, Model model) {
-		Integer id = Integer.valueOf(request.getParameter("id"));
-		fendiantemp = fendianservice.fendianget(id);
-		model.addAttribute("fendian", fendiantemp);
+		fendian = fendianservice.fendianget(Integer.valueOf(request.getParameter("id")));
+		model.addAttribute("fendian", fendian);
 		return "fendian/edit";
 	}
 
-	// 执行修改分店
+	/**
+	 * 执行修改分店
+	 */
 	@RequestMapping("/doedit")
-	public String doedit(Fendian fendian, Model model) {
-		fendian.setZt(0);
-		fendianservice.fendianupdate(fendian);
-		model.addAttribute("editdate", "修改成功");
-		return "redirect:list.action";
+	public String doedit(Fendian record, Model model) {
+		fendianlist = fendianservice.checkrepeat(record);
 
+		if (record.getFdbh() == null || record.getFdmc() == null || fendianlist.size() > 0) {
+			// 修改失败
+			for (Fendian temp : fendianlist) {
+				if (temp.getFdbh() != null) {
+					model.addAttribute("bhdata", "此分店编号已存在");
+				}
+				if (temp.getFdmc() != null) {
+					model.addAttribute("mcdata", "此分店名称已存在");
+				}
+			}
+			model.addAttribute("editdata", "分店修改失败");
+			model.addAttribute("fendian", record);
+			return "fendian/edit";
+		} else {// 修改成功
+			fendianservice.fendianupdate(record);
+			return "redirect:list.action?editdata=1";
+		}
 	}
 
-	// 删除分店
+	/**
+	 * 删除分店
+	 */
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
-		Integer id = Integer.valueOf(request.getParameter("id"));
-		fendianservice.fendiandelete(id);
-		model.addAttribute("deletedate", "删除成功");
-		return "redirect:list.action";
+		fendianservice.fendiandelete(Integer.valueOf(request.getParameter("id")));
+		return "redirect:list.action?deleta=1";
 	}
 }

@@ -1,9 +1,3 @@
-/**  
-* Title: GongyingshangSer.java  
-* Description:供应商service实现类  
-* @author LIN  
-* @date 2018年3月10日  
-*/
 package cn.sdhqtj.hjt.service.impl;
 
 import java.util.List;
@@ -15,6 +9,9 @@ import cn.sdhqtj.hjt.mapper.GongyingshangMapper;
 import cn.sdhqtj.hjt.mapper.GongyingshangMapperPro;
 import cn.sdhqtj.hjt.service.GongyingshangService;
 
+/**
+ * 供应商service接口实现类
+ */
 @Service
 public class GongyingshangSer implements GongyingshangService {
 
@@ -23,38 +20,67 @@ public class GongyingshangSer implements GongyingshangService {
 
 	@Resource
 	private GongyingshangMapper gysMapper;
-	Gongyingshang gystemp;
-	GongyingshangWithBLOBs gysBtemp;
+	Gongyingshang gys;
+	GongyingshangWithBLOBs gysB;
 	List<Gongyingshang> gyslist;
 
-	// 获取供应商列表
+	/**
+	 * 获取供应商列表
+	 */
 	@Override
 	public List<Gongyingshang> gongyingshangquery() {
 		// TODO Auto-generated method stub
-		gyslist = gysMapperPro.Gongyingshangquery();
-
+		gyslist = gysMapperPro.gongyingshangquery();
 		return gyslist;
 	}
 
-	// 通过供应商编号获取供应商信息
+	/**
+	 * 检查重复，供应商编号
+	 */
 	@Override
-	public GongyingshangWithBLOBs selectBygysbhWithBLOBs(String gysbh) {
+	public Gongyingshang checkrepeat(Gongyingshang record) {
 		// TODO Auto-generated method stub
-		gysBtemp = gysMapperPro.selectBygysbhWithBLOBs(gysbh);
-		return gysBtemp;
+		gys = gysMapperPro.checkrepeat(record);
+		return gys;
 	}
 
-	// 添加供应商
+	/**
+	 * 添加供应商
+	 */
 	@Override
-	public void gongyingshangadd(GongyingshangWithBLOBs gysB) {
+	public void gongyingshangadd(GongyingshangWithBLOBs record) {
 		// TODO Auto-generated method stub
-		gysMapper.insert(gysB);
+		try {
+			gysMapper.insertSelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	// 更新供应商
+	/**
+	 * 更新供应商
+	 */
 	@Override
-	public void gongyingshangupdate(GongyingshangWithBLOBs gysB) {
+	public void gongyingshangupdate(GongyingshangWithBLOBs record) {
 		// TODO Auto-generated method stub
+		try {
+			gysMapperPro.gongyingshangupdate(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 根据供应商id删除供应商
+	 */
+	@Override
+	public void gongyingshangdelete(Integer id) {
+		// TODO Auto-generated method stub
+		gysB = new GongyingshangWithBLOBs();
+		gysB.setId(id);
+		gysB.setDm(1);
 		try {
 			gysMapper.updateByPrimaryKeySelective(gysB);
 		} catch (Exception e) {
@@ -63,28 +89,13 @@ public class GongyingshangSer implements GongyingshangService {
 		}
 	}
 
-	// 根据供应商id删除供应商
-	@Override
-	public void gongyingshangdelete(Integer id) {
-		// TODO Auto-generated method stub
-		gysBtemp = new GongyingshangWithBLOBs();
-		gysBtemp.setId(id);
-		gysBtemp.setDm(1);
-			try {
-				gysMapper.updateByPrimaryKeySelective(gysBtemp);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	}
-
-	/* (non-Javadoc)
-	 * @see cn.sdhqtj.hjt.service.GongyingshangService#selectByPrimaryKey(java.lang.Integer)
+	/**
+	 * 通过供应商id获取供应商信息
 	 */
 	@Override
 	public GongyingshangWithBLOBs selectByPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub
-		gysBtemp = gysMapper.selectByPrimaryKey(id);
-		return gysBtemp;
+		gysB = gysMapper.selectByPrimaryKey(id);
+		return gysB;
 	}
 }

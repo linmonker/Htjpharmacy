@@ -5,11 +5,24 @@ import java.util.List;
 import cn.sdhqtj.hjt.entity.Gongyingshang;
 import cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs;
 
+/**
+ * 供应商mapper补充
+ */
 public interface GongyingshangMapperPro {
 
-	List<Gongyingshang> Gongyingshangquery();
+	/**
+	 * 获取供应商列表
+	 */
+	List<Gongyingshang> gongyingshangquery();
 
-	Gongyingshang selectBygysbh(String gysbh);
+	/**
+	 * 检查重复，供应商编号
+	 */
+	Gongyingshang checkrepeat(Gongyingshang record);
+	
+	/**
+	 *更新供应商信息，选择字段
+	 */
+	GongyingshangWithBLOBs gongyingshangupdate(GongyingshangWithBLOBs record);
 
-	GongyingshangWithBLOBs selectBygysbhWithBLOBs(String gysbh);
 }

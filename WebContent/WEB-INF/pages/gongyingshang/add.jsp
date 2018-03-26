@@ -15,7 +15,6 @@
 </head>
 <body>
 <body>
-
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -24,8 +23,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }/index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -51,20 +51,16 @@
 			</div>
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">添加供应商</h4>
-				<span style="margin-left: 50px; color: red; font-size: 20px">${bhdata}</span>
-				<span style="margin-left: 50px; color: red; font-size: 20px">${mcdata}</span>
+				<span>${adddata}</span> <span>${bhdata}</span>
 				<form method="post" class="form-x"
 					action="${ctx }/gongyingshang/doadd.action">
 					<div>
-						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#jbxx"
 								aria-controls="jbxx" role="tab" data-toggle="tab">基本信息</a></li>
 							<li role="presentation"><a href="#gspzl"
 								aria-controls="gspzl" role="tab" data-toggle="tab">GSP资料</a></li>
 						</ul>
-
-						<!-- Tab panes -->
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="jbxx">
 								<div class="col-sm-8 col-md-10">
@@ -73,7 +69,7 @@
 											<label>编号：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gysbh"
+											<input type="text" class="form-control" name="gysbh"
 												value="${gys.gysbh }" />
 										</div>
 									</div>
@@ -82,8 +78,26 @@
 											<label>名称：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gysmc"
+											<input type="text" class="form-control" name="gysmc"
 												value="${gys.gysmc }" />
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="label">
+											<label>名称简拼：</label>
+										</div>
+										<div class="field">
+											<input type="text" class="form-control" name="gysmcjp"
+												value="${gys.gysmcjp }" />
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="label">
+											<label>供应商电话：</label>
+										</div>
+										<div class="field">
+											<input type="text" class="form-control" name="gyslxdh"
+												value="${gys.gyslxdh }" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -91,17 +105,8 @@
 											<label>联系人：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gyslxr"
+											<input type="text" class="form-control" name="gyslxr"
 												value="${gys.gyslxr }" />
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="label">
-											<label>电话：</label>
-										</div>
-										<div class="field">
-											<input type="text" class="input w50" name="gyslxr"
-												value="${gys.gyslxdh }" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -109,7 +114,7 @@
 											<label>详细地址：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gysxxdz"
+											<input type="text" class="form-control" name="gysxxdz"
 												value="${gys.gysxxdz }" />
 										</div>
 									</div>
@@ -118,7 +123,7 @@
 											<label>电子邮件：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gyslyxdz"
+											<input type="text" class="form-control" name="gyslyxdz"
 												value="${gys.gyslyxdz}" />
 										</div>
 									</div>
@@ -127,7 +132,7 @@
 											<label>邮政编码：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gysyzbm"
+											<input type="text" class="form-control" name="gysyzbm"
 												value="${gys.gysyzbm }" />
 										</div>
 									</div>
@@ -136,7 +141,7 @@
 											<label>业务员：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gysywy"
+											<input type="text" class="form-control" name="gysywy"
 												value="${gys.gysywy }" />
 										</div>
 									</div>
@@ -145,8 +150,17 @@
 											<label>业务员电话：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gysywydh"
+											<input type="text" class="form-control" name="gysywydh"
 												value="${gys.gysywydh }" />
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="label">
+											<label>业务员身份证：</label>
+										</div>
+										<div class="field">
+											<input type="text" class="form-control" name="gysywysfz"
+												value="${gys.gysywsfz }" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -154,7 +168,7 @@
 											<label>营业执照：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gysyyzz"
+											<input type="text" class="form-control" name="gysyyzz"
 												value="${gys.gysyyzz }" />
 										</div>
 									</div>
@@ -163,8 +177,17 @@
 											<label>执照期限：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gysyyzzqx"
+											<input type="date" class="form-control" name="gysyyzzqx"
 												value="${gys.gysyyzzqx }" />
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="label">
+											<label>执照发证日期：</label>
+										</div>
+										<div class="field">
+											<input type="date" class="form-control" name="gysyyzzfzrq"
+												value="${gys.gysyyzzfzrq }" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -172,7 +195,7 @@
 											<label>法人代表：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gysfrdb"
+											<input type="text" class="form-control" name="gysfrdb"
 												value="${gys.gysfrdb }" />
 										</div>
 									</div>
@@ -181,18 +204,16 @@
 											<label>经营性质：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gysjyxz"
+											<input type="text" class="form-control" name="gysjyxz"
 												value="${gys.gysjyxz }" />
 										</div>
 									</div>
-
-
 									<div class="form-group">
 										<div class="label">
-											<label>注册资金：</label>
+											<label>注册资本：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gyszczb"
+											<input type="text" class="form-control" name="gyszczb"
 												value="${gys.gyszczb }" />
 										</div>
 									</div>
@@ -201,7 +222,7 @@
 											<label>经营方式：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gysjyfs"
+											<input type="text" class="form-control" name="gysjyfs"
 												value="${gys.gysjyfs }" />
 										</div>
 									</div>
@@ -210,17 +231,19 @@
 											<label>经营范围：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gysjyfw"
+											<input type="text" class="form-control" name="gysjyfw"
 												value="${gys.gysjyfw }" />
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="label">
-											<label>发证日期：</label>
+											<label>状态：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="input w50" name="gysyyzzfzrq"
-												value="${gys.gysyyzzfzrq }" />
+											<select class="form-control" name="zt">
+												<option value="0">启用</option>
+												<option value="1">禁用</option>
+											</select>
 										</div>
 									</div>
 								</div>
@@ -228,10 +251,10 @@
 							<div role="tabpanel" class="tab-pane" id="gspzl">
 								<div class="form-group">
 									<div class="label">
-										<label>GSP证书编号：</label>
+										<label>GSP证书号码：</label>
 									</div>
 									<div class="field">
-										<input type="text" class="input w50" name="gygspzj"
+										<input type="text" class="form-control" name="gygspzj"
 											value="${gys.gygspzj }" />
 									</div>
 								</div>
@@ -240,7 +263,7 @@
 										<label>gsp证书有效期：</label>
 									</div>
 									<div class="field">
-										<input type="text" class="input w50" name="gysgspzjyxq"
+										<input type="date" class="form-control" name="gysgspzjyxq"
 											value="${gys.gysgspzjyxq }" />
 									</div>
 								</div>
@@ -249,8 +272,17 @@
 										<label>负责人：</label>
 									</div>
 									<div class="field">
-										<input type="text" class="input w50" name="gysgspfzr"
+										<input type="text" class="form-control" name="gysgspfzr"
 											value="${gys.gysgspfzr }" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="label">
+										<label>生产经营许可证编号：</label>
+									</div>
+									<div class="field">
+										<input type="text" class="form-control" name="gysscjyxkz"
+											value="${gys.gysscjyxkz }" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -258,7 +290,7 @@
 										<label>许可证名称：</label>
 									</div>
 									<div class="field">
-										<input type="text" class="input w50" name="gysxkzmc"
+										<input type="text" class="form-control" name="gysxkzmc"
 											value="${gys.gysxkzmc }" />
 									</div>
 								</div>
@@ -267,7 +299,7 @@
 										<label>发证单位名称：</label>
 									</div>
 									<div class="field">
-										<input type="text" class="input w50" name="gysxkzfzdw"
+										<input type="text" class="form-control" name="gysxkzfzdw"
 											value="${gys.gysxkzfzdw }" />
 									</div>
 								</div>
@@ -276,26 +308,16 @@
 										<label>许可证地址：</label>
 									</div>
 									<div class="field">
-										<input type="text" class="input w50" name="gysxkzdz"
+										<input type="text" class="form-control" name="gysxkzdz"
 											value="${gys.gysxkzdz }" />
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="label">
-										<label>许可证编号：</label>
-									</div>
-									<div class="field">
-										<input type="text" class="input w50" name="gysxkzbh"
-											value="${gys.gysxkzbh }" />
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="label">
 										<label>许可证发证日期：</label>
 									</div>
 									<div class="field">
-										<input type="text" class="input w50" name="gysxkzfzrq"
+										<input type="date" class="form-control" name="gysxkzfzrq"
 											value="${gys.gysxkzfzrq }" />
 									</div>
 								</div>
@@ -304,13 +326,20 @@
 										<label>有效期至：</label>
 									</div>
 									<div class="field">
-										<input type="text" class="input w50" name="gysxkzyxq"
+										<input type="date" class="form-control" name="gysxkzyxq"
 											value="${gys.gysxkzyxq }" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="label">
+										<label>备注信息：</label>
+									</div>
+									<div class="field">
+										<textarea class="form-control" rows="3" name="gysbz">${gys.gysbz }</textarea>
 									</div>
 								</div>
 							</div>
 						</div>
-
 					</div>
 					<div class="form-group">
 						<div class="label">

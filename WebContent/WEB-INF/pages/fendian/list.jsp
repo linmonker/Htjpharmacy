@@ -12,7 +12,6 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
-
 <script>
 	function setid(element,id) {
 		$("tr.active").removeClass("active");
@@ -24,7 +23,7 @@
 			var id = $("#tempid").text();
 			location = "${ctx}/fendian/edit.action?id=" + id;
 		}else{
-			alert("请先选择对象");
+			alert("请先选择分店");
 		}
 	}
 	function del() {
@@ -34,7 +33,7 @@
 				location = "${ctx}/fendian/delete.action?id=" + id;
 			}
 		}else{
-			alert("请先选择对象");
+			alert("请先选择分店");
 		}
 	}
 </script>
@@ -49,8 +48,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }/index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -97,12 +97,10 @@
 									<button type="submit" class="button border-main">搜索</button>
 								</form>
 							</div>
-
 						</div>
 					</div>
 					</nav>
-					<span style="margin-left: 50px; font-size: 20px">${adddata}</span>
-					<span style="margin-left: 50px; font-size: 20px">${deletedata}</span>
+					<span>${adddata}</span> <span>${editdata}</span> <span>${deletedata}</span>
 				</div>
 				<div class="row">
 					<div class="table-responsive">
@@ -114,6 +112,7 @@
 									<th>分店地址</th>
 									<th>联系电话</th>
 									<th>店长姓名</th>
+									<th>备注信息</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -124,6 +123,7 @@
 										<td>${list.fddz }</td>
 										<td>${list.fdlxdh }</td>
 										<td>${list.fddzxm }</td>
+										<td>${list.fdbz }</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -133,7 +133,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
-
 </html>

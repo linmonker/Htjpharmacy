@@ -26,6 +26,7 @@
 		<include refid="Base_Column_List" />
 		from hjt_fendian
 		where zt = 0
+		order by fdbh asc
 	</select>
 	<select id="checkrepeat" resultType="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Fendian">
@@ -35,7 +36,7 @@
 		where 
 		fdbh = #{fdbh,jdbcType=VARCHAR} or fdmc = #{fdmc,jdbcType=VARCHAR}
 	</select>
-    <update id="fendianupdate" parameterType="cn.sdhqtj.hjt.entity.Fendian">
+    <update id="updatefendian" parameterType="cn.sdhqtj.hjt.entity.Fendian">
 		update hjt_fendian
 		set fdbh = #{fdbh,jdbcType=VARCHAR},
 		fdmc = #{fdmc,jdbcType=VARCHAR},

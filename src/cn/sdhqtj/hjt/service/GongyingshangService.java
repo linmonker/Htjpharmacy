@@ -31,16 +31,16 @@ public interface GongyingshangService {
 	/**
 	 * 添加供应商
 	 */
-	public void gongyingshangadd(GongyingshangWithBLOBs record);
+	public void addgongyingshang(GongyingshangWithBLOBs record);
 
 	/**
 	 * 更新供应商信息
 	 */
-	public void gongyingshangupdate(GongyingshangWithBLOBs record);
+	public void updategongyingshang(GongyingshangWithBLOBs record);
 
 	/**
 	 * 根据供应商id删除供应商
 	 */
-	public void gongyingshangdelete(Integer id);
+	public void deletegongyingshang(Integer id);
 
 }

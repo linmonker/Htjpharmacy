@@ -21,20 +21,21 @@
 		flbz
 	</sql>
 	<select id="Yaopinfenleiquery" resultMap="BaseResultMap">
-		select *
-		from
-		hjt_yaopinfenlei
+		select <include refid="Base_Column_List" />
+		from hjt_yaopinfenlei
 		where zt=0
+		order by sjflid asc
 	</select>
-	<select id="selectByypflbh" resultMap="ResultMapWithBLOBs"
-		parameterType="java.lang.String">
-		select *
+	<select id="checkrepeat" resultMap="BaseResultMap"
+		parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
+		select <include refid="Base_Column_List" />
 		from hjt_yaopinfenlei
-		where flbh = #{flbh}
+		where flbh = #{flbh,jdbcType=VARCHAR}
 	</select>
-	<select id="lastinsertid" resultType="java.lang.String">
-		select last_insert_id()
-		from hjt_yaopinfenlei
+	<select id="yaopinfenleiget" resultType="cn.sdhqtj.hjt.entity.YaopinfenleiVo">
+		select a.*,b.flmc sjflmc
+		from hjt_yaopinfenlei a,hjt_yaopinfenlei b
+		where a.sjflid = b.id
 	</select>
 	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
 		insert into hjt_yaopinfenlei
@@ -94,4 +95,13 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
+	<update id="updateyaopinfenlei" parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
+		update hjt_yaopinfenlei
+		set flbh = #{flbh,jdbcType=VARCHAR},
+		flmc = #{flmc,jdbcType=VARCHAR},
+		fldj = #{fldj,jdbcType=SMALLINT},
+		sjflid = #{sjflid,jdbcType=INTEGER},
+		flbz = #{flbz,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
 </mapper>

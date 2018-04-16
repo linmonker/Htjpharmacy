@@ -61,6 +61,7 @@
 					<span style="margin-left: 50px; color: red; font-size: 20px">${editdata}</span>
 					<input type="hidden" name="fdid" value="${session.loginer.fdid }">
 					<input id="cszt" type="hidden" value="${chushi.zt }" />
+					<input type="hidden" name="id" value="${chushi.id }" />
 					<div class="form-group">
 						<div class="label">
 							<label>处室编号：</label>

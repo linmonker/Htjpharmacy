@@ -4,7 +4,6 @@
 	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Gongyingshang">
 		<id column="Id" property="id" jdbcType="INTEGER" />
 		<result column="jtid" property="jtid" jdbcType="INTEGER" />
-		<result column="fdid" property="fdid" jdbcType="INTEGER" />
 		<result column="gysbh" property="gysbh" jdbcType="VARCHAR" />
 		<result column="gysmc" property="gysmc" jdbcType="VARCHAR" />
 		<result column="gysmcjp" property="gysmcjp" jdbcType="VARCHAR" />
@@ -44,7 +43,7 @@
 		<result column="gysbz" property="gysbz" jdbcType="LONGVARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		Id, jtid, fdid, gysbh, gysmc, gysmcjp, gyslxdh, gyslxr,
+		Id, jtid, gysbh, gysmc, gysmcjp, gyslxdh, gyslxr,
 		gysxxdz, gysywy,
 		gysywydh,
 		gysywysfz, gysyzbm, gyslyxdz, gysyyzz,
@@ -63,6 +62,7 @@
 		select <include refid="Base_Column_List" />
 		from hjt_gongyingshang
 		where dm = 0
+		order by gysbh asc
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Gongyingshang">
@@ -70,7 +70,7 @@
 		from hjt_gongyingshang
 		where gysbh = #{gysbh,jdbcType=VARCHAR}
 	</select>
-    <update id="gongyingshangupdate" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs">
+    <update id="updategongyingshang" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs">
 		update hjt_gongyingshang
 		set gysbh = #{gysbh,jdbcType=VARCHAR},
 		gysmc = #{gysmc,jdbcType=VARCHAR},

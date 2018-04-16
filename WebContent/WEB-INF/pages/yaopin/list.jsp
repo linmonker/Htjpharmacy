@@ -12,7 +12,6 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
-
 <script>
 	function setid(element, id) {
 		$("tr.active").removeClass("active");
@@ -24,7 +23,7 @@
 			var id = $("#tempid").text();
 			location = "${ctx}/yaopin/edit.action?id=" + id;
 		}else{
-			alert("请先选择对象");
+			alert("请先选择药品");
 		}
 	}
 	function del() {
@@ -34,7 +33,7 @@
 				location = "${ctx}/yaopin/delete.action?id=" + id;
 			}
 		}else{
-			alert("请先选择对象");
+			alert("请先选择药品");
 		}
 	}
 </script>
@@ -49,8 +48,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }/index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -102,8 +102,7 @@
 						</div>
 					</div>
 					</nav>
-					<span style="margin-left: 50px; font-size: 20px">${adddata}</span>
-					<span style="margin-left: 50px; font-size: 20px">${deletedata}</span>
+					<span>${adddata}</span> <span>${editdata}</span> <span>${deletedata}</span>
 				</div>
 				<div class="row">
 					<div class="table-responsive">
@@ -111,24 +110,28 @@
 							<thead>
 								<tr>
 									<th>药品编号</th>
-									<th>药品名称</th>
+									<th>商品名</th>
 									<th>通用名</th>
+									<th>类别</th>
+									<th>药品规格</th>
+									<th>产地</th>
 									<th>生产单位</th>
-									<th>剂型</th>
-									<th>零售价</th>
-									<th>库存</th>
+									<th>批准文号</th>
+									<th>状态</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${yaopinlist }" var="list">
-									<tr>
+									<tr onclick="setid(this,${list.id })">
 										<td>${list.ypbh }</td>
 										<td>${list.ypspm }</td>
 										<td>${list.yptym }</td>
+										<td>${list.flmc }</td>
+										<td>${list.ypgg }</td>
+										<td>${list.ypcd }</td>
 										<td>${list.ypscdw }</td>
-										<td>${list.ypjx }</td>
-										<td>${list.yplsj }</td>
-										<td>${list.ypkcsl }</td>
+										<td>${list.yppzwh }</td>
+										<td>${list.zt }</td>
 									</tr>
 								</c:forEach>
 							</tbody>

@@ -48,7 +48,7 @@ public class GongyingshangSer implements GongyingshangService {
 	 * 添加供应商
 	 */
 	@Override
-	public void gongyingshangadd(GongyingshangWithBLOBs record) {
+	public void addgongyingshang(GongyingshangWithBLOBs record) {
 		// TODO Auto-generated method stub
 		try {
 			gysMapper.insertSelective(record);
@@ -62,10 +62,10 @@ public class GongyingshangSer implements GongyingshangService {
 	 * 更新供应商
 	 */
 	@Override
-	public void gongyingshangupdate(GongyingshangWithBLOBs record) {
+	public void updategongyingshang(GongyingshangWithBLOBs record) {
 		// TODO Auto-generated method stub
 		try {
-			gysMapperPro.gongyingshangupdate(record);
+			gysMapperPro.updategongyingshang(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,7 +76,7 @@ public class GongyingshangSer implements GongyingshangService {
 	 * 根据供应商id删除供应商
 	 */
 	@Override
-	public void gongyingshangdelete(Integer id) {
+	public void deletegongyingshang(Integer id) {
 		// TODO Auto-generated method stub
 		gysB = new GongyingshangWithBLOBs();
 		gysB.setId(id);

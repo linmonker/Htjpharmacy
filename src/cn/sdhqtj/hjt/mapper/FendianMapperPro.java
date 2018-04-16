@@ -22,5 +22,5 @@ public interface FendianMapperPro {
 	/**
 	 * 更新分店信息，选择字段
 	 */
-	int fendianupdate(Fendian record);
+	int updatefendian(Fendian record);
 }

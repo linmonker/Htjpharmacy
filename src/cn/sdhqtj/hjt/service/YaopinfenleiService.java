@@ -6,25 +6,50 @@ import org.springframework.stereotype.Service;
 
 import cn.sdhqtj.hjt.entity.Yaopinfenlei;
 
+/**
+ * 药品分类service接口
+ */
 @Service
 public interface YaopinfenleiService {
 
-	// 获取药品分类列表
-	public List<Object> Yaopinfenleiquery();
+	/**
+	 * 获取药品分类列表
+	 */
+	public List<Yaopinfenlei> Yaopinfenleiquery();
+
+	/**
+	 * 获取药品分类json列表
+	 */
+	public List<Object> gettreelist();
 	
-	// 根据药品分类id获取药品分类信息
-	Yaopinfenlei yaopinfenleiget(Integer id);
+	/**
+	 *检查重复，药品分类编号
+	 */
+	Yaopinfenlei checkrepeat(Yaopinfenlei record);
 
-	// 添加药品分类
-	public Integer yaopinfenleiadd(Yaopinfenlei record);
+	/**
+	 * 根据药品分类id获取药品分类信息
+	 */
+	Yaopinfenlei getyaopinfenlei(Integer id);
 
-	// 更新药品分类
-	public void yaopinfenleiupdate(Yaopinfenlei record);
-	
-	// 更新药品分类名称
-	public void mingchenupdate(Yaopinfenlei record);
+	/**
+	 * 添加药品分类
+	 */
+	public Integer addyaopinfenlei(Yaopinfenlei record);
 
-	// 删除药品分类
-	public void yaopinfenleidelete(Integer id);
+	/**
+	 * 更新药品分类
+	 */
+	public void updateyaopinfenlei(Yaopinfenlei record);
+
+	/**
+	 * 更新药品分类名称
+	 */
+	public void updatemingchen(Yaopinfenlei record);
+
+	/**
+	 * 删除药品分类
+	 */
+	public void deleteyaopinfenlei(Integer id);
 
 }

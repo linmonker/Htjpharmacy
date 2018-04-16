@@ -7,8 +7,6 @@ public class Gongyingshang {
 
 	private Integer jtid;
 
-	private Integer fdid;
-
 	private String gysbh;
 
 	private String gysmc;
@@ -87,14 +85,6 @@ public class Gongyingshang {
 
 	public void setJtid(Integer jtid) {
 		this.jtid = jtid;
-	}
-
-	public Integer getFdid() {
-		return fdid;
-	}
-
-	public void setFdid(Integer fdid) {
-		this.fdid = fdid;
 	}
 
 	public String getGysbh() {

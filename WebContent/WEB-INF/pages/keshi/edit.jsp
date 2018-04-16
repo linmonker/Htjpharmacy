@@ -62,6 +62,7 @@
 				<form method="post" class="form-x"
 					action="${ctx }/keshi/doedit.action">
 					<input type="hidden" name="fdid" value="${session.loginer.fdid }">
+					<input type="hidden" name="id" value="${keshi.id }" />
 					<div class="form-group">
 						<div class="label">
 							<label>科室编号：</label>

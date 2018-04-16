@@ -36,7 +36,7 @@ public class FendianSer implements FendianService {
 	 * 通过分店id获取分店信息
 	 */
 	@Override
-	public Fendian fendianget(Integer id) {
+	public Fendian getfendian(Integer id) {
 		// TODO Auto-generated method stub
 		fendian = fendianMapper.selectByPrimaryKey(id);
 		return fendian;
@@ -56,7 +56,7 @@ public class FendianSer implements FendianService {
 	 * 添加分店
 	 */
 	@Override
-	public void fendianadd(Fendian record) {
+	public void addfendian(Fendian record) {
 		// TODO Auto-generated method stub
 		try {
 			fendianMapper.insertSelective(record);
@@ -70,7 +70,7 @@ public class FendianSer implements FendianService {
 	 * 根据分店id删除分店
 	 */
 	@Override
-	public void fendiandelete(Integer id) {
+	public void deletefendian(Integer id) {
 		// TODO Auto-generated method stub
 		fendian = new Fendian();
 		fendian.setId(id);
@@ -87,10 +87,10 @@ public class FendianSer implements FendianService {
 	 * 更新分店信息
 	 */
 	@Override
-	public void fendianupdate(Fendian record) {
+	public void updatefendian(Fendian record) {
 		// TODO Auto-generated method stub
 		try {
-			fendianMapperPro.fendianupdate(record);
+			fendianMapperPro.updatefendian(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -48,6 +48,11 @@
 		<result column="ypxf" property="ypxf" jdbcType="LONGVARCHAR" />
 		<result column="ypxw" property="ypxw" jdbcType="LONGVARCHAR" />
 	</resultMap>
+	<resultMap id="ResultMapPro" type="cn.sdhqtj.hjt.entity.YaopinPro"
+		extends="ResultMapWithBLOBs">
+		<result column="flmc" property="flmc" jdbcType="LONGVARCHAR" />
+		<result column="gysmc" property="gysmc" jdbcType="LONGVARCHAR" />
+	</resultMap>
 
 	<sql id="Base_Column_List">
 		id, jtid, yplb, ypgys, ypbh, ypspm, yptym, ypgg, ypbzgg,
@@ -65,30 +70,58 @@
 	<sql id="Blob_Column_List">
 		ypsms, ypxf, ypxw
 	</sql>
+	<sql id="Pro_Column_List">
+		flmc, gysmc
+	</sql>
 
-	<select id="yaopinquery" resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
+	<select id="yaopinquery" resultMap="ResultMapPro">
+		select <include refid="Base_Column_List" />,b.flmc
+		from hjt_yaopin a,hjt_yaopinfenlei b
+		where a.dm=0 and a.lbid = b.id
+		order by ypbh asc
+	</select>
+	<select id="checkrepeat" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select <include refid="Base_Column_List" />
 		from hjt_yaopin
-		where zt=0 and dm=0
+		where ypbh = #{parameter jdbcType=VARCHAR} and dm = 0
 	</select>
-	<select id="selectByypbh" resultMap="ResultMapWithBLOBs"
-		parameterType="java.lang.String">
-		select
-		*
-		from
-		hjt_yaopin
-		where
-		ypbh=#{_parameter} and zt=0
-	</select>
-	<select id="selectByypmc" resultMap="ResultMapWithBLOBs"
-		parameterType="java.lang.String">
-		select
-		*
-		from
-		hjt_yaopin
-		where
-		ypmc=#{_parameter} and zt=0
-	</select>
-
+	<update id="updateyaopin" parameterType="cn.sdhqtj.hjt.entity.YaopinWithBLOBs">
+		update hjt_yaopin
+		set yplb = #{yplb,jdbcType=INTEGER},
+		ypgys = #{ypgys,jdbcType=INTEGER},
+		ypbh = #{ypbh,jdbcType=VARCHAR},
+		ypspm = #{ypspm,jdbcType=VARCHAR},
+		yptym = #{yptym,jdbcType=VARCHAR},
+		ypgg = #{ypgg,jdbcType=VARCHAR},
+		ypbzgg = #{ypbzgg,jdbcType=VARCHAR},
+		ypcd = #{ypcd,jdbcType=VARCHAR},
+		ypzddcgml = #{ypzddcgml,jdbcType=DECIMAL},
+		ypsx = #{ypsx,jdbcType=VARCHAR},
+		ypyytx = #{ypyytx,jdbcType=INTEGER},
+		ypyytxnr = #{ypyytxnr,jdbcType=VARCHAR},
+		ypscdw = #{ypscdw,jdbcType=VARCHAR},
+		ypjx = #{ypjx,jdbcType=VARCHAR},
+		ypdw = #{ypdw,jdbcType=VARCHAR},
+		ypzcsb = #{ypzcsb,jdbcType=VARCHAR},
+		yppzwh = #{yppzwh,jdbcType=VARCHAR},
+		ypysbz = #{ypysbz,jdbcType=VARCHAR},
+		ypcctj = #{ypcctj,jdbcType=VARCHAR},
+		ypjhj = #{ypjhj,jdbcType=DECIMAL},
+		yppfj = #{yppfj,jdbcType=DECIMAL},
+		yplsj = #{yplsj,jdbcType=DECIMAL},
+		yphyj = #{yphyj,jdbcType=DECIMAL},
+		ypyxq = #{ypyxq,jdbcType=VARCHAR},
+		ypkcxx = #{ypkcxx,jdbcType=DECIMAL},
+		ypkcsx = #{ypkcsx,jdbcType=DECIMAL},
+		ypshzt = #{ypshzt,jdbcType=INTEGER},
+		ypyhzq = #{ypyhzq,jdbcType=INTEGER},
+		ypsfdz = #{ypsfdz,jdbcType=INTEGER},
+		ypsfcyhyjf = #{ypsfcyhyjf,jdbcType=INTEGER},
+		ypkcsl = #{ypkcsl,jdbcType=DECIMAL},
+		zt = #{zt,jdbcType=INTEGER},
+		ypsms = #{ypsms,jdbcType=LONGVARCHAR},
+		ypxf = #{ypxf,jdbcType=LONGVARCHAR},
+		ypxw = #{ypxw,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
 </mapper>

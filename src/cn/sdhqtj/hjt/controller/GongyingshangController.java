@@ -27,7 +27,7 @@ public class GongyingshangController {
 	GongyingshangWithBLOBs gysB;
 
 	/**
-	 * 列表
+	 * 供应商列表
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
@@ -74,7 +74,7 @@ public class GongyingshangController {
 			model.addAttribute("gys", record);
 			return "gongyingshang/add";
 		} else {// 添加成功
-			gysservice.gongyingshangadd(record);
+			gysservice.addgongyingshang(record);
 			return "redirect:list.action?adddata=1";
 		}
 	}
@@ -87,11 +87,10 @@ public class GongyingshangController {
 		gysB = gysservice.selectByPrimaryKey(Integer.valueOf(request.getParameter("id")));
 		model.addAttribute("gys", gysB);
 		return "gongyingshang/edit";
-
 	}
 
 	/**
-	 * 执行修改分店
+	 * 执行修改供应商
 	 */
 	@RequestMapping("/doedit")
 	public String doedit(GongyingshangWithBLOBs record, Model model) {
@@ -106,17 +105,17 @@ public class GongyingshangController {
 			model.addAttribute("gys", record);
 			return "gongyingshang/edit";
 		} else {// 修改成功
-			gysservice.gongyingshangupdate(record);
+			gysservice.updategongyingshang(record);
 			return "redirect:list.action?editdata=1";
 		}
 	}
 
 	/**
-	 * 删除分店
+	 * 删除供应商
 	 */
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
-		gysservice.gongyingshangdelete(Integer.valueOf(request.getParameter("id")));
+		gysservice.deletegongyingshang(Integer.valueOf(request.getParameter("id")));
 		return "redirect:list.action?deletedata=1";
 	}
 }

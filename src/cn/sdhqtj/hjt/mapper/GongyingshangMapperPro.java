@@ -23,6 +23,6 @@ public interface GongyingshangMapperPro {
 	/**
 	 *更新供应商信息，选择字段
 	 */
-	GongyingshangWithBLOBs gongyingshangupdate(GongyingshangWithBLOBs record);
+	GongyingshangWithBLOBs updategongyingshang(GongyingshangWithBLOBs record);
 
 }

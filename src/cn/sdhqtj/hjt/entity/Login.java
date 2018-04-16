@@ -4,22 +4,20 @@ public class Login {
 	private int id;
 	private String login;
 	private String password;
-	private String createDate;
 	private String loginDate;
-	private String ip;
 	private int fdid;
 	private String fdmc;
 
 	public Login() {
 	}
 
-	public Login(int id, String login, String password, String createDate, String loginDate, String ip) {
+	public Login(int id, String login, String password, String loginDate, int fdid, String fdmc) {
 		this.id = id;
 		this.login = login;
 		this.password = password;
-		this.createDate = createDate;
 		this.loginDate = loginDate;
-		this.ip = ip;
+		this.fdid = fdid;
+		this.fdmc = fdmc;
 	}
 
 	public int getId() {
@@ -45,15 +43,7 @@ public class Login {
 	public void setPassword(String passWord) {
 		this.password = passWord;
 	}
-
-	public String getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
-	}
-
+	
 	public String getLoginDate() {
 		return loginDate;
 	}
@@ -62,14 +52,6 @@ public class Login {
 		this.loginDate = loginDate;
 	}
 
-	public String getIp() {
-		return ip;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-	
 	public int getFdid() {
 		return fdid;
 	}
@@ -84,11 +66,5 @@ public class Login {
 
 	public void setFdmc(String fdmc) {
 		this.fdmc = fdmc;
-	}
-
-	@Override
-	public String toString() {
-		return "Login [id=" + id + ", login=" + login + ", password=" + password + ", createDate=" + createDate
-				+ ", loginDate=" + loginDate + ", ip=" + ip + "]\n";
 	}
 }

@@ -12,6 +12,13 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		if ("1" == $("#gyszt").val) {
+			$("select option:eq(1)").attr("selected", true);
+		}
+	})
+</script>
 </head>
 <body>
 <body>
@@ -51,6 +58,7 @@
 			</div>
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">添加供应商</h4>
+				<input id="gyszt" type="hidden" value="${gys.zt }" /> 
 				<span>${adddata}</span> <span>${bhdata}</span>
 				<form method="post" class="form-x"
 					action="${ctx }/gongyingshang/doadd.action">
@@ -249,93 +257,95 @@
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane" id="gspzl">
-								<div class="form-group">
-									<div class="label">
-										<label>GSP证书号码：</label>
+								<div class="col-sm-8 col-md-10">
+									<div class="form-group">
+										<div class="label">
+											<label>GSP证书号码：</label>
+										</div>
+										<div class="field">
+											<input type="text" class="form-control" name="gygspzj"
+												value="${gys.gygspzj }" />
+										</div>
 									</div>
-									<div class="field">
-										<input type="text" class="form-control" name="gygspzj"
-											value="${gys.gygspzj }" />
+									<div class="form-group">
+										<div class="label">
+											<label>gsp证书有效期：</label>
+										</div>
+										<div class="field">
+											<input type="date" class="form-control" name="gysgspzjyxq"
+												value="${gys.gysgspzjyxq }" />
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									<div class="label">
-										<label>gsp证书有效期：</label>
+									<div class="form-group">
+										<div class="label">
+											<label>负责人：</label>
+										</div>
+										<div class="field">
+											<input type="text" class="form-control" name="gysgspfzr"
+												value="${gys.gysgspfzr }" />
+										</div>
 									</div>
-									<div class="field">
-										<input type="date" class="form-control" name="gysgspzjyxq"
-											value="${gys.gysgspzjyxq }" />
+									<div class="form-group">
+										<div class="label">
+											<label>生产经营许可证编号：</label>
+										</div>
+										<div class="field">
+											<input type="text" class="form-control" name="gysscjyxkz"
+												value="${gys.gysscjyxkz }" />
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									<div class="label">
-										<label>负责人：</label>
+									<div class="form-group">
+										<div class="label">
+											<label>许可证名称：</label>
+										</div>
+										<div class="field">
+											<input type="text" class="form-control" name="gysxkzmc"
+												value="${gys.gysxkzmc }" />
+										</div>
 									</div>
-									<div class="field">
-										<input type="text" class="form-control" name="gysgspfzr"
-											value="${gys.gysgspfzr }" />
+									<div class="form-group">
+										<div class="label">
+											<label>发证单位名称：</label>
+										</div>
+										<div class="field">
+											<input type="text" class="form-control" name="gysxkzfzdw"
+												value="${gys.gysxkzfzdw }" />
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									<div class="label">
-										<label>生产经营许可证编号：</label>
+									<div class="form-group">
+										<div class="label">
+											<label>许可证地址：</label>
+										</div>
+										<div class="field">
+											<input type="text" class="form-control" name="gysxkzdz"
+												value="${gys.gysxkzdz }" />
+										</div>
 									</div>
-									<div class="field">
-										<input type="text" class="form-control" name="gysscjyxkz"
-											value="${gys.gysscjyxkz }" />
+									<div class="form-group">
+										<div class="label">
+											<label>许可证发证日期：</label>
+										</div>
+										<div class="field">
+											<input type="date" class="form-control" name="gysxkzfzrq"
+												value="${gys.gysxkzfzrq }" />
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									<div class="label">
-										<label>许可证名称：</label>
+									<div class="form-group">
+										<div class="label">
+											<label>有效期至：</label>
+										</div>
+										<div class="field">
+											<input type="date" class="form-control" name="gysxkzyxq"
+												value="${gys.gysxkzyxq }" />
+										</div>
 									</div>
-									<div class="field">
-										<input type="text" class="form-control" name="gysxkzmc"
-											value="${gys.gysxkzmc }" />
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="label">
-										<label>发证单位名称：</label>
-									</div>
-									<div class="field">
-										<input type="text" class="form-control" name="gysxkzfzdw"
-											value="${gys.gysxkzfzdw }" />
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="label">
-										<label>许可证地址：</label>
-									</div>
-									<div class="field">
-										<input type="text" class="form-control" name="gysxkzdz"
-											value="${gys.gysxkzdz }" />
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="label">
-										<label>许可证发证日期：</label>
-									</div>
-									<div class="field">
-										<input type="date" class="form-control" name="gysxkzfzrq"
-											value="${gys.gysxkzfzrq }" />
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="label">
-										<label>有效期至：</label>
-									</div>
-									<div class="field">
-										<input type="date" class="form-control" name="gysxkzyxq"
-											value="${gys.gysxkzyxq }" />
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="label">
-										<label>备注信息：</label>
-									</div>
-									<div class="field">
-										<textarea class="form-control" rows="3" name="gysbz">${gys.gysbz }</textarea>
+									<div class="form-group">
+										<div class="label">
+											<label>备注信息：</label>
+										</div>
+										<div class="field">
+											<textarea class="form-control" rows="3" name="gysbz">${gys.gysbz }</textarea>
+										</div>
 									</div>
 								</div>
 							</div>

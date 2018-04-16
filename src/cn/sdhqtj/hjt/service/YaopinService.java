@@ -1,9 +1,3 @@
-/**  
-* Title: YaopinfenleiSer.java  
-* Description:药品service接口 
-* @author LIN  
-* @date 2018年3月10日  
-*/
 package cn.sdhqtj.hjt.service;
 
 import java.util.List;
@@ -11,27 +5,43 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import cn.sdhqtj.hjt.entity.Yaopin;
+import cn.sdhqtj.hjt.entity.YaopinPro;
 import cn.sdhqtj.hjt.entity.YaopinWithBLOBs;
 
+/**
+ * 药品service接口
+ */
 @Service
 public interface YaopinService {
 
-	// 获取药品列表
-	public List<Yaopin> yaopinquery();
+	/**
+	 * 获取药品列表
+	 */
+	public List<YaopinPro> yaopinquery();
 
-	// 根据药品id获取药品信息
-	public YaopinWithBLOBs yaopinget(Integer id);
+	/**
+	 * 根据药品id获取药品信息
+	 */
+	public YaopinWithBLOBs getyaopin(Integer id);
 
-	// 根据药品编号获取药品信息
-	public YaopinWithBLOBs selectByypbh(String ypbh);
+	/**
+	 * 检查重复，药品编号
+	 */
+	public Yaopin checkrepeat(String record);
 
-	// 添加药品
-	public void yaopinadd(YaopinWithBLOBs yaopin);
+	/**
+	 * 添加药品
+	 */
+	public void addyaopin(YaopinWithBLOBs record);
 
-	// 根据药品id删除药品
-	public void yaopindelete(Integer id);
+	/**
+	 * 根据药品id删除药品
+	 */
+	public void deleteyaopin(Integer id);
 
-	// 更新药品
-	public void yaopinupdate(YaopinWithBLOBs yaopin);
+	/**
+	 * 更新药品
+	 */
+	public void updateyaopin(YaopinWithBLOBs record);
 
 }

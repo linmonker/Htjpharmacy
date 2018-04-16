@@ -12,10 +12,16 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function() {
+		var sid = $("#sjflidtemp").val;
+		if (sid != null) {
+			$("#sjflid option[value=sid]").attr("selected", true);
+		}
+	})
+</script>
 </head>
-
 <body>
-
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -24,8 +30,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -51,25 +58,18 @@
 			</div>
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">修改药品分类</h4>
-				<form method="post" class="form-x" action="${ctx }/yaopinfenlei/doedit.action">
-					<span style="margin-left: 50px; color: red; font-size: 20px">${editdate}</span>
-					<input type="hidden" name="id" value="${yaopinfenlei.id }" />
-					<div class="form-group">
-						<div class="label">
-							<label>集团ID：</label>
-						</div>
-						<div class="field">
-							<input type="text" class="input w50" name="jtid"
-								value="${yaopinfenlei.jtid }" />
-						</div>
-					</div>
+				<input id="sjflidtemp" type="hidden" value="${ypfl.sjflid }" />
+				<span>${adddata}</span><span>${bhdata}</span>
+				<form method="post" class="form-x"
+					action="${ctx }/yaopinfenlei/doedit.action">
+					<input type="hidden" name="id" value="${ypfl.id }" />
 					<div class="form-group">
 						<div class="label">
 							<label>药品分类编号：</label>
 						</div>
 						<div class="field">
 							<input type="text" class="input w50" name="flbh"
-								value="${yaopinfenlei.flbh }" data-validate="required:请输入药品分类编号" />
+								value="${ypfl.flbh }" data-validate="required:请输入药品分类编号" />
 							<div class="tips"></div>
 						</div>
 					</div>
@@ -79,16 +79,28 @@
 						</div>
 						<div class="field">
 							<input type="text" class="input w50" name="flmc"
-								value="${yaopinfenlei.flmc }" data-validate="required:请输入分店名称" />
+								value="${ypfl.flmc }" data-validate="required:请输入分店名称" />
 							<div class="tips"></div>
 						</div>
-					</div>		
+					</div>
+					<div class="form-group">
+						<div class="label">
+							<label>上级分类：</label>
+						</div>
+						<div class="field">
+							<select id="sjflid" class="form-control" name="sjflid">
+								<c:forEach items="${ypfllist }" var="ylist">
+									<option value="${ylist.id }">${ylist.flmc }</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
 					<div class="form-group">
 						<div class="label">
 							<label>备注信息：</label>
 						</div>
 						<div class="field">
-							<textarea class="input" rows="3" name="flbz">${yaopinfenlei.flbz }</textarea>
+							<textarea class="input" rows="3" name="flbz">${ypfl.flbz }</textarea>
 						</div>
 					</div>
 					<div class="form-group">

@@ -25,7 +25,7 @@ public class FendianController {
 	List<Fendian> fendianlist;
 
 	/**
-	 * 列表
+	 * 分店列表
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
@@ -77,7 +77,7 @@ public class FendianController {
 			model.addAttribute("fendian", record);
 			return "fendian/add";
 		} else {// 添加成功
-			fendianservice.fendianadd(record);
+			fendianservice.addfendian(record);
 			return "redirect:list.action?adddata=1";
 		}
 	}
@@ -87,7 +87,7 @@ public class FendianController {
 	 */
 	@RequestMapping("/edit")
 	public String edit(HttpServletRequest request, Model model) {
-		fendian = fendianservice.fendianget(Integer.valueOf(request.getParameter("id")));
+		fendian = fendianservice.getfendian(Integer.valueOf(request.getParameter("id")));
 		model.addAttribute("fendian", fendian);
 		return "fendian/edit";
 	}
@@ -113,7 +113,7 @@ public class FendianController {
 			model.addAttribute("fendian", record);
 			return "fendian/edit";
 		} else {// 修改成功
-			fendianservice.fendianupdate(record);
+			fendianservice.updatefendian(record);
 			return "redirect:list.action?editdata=1";
 		}
 	}
@@ -123,7 +123,7 @@ public class FendianController {
 	 */
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
-		fendianservice.fendiandelete(Integer.valueOf(request.getParameter("id")));
+		fendianservice.deletefendian(Integer.valueOf(request.getParameter("id")));
 		return "redirect:list.action?deleta=1";
 	}
 }

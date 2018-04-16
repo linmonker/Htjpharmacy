@@ -1,20 +1,18 @@
-/**  
-* Title: YaopinfenleiSer.java  
-* Description:药品service实现类 
-* @author LIN  
-* @date 2018年3月10日  
-*/
 package cn.sdhqtj.hjt.service.impl;
 
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import cn.sdhqtj.hjt.entity.Yaopin;
+import cn.sdhqtj.hjt.entity.YaopinPro;
 import cn.sdhqtj.hjt.entity.YaopinWithBLOBs;
 import cn.sdhqtj.hjt.mapper.YaopinMapper;
 import cn.sdhqtj.hjt.mapper.YaopinMapperPro;
 import cn.sdhqtj.hjt.service.YaopinService;
 
+/**
+ * 药品service接口实现类
+ */
 @Service
 public class YaopinSer implements YaopinService {
 
@@ -23,62 +21,80 @@ public class YaopinSer implements YaopinService {
 
 	@Resource
 	private YaopinMapper yaopinMapper;
-	Yaopin yaopintemp;
-	YaopinWithBLOBs yaopinBtemp;
+	Yaopin yaopin;
+	YaopinWithBLOBs yaopinB;
+	List<YaopinPro> yaopinlist;
 
-	// 获取药品列表
+	/**
+	 * 获取药品列表
+	 */
 	@Override
-	public List<Yaopin> yaopinquery() {
+	public List<YaopinPro> yaopinquery() {
 		// TODO Auto-generated method stub
-		List<Yaopin> list = yaopinMapperPro.yaopinquery();
-		return list;
+		yaopinlist = yaopinMapperPro.yaopinquery();
+		return yaopinlist;
 	}
 
-	// 根据药品id获取药品信息
+	/**
+	 * 根据药品id获取药品信息
+	 */
 	@Override
-	public YaopinWithBLOBs yaopinget(Integer id) {
+	public YaopinWithBLOBs getyaopin(Integer id) {
 		// TODO Auto-generated method stub
-		yaopinBtemp = yaopinMapper.selectByPrimaryKey(id);
-		return yaopinBtemp;
+		yaopinB = yaopinMapper.selectByPrimaryKey(id);
+		return yaopinB;
 	}
 
-	// 根据药品编号获取药品信息
+	/**
+	 * 检查重复，药品编号
+	 */
 	@Override
-	public YaopinWithBLOBs selectByypbh(String ypbh) {
+	public Yaopin checkrepeat(String string) {
 		// TODO Auto-generated method stub
-		yaopinBtemp = yaopinMapperPro.selectByypbh(ypbh);
-		return yaopinBtemp;
+		yaopin = yaopinMapperPro.checkrepeat(string);
+		return yaopin;
 	}
 
-	// 添加药品
+	/**
+	 * 添加药品
+	 */
 	@Override
-	public void yaopinadd(YaopinWithBLOBs yaopin) {
+	public void addyaopin(YaopinWithBLOBs record) {
 		// TODO Auto-generated method stub
-		yaopinMapper.insert(yaopin);
+		try {
+			yaopinMapper.insertSelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
-	// 根据药品id删除药品
+	/**
+	 * 根据药品id删除药品
+	 */
 	@Override
-	public void yaopindelete(Integer id) {
+	public void deleteyaopin(Integer id) {
 		// TODO Auto-generated method stub
-		yaopinBtemp = new YaopinWithBLOBs();
-		yaopinBtemp.setId(id);
-		yaopinBtemp.setDm(1);
-		try {	
-			yaopinMapper.updateByPrimaryKeySelective(yaopinBtemp);
+		yaopinB = new YaopinWithBLOBs();
+		yaopinB.setId(id);
+		yaopinB.setDm(1);
+		try {
+			yaopinMapper.updateByPrimaryKeySelective(yaopinB);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	// 更新药品
+	/**
+	 * 更新药品信息
+	 */
 	@Override
-	public void yaopinupdate(YaopinWithBLOBs yaopin) {
+	public void updateyaopin(YaopinWithBLOBs record) {
 		// TODO Auto-generated method stub
 		try {
-			yaopinMapper.updateByPrimaryKeySelective(yaopin);
+			yaopinMapperPro.updateyaopin(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

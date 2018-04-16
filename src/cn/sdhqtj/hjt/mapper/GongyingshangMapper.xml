@@ -4,7 +4,6 @@
 	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Gongyingshang">
 		<id column="Id" property="id" jdbcType="INTEGER" />
 		<result column="jtid" property="jtid" jdbcType="INTEGER" />
-		<result column="fdid" property="fdid" jdbcType="INTEGER" />
 		<result column="gysbh" property="gysbh" jdbcType="VARCHAR" />
 		<result column="gysmc" property="gysmc" jdbcType="VARCHAR" />
 		<result column="gysmcjp" property="gysmcjp" jdbcType="VARCHAR" />
@@ -44,7 +43,7 @@
 		<result column="gysbz" property="gysbz" jdbcType="LONGVARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		Id, jtid, fdid, gysbh, gysmc, gysmcjp, gyslxdh, gyslxr, gysxxdz, gysywy,
+		Id, jtid, gysbh, gysmc, gysmcjp, gyslxdh, gyslxr, gysxxdz, gysywy,
 		gysywydh,
 		gysywysfz, gysyzbm, gyslyxdz, gysyyzz, gysyyzzqx, gysyyzzfzrq, gysfrdb, gysjyxz,
 		gyszczb, gysjyfs, gysscjyxkz, gysxkzmc, gysxkzdz, gysxkzbh,
@@ -82,7 +81,6 @@
 		zt, dm, gysjyfw,
 		gysbz)
 		values (#{id,jdbcType=INTEGER}, #{jtid,jdbcType=INTEGER},
-		#{fdid,jdbcType=INTEGER},
 		#{gysbh,jdbcType=VARCHAR}, #{gysmc,jdbcType=VARCHAR}, #{gysmcjp,jdbcType=VARCHAR},
 		#{gyslxdh,jdbcType=VARCHAR}, #{gyslxr,jdbcType=VARCHAR},
 		#{gysxxdz,jdbcType=VARCHAR},
@@ -109,9 +107,6 @@
 			</if>
 			<if test="jtid != null">
 				jtid,
-			</if>
-			<if test="fdid != null">
-				fdid,
 			</if>
 			<if test="gysbh != null">
 				gysbh,
@@ -223,9 +218,6 @@
 			<if test="jtid != null">
 				#{jtid,jdbcType=INTEGER},
 			</if>
-			<if test="fdid != null">
-				#{fdid,jdbcType=INTEGER},
-			</if>
 			<if test="gysbh != null">
 				#{gysbh,jdbcType=VARCHAR},
 			</if>
@@ -336,9 +328,6 @@
 			<if test="jtid != null">
 				jtid = #{jtid,jdbcType=INTEGER},
 			</if>
-			<if test="fdid != null">
-				fdid = #{fdid,jdbcType=INTEGER},
-			</if>
 			<if test="gysbh != null">
 				gysbh = #{gysbh,jdbcType=VARCHAR},
 			</if>
@@ -447,7 +436,6 @@
 	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs">
 		update hjt_gongyingshang
 		set jtid = #{jtid,jdbcType=INTEGER},
-		fdid = #{fdid,jdbcType=INTEGER},
 		gysbh = #{gysbh,jdbcType=VARCHAR},
 		gysmc = #{gysmc,jdbcType=VARCHAR},
 		gysmcjp = #{gysmcjp,jdbcType=VARCHAR},
@@ -487,7 +475,6 @@
 	<update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Gongyingshang">
 		update hjt_gongyingshang
 		set jtid = #{jtid,jdbcType=INTEGER},
-		fdid = #{fdid,jdbcType=INTEGER},
 		gysbh = #{gysbh,jdbcType=VARCHAR},
 		gysmc = #{gysmc,jdbcType=VARCHAR},
 		gysmcjp = #{gysmcjp,jdbcType=VARCHAR},

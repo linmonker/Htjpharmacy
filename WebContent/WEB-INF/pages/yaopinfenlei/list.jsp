@@ -156,7 +156,7 @@
 				}
 			},
 			error : function() {
-				alert('网络有点不给力呀！');
+				alert('修改失败');
 			}
 		});
 
@@ -201,7 +201,7 @@
 						}
 					},
 					error : function() {
-						alert('网络有点不给力呀！');
+						alert('添加失败');
 					}
 				});
 				return false;
@@ -261,7 +261,7 @@
 			dataType : "json", //数据传输格式  
 			url : "${ctx}/yaopinfenlei/getlist.action", //请求链接  
 			error : function() {
-				alert('网络有点不给力呀！');
+				alert('获取页面数据失败，请刷新');
 			},
 			success : function(data) {
 
@@ -289,8 +289,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -323,6 +324,7 @@
 						</div>
 					</div>
 					</nav>
+					<span>${editdata}</span>
 				</div>
 				<div class="row">
 					<div class="content_wrap">
@@ -334,7 +336,5 @@
 			</div>
 		</div>
 	</div>
-	
 </body>
-
 </html>

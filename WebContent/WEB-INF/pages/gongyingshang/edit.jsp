@@ -14,7 +14,7 @@
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		if ("1" == $("#gys").val) {
+		if ("1" == $("#gyszt").val) {
 			$("select option:eq(1)").attr("selected", true);
 		}
 	})
@@ -60,8 +60,8 @@
 				<h4 class="sub-header">修改供应商</h4>
 				<input id="gyszt" type="hidden" value="${gys.zt }" /> 
 				<span>${editdata}</span> <span>${bhdata}</span>
-				<form method="post" class="form-x"
-					action="${ctx }/gongyingshang/doedit.action">
+				<form method="post" class="form-x" action="${ctx }/gongyingshang/doedit.action">
+				    <input type="hidden" name="id" value="${gys.id }" />
 					<div>
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#jbxx"

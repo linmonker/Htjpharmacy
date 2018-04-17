@@ -36,14 +36,14 @@ public class ChushiSer implements ChushiService {
 	 * 根据处室id获取处室信息
 	 */
 	@Override
-	public Zuzhijigou chushiget(Integer id) {
+	public Zuzhijigou getchushi(Integer id) {
 		// TODO Auto-generated method stub
 		chushi = zuzhijigouMapper.selectByPrimaryKey(id);
 		return chushi;
 	}
 
 	/**
-	 * 检查重复同一分店一个处室编号和名称
+	 * 检查重复，处室编号同一分店唯一
 	 */
 	@Override
 	public List<Zuzhijigou> checkrepeat(Zuzhijigou record) {
@@ -56,7 +56,7 @@ public class ChushiSer implements ChushiService {
 	 * 添加处室
 	 */
 	@Override
-	public void chushiadd(Zuzhijigou record) {
+	public void addchushi(Zuzhijigou record) {
 		// TODO Auto-generated method stub
 		try {
 			zuzhijigouMapper.insertSelective(record);
@@ -71,7 +71,7 @@ public class ChushiSer implements ChushiService {
 	 * 根据处室id删除处室
 	 */
 	@Override
-	public void chushidelete(Integer id) {
+	public void deletechushi(Integer id) {
 		// TODO Auto-generated method stub
 		chushi = new Zuzhijigou();
 		chushi.setId(id);
@@ -89,10 +89,10 @@ public class ChushiSer implements ChushiService {
 	 * 更新处室信息
 	 */
 	@Override
-	public void chushiupdate(Zuzhijigou record) {
+	public void updatechushi(Zuzhijigou record) {
 		// TODO Auto-generated method stub
 		try {
-			zuzhijigouMapper.updateByPrimaryKeySelective(record);
+			zuzhijigouMapperPro.updatechushi(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

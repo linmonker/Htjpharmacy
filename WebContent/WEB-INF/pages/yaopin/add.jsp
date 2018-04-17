@@ -65,7 +65,7 @@
 				<h4 class="sub-header">添加供应商</h4>
 				<input id="flid" type="hidden" value="${yaopin.yplb }" />
 				<input id="gysid" type="hidden" value="${yaopin.ypgys }" />
-				<span>${adddata}</span><span>${bhdata}</span>
+				<span>${addmsg }</span><span>${bhmsg }</span>
 				<form method="post" class="form-x" action="${ctx }/yaopin/doadd.action">
 					<div>
 						<ul class="nav nav-tabs" role="tablist">

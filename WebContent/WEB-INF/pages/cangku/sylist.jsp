@@ -12,32 +12,6 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
-
-<script>
-	function setid(element, id) {
-		$("tr.active").removeClass("active");
-		$(element).addClass("active");
-		$("#tempid").text(id);
-	}
-	function edit() {
-		if ($("tr.active").length > 0) {
-			var id = $("#tempid").text();
-			location = "${ctx}/cangku/edit.action?id=" + id;
-		} else {
-			alert("请先选择对象");
-		}
-	}
-	function del() {
-		if ($("tr.active").length > 0) {
-			if (confirm("您确定要删除 " + $("tr.active td:eq(1)").text() + " 吗?")) {
-				var id = $("#tempid").text();
-				location = "${ctx}/cangku/delete.action?id=" + id;
-			}
-		} else {
-			alert("请先选择对象");
-		}
-	}
-</script>
 </head>
 <body>
 <body>
@@ -49,8 +23,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }/index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -83,8 +58,6 @@
 						</div>
 					</div>
 					</nav>
-					<span style="margin-left: 50px; font-size: 20px">${adddata}</span>
-					<span style="margin-left: 50px; font-size: 20px">${deletedata}</span>
 				</div>
 				<div class="row">
 					<div class="col-sm-2 col-md-2 sidebar">

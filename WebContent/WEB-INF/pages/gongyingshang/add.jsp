@@ -59,7 +59,7 @@
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">添加供应商</h4>
 				<input id="gyszt" type="hidden" value="${gys.zt }" /> 
-				<span>${adddata}</span> <span>${bhdata}</span>
+				<span>${addmsg}</span> <span>${bhmsg}</span>
 				<form method="post" class="form-x"
 					action="${ctx }/gongyingshang/doadd.action">
 					<div>

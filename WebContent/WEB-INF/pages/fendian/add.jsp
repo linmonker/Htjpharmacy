@@ -50,7 +50,7 @@
 			</div>
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">添加分店</h4>
-				<span>${adddata}</span> <span>${bhdata}</span> <span>${mcdata}</span>
+				<span>${addmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				<form method="post" class="form-x"
 					action="${ctx}/fendian/doadd.action">
 					<div class="form-group">
@@ -109,9 +109,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label></label>
-						</div>
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
 							<a class="button bg-red" href="${ctx}/fendian/list.action"

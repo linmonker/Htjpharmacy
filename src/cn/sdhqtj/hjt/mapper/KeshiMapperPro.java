@@ -5,7 +5,7 @@ import java.util.List;
 import cn.sdhqtj.hjt.entity.Keshi;
 
 /**
- * 科室mapper增
+ * 科室mapper补充
  */
 public interface KeshiMapperPro {
 
@@ -15,8 +15,13 @@ public interface KeshiMapperPro {
 	List<Keshi> keshiquery(Integer id);
 
 	/**
-	 * 检查重复检查重复同一分店一个科室编号和名称
+	 * 检查重复检查重复，科室编号同一分店唯一
 	 */
 	List<Keshi> checkrepeat(Keshi record);
+
+	/**
+	 * 更新科室信息
+	 */
+	void updatekeshi(Keshi record);
 
 }

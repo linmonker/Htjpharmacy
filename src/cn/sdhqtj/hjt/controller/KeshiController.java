@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.sdhqtj.hjt.entity.Keshi;
 import cn.sdhqtj.hjt.service.KeshiService;
+import cn.sdhqtj.hjt.entity.Login;
 
+/**
+ * 科室controller
+ */
 @Controller
 @RequestMapping("/keshi")
 public class KeshiController {
@@ -22,26 +26,25 @@ public class KeshiController {
 	List<Keshi> keshilist;
 	Keshi keshi;
 
+	Login login;
+
 	/**
 	 * 列表
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model, HttpSession session) {
-		/*
-		 * try { Login login = (Login) session.getAttribute("loginer"); } catch
-		 * (Exception e) { // TODO Auto-generated catch block e.printStackTrace(); }
-		 */
-		keshilist = keshiservice.keshiquery(1);
+
+	    login = (Login) session.getAttribute("loginer");
+		keshilist = keshiservice.keshiquery(login.getFdid());
 		model.addAttribute("keshilist", keshilist);
-		String adddata = (String) request.getAttribute("adddata");
-		if (adddata != null) {
-			adddata = "添加成功";
-			model.addAttribute("adddate", adddata);
-		}
-		String deletedata = (String) request.getAttribute("deletedata");
-		if (deletedata != null) {
-			deletedata = "删除成功";
-			model.addAttribute("deletedata", deletedata);
+
+		String waymsg = request.getParameter("waymsg");
+		if ("add".equals(waymsg)) {
+			model.addAttribute("addmsg", "分店添加成功");
+		} else if ("edit".equals(waymsg)) {
+			model.addAttribute("editmsg", "分店修改成功");
+		} else if ("delete".equals(waymsg)) {
+			model.addAttribute("deletemsg", "分店删除成功");
 		}
 		return "keshi/list";
 	}
@@ -59,23 +62,18 @@ public class KeshiController {
 	 * 执行添加科室
 	 */
 	@RequestMapping("/doadd")
-	public String doadd(Keshi record, Model model) {
+	public String doadd(Keshi record, Model model, HttpSession session) {
 		keshilist = keshiservice.checkrepeat(record);
 
 		if (keshilist.size() > 0) {
-			for (Keshi kstemp : keshilist) {
-				if (kstemp.getKsbh() != null) {
-					model.addAttribute("bhdate", "此科室编号已存在");
-				}
-				if (kstemp.getKsmc() != null) {
-					model.addAttribute("mcdate", "此科室名称已存在");
-				}
-			}
-			model.addAttribute("keshi", keshi);
+			model.addAttribute("bhmsg", "此科室编号已存在");
+			model.addAttribute("keshi", record);
 			return "keshi/add";
 		} else {
-			keshiservice.keshiadd(record);
-			return "redirect:list.action";
+			login = (Login) session.getAttribute("longiner");
+			record.setFdid(login.getFdid());
+			keshiservice.addkeshi(record);
+			return "redirect:list.action?waymsg=add";
 		}
 	}
 
@@ -85,7 +83,7 @@ public class KeshiController {
 	@RequestMapping("/edit")
 	public String edit(HttpServletRequest request, Model model) {
 		Integer id = Integer.valueOf(request.getParameter("id"));
-		keshi = keshiservice.keshiget(id);
+		keshi = keshiservice.getkeshi(id);
 		model.addAttribute("keshi", keshi);
 		return "keshi/edit";
 	}
@@ -98,21 +96,13 @@ public class KeshiController {
 		keshilist = keshiservice.checkrepeat(record);
 
 		if (keshilist.size() > 0) {
-			for (Keshi kstemp : keshilist) {
-				if (kstemp.getKsbh() != null) {
-					model.addAttribute("bhdate", "此科室编号已存在");
-				}
-				if (kstemp.getKsmc() != null) {
-					model.addAttribute("mcdate", "此科室名称已存在");
-				}
-			}
+			model.addAttribute("bhmsg", "此科室编号已存在");
 			model.addAttribute("keshi", keshi);
 			return "keshi/edit";
 		} else {
-			keshiservice.keshiupdate(keshi);
-			return "redirect:list.action?adddata=1";
+			keshiservice.updatekeshi(keshi);
+			return "redirect:list.action?waymsg=edit";
 		}
-
 	}
 
 	/**
@@ -121,8 +111,7 @@ public class KeshiController {
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
 		Integer id = Integer.valueOf(request.getParameter("id"));
-		keshiservice.keshidelete(id);
-		model.addAttribute("deletedate", "删除成功");
-		return "redirect:list.action?deletedata=1";
+		keshiservice.deletekeshi(id);
+		return "redirect:list.action?waymsg=delete";
 	}
 }

@@ -65,7 +65,7 @@
 				<h4 class="sub-header">修改供应商</h4>
 				<input id="flid" type="hidden" value="${yaopin.yplb }" />
 				<input id="gysid" type="hidden" value="${yaopin.ypgys }" />
-				<span>${adddata}</span><span>${bhdata}</span>
+				<span>${addmsg }</span><span>${bhmsg }</span>
 				<form method="post" class="form-x" action="${ctx }/yaopin/doedit.action">
 				    <input type="hidden" name="id" value="${yaopin.id }" />
 					<div>

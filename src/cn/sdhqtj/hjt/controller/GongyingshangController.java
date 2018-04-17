@@ -34,17 +34,13 @@ public class GongyingshangController {
 		gyslist = gysservice.gongyingshangquery();
 		model.addAttribute("gyslist", gyslist);
 
-		String data = request.getParameter("adddata");
-		if (data != null) {
-			model.addAttribute("adddata", "供应商添加成功");
-		}
-		data = request.getParameter("editdata");
-		if (data != null) {
-			model.addAttribute("editdata", "供应商修改成功");
-		}
-		data = request.getParameter("deletedata");
-		if (data != null) {
-			model.addAttribute("deletedata", "供应商删除成功");
+		String waymsg = request.getParameter("waymsg");
+		if ("add".equals(waymsg)) {
+			model.addAttribute("addmsg", "分店添加成功");
+		} else if ("edit".equals(waymsg)) {
+			model.addAttribute("editmsg", "分店修改成功");
+		} else if ("delete".equals(waymsg)) {
+			model.addAttribute("deletemsg", "分店删除成功");
 		}
 		return "gongyingshang/list";
 	}
@@ -68,14 +64,14 @@ public class GongyingshangController {
 		if (record.getGysbh() == null || record.getGysmc() == null || gys != null) {
 			// 添加失败
 			if (gys != null) {
-				model.addAttribute("bhdata", "此供应商编号已存在");
+				model.addAttribute("bhmsg", "此供应商编号已存在");
 			}
-			model.addAttribute("adddata", "供应商添加失败");
+			model.addAttribute("addmsg", "供应商添加失败");
 			model.addAttribute("gys", record);
 			return "gongyingshang/add";
 		} else {// 添加成功
 			gysservice.addgongyingshang(record);
-			return "redirect:list.action?adddata=1";
+			return "redirect:list.action?waymsg=add";
 		}
 	}
 
@@ -99,14 +95,14 @@ public class GongyingshangController {
 		if (record.getGysbh() == null || record.getGysmc() == null || gys != null) {
 			// 修改失败
 			if (gys != null) {
-				model.addAttribute("bhdata", "此供应商编号已存在");
+				model.addAttribute("bhmsg", "此供应商编号已存在");
 			}
-			model.addAttribute("adddata", "供应商添加失败");
+			model.addAttribute("addmsg", "供应商添加失败");
 			model.addAttribute("gys", record);
 			return "gongyingshang/edit";
 		} else {// 修改成功
 			gysservice.updategongyingshang(record);
-			return "redirect:list.action?editdata=1";
+			return "redirect:list.action?waymsg=edit";
 		}
 	}
 
@@ -114,8 +110,8 @@ public class GongyingshangController {
 	 * 删除供应商
 	 */
 	@RequestMapping("/delete")
-	public String delete(HttpServletRequest request, Model model) {
+	public String delete(HttpServletRequest request) {
 		gysservice.deletegongyingshang(Integer.valueOf(request.getParameter("id")));
-		return "redirect:list.action?deletedata=1";
+		return "redirect:list.action?waymsg=delete";
 	}
 }

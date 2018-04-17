@@ -29,8 +29,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -58,24 +59,17 @@
 				<h4 class="sub-header">修改货位</h4>
 				<form method="post" class="form-x"
 					action="${ctx }/huowei/doedit.action">
-					<span style="margin-left: 50px; color: red; font-size: 20px">${editdate}</span>
+					<span>${editmsg}</span> <span>${bhmsg }</span>
 					<input type="hidden" name="id" value="${huowei.id }" />
+					<input type="hidden" name="fdid" value="${huowei.fdid }" />
+					<input type="hidden" name="ckid" value="${huowei.ckid }" />
 					<input id="hwzt" type="hidden" value="${huowei.zt }" />
-					<div class="form-group">
-						<div class="label">
-							<label>仓库ID：</label>
-						</div>
-						<div class="field">
-							<input type="text" class="input w50" name="ckid"
-								value="${huowei.ckid }" readonly />
-						</div>
-					</div>
 					<div class="form-group">
 						<div class="label">
 							<label>货位编号：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="hwbh"
+							<input type="text" class="form-control" name="hwbh"
 								value="${huowei.hwbh }" data-validate="required:请输入货位编号" />
 							<div class="tips"></div>
 						</div>
@@ -85,7 +79,7 @@
 							<label>货位名称：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="hwmc"
+							<input type="text" class="form-control" name="hwmc"
 								value="${huowei.hwmc }" data-validate="required:请输入货位名称" />
 							<div class="tips"></div>
 						</div>
@@ -95,7 +89,7 @@
 							<label>货位名称简拼：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="hwmcjp"
+							<input type="text" class="form-control" name="hwmcjp"
 								value="${huowei.ckmcjp }" />
 						</div>
 					</div>
@@ -115,7 +109,7 @@
 							<label>备注信息：</label>
 						</div>
 						<div class="field">
-							<textarea class="form-control w50" rows="3" name="hwbz">${huowei.hwbz }</textarea>
+							<textarea class="form-control" rows="3" name="hwbz">${huowei.hwbz }</textarea>
 						</div>
 					</div>
 					<div class="form-group">

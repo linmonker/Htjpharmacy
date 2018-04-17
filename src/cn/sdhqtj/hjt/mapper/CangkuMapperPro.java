@@ -4,7 +4,23 @@ import java.util.List;
 
 import cn.sdhqtj.hjt.entity.Cangku;
 
+/**
+ * 仓库mapper补充
+ */
 public interface CangkuMapperPro {
-   
-	List<Cangku> cangkuquery(Integer fdid);
+
+	/**
+	 * 根据分店id获取仓库列表
+	 */
+	List<Cangku> cangkuquery(Integer id);
+	
+	/**
+	 *检查重复，仓库编号每个分店唯一
+	 */
+	Cangku checkrepeat(Cangku record);
+
+	/**
+	 * 更新仓库信息
+	 */
+	void updatecangku(Cangku record);
 }

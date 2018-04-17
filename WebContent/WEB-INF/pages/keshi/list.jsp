@@ -17,24 +17,24 @@
 	function setid(element,id) {
 		$("tr.active").removeClass("active");
 		$(element).addClass("active");
-		$("#tempid").text(id);
+		$("#tempid").val(id);
 	}
 	function edit() {
 		if($("tr.active").length > 0){
-			var id = $("#tempid").text();
+			var id = $("#tempid").val();
 			location = "${ctx}/keshi/edit.action?id=" + id;
 		}else{
-			alert("请先选择对象");
+			alert("请先选择科室");
 		}
 	}
 	function del() {
 		if($("tr.active").length > 0){	
 			if (confirm("您确定要删除 " + $("tr.active td:eq(1)").text() + " 吗?")) {	
-				var id = $("#tempid").text();
+				var id = $("#tempid").val();
 				location = "${ctx}/keshi/delete.action?id=" + id;
 			}
 		}else{
-			alert("请先选择对象");
+			alert("请先选择科室");
 		}
 	}
 </script>
@@ -49,8 +49,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }/index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -86,7 +87,6 @@
 								<li><a href="${ctx}/keshi/add.action">添加科室</a></li>
 								<li><a onclick="return edit()">修改科室</a></li>
 								<li><a onclick="return del()">删除科室</a></li>
-								<li><span id="tempid" style="display: none"></span></li>
 							</ul>
 							<div class="nav navbar-nav navbar-right">
 								<form action="${ctx }/keshi/search.action" method="post">
@@ -97,12 +97,11 @@
 									<button type="submit" class="button border-main">搜索</button>
 								</form>
 							</div>
-
 						</div>
 					</div>
 					</nav>
-					<span style="margin-left: 50px; font-size: 20px">${adddata}</span>
-					<span style="margin-left: 50px; font-size: 20px">${deletedata}</span>
+					<input type="hidden" id="tempid" />
+					<span>${addmsg }</span> <span>${editmsg }</span> <span>${deletemsg }</span>
 				</div>
 				<div class="row">
 					<div class="table-responsive">
@@ -125,10 +124,12 @@
 										<td>${list.kslxdh }</td>
 										<td>${list.kszr }</td>
 										<td>${list.ksbz }</td>
-										<td><c:choose>
+										<td>
+											<c:choose>
 												<c:when test="${list.zt == 0}">启用</c:when>
 												<c:otherwise>禁用</c:otherwise>
-											</c:choose></td>
+											</c:choose>
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -138,7 +139,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
-
 </html>

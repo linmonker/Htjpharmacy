@@ -36,9 +36,9 @@ public class YaopinfenleiController {
 	@RequestMapping("/list")
 	public String toListLibrary(HttpServletRequest request, Model model) {
 
-		String data = request.getParameter("editdata");
-		if (data != null) {
-			model.addAttribute("editdata", "药品分类修改成功");
+		String waymsg = request.getParameter("waymsg");
+		if ("edit".equals(waymsg)) {
+			model.addAttribute("editmsg", "分店修改成功");
 		}
 		return "yaopinfenlei/list";
 	}
@@ -89,7 +89,7 @@ public class YaopinfenleiController {
 	public String edit(Model model, @RequestParam(value = "id") Integer id) {
 		ypfl = ypflservice.getyaopinfenlei(id);
 		model.addAttribute("ypfl", ypfl);
-		
+
 		ypfllist = ypflservice.Yaopinfenleiquery();
 		model.addAttribute("ypfllist", ypfllist);
 		return "yaopinfenlei/edit";
@@ -105,10 +105,10 @@ public class YaopinfenleiController {
 		if (record.getFlbh() == null || record.getFlmc() == null || ypfl != null) {
 			// 修改失败
 			if (ypfl != null) {
-				model.addAttribute("bhdata", "此药品分类编号已存在");
+				model.addAttribute("bhmsg", "此药品分类编号已存在");
 			}
 
-			model.addAttribute("editdata", "药品分类修改失败");
+			model.addAttribute("editmsg", "药品分类修改失败");
 			model.addAttribute("ypfl", record);
 			ypfllist = ypflservice.Yaopinfenleiquery();
 			model.addAttribute("ypfllist", ypfllist);
@@ -117,7 +117,7 @@ public class YaopinfenleiController {
 			ypfl = ypflservice.getyaopinfenlei(record.getSjflid());
 			record.setFldj((short) (ypfl.getFldj() + 1));
 			ypflservice.updateyaopinfenlei(record);
-			return "redirect:list.action?editdata=1";
+			return "redirect:list.action?waymsg=edit";
 		}
 	}
 
@@ -127,9 +127,7 @@ public class YaopinfenleiController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public String delete(HttpServletRequest request, @RequestParam(value = "id") Integer id) {
-
 		ypflservice.deleteyaopinfenlei(id);
 		return "success";
 	}
-
 }

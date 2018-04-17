@@ -59,7 +59,7 @@
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">修改药品分类</h4>
 				<input id="sjflidtemp" type="hidden" value="${ypfl.sjflid }" />
-				<span>${adddata}</span><span>${bhdata}</span>
+				<span>${addmsg }</span><span>${bhmsg }</span>
 				<form method="post" class="form-x"
 					action="${ctx }/yaopinfenlei/doedit.action">
 					<input type="hidden" name="id" value="${ypfl.id }" />

@@ -12,16 +12,15 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
-
 <script>
 	function setid(element,id) {
 		$("tr.active").removeClass("active");
 		$(element).addClass("active");
-		$("#tempid").text(id);
+		$("#tempid").val(id);
 	}
 	function edit() {
 		if($("tr.active").length > 0){
-			var id = $("#tempid").text();
+			var id = $("#tempid").val();
 			location = "${ctx}/huowei/edit.action?id=" + id;
 		}else{
 			alert("请先选择货位");
@@ -30,7 +29,7 @@
 	function del() {
 		if($("tr.active").length > 0){	
 			if (confirm("您确定要删除 " + $("tr.active td:eq(1)").text() + " 吗?")) {	
-				var id = $("#tempid").text();
+				var id = $("#tempid").val();
 				location = "${ctx}/huowei/delete.action?id=" + id;
 			}
 		}else{
@@ -49,8 +48,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }/index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -83,10 +83,9 @@
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="${ctx}/huowei/add.action?ckid=" +${ckid }>添加货位</a></li>
+								<li><a href="${ctx}/huowei/add.action">添加货位</a></li>
 								<li><a onclick="return edit()">修改货位</a></li>
 								<li><a onclick="return del()">删除货位</a></li>
-								<li><span id="tempid" style="display: none"></span></li>
 							</ul>
 							<div class="nav navbar-nav navbar-right">
 								<form action="${ctx }/huowei/search.action" method="post">
@@ -97,12 +96,13 @@
 									<button type="submit" class="button border-main">搜索</button>
 								</form>
 							</div>
-
 						</div>
 					</div>
 					</nav>
-					<span style="margin-left: 50px; font-size: 20px">${adddata}</span>
-					<span style="margin-left: 50px; font-size: 20px">${deletedata}</span>
+					<input type="hidden" id="tempid" />
+					<input type="hidden" name="fdid" value="${huoweilist.fdid }" />
+					<input type="hidden" name="ckid" value="${huoweilist.ckid }" />
+					<span>${addmsg}</span> <span>${editmsg}</span> <span>${deletemsg}</span>
 				</div>
 				<div class="row">
 					<div class="table-responsive">
@@ -112,7 +112,6 @@
 									<th>货位编号</th>
 									<th>货位名称</th>
 									<th>货位名称简拼</th>
-									<th>货位状态</th>
 									<th>备注信息</th>
 									<th>状态</th>
 								</tr>
@@ -123,7 +122,6 @@
 										<td>${list.hwbh }</td>
 										<td>${list.hwmc }</td>
 										<td>${list.hwmcjp }</td>
-										<td>${list.zt }</td>
 										<td>${list.hwbz }</td>
 										<td><c:choose>
 												<c:when test="${list.zt == 0}">启用</c:when>
@@ -138,7 +136,6 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 
 </html>

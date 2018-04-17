@@ -8,6 +8,9 @@ import cn.sdhqtj.hjt.mapper.HuoweiMapper;
 import cn.sdhqtj.hjt.mapper.HuoweiMapperPro;
 import cn.sdhqtj.hjt.service.HuoweiService;
 
+/**
+ * 货位service接口实现类
+ */
 @Service
 public class HuoweiSer implements HuoweiService {
 
@@ -18,7 +21,7 @@ public class HuoweiSer implements HuoweiService {
 	private HuoweiMapper huoweiMapper;
 	Huowei huowei;
 	List<Huowei> huoweilist;
-	
+
 	/**
 	 * 根据仓库id获取货位列表
 	 */
@@ -28,36 +31,32 @@ public class HuoweiSer implements HuoweiService {
 		huoweilist = huoweiMapperPro.huoweiquery(id);
 		return huoweilist;
 	}
+
 	/**
 	 * 通过货位id获取货位信息
 	 */
 	@Override
-	public Huowei huoweiget(Integer id) {
+	public Huowei gethuowei(Integer id) {
 		// TODO Auto-generated method stub
 		huowei = huoweiMapper.selectByPrimaryKey(id);
 		return huowei;
 	}
+
 	/**
-	 * 通过货位编号获取货位信息
+	 * 检查重复，货物编号同一仓库唯一
 	 */
 	@Override
-	public Huowei selectBybh(String string) {
+	public Huowei checkrepeat(Huowei record) {
 		// TODO Auto-generated method stub
-		return null;
+		huowei = huoweiMapperPro.checkrepeat(record);
+		return huowei;
 	}
-	/**
-	 * 通过分货位称获取货位信息
-	 */
-	@Override
-	public Huowei selectBymc(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	/**
 	 * 添加货位
 	 */
 	@Override
-	public void huoweiadd(Huowei record) {
+	public void addhuowei(Huowei record) {
 		// TODO Auto-generated method stub
 		try {
 			huoweiMapper.insertSelective(record);
@@ -66,11 +65,12 @@ public class HuoweiSer implements HuoweiService {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * 根据货位id删除货位
 	 */
 	@Override
-	public void huoweidelete(Integer id) {
+	public void deletehuowei(Integer id) {
 		// TODO Auto-generated method stub
 		huowei = new Huowei();
 		huowei.setId(id);
@@ -82,19 +82,19 @@ public class HuoweiSer implements HuoweiService {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * 更新货位信息
 	 */
 	@Override
-	public void huoweiupdate(Huowei record) {
+	public void updatehuowei(Huowei record) {
 		// TODO Auto-generated method stub
 		try {
-			huoweiMapper.updateByPrimaryKeySelective(record);
+			huoweiMapperPro.updatehuowei(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	
 }

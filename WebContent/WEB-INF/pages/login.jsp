@@ -25,7 +25,7 @@
 						</div>
 						<div class="panel-body"
 							style="padding: 30px; padding-bottom: 10px; padding-top: 10px;">
-							<span style="margin-left: 50px; color: red; font-size: 20px">${data}</span>
+							<span style="margin-left: 50px; color: red; font-size: 20px">${loginmsg}</span>
 							<div class="form-group">
 								<div class="field field-icon-right">
 									<input type="text" class="input input-big" name="login"

@@ -18,26 +18,26 @@ public interface KeshiService {
 	/**
 	 * 根据科室id获取科室信息
 	 */
-	public Keshi keshiget(Integer id);
+	public Keshi getkeshi(Integer id);
 
 	/**
-	 * 检查重复同一分店一个科室编号和名称
+	 * 检查重复检查重复，科室编号同一分店唯一
 	 */
 	public List<Keshi> checkrepeat(Keshi record);
 
 	/**
 	 * 添加科室
 	 */
-	public void keshiadd(Keshi record);
+	public void addkeshi(Keshi record);
 
 	/**
 	 * 根据科室id删除科室
 	 */
-	public void keshidelete(Integer id);
+	public void deletekeshi(Integer id);
 
 	/**
 	 * 更新科室信息
 	 */
-	public void keshiupdate(Keshi record);
+	public void updatekeshi(Keshi record);
 
 }

@@ -50,8 +50,8 @@
 	</resultMap>
 	<resultMap id="ResultMapPro" type="cn.sdhqtj.hjt.entity.YaopinPro"
 		extends="ResultMapWithBLOBs">
-		<result column="flmc" property="flmc" jdbcType="LONGVARCHAR" />
-		<result column="gysmc" property="gysmc" jdbcType="LONGVARCHAR" />
+		<result column="flmc" property="flmc" jdbcType="VARCHAR" />
+		<result column="gysmc" property="gysmc" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -75,7 +75,7 @@
 	</sql>
 
 	<select id="yaopinquery" resultMap="ResultMapPro">
-		select <include refid="Base_Column_List" />,b.flmc
+		select a.*,b.flmc
 		from hjt_yaopin a,hjt_yaopinfenlei b
 		where a.dm=0 and a.lbid = b.id
 		order by ypbh asc

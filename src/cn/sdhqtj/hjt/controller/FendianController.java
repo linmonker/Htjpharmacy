@@ -32,17 +32,13 @@ public class FendianController {
 		fendianlist = fendianservice.fendianquery();
 		model.addAttribute("fendianlist", fendianlist);
 
-		String data = request.getParameter("adddata");
-		if (data != null) {
-			model.addAttribute("adddata", "分店添加成功");
-		}
-		data = request.getParameter("editdata");
-		if (data != null) {
-			model.addAttribute("editdata", "分店修改成功");
-		}
-		data = request.getParameter("deletedata");
-		if (data != null) {
-			model.addAttribute("deletedata", "分店删除成功");
+		String waymsg = request.getParameter("waymsg");
+		if ("add".equals(waymsg)) {
+			model.addAttribute("addmsg", "分店添加成功");
+		} else if ("edit".equals(waymsg)) {
+			model.addAttribute("editmsg", "分店修改成功");
+		} else if ("delete".equals(waymsg)) {
+			model.addAttribute("deletemsg", "分店删除成功");
 		}
 		return "fendian/list";
 	}
@@ -67,18 +63,18 @@ public class FendianController {
 			// 添加失败
 			for (Fendian temp : fendianlist) {
 				if (temp.getFdbh() != null) {
-					model.addAttribute("bhdata", "此分店编号已存在");
+					model.addAttribute("bhmsg", "此分店编号已存在");
 				}
 				if (temp.getFdmc() != null) {
-					model.addAttribute("mcdata", "此分店名称已存在");
+					model.addAttribute("mcmsg", "此分店名称已存在");
 				}
 			}
-			model.addAttribute("adddata", "分店添加失败");
+			model.addAttribute("addmsg", "分店添加失败");
 			model.addAttribute("fendian", record);
 			return "fendian/add";
 		} else {// 添加成功
 			fendianservice.addfendian(record);
-			return "redirect:list.action?adddata=1";
+			return "redirect:list.action?waymsg=add";
 		}
 	}
 
@@ -103,18 +99,18 @@ public class FendianController {
 			// 修改失败
 			for (Fendian temp : fendianlist) {
 				if (temp.getFdbh() != null) {
-					model.addAttribute("bhdata", "此分店编号已存在");
+					model.addAttribute("bhmsg", "此分店编号已存在");
 				}
 				if (temp.getFdmc() != null) {
-					model.addAttribute("mcdata", "此分店名称已存在");
+					model.addAttribute("mcmsg", "此分店名称已存在");
 				}
 			}
-			model.addAttribute("editdata", "分店修改失败");
+			model.addAttribute("editmsg", "分店修改失败");
 			model.addAttribute("fendian", record);
 			return "fendian/edit";
 		} else {// 修改成功
 			fendianservice.updatefendian(record);
-			return "redirect:list.action?editdata=1";
+			return "redirect:list.action?waymsg=edit";
 		}
 	}
 
@@ -122,8 +118,8 @@ public class FendianController {
 	 * 删除分店
 	 */
 	@RequestMapping("/delete")
-	public String delete(HttpServletRequest request, Model model) {
+	public String delete(HttpServletRequest request) {
 		fendianservice.deletefendian(Integer.valueOf(request.getParameter("id")));
-		return "redirect:list.action?deleta=1";
+		return "redirect:list.action?waymsg=delete";
 	}
 }

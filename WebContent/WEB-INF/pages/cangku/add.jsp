@@ -14,7 +14,6 @@
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
 </head>
 <body>
-
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -23,8 +22,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx}/index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -36,7 +36,6 @@
 	</nav>
 	<div class="container-fluid">
 		<div class="row">
-
 			<div class="col-sm-2 col-md-2 sidebar">
 				<h4>管理项目</h4>
 				<ul class="nav nav-sidebar">
@@ -51,16 +50,16 @@
 			</div>
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">添加仓库</h4>
+				<span>${addmsg}</span> <span>${bhmsg}</span>
 				<form method="post" class="form-x"
 					action="${ctx}/cangku/doadd.action">
-					<span style="margin-left: 50px; color: red; font-size: 20px">${bhdata}</span>
-					<span style="margin-left: 50px; color: red; font-size: 20px">${mcdata}</span>
+					<input type="hidden" name="fdid" value="${cangku.fdid }" />
 					<div class="form-group">
 						<div class="label">
 							<label>仓库编号：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="ckbh"
+							<input type="text" class="form-control" name="ckbh"
 								value="${cangku.ckbh }" data-validate="required:请输入仓库编号" />
 							<div class="tips"></div>
 						</div>
@@ -70,7 +69,7 @@
 							<label>仓库名称：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="ckmc"
+							<input type="text" class="form-control" name="ckmc"
 								value="${cangku.ckmc }" data-validate="required:请输入仓库名称" />
 							<div class="tips"></div>
 						</div>
@@ -80,7 +79,7 @@
 							<label>仓库名称简拼：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="ckmcjp"
+							<input type="text" class="form-control" name="ckmcjp"
 								value="${cangku.ckmcjp }" />
 						</div>
 					</div>
@@ -100,13 +99,10 @@
 							<label>备注信息：</label>
 						</div>
 						<div class="field">
-							<textarea class="form-control w50" rows="3" name="ckbz">${cangku.ckbz }</textarea>
+							<textarea class="form-control" rows="3" name="ckbz">${cangku.ckbz }</textarea>
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label></label>
-						</div>
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
 							<a class="button bg-red" href="${ctx}/cangku/list.action"

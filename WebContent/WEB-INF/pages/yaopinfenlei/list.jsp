@@ -324,7 +324,7 @@
 						</div>
 					</div>
 					</nav>
-					<span>${editdata}</span>
+					<span>${editmsg }</span>
 				</div>
 				<div class="row">
 					<div class="content_wrap">

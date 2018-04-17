@@ -18,26 +18,26 @@ public interface ChushiService {
 	/**
 	 * 根据处室id获取处室信息
 	 */
-	public Zuzhijigou chushiget(Integer id);
+	public Zuzhijigou getchushi(Integer id);
 
 	/**
-	 * 检查重复同一分店一个处室编号和名称
+	 * 检查重复，处室编号同一分店唯一
 	 */
 	public List<Zuzhijigou> checkrepeat(Zuzhijigou record);
 
 	/**
 	 * 添加处室
 	 */
-	public void chushiadd(Zuzhijigou record);
+	public void addchushi(Zuzhijigou record);
 
 	/**
 	 * 根据处室id删除处室
 	 */
-	public void chushidelete(Integer id);
+	public void deletechushi(Integer id);
 
 	/**
 	 * 更新处室信息
 	 */
-	public void chushiupdate(Zuzhijigou record);
+	public void updatechushi(Zuzhijigou record);
 
 }

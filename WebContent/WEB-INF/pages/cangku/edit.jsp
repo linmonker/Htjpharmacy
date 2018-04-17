@@ -29,8 +29,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+			    <li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -56,11 +57,12 @@
 			</div>
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">修改仓库</h4>
+				<input id="ckzt" type="hidden" value="${cangku.zt }" />
+				<span>${editmsg}</span> <span>${bhmsg}</span>
 				<form method="post" class="form-x"
 					action="${ctx }/cangku/doedit.action">
-					<span style="margin-left: 50px; color: red; font-size: 20px">${editdate}</span>
 					<input type="hidden" name="id" value="${cangku.id }" /> 
-					<input id="ckzt" type="hidden" value="${cangku.zt }" />
+					<input type="hidden" name="fdid" value="${cangku.fdid }" />
 					<div class="form-group">
 						<div class="label">
 							<label>仓库编号：</label>
@@ -106,7 +108,7 @@
 							<label>备注信息：</label>
 						</div>
 						<div class="field">
-							<textarea class="form-control w50" rows="3" name="ckbz">${cangku.ckbz }</textarea>
+							<textarea class="form-control" rows="3" name="ckbz">${cangku.ckbz }</textarea>
 						</div>
 					</div>
 					<div class="form-group">

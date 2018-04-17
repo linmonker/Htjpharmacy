@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.sdhqtj.hjt.mapper.KeshiMapper">
+<mapper namespace="cn.sdhqtj.hjt.mapper.KeshiMapperPro">
 	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Keshi">
 		<id column="Id" property="id" jdbcType="INTEGER" />
 		<result column="jtid" property="jtid" jdbcType="INTEGER" />
@@ -35,7 +35,17 @@
 		select
 		<include refid="Base_Column_List" />
 		from hjt_keshi
-		where fdid = #{fdid,jdbcType=INTEGER} and (ksbh = #{ksbh,jdbcType=VARCHAR} or ksmc = #{ksmc,jdbcType=VARCHAR})
+		where fdid = #{fdid,jdbcType=INTEGER} and (ksbh = #{ksbh,jdbcType=VARCHAR}
 	</select>
-	
+	<update id="updatekeshi" parameterType="cn.sdhqtj.hjt.entity.Keshi">
+		update hjt_keshi
+		set ksbh = #{ksbh,jdbcType=VARCHAR},
+		ksmc = #{ksmc,jdbcType=VARCHAR},
+		ksmcjp = #{ksmcjp,jdbcType=VARCHAR},
+		kslxdh = #{kslxdh,jdbcType=VARCHAR},
+		kszr = #{kszr,jdbcType=VARCHAR},
+		zt = #{zt,jdbcType=INTEGER},
+		ksbz = #{ksbz,jdbcType=LONGVARCHAR}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
 </mapper>

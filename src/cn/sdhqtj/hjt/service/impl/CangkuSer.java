@@ -27,9 +27,9 @@ public class CangkuSer implements CangkuService {
 	 * 根据分店id获取仓库列表
 	 */
 	@Override
-	public List<Cangku> cangkuquery(Integer fdid) {
+	public List<Cangku> cangkuquery(Integer id) {
 		// TODO Auto-generated method stub
-		cangkulist = cangkuMapperPro.cangkuquery(fdid);
+		cangkulist = cangkuMapperPro.cangkuquery(id);
 		return cangkulist;
 	}
 	
@@ -37,26 +37,41 @@ public class CangkuSer implements CangkuService {
 	 * 通过仓库id获取仓库信息
 	 */
 	@Override
-	public Cangku cangkuget(Integer id) {
+	public Cangku getcangku(Integer id) {
 		// TODO Auto-generated method stub
 		cangku = cangkuMapper.selectByPrimaryKey(id);
 		return cangku;
 	}
 	
 	/**
+	 *
+	 */
+	@Override
+	public Cangku checkrepeat(Cangku record) {
+		// TODO Auto-generated method stub
+		cangku = cangkuMapperPro.checkrepeat(record);
+		return null;
+	}
+
+	/**
 	 * 添加仓库
 	 */
 	@Override
-	public void cangkuadd(Cangku record) {
+	public void addcangku(Cangku record) {
 		// TODO Auto-generated method stub
-		cangkuMapper.insert(record);
+		try {
+			cangkuMapper.insertSelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
-	 * 根据仓库id删除分店
+	 * 根据仓库id删除仓库
 	 */
 	@Override
-	public void cangkudelete(Integer id) {
+	public void deletecangku(Integer id) {
 		// TODO Auto-generated method stub
 		cangku = new Cangku();
 		cangku.setId(id);
@@ -73,10 +88,10 @@ public class CangkuSer implements CangkuService {
 	 * 更新仓库信息
 	 */
 	@Override
-	public void cangkuupdate(Cangku record) {
+	public void updatecangku(Cangku record) {
 		// TODO Auto-generated method stub
 		try {
-			cangkuMapper.updateByPrimaryKeySelective(record);
+			cangkuMapperPro.updatecangku(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

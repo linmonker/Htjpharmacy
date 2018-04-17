@@ -29,8 +29,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -56,18 +57,18 @@
 			</div>
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">修改处室</h4>
+				<input id="kszt" type="hidden" value="${chushi.zt }" />
+				<span>${editmsg }</span> <span>${bhmsg}</span>
 				<form method="post" class="form-x"
 					action="${ctx }/zhuzhijigou/doedit.action">
-					<span style="margin-left: 50px; color: red; font-size: 20px">${editdata}</span>
 					<input type="hidden" name="fdid" value="${session.loginer.fdid }">
-					<input id="cszt" type="hidden" value="${chushi.zt }" />
 					<input type="hidden" name="id" value="${chushi.id }" />
 					<div class="form-group">
 						<div class="label">
 							<label>处室编号：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="csbh"
+							<input type="text" class="form-control" name="csbh"
 								value="${chushi.csbh }" data-validate="required:请输入处室编号" />
 							<div class="tips"></div>
 						</div>
@@ -77,7 +78,7 @@
 							<label>处室名称：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="csmc"
+							<input type="text" class="form-control" name="csmc"
 								value="${chushi.csmc }" data-validate="required:请输入科室名称" />
 							<div class="tips"></div>
 						</div>
@@ -87,7 +88,7 @@
 							<label>处室名称简拼：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="csmcjp"
+							<input type="text" class="form-control" name="csmcjp"
 								value="${chushi.csmcjp }" />
 						</div>
 					</div>
@@ -96,7 +97,7 @@
 							<label>处室电话：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="cslxdh"
+							<input type="text" class="form-control" name="cslxdh"
 								value="${chushi.cslxdh }" />
 						</div>
 					</div>
@@ -105,7 +106,7 @@
 							<label>处室主任：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w80" name="cszr"
+							<input type="text" class="form-control" name="cszr"
 								value="${chushi.cszr }" />
 						</div>
 					</div>
@@ -125,7 +126,7 @@
 							<label>备注信息：</label>
 						</div>
 						<div class="field">
-							<textarea class="form-control w50" rows="3" name="ksbz">${chushi.csbz }</textarea>
+							<textarea class="form-control" rows="3" name="ksbz">${chushi.csbz }</textarea>
 						</div>
 					</div>
 					<div class="form-group">

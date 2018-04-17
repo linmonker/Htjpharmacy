@@ -59,7 +59,7 @@
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">修改供应商</h4>
 				<input id="gyszt" type="hidden" value="${gys.zt }" /> 
-				<span>${editdata}</span> <span>${bhdata}</span>
+				<span>${editmsg}</span> <span>${bhmsg}</span>
 				<form method="post" class="form-x" action="${ctx }/gongyingshang/doedit.action">
 				    <input type="hidden" name="id" value="${gys.id }" />
 					<div>

@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.sdhqtj.hjt.entity.Gongyingshang;
+import cn.sdhqtj.hjt.entity.Login;
 import cn.sdhqtj.hjt.entity.Yaopin;
 import cn.sdhqtj.hjt.entity.YaopinPro;
 import cn.sdhqtj.hjt.entity.YaopinWithBLOBs;
@@ -47,17 +49,13 @@ public class YaopinController {
 		yaopinlist = yaopinservice.yaopinquery();
 		model.addAttribute("yaopinnlist", yaopinlist);
 
-		String data = request.getParameter("adddata");
-		if (data != null) {
-			model.addAttribute("adddata", "药品添加成功");
-		}
-		data = request.getParameter("editdata");
-		if (data != null) {
-			model.addAttribute("editdata", "药品修改成功");
-		}
-		data = request.getParameter("deletedata");
-		if (data != null) {
-			model.addAttribute("deletedata", "药品删除成功");
+		String waymsg = request.getParameter("waymsg");
+		if ("add".equals(waymsg)) {
+			model.addAttribute("addmsg", "分店添加成功");
+		} else if ("edit".equals(waymsg)) {
+			model.addAttribute("editmsg", "分店修改成功");
+		} else if ("delete".equals(waymsg)) {
+			model.addAttribute("deletemsg", "分店删除成功");
 		}
 		return "yaopin/list";
 	}
@@ -78,25 +76,27 @@ public class YaopinController {
 	 * 执行添加药品
 	 */
 	@RequestMapping("/doadd")
-	public String doadd(YaopinWithBLOBs record, Model model) {
+	public String doadd(YaopinWithBLOBs record, Model model, HttpSession session) {
 		yaopin = yaopinservice.checkrepeat(record.getYpbh());
 
 		if (record.getYpbh() == null || record.getYpspm() == null || yaopin != null) {
 			// 添加失败
 			if (yaopin != null) {
-				model.addAttribute("bhdata", "此药品编号已存在");
+				model.addAttribute("bhmsg", "此药品编号已存在");
 			}
 			ypfllist = ypflservice.Yaopinfenleiquery();
 			gyslist = gysservice.gongyingshangquery();
 			model.addAttribute("ypfllist", ypfllist);
 			model.addAttribute("gyslist", gyslist);
 			
-			model.addAttribute("adddata", "药品添加失败");
+			model.addAttribute("addmsg", "药品添加失败");
 			model.addAttribute("yaopin", record);
 			return "yaopin/add";
 		} else {// 添加成功
+			Login loginer = (Login) session.getAttribute("loginer");
+			record.setYpcjr(loginer.getId());
 			yaopinservice.addyaopin(record);
-			return "redirect:list.action?adddata=1";
+			return "redirect:list.action?waymsg=add";
 		}
 	}
 
@@ -125,19 +125,19 @@ public class YaopinController {
 		if (record.getYpbh() == null || record.getYpspm() == null || yaopin != null) {
 			// 修改失败
 			if (yaopin != null) {
-				model.addAttribute("bhdata", "此药品编号已存在");
+				model.addAttribute("bhmsg", "此药品编号已存在");
 			}
 			ypfllist = ypflservice.Yaopinfenleiquery();
 			gyslist = gysservice.gongyingshangquery();
 			model.addAttribute("ypfllist", ypfllist);
 			model.addAttribute("gyslist", gyslist);
 			
-			model.addAttribute("adddata", "药品添加失败");
+			model.addAttribute("addmsg", "药品添加失败");
 			model.addAttribute("yaopin", record);
 			return "yaopin/edit";
 		} else {// 修改成功
 			yaopinservice.updateyaopin(record);
-			return "redirect:list.action?editdata=1";
+			return "redirect:list.action?waymsg=edit";
 		}
 	}
 
@@ -145,9 +145,9 @@ public class YaopinController {
 	 * 删除药品
 	 */
 	@RequestMapping("/delete")
-	public String delete(HttpServletRequest request, Model model) {
+	public String delete(HttpServletRequest request) {
 		yaopinservice.deleteyaopin(Integer.valueOf(request.getParameter("id")));
-		return "redirect:list.action";
+		return "redirect:list.action?waymsg=delete";
 	}
 
 }

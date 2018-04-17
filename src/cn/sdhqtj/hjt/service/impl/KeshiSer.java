@@ -36,14 +36,14 @@ public class KeshiSer implements KeshiService {
 	 * 根据科室id获取科室信息
 	 */
 	@Override
-	public Keshi keshiget(Integer id) {
+	public Keshi getkeshi(Integer id) {
 		// TODO Auto-generated method stub
 		keshi = keshiMapper.selectByPrimaryKey(id);
 		return keshi;
 	}
 
 	/**
-	 * 检查重复同一分店一个科室编号和名称
+	 * 检查重复检查重复，科室编号同一分店唯一
 	 */
 	@Override
 	public List<Keshi> checkrepeat(Keshi record) {
@@ -56,7 +56,7 @@ public class KeshiSer implements KeshiService {
 	 * 添加科室
 	 */
 	@Override
-	public void keshiadd(Keshi record) {
+	public void addkeshi(Keshi record) {
 		// TODO Auto-generated method stub
 		try {
 			keshiMapper.insertSelective(record);
@@ -71,7 +71,7 @@ public class KeshiSer implements KeshiService {
 	 * 根据科室id删除科室
 	 */
 	@Override
-	public void keshidelete(Integer id) {
+	public void deletekeshi(Integer id) {
 		// TODO Auto-generated method stub
 		keshi = new Keshi();
 		keshi.setId(id);
@@ -89,10 +89,10 @@ public class KeshiSer implements KeshiService {
 	 * 更新科室信息
 	 */
 	@Override
-	public void keshiupdate(Keshi record) {
+	public void updatekeshi(Keshi record) {
 		// TODO Auto-generated method stub
 		try {
-			keshiMapper.updateByPrimaryKeySelective(record);
+			keshiMapperPro.updatekeshi(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

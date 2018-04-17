@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.sdhqtj.hjt.mapper.ZuzhijigouMapper">
+<mapper namespace="cn.sdhqtj.hjt.mapper.ZuzhijigouMapperPro">
 	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Zuzhijigou">
 		<id column="Id" property="id" jdbcType="INTEGER" />
 		<result column="jtid" property="jtid" jdbcType="INTEGER" />
@@ -36,6 +36,17 @@
 		select
 		<include refid="Base_Column_List" />
 		from hjt_zuzhijigou
-		where fdid = #{fdid,jdbcType=INTEGER} and (csbh = #{csbh,jdbcType=VARCHAR} or csmc = #{csmc,jdbcType=VARCHAR})
+		where fdid = #{fdid,jdbcType=INTEGER} and (csbh = #{csbh,jdbcType=VARCHAR}
 	</select>
+	<update id="updatechushi" parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">
+		update hjt_zuzhijigou
+		set csbh = #{csbh,jdbcType=VARCHAR},
+		csmc = #{csmc,jdbcType=VARCHAR},
+		csmcjp = #{csmcjp,jdbcType=VARCHAR},
+		cslxdh = #{cslxdh,jdbcType=VARCHAR},
+		cszr = #{cszr,jdbcType=VARCHAR},
+		zt = #{zt,jdbcType=INTEGER},
+		csbz = #{csbz,jdbcType=LONGVARCHAR}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
 </mapper>

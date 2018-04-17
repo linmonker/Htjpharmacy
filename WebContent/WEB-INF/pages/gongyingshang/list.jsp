@@ -16,11 +16,11 @@
 	function setid(element,id) {
 		$("tr.active").removeClass("active");
 		$(element).addClass("active");
-		$("#tempid").text(id);
+		$("#tempid").val(id);
 	}
 	function edit() {
 		if($("tr.active").length > 0){
-			var id = $("#tempid").text();
+			var id = $("#tempid").val();
 			location = "${ctx}/gongyingshang/edit.action?id=" + id;
 		}else{
 			alert("请先选择供应商");
@@ -29,7 +29,7 @@
 	function del() {
 		if($("tr.active").length > 0){
 			if (confirm("您确定要删除 " + $("tr.active td:eq(1)").text() + " 吗?")) {	
-				var id = $("#tempid").text();
+				var id = $("#tempid").val();
 				location = "${ctx}/gongyingshang/delete.action?id=" + id;
 			}
 		}else{
@@ -86,7 +86,6 @@
 								<li><a href="${ctx}/gongyingshang/add.action">添加供应商</a></li>
 								<li><a onclick="return edit()">修改供应商</a></li>
 								<li><a onclick="return del()">删除供应商</a></li>
-								<li><span id="tempid" style="display: none"></span></li>
 							</ul>
 							<div class="nav navbar-nav navbar-right">
 								<form action="${ctx }/gongyingshang/search.action" method="post">
@@ -100,7 +99,8 @@
 						</div>
 					</div>
 					</nav>
-					<span>${adddata}</span> <span>${editdata}</span> <span>${deletedata}</span>
+					<input type="hidden" id="tempid" />
+					<span>${addmsg}</span> <span>${editmsg}</span> <span>${deletemsg}</span>
 				</div>
 				<div class="row">
 					<div class="table-responsive">

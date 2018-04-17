@@ -17,11 +17,11 @@
 	function setid(element,id) {
 		$("tr.active").removeClass("active");
 		$(element).addClass("active");
-		$("#tempid").text(id);
+		$("#tempid").val(id);
 	}
 	function edit() {
 		if($("tr.active").length > 0){
-			var id = $("#tempid").text();
+			var id = $("#tempid").val();
 			location = "${ctx}/cangku/edit.action?id=" + id;
 		}else{
 			alert("请先选择仓库");
@@ -30,7 +30,7 @@
 	function del() {
 		if($("tr.active").length > 0){	
 			if (confirm("您确定要删除 " + $("tr.active td:eq(1)").text() + " 吗?")) {	
-				var id = $("#tempid").text();
+				var id = $("#tempid").val();
 				location = "${ctx}/cangku/delete.action?id=" + id;
 			}
 		}else{
@@ -39,14 +39,14 @@
 	}
 	function huowei() {
 		if($("tr.active").length > 0){	
-			var id = $("#tempid").text();
-			location = "${ctx}/huowei/list.action?id=" + id;
+			var id = $("#tempid").val();
+			location = "${ctx}/huowei/list.action?ckid=" + id;
 		}else{
 			alert("请先选择仓库");
 		}
 	}
 	$(document).ready(function(){
-		 var fdid = "${session.loginer.fdid }"; 
+		 var fdid = $(input[name='fdid']).val;
 		 $("#fdid" + fdid).addClass("active");
 		});
 </script>
@@ -61,8 +61,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }/index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -110,16 +111,16 @@
 									<button type="submit" class="button border-main">搜索</button>
 								</form>
 							</div>
-
 						</div>
 					</div>
 					</nav>
-					<span style="margin-left: 50px; font-size: 20px">${adddata}</span>
-					<span style="margin-left: 50px; font-size: 20px">${deletedata}</span>
+					<input type="hidden" id="tempid" />
+					<input type="hidden" name="fdid" value="${cangkulist.fdid }" />
+					<span>${addmsg}</span> <span>${editmsg}</span> <span>${deletemsg}</span>
 				</div>
 				<div class="row">
 					<div class="col-sm-2 col-md-2 sidebar">
-						<h5>分店列表</h5>
+						<h4>分店列表</h4>
 						<ul class="nav nav-sidebar">
 							<c:forEach items="${fendianlist }" var="fdlist">
 								<li id="fdid${fdlist.id }"><a
@@ -128,7 +129,7 @@
 						</ul>
 					</div>
 					<div class="col-sm-9 col-md-9">
-						<h5>仓库列表</h5>
+						<h4>仓库列表</h4>
 						<div class="table-responsive">
 							<table class="table table-bordered table-condensed">
 								<thead>
@@ -136,6 +137,7 @@
 										<th>仓库编号</th>
 										<th>仓库名称</th>
 										<th>仓库名称简拼</th>
+										<th>备注</th>
 										<th>状态</th>
 									</tr>
 								</thead>
@@ -144,6 +146,7 @@
 										<tr onclick="setid(this,${cklist.id })">
 											<td>${cklist.ckbh }</td>
 											<td>${cklist.ckmc }</td>
+											<td>${cklist.ckbz }</td>
 											<td>${cklist.ckmcjp }</td>
 											<td><c:choose>
 													<c:when test="${cklist.zt == 0}">启用</c:when>
@@ -159,7 +162,6 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 
 </html>

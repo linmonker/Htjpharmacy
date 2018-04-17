@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.YonghuMapperPro">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Yonghu">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="fdid" property="fdid" jdbcType="INTEGER" />
+		<result column="yhbh" property="yhbh" jdbcType="VARCHAR" />
+		<result column="yhdlm" property="yhdlm" jdbcType="VARCHAR" />
+		<result column="yhmm" property="yhmm" jdbcType="VARCHAR" />
+		<result column="yhxm" property="yhxm" jdbcType="VARCHAR" />
+		<result column="yhxmjp" property="yhxmjp" jdbcType="VARCHAR" />
+		<result column="yhxb" property="yhxb" jdbcType="VARCHAR" />
+		<result column="yhsfzh" property="yhsfzh" jdbcType="VARCHAR" />
+		<result column="yhsj" property="yhsj" jdbcType="VARCHAR" />
+		<result column="yhdzyx" property="yhdzyx" jdbcType="VARCHAR" />
+		<result column="yhbmid" property="yhbmid" jdbcType="INTEGER" />
+		<result column="yhcsrq" property="yhcsrq" jdbcType="DATE" />
+		<result column="yhdz" property="yhdz" jdbcType="VARCHAR" />
+		<result column="yhyb" property="yhyb" jdbcType="VARCHAR" />
+		<result column="yhjsid" property="yhjsid" jdbcType="INTEGER" />
+		<result column="yhrzrq" property="yhrzrq" jdbcType="DATE" />
+		<result column="ct" property="ct" jdbcType="TIMESTAMP" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+		<result column="dm" property="dm" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Yonghu"
+		extends="BaseResultMap">
+		<result column="yhbz" property="yhbz" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapPro" type="cn.sdhqtj.hjt.entity.YonghuPro"
+		extends="ResultMapWithBLOBs">
+		<result column="fdmc" property="fdmc" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, jtid, fdid, yhbh, yhdlm, yhmm, yhxm, yhxmjp, yhxb, yhsfzh, yhsj,
+		yhdzyx, yhbmid,
+		yhcsrq, yhdz, yhyb, yhjsid, yhrzrq, ct, zt, dm
+	</sql>
+	<sql id="Blob_Column_List">
+		yhbz
+	</sql>
+	<sql id="Pro_Column_List">
+		fdmc, csmc, rolename
+	</sql>
+	<select id="yonghuquery" resultMap="ResultMapPro">
+		select a.*, b.fdmc
+		from hjt_yonghu a,hjt_fendian b,
+		where a.fdid = b.Id
+	</select>
+	<select id="validatelogon" resultMap="ResultMapPro"
+		parameterType="cn.sdhqtj.hjt.entity.Login">
+		select a.id, a.yhdlm, a.fdid, b.fdmc
+		from hjt_yonghu a,hjt_fendian b,
+		where a.yhdlm = #{username,jdbcType=VARCHAR} and a.yhmm =
+		#{password,jdbcType=VARCHAR} and a.fdid = b.Id
+	</select>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.Yonghu">
+		update hjt_yonghu
+		set jtid = #{jtid,jdbcType=INTEGER},
+		fdid = #{fdid,jdbcType=INTEGER},
+		yhbh = #{yhbh,jdbcType=VARCHAR},
+		yhdlm = #{yhdlm,jdbcType=VARCHAR},
+		yhmm = #{yhmm,jdbcType=VARCHAR},
+		yhxm = #{yhxm,jdbcType=VARCHAR},
+		yhxmjp = #{yhxmjp,jdbcType=VARCHAR},
+		yhxb = #{yhxb,jdbcType=VARCHAR},
+		yhsfzh = #{yhsfzh,jdbcType=VARCHAR},
+		yhsj = #{yhsj,jdbcType=VARCHAR},
+		yhdzyx = #{yhdzyx,jdbcType=VARCHAR},
+		yhbmid = #{yhbmid,jdbcType=INTEGER},
+		yhcsrq = #{yhcsrq,jdbcType=DATE},
+		yhdz = #{yhdz,jdbcType=VARCHAR},
+		yhyb = #{yhyb,jdbcType=VARCHAR},
+		yhjsid = #{yhjsid,jdbcType=INTEGER},
+		yhrzrq = #{yhrzrq,jdbcType=DATE},
+		ct = #{ct,jdbcType=TIMESTAMP},
+		zt = #{zt,jdbcType=INTEGER},
+		dm = #{dm,jdbcType=INTEGER},
+		yhbz = #{yhbz,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

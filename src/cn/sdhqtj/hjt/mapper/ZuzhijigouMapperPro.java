@@ -4,6 +4,9 @@ import java.util.List;
 
 import cn.sdhqtj.hjt.entity.Zuzhijigou;
 
+/**
+ * 处室mapper补充
+ */
 public interface ZuzhijigouMapperPro {
 	/**
 	 * 根据分店id获取处室列表
@@ -11,7 +14,12 @@ public interface ZuzhijigouMapperPro {
 	List<Zuzhijigou> chushiquery(Integer id);
 
 	/**
-	 * 检查重复检查重复同一分店一个处室编号和名称
+	 * 检查重复，处室编号同一分店唯一
 	 */
 	List<Zuzhijigou> checkrepeat(Zuzhijigou record);
+
+	/**
+	 * 更新处室信息
+	 */
+	void updatechushi(Zuzhijigou record);
 }

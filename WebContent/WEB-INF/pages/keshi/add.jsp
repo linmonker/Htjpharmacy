@@ -22,8 +22,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx}/index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -35,7 +36,6 @@
 	</nav>
 	<div class="container-fluid">
 		<div class="row">
-
 			<div class="col-sm-2 col-md-2 sidebar">
 				<h4>管理项目</h4>
 				<ul class="nav nav-sidebar">
@@ -50,16 +50,15 @@
 			</div>
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">添加科室</h4>
+				<span>${addmsg }</span> <span>${bhmsg }</span>
 				<form method="post" class="form-x" action="${ctx}/keshi/doadd.action">
-					<span style="margin-left: 50px; color: red; font-size: 20px">${bhdata}</span>
-					<span style="margin-left: 50px; color: red; font-size: 20px">${mcdata}</span>
 					<input type="hidden" name="fdid" value="${session.loginer.fdid }">
 					<div class="form-group">
 						<div class="label">
 							<label>科室编号：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="ksbh"
+							<input type="text" class="form-control" name="ksbh"
 								value="${keshi.ksbh }" data-validate="required:请输入科室编号" />
 							<div class="tips"></div>
 						</div>
@@ -69,7 +68,7 @@
 							<label>科室名称：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="ksmc"
+							<input type="text" class="form-control" name="ksmc"
 								value="${keshi.ksmc }" data-validate="required:请输入科室名称" />
 							<div class="tips"></div>
 						</div>
@@ -79,7 +78,7 @@
 							<label>科室名称简拼：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="ksmcjp"
+							<input type="text" class="form-control" name="ksmcjp"
 								value="${keshi.ksmcjp }" />
 						</div>
 					</div>
@@ -88,7 +87,7 @@
 							<label>科室电话：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="kslxdh"
+							<input type="text" class="form-control" name="kslxdh"
 								value="${keshi.kslxdh }" />
 						</div>
 					</div>
@@ -97,7 +96,7 @@
 							<label>科室主任：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w80" name="kszr"
+							<input type="text" class="form-control" name="kszr"
 								value="${keshi.kszr }" />
 						</div>
 					</div>
@@ -117,13 +116,10 @@
 							<label>备注信息：</label>
 						</div>
 						<div class="field">
-							<textarea class="form-control w50" rows="3" name="ksbz">${keshi.ksbz }</textarea>
+							<textarea class="form-control" rows="3" name="ksbz">${keshi.ksbz }</textarea>
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label></label>
-						</div>
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
 							<a class="button bg-red" href="${ctx}/fendian/list.action"

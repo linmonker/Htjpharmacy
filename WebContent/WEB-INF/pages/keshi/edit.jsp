@@ -58,9 +58,8 @@
 			<div class="col-sm-9 col-md-9 main">
 				<h4 class="sub-header">修改科室</h4>
 				<input id="kszt" type="hidden" value="${keshi.zt }" />
-				<span>${editdata}</span> <span>${bhdata}</span> <span>${mcdata}</span>
-				<form method="post" class="form-x"
-					action="${ctx }/keshi/doedit.action">
+				<span>${editmsg}</span> <span>${bhmsg}</span>
+				<form method="post" class="form-x" action="${ctx }/keshi/doedit.action">
 					<input type="hidden" name="fdid" value="${session.loginer.fdid }">
 					<input type="hidden" name="id" value="${keshi.id }" />
 					<div class="form-group">
@@ -68,7 +67,7 @@
 							<label>科室编号：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="ksbh"
+							<input type="text" class="form-control" name="ksbh"
 								value="${keshi.ksbh }" data-validate="required:请输入科室编号" />
 							<div class="tips"></div>
 						</div>
@@ -78,7 +77,7 @@
 							<label>科室名称：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="ksmc"
+							<input type="text" class="form-control" name="ksmc"
 								value="${keshi.ksmc }" data-validate="required:请输入科室名称" />
 							<div class="tips"></div>
 						</div>
@@ -88,7 +87,7 @@
 							<label>科室名称简拼：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="ksmcjp"
+							<input type="text" class="form-control" name="ksmcjp"
 								value="${keshi.ksmcjp }" />
 						</div>
 					</div>
@@ -97,7 +96,7 @@
 							<label>科室电话：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="kslxdh"
+							<input type="text" class="form-control" name="kslxdh"
 								value="${keshi.kslxdh }" />
 						</div>
 					</div>
@@ -106,7 +105,7 @@
 							<label>科室主任：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w80" name="kszr"
+							<input type="text" class="form-control" name="kszr"
 								value="${keshi.kszr }" />
 						</div>
 					</div>
@@ -126,13 +125,10 @@
 							<label>备注信息：</label>
 						</div>
 						<div class="field">
-							<textarea class="form-control w50" rows="3" name="ksbz">${keshi.ksbz }</textarea>
+							<textarea class="form-control" rows="3" name="ksbz">${keshi.ksbz }</textarea>
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label></label>
-						</div>
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
 							<button class="button bg-main" type="reset">重置</button>

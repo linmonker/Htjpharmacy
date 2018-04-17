@@ -15,7 +15,6 @@
 </head>
 <body>
 <body>
-
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -24,8 +23,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx}/index.action">首页</a></li>
-				<li><a href="#">关于</a></li>
-
+				<li><label>当前用户：</label></li>
+				<li><label>${session.loginer.login }</label></li>
+				<li><label>${session.loginer.fdmc }</label></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">one</a></li>
@@ -49,10 +49,7 @@
 					<li><a href="${ctx}/zhuzhijigou/list.action">组织机构</a></li>
 				</ul>
 			</div>
-
 		</div>
 	</div>
 </body>
-
-
 </html>

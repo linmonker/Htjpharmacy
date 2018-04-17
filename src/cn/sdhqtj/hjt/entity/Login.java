@@ -1,62 +1,52 @@
 package cn.sdhqtj.hjt.entity;
 
 public class Login {
-	private int id;
-	private String login;
+	private Integer id;
+	private String username;
 	private String password;
-	private String loginDate;
-	private int fdid;
+	private Integer fdid;
 	private String fdmc;
 
 	public Login() {
 	}
 
-	public Login(int id, String login, String password, String loginDate, int fdid, String fdmc) {
+	public Login(Integer id, String username, String password, Integer fdid, String fdmc) {
 		this.id = id;
-		this.login = login;
+		this.username = username;
 		this.password = password;
-		this.loginDate = loginDate;
 		this.fdid = fdid;
 		this.fdmc = fdmc;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String passWord) {
-		this.password = passWord;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
-	public String getLoginDate() {
-		return loginDate;
-	}
-
-	public void setLoginDate(String loginDate) {
-		this.loginDate = loginDate;
-	}
-
-	public int getFdid() {
+	public Integer getFdid() {
 		return fdid;
 	}
 
-	public void setFdid(int fdid) {
+	public void setFdid(Integer fdid) {
 		this.fdid = fdid;
 	}
 
@@ -67,4 +57,5 @@ public class Login {
 	public void setFdmc(String fdmc) {
 		this.fdmc = fdmc;
 	}
+
 }

@@ -1,20 +1,12 @@
 package cn.sdhqtj.hjt.entity;
 
 /**
- *
+ * 药品扩展类
  */
 public class YaopinPro extends YaopinWithBLOBs {
 	private String flmc;
 	private String gysmc;
 	
-	public YaopinPro() {
-	}
-
-	public YaopinPro(String flmc, String gysmc) {
-		this.flmc = flmc;
-		this.gysmc = gysmc;
-	}
-
 	public String getFlmc() {
 		return flmc;
 	}

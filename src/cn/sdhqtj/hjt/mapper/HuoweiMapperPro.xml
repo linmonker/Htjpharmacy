@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.sdhqtj.hjt.mapper.HuoweiMapper">
+<mapper namespace="cn.sdhqtj.hjt.mapper.HuoweiMapperPro">
 	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Huowei">
 		<id column="Id" property="id" jdbcType="INTEGER" />
 		<result column="jtid" property="jtid" jdbcType="INTEGER" />
@@ -30,5 +30,21 @@
 		from hjt_cangku_huowei
 		where ckid = #{ckid,jdbcType=INTEGER}
 	</select>
+	<select id="checkrepeat" resultMap="BaseResultMap"
+		parameterType="cn.sdhqtj.hjt.entity.Huowei">
+		select
+		<include refid="Base_Column_List" />
+		from hjt_cangku_huowei
+		where ckid = #{ckid,jdbcType=INTEGER} and hwbh = #{hwbh,jdbcType=VARCHAR}
+	</select>
+	<update id="updatehuowei" parameterType="cn.sdhqtj.hjt.entity.Huowei">
+		update hjt_cangku_huowei
+		set hwbh = #{hwbh,jdbcType=VARCHAR},
+		hwmc = #{hwmc,jdbcType=VARCHAR},
+		hwmcjp = #{hwmcjp,jdbcType=VARCHAR},
+		zt = #{zt,jdbcType=INTEGER},
+		hwbz = #{hwbz,jdbcType=LONGVARCHAR}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
 
 </mapper>

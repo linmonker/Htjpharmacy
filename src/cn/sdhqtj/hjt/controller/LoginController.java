@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import cn.sdhqtj.hjt.entity.Login;
 import cn.sdhqtj.hjt.service.LoginService;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 
 /**
  *用户登录controller
@@ -28,6 +26,11 @@ public class LoginController {
 	public String login() {
 		return "login";
 	}
+	
+	@RequestMapping("/index")
+	public String index() {
+		return "index";
+	}
 
 	/**
 	 *登录操作
@@ -37,7 +40,7 @@ public class LoginController {
 
 		login = loginService.validatelogon(record);
 		if (login == null) {
-			model.addAttribute("login", login.getUsername());
+			model.addAttribute("username", login.getUsername());
 			model.addAttribute("loginmsg", "用户名或密码不正确");
 			return "login";
 		} else {

@@ -57,17 +57,19 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
-				<h4 class="sub-header">添加供应商</h4>
-				<input id="gyszt" type="hidden" value="${gys.zt }" /> 
-				<span>${addmsg}</span> <span>${bhmsg}</span>
+				<div class="field">
+					<label class="sub-header">添加供应商</label>
+					<input id="gyszt" type="hidden" value="${gys.zt }" />
+					<span>${addmsg}</span> <span>${bhmsg}</span>
+				</div>
 				<form method="post" class="form-x"
 					action="${ctx }/gongyingshang/doadd.action">
 					<div>
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#jbxx"
 								aria-controls="jbxx" role="tab" data-toggle="tab">基本信息</a></li>
-							<li role="presentation"><a href="#gspzl"
-								aria-controls="gspzl" role="tab" data-toggle="tab">GSP资料</a></li>
+							<li role="presentation"><a href="#gspzl" aria-controls="gspzl"
+								role="tab" data-toggle="tab">GSP资料</a></li>
 						</ul>
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="jbxx">
@@ -168,7 +170,7 @@
 										</div>
 										<div class="field">
 											<input type="text" class="form-control" name="gysywysfz"
-												value="${gys.gysywsfz }" />
+												value="${gys.gysywysfz }" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -263,8 +265,8 @@
 											<label>GSP证书号码：</label>
 										</div>
 										<div class="field">
-											<input type="text" class="form-control" name="gygspzj"
-												value="${gys.gygspzj }" />
+											<input type="text" class="form-control" name="gysgspzj"
+												value="${gys.gysgspzj }" />
 										</div>
 									</div>
 									<div class="form-group">

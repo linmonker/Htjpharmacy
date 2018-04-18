@@ -12,6 +12,8 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script src="${ctx}/static/js/jquery.jqprint-0.3.js"></script>
+<script src="${ctx}/static/js/jquery-migrate-1.2.1.min.js"></script>
 <script>
 	$(document).ready(function() {
 		var sid = $("#flid").val;
@@ -23,6 +25,14 @@
 			$("#ypgys option[value=sid]").attr("selected", true);
 		}
 	})
+	function topdf() {
+		$("#formpot").jqprint({
+			debug : false,
+			importCSS : true,
+			printContainer : true,
+			operaSupport : true
+		});
+	}
 </script>
 </head>
 <body>
@@ -62,12 +72,16 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
-				<h4 class="sub-header">修改供应商</h4>
-				<input id="flid" type="hidden" value="${yaopin.yplb }" />
-				<input id="gysid" type="hidden" value="${yaopin.ypgys }" />
-				<span>${addmsg }</span><span>${bhmsg }</span>
-				<form method="post" class="form-x" action="${ctx }/yaopin/doedit.action">
-				    <input type="hidden" name="id" value="${yaopin.id }" />
+				<div class="field">
+					<label class="sub-header">修改药品</label>
+					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
+					<input id="flid" type="hidden" value="${yaopin.yplb }" />
+					<input id="gysid" type="hidden" value="${yaopin.ypgys }" />
+					<span>${addmsg }</span><span>${bhmsg }</span>
+				</div>
+				<form id="" formpot method="post" class="form-x"
+					action="${ctx }/yaopin/doedit.action">
+					<input type="hidden" name="id" value="${yaopin.id }" />
 					<div>
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#jbxx"
@@ -338,13 +352,13 @@
 										<div class="field">
 											<label class="radio-inline">
 												<input type="radio" name="ypsfdz" id="ypsfdz1"
-													<c:if test="${yaopin.ypsfdz == 0 }">checked</c:if> 
-													value="0">是
+													<c:if test="${yaopin.ypsfdz == 0 }">checked</c:if> value="0">
+												是
 											</label>
 											<label class="radio-inline">
 												<input type="radio" name="ypsfdz" id="ypsfdz2"
-													<c:if test="${yaopin.ypsfdz == 1 }">checked</c:if> 
-													value="1">否
+													<c:if test="${yaopin.ypsfdz == 1 }">checked</c:if> value="1">
+												否
 											</label>
 										</div>
 									</div>
@@ -356,12 +370,14 @@
 											<label class="radio-inline">
 												<input type="radio" name="ypsfcyhyjf" id="ypsfcyhyjf1"
 													<c:if test="${yaopin.ypsfcyhyjf == 0 }">checked</c:if>
-													value="0">开
+													value="0">
+												开
 											</label>
 											<label class="radio-inline">
 												<input type="radio" name="ypsfcyhyjf" id="ypsfcyhyjf2"
 													<c:if test="${yaopin.ypsfcyhyjf == 1 }">checked</c:if>
-													value="1">关
+													value="1">
+												关
 											</label>
 										</div>
 									</div>

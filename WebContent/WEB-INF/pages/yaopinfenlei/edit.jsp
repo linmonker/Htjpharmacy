@@ -12,6 +12,8 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script src="${ctx}/static/js/jquery.jqprint-0.3.js"></script>
+<script src="${ctx}/static/js/jquery-migrate-1.2.1.min.js"></script>
 <script>
 	$(document).ready(function() {
 		var sid = $("#sjflidtemp").val;
@@ -19,6 +21,14 @@
 			$("#sjflid option[value=sid]").attr("selected", true);
 		}
 	})
+	function topdf() {
+		$("#formpot").jqprint({
+			debug : false,
+			importCSS : true,
+			printContainer : true,
+			operaSupport : true
+		});
+	}
 </script>
 </head>
 <body>
@@ -57,9 +67,12 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
-				<h4 class="sub-header">修改药品分类</h4>
-				<input id="sjflidtemp" type="hidden" value="${ypfl.sjflid }" />
-				<span>${addmsg }</span><span>${bhmsg }</span>
+				<div class="field">
+					<label class="sub-header">修改药品分类</label>
+					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
+					<input id="sjflidtemp" type="hidden" value="${ypfl.sjflid }" />
+					<span>${addmsg }</span><span>${bhmsg }</span>
+				</div>
 				<form method="post" class="form-x"
 					action="${ctx }/yaopinfenlei/doedit.action">
 					<input type="hidden" name="id" value="${ypfl.id }" />

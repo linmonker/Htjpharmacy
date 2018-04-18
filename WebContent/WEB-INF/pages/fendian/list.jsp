@@ -12,6 +12,7 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script src="${ctx}/static/js/jquery.table2excel.min.js"></script>
 <script>
 	function setid(element,id) {
 		$("tr.active").removeClass("active");
@@ -35,6 +36,16 @@
 		}else{
 			alert("请先选择分店");
 		}
+	}
+	function toexcel() {
+	    $("#tablepot").table2excel({
+		    exclude: ".noExl",
+		    name: "Excel Document Name",
+		    filename: "分店列表",
+		    exclude_img: true,
+		    exclude_links: true,
+		    exclude_inputs: true
+		});
 	}
 </script>
 </head>
@@ -103,8 +114,10 @@
 					<span>${addmsg }</span> <span>${editmsg }</span> <span>${deletemsg }</span>
 				</div>
 				<div class="row">
+					<span>共${fendianlist.size() }条记录</span>
+					<button class="btn btn-primary btn-sm" onclick="toexcel()">导出Excel</button>
 					<div class="table-responsive">
-						<table class="table table-bordered table-condensed">
+						<table id="tablepot" class="table table-bordered table-condensed">
 							<thead>
 								<tr>
 									<th>分店编号</th>

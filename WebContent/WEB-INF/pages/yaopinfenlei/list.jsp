@@ -39,10 +39,7 @@
              removeTitle:"删除分类",  
              renameTitle:"编辑分类",  
              editNameSelectAll: true,
-             drag: {
-            	 isCopy = false,
-            	 isMove = false,
-             }
+      
          },  
          data: {  
              simpleData: {  

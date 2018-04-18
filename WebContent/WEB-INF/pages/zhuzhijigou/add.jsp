@@ -50,8 +50,10 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
-				<h4 class="sub-header">添加处室</h4>
-				<span>${addmsg }</span> <span>${bhmsg }</span>
+				<div class="field">
+					<label class="sub-header">添加处室</label>
+					<span>${addmsg }</span> <span>${bhmsg }</span>
+				</div>
 				<form method="post" class="form-x"
 					action="${ctx}/zhuzhijigou/doadd.action">
 					<input type="hidden" name="fdid" value="${session.loginer.fdid }">

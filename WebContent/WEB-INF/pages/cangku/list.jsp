@@ -45,6 +45,16 @@
 			alert("请先选择仓库");
 		}
 	}
+	function toexcel() {
+	    $("#tablepot").table2excel({
+		    exclude: ".noExl",
+		    name: "Excel Document Name",
+		    filename: "仓库列表",
+		    exclude_img: true,
+		    exclude_links: true,
+		    exclude_inputs: true
+		});
+	}
 	$(document).ready(function(){
 		 var fdid = $(input[name='fdid']).val;
 		 $("#fdid" + fdid).addClass("active");
@@ -130,8 +140,10 @@
 					</div>
 					<div class="col-sm-9 col-md-9">
 						<h4>仓库列表</h4>
+						<span>共${cangkulist.size() }条记录</span>
+					    <button class="btn btn-primary btn-sm" onclick="toexcel()">导出Excel</button>
 						<div class="table-responsive">
-							<table class="table table-bordered table-condensed">
+							<table id="tablepot" class="table table-bordered table-condensed">
 								<thead>
 									<tr>
 										<th>仓库编号</th>

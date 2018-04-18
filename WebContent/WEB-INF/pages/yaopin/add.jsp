@@ -62,10 +62,12 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
-				<h4 class="sub-header">添加供应商</h4>
-				<input id="flid" type="hidden" value="${yaopin.yplb }" />
-				<input id="gysid" type="hidden" value="${yaopin.ypgys }" />
-				<span>${addmsg }</span><span>${bhmsg }</span>
+				<div class="field">
+					<label class="sub-header">添加药品</label>
+					<input id="flid" type="hidden" value="${yaopin.yplb }" />
+					<input id="gysid" type="hidden" value="${yaopin.ypgys }" />
+					<span>${addmsg }</span><span>${bhmsg }</span>
+				</div>
 				<form method="post" class="form-x" action="${ctx }/yaopin/doadd.action">
 					<div>
 						<ul class="nav nav-tabs" role="tablist">
@@ -337,13 +339,13 @@
 										<div class="field">
 											<label class="radio-inline">
 												<input type="radio" name="ypsfdz" id="ypsfdz1"
-													<c:if test="${yaopin.ypsfdz == 0 }">checked</c:if> 
-													value="0">是
+													<c:if test="${yaopin.ypsfdz == 0 }">checked</c:if> value="0">
+												是
 											</label>
 											<label class="radio-inline">
 												<input type="radio" name="ypsfdz" id="ypsfdz2"
-													<c:if test="${yaopin.ypsfdz == 1 }">checked</c:if>
-													value="1">否
+													<c:if test="${yaopin.ypsfdz == 1 }">checked</c:if> value="1">
+												否
 											</label>
 										</div>
 									</div>
@@ -355,12 +357,14 @@
 											<label class="radio-inline">
 												<input type="radio" name="ypsfcyhyjf" id="ypsfcyhyjf1"
 													<c:if test="${yaopin.ypsfcyhyjf == 0 }">checked</c:if>
-													value="0">开
+													value="0">
+												开
 											</label>
 											<label class="radio-inline">
 												<input type="radio" name="ypsfcyhyjf" id="ypsfcyhyjf2"
 													<c:if test="${yaopin.ypsfcyhyjf == 1 }">checked</c:if>
-													value="1">关
+													value="1">
+												关
 											</label>
 										</div>
 									</div>

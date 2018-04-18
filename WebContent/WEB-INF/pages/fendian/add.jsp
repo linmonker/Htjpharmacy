@@ -49,10 +49,11 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
-				<h4 class="sub-header">添加分店</h4>
-				<span>${addmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
-				<form method="post" class="form-x"
-					action="${ctx}/fendian/doadd.action">
+				<div class="field">
+					<label class="sub-header">添加分店</label>
+					<span>${addmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
+				</div>
+				<form method="post" class="form-x" action="${ctx}/fendian/doadd.action">
 					<div class="form-group">
 						<div class="label">
 							<label>分店编号：</label>

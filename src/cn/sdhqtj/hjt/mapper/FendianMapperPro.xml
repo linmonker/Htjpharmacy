@@ -21,14 +21,14 @@
 	<sql id="Blob_Column_List">
 		fdbz
 	</sql>
-	<select id="fendianquery" resultType="ResultMapWithBLOBs">
+	<select id="fendianquery" resultMap="ResultMapWithBLOBs">
 		select
 		<include refid="Base_Column_List" />
 		from hjt_fendian
 		where zt = 0
 		order by fdbh asc
 	</select>
-	<select id="checkrepeat" resultType="BaseResultMap"
+	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Fendian">
 		select
 		<include refid="Base_Column_List" />

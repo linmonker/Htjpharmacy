@@ -12,12 +12,23 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script src="${ctx}/static/js/jquery.jqprint-0.3.js"></script>
+<script src="${ctx}/static/js/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		if ("1" == $("#gyszt").val) {
 			$("select option:eq(1)").attr("selected", true);
 		}
 	})
+	function topdf() {
+		$("#formpot").jqprint({
+			debug : false,
+			importCSS : true,
+			printContainer : true,
+			operaSupport : true
+		});
+	}
+</script>
 </script>
 </head>
 <body>
@@ -57,17 +68,21 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
-				<h4 class="sub-header">修改供应商</h4>
-				<input id="gyszt" type="hidden" value="${gys.zt }" /> 
-				<span>${editmsg}</span> <span>${bhmsg}</span>
-				<form method="post" class="form-x" action="${ctx }/gongyingshang/doedit.action">
-				    <input type="hidden" name="id" value="${gys.id }" />
+				<div class="field">
+					<label class="sub-header">修改供应商</label>
+					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
+					<input id="gyszt" type="hidden" value="${gys.zt }" />
+					<span>${editmsg}</span> <span>${bhmsg}</span>
+				</div>
+				<form id="formpot" method="post" class="form-x"
+					action="${ctx }/gongyingshang/doedit.action">
+					<input type="hidden" name="id" value="${gys.id }" />
 					<div>
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#jbxx"
 								aria-controls="jbxx" role="tab" data-toggle="tab">基本信息</a></li>
-							<li role="presentation"><a href="#gspzl"
-								aria-controls="gspzl" role="tab" data-toggle="tab">GSP资料</a></li>
+							<li role="presentation"><a href="#gspzl" aria-controls="gspzl"
+								role="tab" data-toggle="tab">GSP资料</a></li>
 						</ul>
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="jbxx">
@@ -168,7 +183,7 @@
 										</div>
 										<div class="field">
 											<input type="text" class="form-control" name="gysywysfz"
-												value="${gys.gysywsfz }" />
+												value="${gys.gysywysfz }" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -262,8 +277,8 @@
 										<label>GSP证书号码：</label>
 									</div>
 									<div class="field">
-										<input type="text" class="form-control" name="gygspzj"
-											value="${gys.gygspzj }" />
+										<input type="text" class="form-control" name="gysgspzj"
+											value="${gys.gysgspzj }" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -350,9 +365,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label></label>
-						</div>
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
 							<button class="button bg-main" type="reset">重置</button>

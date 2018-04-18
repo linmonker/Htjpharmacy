@@ -12,6 +12,18 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script src="${ctx}/static/js/jquery.jqprint-0.3.js"></script>
+<script src="${ctx}/static/js/jquery-migrate-1.2.1.min.js"></script>
+<script>
+	function topdf() {
+		$("#formpot").jqprint({
+			debug : false,
+			importCSS : true,
+			printContainer : true,
+			operaSupport : true
+		});
+	}
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -49,9 +61,13 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
-				<h4 class="sub-header">修改分店</h4>
-				<span>${editmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
-				<form method="post" class="form-x" action="${ctx }/fendian/doedit.action">
+				<div class="field">
+					<label class="sub-header">修改分店</label>
+					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
+					<span>${editmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
+				</div>
+				<form id="formpot" method="post" class="form-x"
+					action="${ctx }/fendian/doedit.action">
 					<input type="hidden" name="id" value="${fendian.id }" />
 					<div class="form-group">
 						<div class="label">

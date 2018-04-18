@@ -58,7 +58,7 @@
 		gysjyfw, gysbz
 	</sql>
 
-	<select id="Gongyingshangquery" resultMap="BaseResultMap">
+	<select id="gongyingshangquery" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" />
 		from hjt_gongyingshang
 		where dm = 0

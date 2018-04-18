@@ -1,5 +1,7 @@
 package cn.sdhqtj.hjt.entity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Gongyingshang {
@@ -187,16 +189,21 @@ public class Gongyingshang {
 		return gysyyzzqx;
 	}
 
-	public void setGysyyzzqx(Date gysyyzzqx) {
-		this.gysyyzzqx = gysyyzzqx;
+	public void setGysyyzzqx(Date gysyyzzqx) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+		String dd = sdf.format(gysyyzzqx);
+		this.gysyyzzqx = sdf.parse(dd);
 	}
 
 	public Date getGysyyzzfzrq() {
 		return gysyyzzfzrq;
 	}
 
-	public void setGysyyzzfzrq(Date gysyyzzfzrq) {
-		this.gysyyzzfzrq = gysyyzzfzrq;
+	public void setGysyyzzfzrq(Date gysyyzzfzrq) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+		String dd = sdf.format(gysyyzzfzrq);
+		this.gysyyzzfzrq = sdf.parse(dd);
+		
 	}
 
 	public String getGysfrdb() {
@@ -275,16 +282,20 @@ public class Gongyingshang {
 		return gysxkzyxq;
 	}
 
-	public void setGysxkzyxq(Date gysxkzyxq) {
-		this.gysxkzyxq = gysxkzyxq;
+	public void setGysxkzyxq(Date gysxkzyxq) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+		String dd = sdf.format(gysxkzyxq);
+		this.gysxkzyxq = sdf.parse(dd);
 	}
 
 	public Date getGysxkzfzrq() {
 		return gysxkzfzrq;
 	}
 
-	public void setGysxkzfzrq(Date gysxkzfzrq) {
-		this.gysxkzfzrq = gysxkzfzrq;
+	public void setGysxkzfzrq(Date gysxkzfzrq) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+		String dd = sdf.format(gysxkzfzrq);
+		this.gysxkzfzrq = sdf.parse(dd);
 	}
 
 	public String getGysgspzj() {
@@ -307,8 +318,10 @@ public class Gongyingshang {
 		return gysgspzjyxq;
 	}
 
-	public void setGysgspzjyxq(Date gysgspzjyxq) {
-		this.gysgspzjyxq = gysgspzjyxq;
+	public void setGysgspzjyxq(Date gysgspzjyxq) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+		String dd = sdf.format(gysgspzjyxq);
+		this.gysgspzjyxq = sdf.parse(dd);
 	}
 
 	public String getGysinfo1() {

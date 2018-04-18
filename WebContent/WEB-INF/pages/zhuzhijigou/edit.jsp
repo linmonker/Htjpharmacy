@@ -12,12 +12,22 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script src="${ctx}/static/js/jquery.jqprint-0.3.js"></script>
+<script src="${ctx}/static/js/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		if ("1" == $("#cszt").val) {
 			$("select option:eq(1)").attr("selected", true);
 		}
 	})
+	function topdf() {
+		$("#formpot").jqprint({
+			debug : false,
+			importCSS : true,
+			printContainer : true,
+			operaSupport : true
+		});
+	}
 </script>
 </head>
 <body>
@@ -56,10 +66,13 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
-				<h4 class="sub-header">修改处室</h4>
-				<input id="kszt" type="hidden" value="${chushi.zt }" />
-				<span>${editmsg }</span> <span>${bhmsg}</span>
-				<form method="post" class="form-x"
+				<div class="field">
+					<label class="sub-header">修改处室</label>
+					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
+					<input id="kszt" type="hidden" value="${chushi.zt }" />
+					<span>${editmsg }</span> <span>${bhmsg}</span>
+				</div>
+				<form id="formpot" method="post" class="form-x"
 					action="${ctx }/zhuzhijigou/doedit.action">
 					<input type="hidden" name="fdid" value="${session.loginer.fdid }">
 					<input type="hidden" name="id" value="${chushi.id }" />

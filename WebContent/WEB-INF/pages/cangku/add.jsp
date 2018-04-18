@@ -49,10 +49,11 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
-				<h4 class="sub-header">添加仓库</h4>
-				<span>${addmsg}</span> <span>${bhmsg}</span>
-				<form method="post" class="form-x"
-					action="${ctx}/cangku/doadd.action">
+				<div class="field">
+					<label class="sub-header">添加仓库</label>
+					<span>${addmsg}</span> <span>${bhmsg}</span>
+				</div>
+				<form method="post" class="form-x" action="${ctx}/cangku/doadd.action">
 					<input type="hidden" name="fdid" value="${cangku.fdid }" />
 					<div class="form-group">
 						<div class="label">

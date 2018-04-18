@@ -37,6 +37,16 @@
 			alert("请先选择科室");
 		}
 	}
+	function toexcel() {
+	    $("#tablepot").table2excel({
+		    exclude: ".noExl",
+		    name: "Excel Document Name",
+		    filename: "科室列表",
+		    exclude_img: true,
+		    exclude_links: true,
+		    exclude_inputs: true
+		});
+	}
 </script>
 </head>
 <body>
@@ -104,8 +114,10 @@
 					<span>${addmsg }</span> <span>${editmsg }</span> <span>${deletemsg }</span>
 				</div>
 				<div class="row">
+				    <span>共${keshilist.size() }条记录</span>
+					<button class="btn btn-primary btn-sm" onclick="toexcel()">导出Excel</button>
 					<div class="table-responsive">
-						<table class="table table-bordered table-condensed">
+						<table id="tablepot" class="table table-bordered table-condensed">
 							<thead>
 								<tr>
 									<th>科室编号</th>

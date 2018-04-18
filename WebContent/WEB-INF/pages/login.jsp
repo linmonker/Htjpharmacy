@@ -25,12 +25,12 @@
 						</div>
 						<div class="panel-body"
 							style="padding: 30px; padding-bottom: 10px; padding-top: 10px;">
-							<span style="margin-left: 50px; color: red; font-size: 20px">${loginmsg}</span>
+							<span style="margin-left: 50px; color: red; font-size: 20px">${loginmsg }</span>
 							<div class="form-group">
 								<div class="field field-icon-right">
 									<input type="text" class="input input-big" name="login"
 										placeholder="登录账号" data-validate="required:请填写账号"
-										value="${login }" /> <span
+										value="${username }" /> <span
 										class="icon icon-user margin-small"></span>
 								</div>
 							</div>

@@ -22,26 +22,30 @@
 		ckbz
 	</sql>
 
-	<select id="cangkuquery" resultMap="ResultMapWithBLOBs"
-		parameterType="java.lang.Integer">
+	<select id="cangkuquery" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
 		select
-		<include refid="Base_Column_List" />,<include refid="Blob_Column_List" />
-		fron hjt_cangku 
-		where fdid = ${fdid,jdbcType=INTEGER}
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from hjt_cangku
+		where fdid = #{fdid,jdbcType=INTEGER} 
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Cangku">
-		select <include refid="Base_Column_List" />
-		fron hjt_cangku 
-		where fdid = ${fdid,jdbcType=INTEGER} and ckbh = #{ckbh,jdbcType=VARCHAR}
+		select
+		<include refid="Base_Column_List" />
+		fron hjt_cangku
+		where fdid = #{fdid,jdbcType=INTEGER} and ckbh = #{ckbh,jdbcType=VARCHAR}
 	</select>
 	<update id="updatecangku" parameterType="cn.sdhqtj.hjt.entity.Cangku">
 		update hjt_cangku
-		set ckbh = #{ckbh,jdbcType=VARCHAR},
+		set
+		ckbh = #{ckbh,jdbcType=VARCHAR},
 		ckmc = #{ckmc,jdbcType=VARCHAR},
 		ckmcjp = #{ckmcjp,jdbcType=VARCHAR},
 		zt = #{zt,jdbcType=INTEGER},
-		ckbz = #{ckbz,jdbcType=LONGVARCHAR}
+		ckbz =
+		#{ckbz,jdbcType=LONGVARCHAR}
 		where Id = #{id,jdbcType=INTEGER}
 	</update>
 

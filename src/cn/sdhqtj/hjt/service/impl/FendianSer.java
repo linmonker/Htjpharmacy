@@ -43,6 +43,16 @@ public class FendianSer implements FendianService {
 	}
 
 	/**
+	 * 搜索分店
+	 */
+	@Override
+	public List<Fendian> searchfendian(Fendian record) {
+		// TODO Auto-generated method stub
+		fendianlist = fendianMapperPro.searchfendian(record);
+		return fendianlist;
+	}
+
+	/**
 	 * 检查重复，分店编号和分店名称
 	 */
 	@Override

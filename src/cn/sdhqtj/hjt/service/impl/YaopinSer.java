@@ -4,7 +4,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import cn.sdhqtj.hjt.entity.Yaopin;
-import cn.sdhqtj.hjt.entity.YaopinPro;
+import cn.sdhqtj.hjt.entity.YaopinVo;
 import cn.sdhqtj.hjt.entity.YaopinWithBLOBs;
 import cn.sdhqtj.hjt.mapper.YaopinMapper;
 import cn.sdhqtj.hjt.mapper.YaopinMapperPro;
@@ -23,16 +23,16 @@ public class YaopinSer implements YaopinService {
 	private YaopinMapper yaopinMapper;
 	Yaopin yaopin;
 	YaopinWithBLOBs yaopinB;
-	List<YaopinPro> yaopinlist;
+	List<YaopinVo> yaopinvolist;
 
 	/**
 	 * 获取药品列表
 	 */
 	@Override
-	public List<YaopinPro> yaopinquery() {
+	public List<YaopinVo> yaopinquery() {
 		// TODO Auto-generated method stub
-		yaopinlist = yaopinMapperPro.yaopinquery();
-		return yaopinlist;
+		yaopinvolist = yaopinMapperPro.yaopinquery();
+		return yaopinvolist;
 	}
 
 	/**
@@ -43,6 +43,16 @@ public class YaopinSer implements YaopinService {
 		// TODO Auto-generated method stub
 		yaopinB = yaopinMapper.selectByPrimaryKey(id);
 		return yaopinB;
+	}
+
+	/**
+	 * 搜索药品
+	 */
+	@Override
+	public List<YaopinVo> searchyaopin(Yaopin record) {
+		// TODO Auto-generated method stub
+		yaopinvolist = yaopinMapperPro.searchyaopin(record);
+		return yaopinvolist;
 	}
 
 	/**

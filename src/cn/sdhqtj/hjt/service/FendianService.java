@@ -21,6 +21,12 @@ public interface FendianService {
 	 * 通过分店id获取分店信息
 	 */
 	public Fendian getfendian(Integer id);
+	
+	/**
+	 * 搜索分店
+	 */
+	public List<Fendian> searchfendian(Fendian record);
+
 
 	/**
 	 * 检查重复，分店编号和分店名称

@@ -43,6 +43,16 @@ public class KeshiSer implements KeshiService {
 	}
 
 	/**
+	 * 搜索科室
+	 */
+	@Override
+	public List<Keshi> searchkeshi(Keshi record) {
+		// TODO Auto-generated method stub
+		keshilist = keshiMapperPro.searchkeshi(record);
+		return keshilist;
+	}
+
+	/**
 	 * 检查重复检查重复，科室编号同一分店唯一
 	 */
 	@Override

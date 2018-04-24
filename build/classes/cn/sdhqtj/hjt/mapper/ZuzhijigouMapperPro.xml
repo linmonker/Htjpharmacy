@@ -32,7 +32,14 @@
 		from hjt_zuzhijigou
 		where fdid = #{fdid,jdbcType=INTEGER}
 	</select>
-	<select id="checkrepeat" resultMap="BaseResultMap" parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">
+	<select id="searchchushi" resultMap="ResultMapWithBLOBs"
+		parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">
+		select *
+		from hjt_zuzhijigou
+		where fdid = #{fdid,jdbcType=INTEGER} and csmc like concat("%",#{csmc},"%")
+	</select>
+	<select id="checkrepeat" resultMap="BaseResultMap" 
+	    parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">
 		select
 		<include refid="Base_Column_List" />
 		from hjt_zuzhijigou

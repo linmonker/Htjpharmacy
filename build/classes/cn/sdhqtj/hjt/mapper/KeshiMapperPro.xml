@@ -31,6 +31,12 @@
 		from hjt_keshi
 		where fdid = #{fdid,jdbcType=INTEGER}
 	</select>
+	<select id="searchkeshi" resultMap="ResultMapWithBLOBs"
+		parameterType="cn.sdhqtj.hjt.entity.Keshi">
+		select *
+		from hjt_keshi
+		where fdid = #{fdid,jdbcType=INTEGER} and ksmc like concat("%",#{ksmc},"%") 
+	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap" parameterType="cn.sdhqtj.hjt.entity.Keshi">
 		select
 		<include refid="Base_Column_List" />

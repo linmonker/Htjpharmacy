@@ -71,7 +71,7 @@ public class GongyingshangController {
 			return "gongyingshang/add";
 		} else {// 添加成功
 			gysservice.addgongyingshang(record);
-			return "redirect:list.action?waymsg=add";
+			return "redirect:list?waymsg=add";
 		}
 	}
 
@@ -102,7 +102,7 @@ public class GongyingshangController {
 			return "gongyingshang/edit";
 		} else {// 修改成功
 			gysservice.updategongyingshang(record);
-			return "redirect:list.action?waymsg=edit";
+			return "redirect:list?waymsg=edit";
 		}
 	}
 
@@ -112,6 +112,16 @@ public class GongyingshangController {
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request) {
 		gysservice.deletegongyingshang(Integer.valueOf(request.getParameter("id")));
-		return "redirect:list.action?waymsg=delete";
+		return "redirect:list?waymsg=delete";
+	}
+	
+	@RequestMapping("/search")
+	public String search(String searchword, Model model) {
+		gys = new Gongyingshang();
+		gys.setGysbh(searchword);
+		gys.setGysmc(searchword);
+		gyslist = gysservice.searchgongyingshang(gys);
+		model.addAttribute("gyslist", gyslist);
+		return "gongyingshang/list";
 	}
 }

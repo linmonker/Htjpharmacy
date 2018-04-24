@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.sdhqtj.hjt.entity.Gongyingshang;
 import cn.sdhqtj.hjt.entity.Login;
 import cn.sdhqtj.hjt.entity.Yaopin;
-import cn.sdhqtj.hjt.entity.YaopinPro;
+import cn.sdhqtj.hjt.entity.YaopinVo;
 import cn.sdhqtj.hjt.entity.YaopinWithBLOBs;
 import cn.sdhqtj.hjt.entity.Yaopinfenlei;
 import cn.sdhqtj.hjt.service.GongyingshangService;
@@ -29,7 +29,7 @@ public class YaopinController {
 
 	@Resource
 	YaopinService yaopinservice;
-	List<YaopinPro> yaopinlist;
+	List<YaopinVo> yaopinvolist;
 	Yaopin yaopin;
 	YaopinWithBLOBs yaopinB;
 	
@@ -46,8 +46,8 @@ public class YaopinController {
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
-		yaopinlist = yaopinservice.yaopinquery();
-		model.addAttribute("yaopinnlist", yaopinlist);
+		yaopinvolist = yaopinservice.yaopinquery();
+		model.addAttribute("yaopinlist", yaopinvolist);
 
 		String waymsg = request.getParameter("waymsg");
 		if ("add".equals(waymsg)) {
@@ -96,7 +96,7 @@ public class YaopinController {
 			Login loginer = (Login) session.getAttribute("loginer");
 			record.setYpcjr(loginer.getId());
 			yaopinservice.addyaopin(record);
-			return "redirect:list.action?waymsg=add";
+			return "redirect:list?waymsg=add";
 		}
 	}
 
@@ -137,7 +137,7 @@ public class YaopinController {
 			return "yaopin/edit";
 		} else {// 修改成功
 			yaopinservice.updateyaopin(record);
-			return "redirect:list.action?waymsg=edit";
+			return "redirect:list?waymsg=edit";
 		}
 	}
 
@@ -147,7 +147,20 @@ public class YaopinController {
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request) {
 		yaopinservice.deleteyaopin(Integer.valueOf(request.getParameter("id")));
-		return "redirect:list.action?waymsg=delete";
+		return "redirect:list?waymsg=delete";
 	}
 
+	/**
+	 * 药品列表
+	 */
+	@RequestMapping("/search")
+	public String search(String searchword, Model model) {
+		yaopin = new Yaopin();
+		yaopin.setYpbh(searchword);
+		yaopin.setYpspm(searchword);
+		yaopin.setYptym(searchword);
+		yaopinvolist = yaopinservice.searchyaopin(yaopin);
+		model.addAttribute("yaopinlist", yaopinvolist);
+		return "yaopin/list";
+	}
 }

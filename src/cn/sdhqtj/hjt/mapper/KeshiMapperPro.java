@@ -13,6 +13,11 @@ public interface KeshiMapperPro {
 	 * 根据分店id获取科室列表
 	 */
 	List<Keshi> keshiquery(Integer id);
+	
+	/**
+	 * 搜索科室
+	 */
+	List<Keshi> searchkeshi(Keshi record);
 
 	/**
 	 * 检查重复检查重复，科室编号同一分店唯一

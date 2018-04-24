@@ -14,6 +14,11 @@ public interface GongyingshangMapperPro {
 	 * 获取供应商列表
 	 */
 	List<Gongyingshang> gongyingshangquery();
+	
+	/**
+	 * 搜索供应商
+	 */
+	List<Gongyingshang> searchgongyingshang(Gongyingshang record);
 
 	/**
 	 * 检查重复，供应商编号

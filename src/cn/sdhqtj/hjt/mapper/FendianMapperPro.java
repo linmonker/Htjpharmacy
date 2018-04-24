@@ -13,6 +13,11 @@ public interface FendianMapperPro {
 	 * 获取分店列表
 	 */
 	List<Fendian> fendianquery();
+	
+	/**
+	 * 搜索分店
+	 */
+	List<Fendian> searchfendian(Fendian record);
 
 	/**
 	 * 检查重复，分店编号和分店名称

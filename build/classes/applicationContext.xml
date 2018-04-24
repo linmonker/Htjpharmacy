@@ -10,12 +10,12 @@
 
 	<!-- 自动扫描注解 -->
 	<ctx:annotation-config />
-	<ctx:component-scan base-package="com.yvdedu.hospital.service" />
+	<ctx:component-scan base-package="cn.sdhqtj.hjt.service"></ctx:component-scan>
 
 	<!-- 配置数据源 -->
 	<!-- <bean id="dataSource" class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"> 
-		<property name="url" value="jdbc:mysql://localhost/hospital" /> <property 
-		name="user" value="root" /> <property name="password" value="mysql" /> </bean> -->
+		<property name="url" value="jdbc:mysql://localhost/hjt" /> <property 
+		name="user" value="root" /> <property name="password" value="123456789" /> </bean> -->
 	<!-- 配置数据源 ，dbcp -->
 	<!-- 加载db.properties文件中的内容，db.properties文件中key命名要有一定的特殊规则 -->
 	<ctx:property-placeholder location="classpath:db.properties" />
@@ -83,6 +83,54 @@
 				</bean>
 			</array>
 		</property>
+	</bean>
+
+	<!-- 自定义Realm -->
+	<bean id="userRealms" class="cn.sdhqtj.hjt.shiro.UserRealm">
+	</bean>
+	<!-- 安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="userRealms" />
+	</bean>
+	<!-- Shiro过滤器 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- Shiro的核心安全接口,这个属性是必须的 -->
+		<property name="securityManager" ref="securityManager" />
+		<!-- 身份认证失败，则跳转到登录页面的配置 -->
+		<property name="loginUrl" value="/login" />
+		<property name="successUrl" value="/index" />
+		<!-- 权限认证失败，则跳转到指定错误页面 -->
+		<property name="unauthorizedUrl" value="/info/error" />
+		<property name="filters">
+			<map>
+				<entry key="perms">
+					<bean class="cn.sdhqtj.hjt.shiro.PermFilter"></bean>
+				</entry>
+			</map>
+		</property>
+		<!-- Shiro连接约束配置,即过滤链的定义 -->
+		<property name="filterChainDefinitions">
+			<value>
+				<!-- 匿名anon -->
+				<!-- authc登录验证 -->
+				<!-- perms权限过滤验证 -->
+				/login = anon
+				/static/** = anon
+				/info/** = anon
+				/** = authc
+				/** = perms
+			</value>
+		</property>
+	</bean>
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	<!-- 开启Shiro注解 -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor" />
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
 	</bean>
 
 </beans> 

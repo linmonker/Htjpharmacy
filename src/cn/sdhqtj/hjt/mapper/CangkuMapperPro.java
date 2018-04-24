@@ -15,6 +15,11 @@ public interface CangkuMapperPro {
 	List<Cangku> cangkuquery(Integer id);
 	
 	/**
+	 * 搜索仓库
+	 */
+	List<Cangku> searchcangku(Cangku record);
+
+	/**
 	 *检查重复，仓库编号每个分店唯一
 	 */
 	Cangku checkrepeat(Cangku record);

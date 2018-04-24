@@ -22,7 +22,7 @@
 	function edit() {
 		if($("tr.active").length > 0){
 			var id = $("#tempid").val();
-			location = "${ctx}/cangku/edit.action?id=" + id;
+			location = "${ctx}/cangku/edit?id=" + id;
 		}else{
 			alert("请先选择仓库");
 		}
@@ -31,7 +31,7 @@
 		if($("tr.active").length > 0){	
 			if (confirm("您确定要删除 " + $("tr.active td:eq(1)").text() + " 吗?")) {	
 				var id = $("#tempid").val();
-				location = "${ctx}/cangku/delete.action?id=" + id;
+				location = "${ctx}/cangku/delete?id=" + id;
 			}
 		}else{
 			alert("请先选择仓库");
@@ -40,7 +40,7 @@
 	function huowei() {
 		if($("tr.active").length > 0){	
 			var id = $("#tempid").val();
-			location = "${ctx}/huowei/list.action?ckid=" + id;
+			location = "${ctx}/huowei/list?ckid=" + id;
 		}else{
 			alert("请先选择仓库");
 		}
@@ -70,15 +70,13 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="${ctx }/index.action">首页</a></li>
-				<li><label>当前用户：</label></li>
-				<li><label>${session.loginer.login }</label></li>
-				<li><label>${session.loginer.fdmc }</label></li>
+				<li><a href="${ctx }/index">首页</a></li>
+				<li><a>当前用户：</a></li>
+				<li><a>${session.loginer.login }</a></li>
+				<li><a>${session.loginer.fdmc }</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">one</a></li>
-				<li><a href="#">two</a></li>
-				<li><a href="#">three</a></li>
+				<li><a href="${ctx}/outlogin">退出</a></li>
 			</ul>
 		</div>
 	</div>
@@ -88,13 +86,15 @@
 			<div class="col-sm-2 col-md-2 sidebar">
 				<h4>管理项目</h4>
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="${ctx }/fendian/list.action">分店管理</a></li>
-					<li><a href="${ctx }/yaopinfenlei/list.action">药品分类</a></li>
-					<li><a href="${ctx }/yaopin/list.action">药品信息管理</a></li>
-					<li><a href="${ctx }/gongyingshang/list.action">供应商管理</a></li>
-					<li class="active"><a href="${ctx}/cangku/sylist.action">仓库管理</a></li>
-					<li><a href="${ctx}/keshi/list.action">科室管理</a></li>
-					<li><a href="${ctx}/zhuzhijigou/list.action">组织机构</a></li>
+					<li class="active"><a href="${ctx }/fendian/list">分店管理</a></li>
+					<li><a href="${ctx }/yaopinfenlei/list">药品分类</a></li>
+					<li><a href="${ctx }/yaopin/list">药品信息管理</a></li>
+					<li><a href="${ctx }/gongyingshang/list">供应商管理</a></li>
+					<li class="active"><a href="${ctx}/cangku/sylist">仓库管理</a></li>
+					<li><a href="${ctx}/keshi/list">科室管理</a></li>
+					<li><a href="${ctx}/zhuzhijigou/list">组织机构</a></li>
+					<li><a href="${ctx}/yonghu/sylist">用户管理</a></li>
+					<li><a href="${ctx}/role/list">角色管理</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
@@ -106,14 +106,14 @@
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="${ctx}/cangku/add.action">添加仓库</a></li>
+								<li><a href="${ctx}/cangku/add">添加仓库</a></li>
 								<li><a onclick="return edit()">修改仓库</a></li>
 								<li><a onclick="return del()">删除仓库</a></li>
 								<li><a onclick="return huowei()">货位管理</a></li>
 								<li><span id="tempid" style="display: none"></span></li>
 							</ul>
 							<div class="nav navbar-nav navbar-right">
-								<form action="${ctx }/cangku/search.action" method="post">
+								<form action="${ctx }/cangku/search" method="post">
 									<input type="text" placeholder="请输入搜索关键字" name="searchword"
 										class="input"
 										style="width: 250px; line-height: 15px; display: inline-block;"
@@ -125,7 +125,7 @@
 					</div>
 					</nav>
 					<input type="hidden" id="tempid" />
-					<input type="hidden" name="fdid" value="${cangkulist.fdid }" />
+					<input type="hidden" name="fdid" value="${cangkulist.get(0).fdid }" />
 					<span>${addmsg}</span> <span>${editmsg}</span> <span>${deletemsg}</span>
 				</div>
 				<div class="row">
@@ -134,7 +134,7 @@
 						<ul class="nav nav-sidebar">
 							<c:forEach items="${fendianlist }" var="fdlist">
 								<li id="fdid${fdlist.id }"><a
-									href="${ctx }/cangku/list.action?fdid=${fdlist.id }">${fdlist.fdmc }</a></li>
+									href="${ctx }/cangku/list?fdid=${fdlist.id }">${fdlist.fdmc }</a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -153,7 +153,7 @@
 										<th>状态</th>
 									</tr>
 								</thead>
-								<tbody>
+							 <tbody>
 									<c:forEach items="${cangkulist }" var="cklist">
 										<tr onclick="setid(this,${cklist.id })">
 											<td>${cklist.ckbh }</td>

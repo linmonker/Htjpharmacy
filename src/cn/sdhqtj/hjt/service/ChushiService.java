@@ -19,6 +19,11 @@ public interface ChushiService {
 	 * 根据处室id获取处室信息
 	 */
 	public Zuzhijigou getchushi(Integer id);
+	
+	/**
+	 * 搜索处室
+	 */
+	List<Zuzhijigou> searchchushi(Zuzhijigou record);
 
 	/**
 	 * 检查重复，处室编号同一分店唯一

@@ -43,6 +43,16 @@ public class HuoweiSer implements HuoweiService {
 	}
 
 	/**
+	 * 搜索货位
+	 */
+	@Override
+	public List<Huowei> searchhuowei(Huowei record) {
+		// TODO Auto-generated method stub
+		huoweilist = huoweiMapperPro.searchhuowei(record);
+		return huoweilist;
+	}
+
+	/**
 	 * 检查重复，货物编号同一仓库唯一
 	 */
 	@Override

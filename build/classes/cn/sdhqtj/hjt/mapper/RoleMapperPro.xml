@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sdhqtj.hjt.mapper.RoleMapperPro">
+	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Role">
+		<id column="role_id" property="role_id" jdbcType="INTEGER" />
+		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="role_name" property="role_name" jdbcType="VARCHAR" />
+		<result column="user_id_create" property="user_id_create" jdbcType="BIGINT" />
+		<result column="gmt_create" property="gmt_create" jdbcType="TIMESTAMP" />
+		<result column="gmt_modified" property="gmt_modified" jdbcType="TIMESTAMP" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+		<result column="dm" property="dm" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.Role" extends="BaseResultMap">
+		<result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		role_id, jtid, role_name, user_id_create, gmt_create,
+		gmt_modified, zt, dm
+	</sql>
+	<sql id="Blob_Column_List">
+		remark
+	</sql>
+
+	<select id="rolequery" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from hjt_role
+	</select>
+	<select id="getrole" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from hjt_role
+		where role_id = #{role_id,jdbcType=INTEGER}
+	</select>
+	<select id="rolenamelist" resultType="java.lang.String" parameterType="java.lang.Integer">
+		select role_name
+		from
+			hjt_role
+		where
+			role_id = #{role_id,jdbcType=INTEGER}
+	</select>
+	<select id="urllist" resultType="java.lang.String" parameterType="java.lang.Integer">
+		select url
+		from
+			hjt_useable u
+		join
+			hjt_access a
+		on
+			u.id=a.usesbleid
+		where
+			a.roleid = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="checkrepeat" resultMap="ResultMapWithBLOBs"
+		parameterType="cn.sdhqtj.hjt.entity.Role">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from hjt_role
+		where role_name = #{role_name,jdbcType=VARCHAR}
+	</select>
+	<update id="updaterole" parameterType="cn.sdhqtj.hjt.entity.Role">
+		update hjt_role
+		set role_name = #{role_name,jdbcType=VARCHAR},
+		user_id_create = #{user_id_create,jdbcType=BIGINT},
+		gmt_create = #{gmt_create,jdbcType=TIMESTAMP},
+		gmt_modified = #{gmt_modified,jdbcType=TIMESTAMP},
+		zt = #{zt,jdbcType=INTEGER},
+		remark = #{remark,jdbcType=LONGVARCHAR}
+		where role_id = #{role_id,jdbcType=INTEGER}
+	</update>
+
+</mapper>

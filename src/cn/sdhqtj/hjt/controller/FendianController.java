@@ -74,7 +74,7 @@ public class FendianController {
 			return "fendian/add";
 		} else {// 添加成功
 			fendianservice.addfendian(record);
-			return "redirect:list.action?waymsg=add";
+			return "redirect:list?waymsg=add";
 		}
 	}
 
@@ -110,7 +110,7 @@ public class FendianController {
 			return "fendian/edit";
 		} else {// 修改成功
 			fendianservice.updatefendian(record);
-			return "redirect:list.action?waymsg=edit";
+			return "redirect:list?waymsg=edit";
 		}
 	}
 
@@ -120,6 +120,15 @@ public class FendianController {
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request) {
 		fendianservice.deletefendian(Integer.valueOf(request.getParameter("id")));
-		return "redirect:list.action?waymsg=delete";
+		return "redirect:list?waymsg=delete";
+	}
+	
+	@RequestMapping("/search")
+	public String search(HttpServletRequest request, String searchword, Model model) {
+		fendian = new Fendian();
+		fendian.setFdmc(searchword);
+		fendianlist =  fendianservice.searchfendian(fendian);
+		model.addAttribute("fendianlist", fendianlist);
+		return "fendian/list";
 	}
 }

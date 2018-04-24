@@ -73,7 +73,7 @@ public class KeshiController {
 			login = (Login) session.getAttribute("longiner");
 			record.setFdid(login.getFdid());
 			keshiservice.addkeshi(record);
-			return "redirect:list.action?waymsg=add";
+			return "redirect:list?waymsg=add";
 		}
 	}
 
@@ -101,7 +101,7 @@ public class KeshiController {
 			return "keshi/edit";
 		} else {
 			keshiservice.updatekeshi(keshi);
-			return "redirect:list.action?waymsg=edit";
+			return "redirect:list?waymsg=edit";
 		}
 	}
 
@@ -112,6 +112,20 @@ public class KeshiController {
 	public String delete(HttpServletRequest request, Model model) {
 		Integer id = Integer.valueOf(request.getParameter("id"));
 		keshiservice.deletekeshi(id);
-		return "redirect:list.action?waymsg=delete";
+		return "redirect:list?waymsg=delete";
+	}
+	
+	/**
+	 * 搜索科室
+	 */
+	@RequestMapping("/search")
+	public String search(String searchword, Model model, HttpSession session) {
+		keshi = new Keshi();
+	    login = (Login) session.getAttribute("loginer");
+	    keshi.setFdid(login.getFdid());
+	    keshi.setKsmc(searchword);
+		keshilist = keshiservice.searchkeshi(keshi);
+		model.addAttribute("keshilist", keshilist);
+		return "keshi/list";
 	}
 }

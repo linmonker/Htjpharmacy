@@ -89,7 +89,7 @@ public class CangkuController {
 		} else {
 			// 添加成功
 			cangkuservice.addcangku(record);
-			return "redirect:list.action?waymsg=add";
+			return "redirect:list?waymsg=add";
 		}
 	}
 
@@ -98,8 +98,8 @@ public class CangkuController {
 	 */
 	@RequestMapping("/edit")
 	public String edit(HttpServletRequest request, Model model) {
-		Integer fdid = Integer.valueOf(request.getParameter("fdid"));
-		cangku = cangkuservice.getcangku(fdid);
+		Integer id = Integer.valueOf(request.getParameter("id"));
+		cangku = cangkuservice.getcangku(id);
 		model.addAttribute("cangku", cangku);
 		return "cangku/edit";
 	}
@@ -119,7 +119,7 @@ public class CangkuController {
 		} else {
 			// 修改成功
 			cangkuservice.updatecangku(record);
-			return "redirect:list.action?waymsg=edit";
+			return "redirect:list?waymsg=edit";
 		}
 	}
 
@@ -130,6 +130,20 @@ public class CangkuController {
 	public String delete(HttpServletRequest request) {
 		Integer id = Integer.valueOf(request.getParameter("id"));
 		cangkuservice.deletecangku(id);
-		return "redirect:list.action?waymsg=delete";
+		return "redirect:list?waymsg=delete";
+	}
+	
+	@RequestMapping("/search")
+	public String search(HttpServletRequest request, String searchword, Model model) {
+		cangku = new Cangku();
+		cangku.setFdid(Integer.valueOf(request.getParameter("fdid")));
+		cangku.setCkbh(searchword);
+		cangku.setCkmc(searchword);
+		cangkulist =  cangkuservice.searchcangku(cangku);
+		fendianlist = fendianservice.fendianquery();
+		model.addAttribute("cangkulist", cangkulist);
+		model.addAttribute("fendianlist", fendianlist);
+
+		return "cangku/list";
 	}
 }

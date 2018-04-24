@@ -117,7 +117,7 @@ public class YaopinfenleiController {
 			ypfl = ypflservice.getyaopinfenlei(record.getSjflid());
 			record.setFldj((short) (ypfl.getFldj() + 1));
 			ypflservice.updateyaopinfenlei(record);
-			return "redirect:list.action?waymsg=edit";
+			return "redirect:list?waymsg=edit";
 		}
 	}
 

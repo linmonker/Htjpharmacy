@@ -44,6 +44,16 @@ public class CangkuSer implements CangkuService {
 	}
 	
 	/**
+	 * 搜索仓库
+	 */
+	@Override
+	public List<Cangku> searchcangku(Cangku record) {
+		// TODO Auto-generated method stub
+		cangkulist = cangkuMapperPro.searchcangku(record);
+		return cangkulist;
+	}
+
+	/**
 	 *
 	 */
 	@Override

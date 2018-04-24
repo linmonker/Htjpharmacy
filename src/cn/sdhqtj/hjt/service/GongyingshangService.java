@@ -22,6 +22,11 @@ public interface GongyingshangService {
 	 * 通过供应商id获取供应商信息
 	 */
 	GongyingshangWithBLOBs selectByPrimaryKey(Integer id);
+	
+	/**
+	 * 搜索供应商
+	 */
+	public List<Gongyingshang> searchgongyingshang(Gongyingshang record);
 
 	/**
 	 * 检查重复，供应商编号

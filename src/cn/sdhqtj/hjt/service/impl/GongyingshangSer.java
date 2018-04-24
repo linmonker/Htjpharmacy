@@ -35,6 +35,26 @@ public class GongyingshangSer implements GongyingshangService {
 	}
 
 	/**
+	 * 通过供应商id获取供应商信息
+	 */
+	@Override
+	public GongyingshangWithBLOBs selectByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		gysB = gysMapper.selectByPrimaryKey(id);
+		return gysB;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public List<Gongyingshang> searchgongyingshang(Gongyingshang record) {
+		// TODO Auto-generated method stub
+		gyslist = gysMapperPro.searchgongyingshang(record);
+		return gyslist;
+	}
+
+	/**
 	 * 检查重复，供应商编号
 	 */
 	@Override
@@ -87,15 +107,5 @@ public class GongyingshangSer implements GongyingshangService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * 通过供应商id获取供应商信息
-	 */
-	@Override
-	public GongyingshangWithBLOBs selectByPrimaryKey(Integer id) {
-		// TODO Auto-generated method stub
-		gysB = gysMapper.selectByPrimaryKey(id);
-		return gysB;
 	}
 }

@@ -26,7 +26,7 @@ public class HuoweiController {
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
-		Integer ckid = Integer.valueOf(request.getParameter("id"));
+		Integer ckid = Integer.valueOf(request.getParameter("ckid"));
 		huoweilist = huoweiservice.huoweiquery(ckid);
 		model.addAttribute("huoweilist", huoweilist);
 		
@@ -72,7 +72,7 @@ public class HuoweiController {
 		}else {
 			//添加成功
 			huoweiservice.addhuowei(record);
-		    return "redirect:list.action?waymsg=add";
+		    return "redirect:list?waymsg=add";
 		}	
 	}
 
@@ -102,7 +102,7 @@ public class HuoweiController {
 		}else {
 			//修改成功
 			huoweiservice.addhuowei(record);
-		    return "redirect:list.action?waymsg=edit";
+		    return "redirect:list?waymsg=edit";
 		}	
 	}
 
@@ -113,6 +113,22 @@ public class HuoweiController {
 	public String delete(HttpServletRequest request, Model model) {
 		Integer id = Integer.valueOf(request.getParameter("id"));
 		huoweiservice.deletehuowei(id);
-		return "redirect:list.action?waymsg=delete";
+		return "redirect:list?waymsg=delete";
 	}
+	
+	/**
+	 * 搜索货位
+	 */
+	@RequestMapping("/search")
+	public String search(HttpServletRequest request, String searchword, Model model) {
+		Integer ckid = Integer.valueOf(request.getParameter("ckid"));
+		huowei = new Huowei();
+		huowei.setCkid(ckid);
+		huowei.setHwmc(searchword);
+		huoweilist = huoweiservice.searchhuowei(huowei);
+		model.addAttribute("huoweilist", huoweilist);
+
+		return "huowei/list";
+	}
+
 }

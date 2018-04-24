@@ -43,6 +43,16 @@ public class ChushiSer implements ChushiService {
 	}
 
 	/**
+	 * 搜索处室
+	 */
+	@Override
+	public List<Zuzhijigou> searchchushi(Zuzhijigou record) {
+		// TODO Auto-generated method stub
+		chushilist = zuzhijigouMapperPro.searchchushi(record);
+		return chushilist;
+	}
+
+	/**
 	 * 检查重复，处室编号同一分店唯一
 	 */
 	@Override

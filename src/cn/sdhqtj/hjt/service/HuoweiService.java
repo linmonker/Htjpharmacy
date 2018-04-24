@@ -19,6 +19,11 @@ public interface HuoweiService {
 	 * 通过货位id获取货位信息
 	 */
 	public Huowei gethuowei(Integer id);
+	
+	/**
+	 * 搜索货位
+	 */
+	List<Huowei> searchhuowei(Huowei record);
 
 	/**
 	 * 检查重复，货物编号同一仓库唯一

@@ -19,6 +19,11 @@ public interface KeshiService {
 	 * 根据科室id获取科室信息
 	 */
 	public Keshi getkeshi(Integer id);
+	
+	/**
+	 * 搜索科室
+	 */
+	List<Keshi> searchkeshi(Keshi record);
 
 	/**
 	 * 检查重复检查重复，科室编号同一分店唯一

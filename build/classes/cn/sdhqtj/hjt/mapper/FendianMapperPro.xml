@@ -22,11 +22,16 @@
 		fdbz
 	</sql>
 	<select id="fendianquery" resultMap="ResultMapWithBLOBs">
-		select
-		<include refid="Base_Column_List" />
+		select *
 		from hjt_fendian
 		where zt = 0
 		order by fdbh asc
+	</select>
+	<select id="searchfendian" resultMap="ResultMapWithBLOBs"
+		parameterType="cn.sdhqtj.hjt.entity.Fendian">
+		select *
+		from hjt_fendian
+		where fdmc like concat("%",#{fdmc},"%")
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Fendian">

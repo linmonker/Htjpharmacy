@@ -80,6 +80,12 @@
 		where a.dm=0 and a.lbid = b.id
 		order by ypbh asc
 	</select>
+	<select id="searchyaopin" resultMap="ResultMapPro" parameterType="cn.sdhqtj.hjt.entity.Yaopin">
+		select a.*,b.flmc
+		from hjt_yaopin a,hjt_yaopinfenlei b
+		where a.dm=0 and a.lbid = b.id and (a.ypbh like concat("%",#{ypbh},"%") or
+		a.ypspm like concat("%",#{ypspm},"%") or a.yptym like concat("%",#{yptym},"%"))
+	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select <include refid="Base_Column_List" />
 		from hjt_yaopin

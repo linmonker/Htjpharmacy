@@ -38,15 +38,13 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="${ctx }index.action">首页</a></li>
-			    <li><label>当前用户：</label></li>
-				<li><label>${session.loginer.login }</label></li>
-				<li><label>${session.loginer.fdmc }</label></li>
+				<li><a href="${ctx }/index">首页</a></li>
+			    <li><a>当前用户：</a></li>
+				<li><a>${session.loginer.login }</a></li>
+				<li><a>${session.loginer.fdmc }</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">one</a></li>
-				<li><a href="#">two</a></li>
-				<li><a href="#">three</a></li>
+				<li><a href="${ctx}/outlogin">退出</a></li>
 			</ul>
 		</div>
 	</div>
@@ -56,13 +54,15 @@
 			<div class="col-sm-2 col-md-2 sidebar">
 				<h4>管理项目</h4>
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="${ctx }/fendian/list.action">分店管理</a></li>
-					<li><a href="${ctx }/yaopinfenlei/list.action">药品分类</a></li>
-					<li><a href="${ctx }/yaopin/list.action">药品信息管理</a></li>
-					<li><a href="${ctx }/gongyingshang/list.action">供应商管理</a></li>
-					<li class="active"><a href="${ctx}/cangku/sylist.action">仓库管理</a></li>
-					<li><a href="${ctx}/keshi/list.action">科室管理</a></li>
-					<li><a href="${ctx}/zhuzhijigou/list.action">组织机构</a></li>
+					<li class="active"><a href="${ctx }/fendian/list">分店管理</a></li>
+					<li><a href="${ctx }/yaopinfenlei/list">药品分类</a></li>
+					<li><a href="${ctx }/yaopin/list">药品信息管理</a></li>
+					<li><a href="${ctx }/gongyingshang/list">供应商管理</a></li>
+					<li class="active"><a href="${ctx}/cangku/sylist">仓库管理</a></li>
+					<li><a href="${ctx}/keshi/list">科室管理</a></li>
+					<li><a href="${ctx}/zhuzhijigou/list">组织机构</a></li>
+					<li><a href="${ctx}/yonghu/sylist">用户管理</a></li>
+					<li><a href="${ctx}/role/list">角色管理</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-md-9 main">
@@ -73,7 +73,7 @@
 				    <span>${editmsg}</span> <span>${bhmsg}</span>
 				</div>
 				<form id="formpot" method="post" class="form-x"
-					action="${ctx }/cangku/doedit.action">
+					action="${ctx }/cangku/doedit">
 					<input type="hidden" name="id" value="${cangku.id }" /> 
 					<input type="hidden" name="fdid" value="${cangku.fdid }" />
 					<div class="form-group">
@@ -81,7 +81,7 @@
 							<label>仓库编号：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="ckbh"
+							<input type="text" class="form-control" name="ckbh"
 								value="${cangku.ckbh }" data-validate="required:请输入仓库编号" />
 							<div class="tips"></div>
 						</div>
@@ -91,7 +91,7 @@
 							<label>仓库名称：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="ckmc"
+							<input type="text" class="form-control" name="ckmc"
 								value="${cangku.ckmc }" data-validate="required:请输入仓库名称" />
 							<div class="tips"></div>
 						</div>
@@ -101,7 +101,7 @@
 							<label>仓库名称简拼：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="input w50" name="ckmcjp"
+							<input type="text" class="form-control" name="ckmcjp"
 								value="${cangku.ckmcjp }" />
 						</div>
 					</div>

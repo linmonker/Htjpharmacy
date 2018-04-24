@@ -3,7 +3,7 @@ package cn.sdhqtj.hjt.mapper;
 import java.util.List;
 
 import cn.sdhqtj.hjt.entity.Yaopin;
-import cn.sdhqtj.hjt.entity.YaopinPro;
+import cn.sdhqtj.hjt.entity.YaopinVo;
 import cn.sdhqtj.hjt.entity.YaopinWithBLOBs;
 
 /**
@@ -14,12 +14,17 @@ public interface YaopinMapperPro {
 	/**
 	 * 获取药品列表
 	 */
-	List<YaopinPro> yaopinquery();
+	List<YaopinVo> yaopinquery();
+	
+	/**
+	 * 搜索药品
+	 */
+	List<YaopinVo> searchyaopin(Yaopin record);
 
 	/**
 	 * 检查重复，药品编号
 	 */
-	Yaopin checkrepeat(String record);
+	Yaopin checkrepeat(String String);
 
 	/**
 	 * 更新药品信息

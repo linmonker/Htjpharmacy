@@ -24,6 +24,7 @@ public class ChushiController {
 	Zuzhijigou chushi;
 
 	Login login;
+	
 	/**
 	 * 列表
 	 */
@@ -67,7 +68,7 @@ public class ChushiController {
 			login = (Login) session.getAttribute("loginer");
 			record.setFdid(login.getFdid());
 			chushiservice.addchushi(record);
-			return "redirect:list.action?waymsg=add";
+			return "redirect:list?waymsg=add";
 		}
 	}
 
@@ -95,7 +96,7 @@ public class ChushiController {
 			return "zuzhijigou/edit";
 		} else {
 			chushiservice.updatechushi(record);
-			return "redirect:list.action?waymsg=edit";
+			return "redirect:list?waymsg=edit";
 		}
 
 	}
@@ -107,6 +108,20 @@ public class ChushiController {
 	public String delete(HttpServletRequest request, Model model) {
 		Integer id = Integer.valueOf(request.getParameter("id"));
 		chushiservice.deletechushi(id);
-		return "redirect:list.action?waymsg=delete";
+		return "redirect:list?waymsg=delete";
+	}
+	
+	/**
+	 * 搜索处室
+	 */
+	@RequestMapping("/search")
+	public String search(String searchword, Model model, HttpSession session) {
+		chushi = new Zuzhijigou();
+		login = (Login) session.getAttribute("loginer"); 
+		chushi.setFdid(login.getFdid());
+		chushi.setCsmc(searchword);
+		chushilist = chushiservice.searchchushi(chushi);
+		model.addAttribute("chushilist", chushilist);
+		return "zuzhijigou/list";
 	}
 }

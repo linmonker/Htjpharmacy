@@ -26,6 +26,11 @@
 		where zt=0
 		order by sjflid asc
 	</select>
+	<select id="getypflnodes" resultType="cn.sdhqtj.hjt.entity.YaopinflNode">
+		select id, sjflid pId, flmc name, flbz
+		from hjt_yaopinfenlei
+		where zt=0
+	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
 		select <include refid="Base_Column_List" />

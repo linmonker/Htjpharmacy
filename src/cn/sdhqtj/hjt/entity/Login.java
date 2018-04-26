@@ -1,5 +1,8 @@
 package cn.sdhqtj.hjt.entity;
 
+/**
+ * 登录用户类
+ */
 public class Login {
 	private Integer id;
 	private String username;

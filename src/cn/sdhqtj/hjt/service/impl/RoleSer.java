@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import cn.sdhqtj.hjt.entity.MenuNode;
 import cn.sdhqtj.hjt.entity.Role;
 import cn.sdhqtj.hjt.mapper.RoleMapper;
 import cn.sdhqtj.hjt.mapper.RoleMapperPro;
@@ -16,7 +17,7 @@ import cn.sdhqtj.hjt.service.RoleService;
  */
 @Service
 public class RoleSer implements RoleService {
-	
+
 	@Resource
 	private RoleMapperPro roleMapperPro;
 
@@ -26,7 +27,7 @@ public class RoleSer implements RoleService {
 	List<Role> rolelist;
 
 	/**
-	 *获取角色列表
+	 * 获取角色列表
 	 */
 	@Override
 	public List<Role> rolequery() {
@@ -36,7 +37,7 @@ public class RoleSer implements RoleService {
 	}
 
 	/**
-	 *根据角色id获取角色
+	 * 根据角色id获取角色
 	 */
 	@Override
 	public List<Role> getrole(Integer id) {
@@ -46,7 +47,7 @@ public class RoleSer implements RoleService {
 	}
 
 	/**
-	 *
+	 * 根据角色id获取角色名称
 	 */
 	@Override
 	public List<String> rolenamelist(Integer id) {
@@ -56,7 +57,7 @@ public class RoleSer implements RoleService {
 	}
 
 	/**
-	 *根据角色id获取相关权限url
+	 * 根据角色id获取相关权限url
 	 */
 	@Override
 	public List<String> urllist(Integer id) {
@@ -66,7 +67,7 @@ public class RoleSer implements RoleService {
 	}
 
 	/**
-	 *检查重复，角色名称
+	 * 检查重复，角色名称
 	 */
 	@Override
 	public List<Role> checkrepeat(Role record) {
@@ -76,7 +77,7 @@ public class RoleSer implements RoleService {
 	}
 
 	/**
-	 *添加角色
+	 * 添加角色
 	 */
 	@Override
 	public void addrole(Role record) {
@@ -91,7 +92,7 @@ public class RoleSer implements RoleService {
 	}
 
 	/**
-	 *更新角色信息
+	 * 更新角色信息
 	 */
 	@Override
 	public void updaterole(Role record) {
@@ -106,7 +107,7 @@ public class RoleSer implements RoleService {
 	}
 
 	/**
-	 *根据角色id删除角色
+	 * 根据角色id删除角色
 	 */
 	@Override
 	public void deleterole(Integer id) {
@@ -116,6 +117,26 @@ public class RoleSer implements RoleService {
 		role.setDm(1);
 		roleMapper.updateByPrimaryKeySelective(role);
 
+	}
+
+	/**
+	 * 获取权限菜单
+	 */
+	@Override
+	public List<MenuNode> getmenunodes() {
+		// TODO Auto-generated method stub
+		List<MenuNode> mlist = roleMapperPro.getmenunodes();
+		return mlist;
+	}
+
+	/**
+	 * 搜索角色
+	 */
+	@Override
+	public List<Role> searchrole(Role record) {
+		// TODO Auto-generated method stub
+		rolelist = roleMapperPro.searchrole(record);
+		return rolelist;
 	}
 
 }

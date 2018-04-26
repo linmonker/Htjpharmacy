@@ -28,6 +28,13 @@
 		,
 		<include refid="Blob_Column_List" />
 		from hjt_role
+		where dm = 0
+	</select>
+	<select id="searchrole" resultMap="ResultMapWithBLOBs"
+		parameterType="cn.sdhqtj.hjt.entity.Role">
+		select *
+		from hjt_role
+		where role_name like concat("%",#{role_name},"%") and dm = 0
 	</select>
 	<select id="getrole" resultMap="ResultMapWithBLOBs"
 		parameterType="java.lang.Integer">
@@ -36,14 +43,14 @@
 		,
 		<include refid="Blob_Column_List" />
 		from hjt_role
-		where role_id = #{role_id,jdbcType=INTEGER}
+		where role_id = #{role_id,jdbcType=INTEGER} and dm = 0
 	</select>
 	<select id="rolenamelist" resultType="java.lang.String" parameterType="java.lang.Integer">
 		select role_name
 		from
 			hjt_role
 		where
-			role_id = #{role_id,jdbcType=INTEGER}
+			role_id = #{role_id,jdbcType=INTEGER} and dm = 0
 	</select>
 	<select id="urllist" resultType="java.lang.String" parameterType="java.lang.Integer">
 		select url
@@ -68,12 +75,14 @@
 	<update id="updaterole" parameterType="cn.sdhqtj.hjt.entity.Role">
 		update hjt_role
 		set role_name = #{role_name,jdbcType=VARCHAR},
-		user_id_create = #{user_id_create,jdbcType=BIGINT},
-		gmt_create = #{gmt_create,jdbcType=TIMESTAMP},
 		gmt_modified = #{gmt_modified,jdbcType=TIMESTAMP},
 		zt = #{zt,jdbcType=INTEGER},
 		remark = #{remark,jdbcType=LONGVARCHAR}
 		where role_id = #{role_id,jdbcType=INTEGER}
 	</update>
+	<select id="getmenunodes" resultType="cn.sdhqtj.hjt.entity.MenuNode">
+		select menu_id id, parent_id pId, name
+		from hjt_menu
+	</select>
 
 </mapper>

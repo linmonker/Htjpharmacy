@@ -31,7 +31,7 @@
 		parameterType="cn.sdhqtj.hjt.entity.Fendian">
 		select *
 		from hjt_fendian
-		where fdmc like concat("%",#{fdmc},"%")
+		where fdmc like concat("%",#{fdmc},"%") and zt = 0
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Fendian">

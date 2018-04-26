@@ -68,7 +68,7 @@
 		parameterType="cn.sdhqtj.hjt.entity.Gongyingshang">
 		select <include refid="Base_Column_List" />
 		from hjt_gongyingshang
-		where gysbh like concat("%",#{gysbh},"%") or gysmc like concat("%",#{gysmc},"%")
+		where dm = 0 and (gysbh like concat("%",#{gysbh},"%") or gysmc like concat("%",#{gysmc},"%"))
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Gongyingshang">

@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 供应商缺类
+ */
 public class Gongyingshang {
 	private Integer id;
 

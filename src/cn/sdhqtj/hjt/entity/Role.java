@@ -1,7 +1,12 @@
 package cn.sdhqtj.hjt.entity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 角色类
+ */
 public class Role {
 	private Integer role_id;
 
@@ -57,16 +62,20 @@ public class Role {
 		return gmt_create;
 	}
 
-	public void setGmt_create(Date gmt_create) {
-		this.gmt_create = gmt_create;
+	public void setGmt_create(Date gmt_create) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		String dd = sdf.format(gmt_create);
+		this.gmt_create = sdf.parse(dd);
 	}
 
 	public Date getGmt_modified() {
 		return gmt_modified;
 	}
 
-	public void setGmt_modified(Date gmt_modified) {
-		this.gmt_modified = gmt_modified;
+	public void setGmt_modified(Date gmt_modified) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		String dd = sdf.format(gmt_modified);
+		this.gmt_modified = sdf.parse(dd);
 	}
 
 	public Integer getZt() {

@@ -1,5 +1,8 @@
 package cn.sdhqtj.hjt.entity;
 
+/**
+ * 组织机构处室类
+ */
 public class Zuzhijigou {
 	private Integer id;
 

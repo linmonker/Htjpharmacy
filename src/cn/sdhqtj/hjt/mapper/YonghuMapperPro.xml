@@ -28,9 +28,10 @@
 		extends="BaseResultMap">
 		<result column="yhbz" property="yhbz" jdbcType="LONGVARCHAR" />
 	</resultMap>
-	<resultMap id="ResultMapPro" type="cn.sdhqtj.hjt.entity.YonghuPro"
+	<resultMap id="ResultMapPro" type="cn.sdhqtj.hjt.entity.YonghuVo"
 		extends="ResultMapWithBLOBs">
 		<result column="fdmc" property="fdmc" jdbcType="VARCHAR" />
+		<result column="csmc" property="csmc" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, jtid, fdid, yhbh, yhdlm, yhmm, yhxm, yhxmjp, yhxb,
@@ -43,20 +44,21 @@
 		yhbz
 	</sql>
 	<sql id="Pro_Column_List">
-		fdmc, csmc, rolename
+		fdmc, csmc
 	</sql>
 	<select id="yonghuquery" resultMap="ResultMapPro" parameterType="java.lang.Integer">
 		select a.*, b.csmc
 		from
-		hjt_yonghu a,hjt_zuzhijigou b,
-		where a.fdid = #{yhdlm,jdbcType=INTEGER} and a.bmid = b.Id
+		hjt_yonghu a,hjt_zuzhijigou b
+		where a.fdid = #{fdid,jdbcType=INTEGER} and a.yhbmid = b.Id and a.dm = 0
+		order by yhbh asc
 	</select>
 	<select id="searchyonghu" resultMap="ResultMapPro"
 		parameterType="cn.sdhqtj.hjt.entity.Yonghu">
 		select a.*, b.csmc
 		from
-		hjt_yonghu a,hjt_zuzhijigou b,
-		where a.fdid = #{fdid,jdbcType=INTEGER} and a.bmid = b.Id and (a.yhbh
+		hjt_yonghu a,hjt_zuzhijigou b
+		where a.fdid = #{fdid,jdbcType=INTEGER} and a.dm = 0 and a.bmid = b.Id and (a.yhbh
 		like concat("%",#{yhbh},"%") or a.yhdlm like concat("%",#{yhdlm},"%")
 		or a.yhxm like concat("%",#{yhxm},"%") or a.yhxmjp like
 		concat("%",#{yhxmjp},"%") or a.yhsfzh like concat("%",#{yhsfzh},"%"))
@@ -66,13 +68,13 @@
 		select
 		<include refid="Base_Column_List" />
 		from hjt_yonghu
-		where yhdlm = #{yhdlm,jdbcType=VARCHAR}
+		where yhdlm = #{yhdlm,jdbcType=VARCHAR} and dm = 0 
 	</select>
 	<select id="getuser" resultMap="ResultMapPro" parameterType="java.lang.String">
 		select a.*, b.fdmc
 		from
-		hjt_yonghu a,hjt_fendian b,
-		where a.yhdlm = #{yhdlm,jdbcType=VARCHAR} and a.fdid = b.Id
+		hjt_yonghu a,hjt_fendian b
+		where a.yhdlm = #{yhdlm,jdbcType=VARCHAR} and a.dm = 0 and a.fdid = b.Id
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Yonghu">
@@ -80,8 +82,7 @@
 		<include refid="Base_Column_List" />
 		from hjt_yonghu
 		where yhbh = #{yhbh,jdbcType=VARCHAR} and
-		yhdlm =
-		#{yhdlm,jdbcType=INTEGER}
+		yhdlm = #{yhdlm,jdbcType=INTEGER}
 	</select>
 	<select id="validatelogon" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Login">
@@ -89,10 +90,9 @@
 		<include refid="Base_Column_List" />
 		from hjt_yonghu
 		where yhdlm = #{username,jdbcType=VARCHAR} and
-		yhmm =
-		#{password,jdbcType=VARCHAR}
+		yhmm = #{password,jdbcType=VARCHAR} and dm = 0
 	</select>
-	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.Yonghu">
+	<update id="updateyonghu" parameterType="cn.sdhqtj.hjt.entity.Yonghu">
 		update
 		hjt_yonghu
 		set fdid = #{fdid,jdbcType=INTEGER},

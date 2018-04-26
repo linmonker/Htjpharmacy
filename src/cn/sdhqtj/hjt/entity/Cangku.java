@@ -1,8 +1,7 @@
 package cn.sdhqtj.hjt.entity;
 
 /**
- * @author LIN
- * 仓库实体
+ * 仓库类
  */
 public class Cangku {
     private Integer id;

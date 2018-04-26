@@ -117,8 +117,8 @@
 				/login = anon
 				/static/** = anon
 				/info/** = anon
-				/** = authc
-				/** = perms
+               <!-- /** = authc -->
+               <!-- /** = perms -->
 			</value>
 		</property>
 	</bean>

@@ -48,7 +48,7 @@
 		<result column="ypxf" property="ypxf" jdbcType="LONGVARCHAR" />
 		<result column="ypxw" property="ypxw" jdbcType="LONGVARCHAR" />
 	</resultMap>
-	<resultMap id="ResultMapPro" type="cn.sdhqtj.hjt.entity.YaopinPro"
+	<resultMap id="ResultMapPro" type="cn.sdhqtj.hjt.entity.YaopinVo"
 		extends="ResultMapWithBLOBs">
 		<result column="flmc" property="flmc" jdbcType="VARCHAR" />
 		<result column="gysmc" property="gysmc" jdbcType="VARCHAR" />
@@ -77,7 +77,7 @@
 	<select id="yaopinquery" resultMap="ResultMapPro">
 		select a.*,b.flmc
 		from hjt_yaopin a,hjt_yaopinfenlei b
-		where a.dm=0 and a.lbid = b.id
+		where a.dm=0 and a.lbid = b.id and a.dm = 0
 		order by ypbh asc
 	</select>
 	<select id="searchyaopin" resultMap="ResultMapPro" parameterType="cn.sdhqtj.hjt.entity.Yaopin">

@@ -1,5 +1,8 @@
 package cn.sdhqtj.hjt.entity;
 
+/**
+ * 分店类
+ */
 public class Fendian {
 	private Integer id;
 

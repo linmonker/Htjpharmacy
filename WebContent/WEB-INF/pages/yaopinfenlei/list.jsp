@@ -51,13 +51,19 @@
          
          },  
          callback: {  
+        	 beforeDrag: beforeDrag,
              beforeEditName: beforeEditName,  
              beforeRemove: beforeRemove,  
-             beforeRename: beforeRename,  
+             beforeRename: beforeRename, 
              onRemove: onRemove,  
              onRename: onRename,
              onClick: onclick,
          }  
+	};
+	
+	//用于捕获节点拖拽事件，并且根据返回值确定是否允许进入拖拽状态  
+	function beforeDrag(treeId, treeNodes) {
+	    return false;
 	};
 
 	//用于捕获节点编辑按钮的 click 事件，并且根据返回值确定是否允许进入名称编辑状态  
@@ -261,9 +267,7 @@
 				alert('获取页面数据失败，请刷新');
 			},
 			success : function(data) {
-
-				ztreeNodes = eval( "["+data+"]" ); //将string类型转换成json对象  
-				$.fn.zTree.init($("#treeDemo"), setting, ztreeNodes);
+				$.fn.zTree.init($("#treeDemo"), setting, data);
 				zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");
 				$("#selectAll").bind("click", selectAll);
 			}

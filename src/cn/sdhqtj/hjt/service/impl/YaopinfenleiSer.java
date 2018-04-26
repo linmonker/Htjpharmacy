@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import cn.sdhqtj.hjt.entity.Yaopinfenlei;
+import cn.sdhqtj.hjt.entity.YaopinflNode;
 import cn.sdhqtj.hjt.mapper.YaopinfenleiMapper;
 import cn.sdhqtj.hjt.mapper.YaopinfenleiMapperPro;
 import cn.sdhqtj.hjt.service.YaopinfenleiService;
@@ -51,6 +52,16 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 			listZTree.add(str);
 		}
 		return listZTree;
+	}
+
+	/**
+	 * 获取药品分类节点
+	 */
+	@Override
+	public List<YaopinflNode> getypflnodes() {
+		// TODO Auto-generated method stub
+		List<YaopinflNode> nodeslist = ypflMapperPro.getypflnodes();
+		return nodeslist;
 	}
 
 	/**

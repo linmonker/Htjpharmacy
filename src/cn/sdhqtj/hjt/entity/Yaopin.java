@@ -1,8 +1,13 @@
 package cn.sdhqtj.hjt.entity;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 药品缺类
+ */
 public class Yaopin {
 	private Integer id;
 
@@ -374,8 +379,10 @@ public class Yaopin {
 		return ct;
 	}
 
-	public void setCt(Date ct) {
-		this.ct = ct;
+	public void setCt(Date ct) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		String dd = sdf.format(ct);
+		this.ct = sdf.parse(dd);
 	}
 
 	public Integer getZt() {

@@ -28,13 +28,14 @@
 		select
 		<include refid="Base_Column_List" />
 		from hjt_cangku_huowei
-		where ckid = #{ckid,jdbcType=INTEGER}
+		where ckid = #{ckid,jdbcType=INTEGER} and dm = 0
+		order by hwbh asc
 	</select>
 	<select id="searchhuowei" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Huowei">
 		select <include refid="Base_Column_List" />
 		from hjt_cangku_huowei
-		where ckid = #{ckid,jdbcType=INTEGER} and hwmc like concat("%",#{hwmc},"%")
+		where ckid = #{ckid,jdbcType=INTEGER} and dm = 0 and hwmc like concat("%",#{hwmc},"%")
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Huowei">

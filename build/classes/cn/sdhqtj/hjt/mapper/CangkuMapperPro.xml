@@ -29,13 +29,14 @@
 		,
 		<include refid="Blob_Column_List" />
 		from hjt_cangku
-		where fdid = #{fdid,jdbcType=INTEGER}
+		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0
+		order by ckbh asc
 	</select>
 	<select id="searchcangku" resultMap="ResultMapWithBLOBs"
 		parameterType="cn.sdhqtj.hjt.entity.Cangku">
 		select *
 		from hjt_cangku
-		where fdid = #{fdid,jdbcType=INTEGER} and (ckbh like concat("%",#{ckbh},"%") or 
+		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0 and (ckbh like concat("%",#{ckbh},"%") or 
 		ckmc like concat("%",#{ckmc},"%"))
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"

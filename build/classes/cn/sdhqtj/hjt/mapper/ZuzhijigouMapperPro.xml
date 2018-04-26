@@ -30,13 +30,14 @@
 		,
 		<include refid="Blob_Column_List" />
 		from hjt_zuzhijigou
-		where fdid = #{fdid,jdbcType=INTEGER}
+		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0
+		order by csbh asc
 	</select>
 	<select id="searchchushi" resultMap="ResultMapWithBLOBs"
 		parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">
 		select *
 		from hjt_zuzhijigou
-		where fdid = #{fdid,jdbcType=INTEGER} and csmc like concat("%",#{csmc},"%")
+		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0 and csmc like concat("%",#{csmc},"%")
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap" 
 	    parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">

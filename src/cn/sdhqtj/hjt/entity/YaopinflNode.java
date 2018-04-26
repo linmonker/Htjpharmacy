@@ -1,5 +1,8 @@
 package cn.sdhqtj.hjt.entity;
 
+/**
+ * 药品分类节点类
+ */
 public class YaopinflNode {
 
 	private Integer id;

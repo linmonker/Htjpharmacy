@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import cn.sdhqtj.hjt.entity.Yaopinfenlei;
+import cn.sdhqtj.hjt.entity.YaopinflNode;
 
 /**
  * 药品分类service接口
@@ -16,6 +17,11 @@ public interface YaopinfenleiService {
 	 * 获取药品分类列表
 	 */
 	public List<Yaopinfenlei> Yaopinfenleiquery();
+	
+	/**
+	 * 获取药品分类节点
+	 */
+	List<YaopinflNode> getypflnodes();
 
 	/**
 	 * 获取药品分类json列表

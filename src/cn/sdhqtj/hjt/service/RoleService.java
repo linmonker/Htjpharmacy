@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import cn.sdhqtj.hjt.entity.MenuNode;
 import cn.sdhqtj.hjt.entity.Role;
 
 /**
@@ -51,5 +52,15 @@ public interface RoleService {
 	 * 根据角色id删除角色
 	 */
 	void deleterole(Integer id);
+	
+	/**
+	 * 获取权限菜单
+	 */
+	List<MenuNode> getmenunodes();
+	
+	/**
+	 * 搜索角色
+	 */
+	List<Role> searchrole(Role record);
 
 }

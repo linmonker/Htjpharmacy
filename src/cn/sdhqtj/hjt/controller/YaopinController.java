@@ -151,7 +151,7 @@ public class YaopinController {
 	}
 
 	/**
-	 * 药品列表
+	 * 搜索药品
 	 */
 	@RequestMapping("/search")
 	public String search(String searchword, Model model) {

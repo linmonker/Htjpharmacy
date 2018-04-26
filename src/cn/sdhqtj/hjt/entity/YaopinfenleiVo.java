@@ -1,5 +1,8 @@
 package cn.sdhqtj.hjt.entity;
 
+/**
+ * 药品分类扩展类
+ */
 public class YaopinfenleiVo {
 	private Integer id;
 

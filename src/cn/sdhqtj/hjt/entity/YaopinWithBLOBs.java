@@ -1,5 +1,8 @@
 package cn.sdhqtj.hjt.entity;
 
+/**
+ * 药品分类
+ */
 public class YaopinWithBLOBs extends Yaopin {
 	private String ypsms;
 

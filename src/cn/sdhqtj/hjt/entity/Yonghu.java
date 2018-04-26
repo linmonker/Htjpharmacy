@@ -1,7 +1,12 @@
 package cn.sdhqtj.hjt.entity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 用户类
+ */
 public class Yonghu {
     private Integer id;
 
@@ -155,8 +160,10 @@ public class Yonghu {
         return yhcsrq;
     }
 
-    public void setYhcsrq(Date yhcsrq) {
-        this.yhcsrq = yhcsrq;
+    public void setYhcsrq(Date yhcsrq) throws ParseException {
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+		String dd = sdf.format(yhcsrq);
+		this.yhcsrq = sdf.parse(dd);
     }
 
     public String getYhdz() {
@@ -187,16 +194,20 @@ public class Yonghu {
         return yhrzrq;
     }
 
-    public void setYhrzrq(Date yhrzrq) {
-        this.yhrzrq = yhrzrq;
+    public void setYhrzrq(Date yhrzrq) throws ParseException {
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+		String dd = sdf.format(yhrzrq);
+		this.yhrzrq = sdf.parse(dd);
     }
 
     public Date getCt() {
         return ct;
     }
 
-    public void setCt(Date ct) {
-        this.ct = ct;
+    public void setCt(Date ct) throws ParseException {
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		String dd = sdf.format(ct);
+		this.ct = sdf.parse(dd);
     }
 
     public Integer getZt() {

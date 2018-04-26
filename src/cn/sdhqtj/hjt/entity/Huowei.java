@@ -1,5 +1,8 @@
 package cn.sdhqtj.hjt.entity;
 
+/**
+ * 货位类
+ */
 public class Huowei {
     private Integer id;
 

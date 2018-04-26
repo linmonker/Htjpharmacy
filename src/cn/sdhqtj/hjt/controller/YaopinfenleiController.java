@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+
 import cn.sdhqtj.hjt.entity.Yaopinfenlei;
 import cn.sdhqtj.hjt.entity.YaopinflNode;
 import cn.sdhqtj.hjt.service.YaopinfenleiService;
@@ -46,11 +48,21 @@ public class YaopinfenleiController {
 	/**
 	 * 列表
 	 */
-	@RequestMapping("/getlist")
+	@RequestMapping("/wwwgetlist")
 	@ResponseBody
 	public List<Object> list() {
 		return ypflservice.gettreelist();
 
+	}
+	/**
+	 * 列表
+	 */
+	@RequestMapping("/getlist")
+	@ResponseBody
+	public String  menulist() {
+		List<YaopinflNode> nlist =  ypflservice.getypflnodes();
+		String str=JSON.toJSON(nlist).toString();
+		return str;
 	}
 
 	/**

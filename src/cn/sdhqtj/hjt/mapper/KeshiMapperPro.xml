@@ -29,13 +29,14 @@
 		,
 		<include refid="Blob_Column_List" />
 		from hjt_keshi
-		where fdid = #{fdid,jdbcType=INTEGER}
+		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0
+		order by ksbh asc
 	</select>
 	<select id="searchkeshi" resultMap="ResultMapWithBLOBs"
 		parameterType="cn.sdhqtj.hjt.entity.Keshi">
 		select *
 		from hjt_keshi
-		where fdid = #{fdid,jdbcType=INTEGER} and ksmc like concat("%",#{ksmc},"%") 
+		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0 and ksmc like concat("%",#{ksmc},"%") 
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap" parameterType="cn.sdhqtj.hjt.entity.Keshi">
 		select

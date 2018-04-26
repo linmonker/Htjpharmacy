@@ -1,5 +1,8 @@
 package cn.sdhqtj.hjt.entity;
 
+/**
+ * 科室类
+ */
 public class Keshi {
 	private Integer id;
 

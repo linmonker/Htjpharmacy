@@ -2,6 +2,7 @@ package cn.sdhqtj.hjt.mapper;
 
 import java.util.List;
 
+import cn.sdhqtj.hjt.entity.MenuNode;
 import cn.sdhqtj.hjt.entity.Role;
 
 /**
@@ -38,4 +39,14 @@ public interface RoleMapperPro {
 	 * 更新角色信息
 	 */
 	void updaterole(Role record);
+	
+	/**
+	 * 获取权限菜单
+	 */
+	List<MenuNode> getmenunodes();
+	
+	/**
+	 * 搜索角色
+	 */
+	List<Role> searchrole(Role record);
 }

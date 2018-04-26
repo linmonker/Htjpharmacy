@@ -115,6 +115,9 @@ public class GongyingshangController {
 		return "redirect:list?waymsg=delete";
 	}
 	
+	/**
+	 * 搜索供应商
+	 */
 	@RequestMapping("/search")
 	public String search(String searchword, Model model) {
 		gys = new Gongyingshang();

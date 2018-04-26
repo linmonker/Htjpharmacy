@@ -5,11 +5,11 @@ package cn.sdhqtj.hjt.entity;
  */
 public class YonghuVo extends Yonghu {
 
-	private String fdmc;
+	private String fdmc; // 分店名称
 	
-	private String csmc;
+	private String csmc; // 部门处室名称
 	
-	private String rolename;
+	private String rolename; // 角色名称
 
 	public String getFdmc() {
 		return fdmc;

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>仓库列表</title>
+<title>用户列表</title>
 <link rel="stylesheet" href="${ctx}/static/css/pintuer.css">
 <link rel="stylesheet" href="${ctx}/static/css/admin.css">
 <link rel="stylesheet" href="${ctx}/static/css/bootstrap.min.css">
@@ -48,8 +48,8 @@
 		});
 	}
 	$(document).ready(function(){
-		 var fdid = $(input[name='fdid']).val;
-		 $("#fdid" + fdid).addClass("active");
+		 var fdid = $("input[name='fdid']").val();
+		 $("#fdid"+fdid).addClass("active");
 		});
 </script>
 </head>
@@ -78,7 +78,7 @@
 			<div class="col-sm-2 col-md-2 sidebar">
 				<h4>管理项目</h4>
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="${ctx }/fendian/list">分店管理</a></li>
+					<li><a href="${ctx }/fendian/list">分店管理</a></li>
 					<li><a href="${ctx }/yaopinfenlei/list">药品分类</a></li>
 					<li><a href="${ctx }/yaopin/list">药品信息管理</a></li>
 					<li><a href="${ctx }/gongyingshang/list">供应商管理</a></li>
@@ -94,14 +94,13 @@
 					<nav class="navbar navbar-default">
 					<div class="container-fluid">
 						<div class="navbar-header">
-							<a class="navbar-brand">仓库列表</a>
+							<a class="navbar-brand">用户列表</a>
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="${ctx}/yonghu/add">添加仓库</a></li>
-								<li><a onclick="return edit()">修改仓库</a></li>
-								<li><a onclick="return del()">删除仓库</a></li>
-								<li><a onclick="return huowei()">货位管理</a></li>
+								<li><a href="${ctx}/yonghu/add">添加用户</a></li>
+								<li><a onclick="return edit()">修改用户</a></li>
+								<li><a onclick="return del()">删除用户</a></li>
 								<li><span id="tempid" style="display: none"></span></li>
 							</ul>
 							<div class="nav navbar-nav navbar-right">
@@ -151,14 +150,14 @@
 								</thead>
 								<tbody>
 									<c:forEach items="${yonghulist }" var="yhlist">
-										<tr onclick="setid(this,${cklist.id })">
+										<tr onclick="setid(this,${yhlist.id })">
 											<td>${yhlist.yhbh }</td>
-											<td>$yhlist.yhdlm }</td>
+											<td>${yhlist.yhdlm }</td>
 											<td>${yhlist.yhxm }</td>
 											<td>${yhlist.yhxb }</td>
-											<td>${yhlist.yhbmmc }</td>
+											<td>${yhlist.csmc }</td>
 											<td>${yhlist.yhsj }</td>
-											<td>${yhlist.yhdzyj }</td>
+											<td>${yhlist.yhdzyx }</td>
 											<td>${yhlist.yhrzrq }</td>
 											<td>${yhlist.yhbz }</td>
 										</tr>

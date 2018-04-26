@@ -123,6 +123,9 @@ public class FendianController {
 		return "redirect:list?waymsg=delete";
 	}
 	
+	/**
+	 * 搜索分店
+	 */
 	@RequestMapping("/search")
 	public String search(HttpServletRequest request, String searchword, Model model) {
 		fendian = new Fendian();

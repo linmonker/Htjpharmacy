@@ -143,7 +143,10 @@
 										<td>${list.ypcd }</td>
 										<td>${list.ypscdw }</td>
 										<td>${list.yppzwh }</td>
-										<td>${list.zt }</td>
+										<td><c:choose>
+													<c:when test="${list.zt == '0'}">启用</c:when>
+													<c:otherwise>禁用</c:otherwise>
+												</c:choose></td>
 									</tr>
 								</c:forEach>
 							</tbody>

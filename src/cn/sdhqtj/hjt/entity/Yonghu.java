@@ -1,8 +1,8 @@
 package cn.sdhqtj.hjt.entity;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 用户类
@@ -34,6 +34,7 @@ public class Yonghu {
 
     private Integer yhbmid;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")  
     private Date yhcsrq;
 
     private String yhdz;
@@ -42,8 +43,10 @@ public class Yonghu {
 
     private Integer yhjsid;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd") 
     private Date yhrzrq;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")  
     private Date ct;
 
     private Integer zt;
@@ -160,10 +163,8 @@ public class Yonghu {
         return yhcsrq;
     }
 
-    public void setYhcsrq(Date yhcsrq) throws ParseException {
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-		String dd = sdf.format(yhcsrq);
-		this.yhcsrq = sdf.parse(dd);
+    public void setYhcsrq(Date yhcsrq) {
+		this.yhcsrq = yhcsrq;
     }
 
     public String getYhdz() {
@@ -191,27 +192,23 @@ public class Yonghu {
     }
 
     public Date getYhrzrq() {
-        return yhrzrq;
+		return this.yhrzrq;
     }
 
-    public void setYhrzrq(Date yhrzrq) throws ParseException {
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-		String dd = sdf.format(yhrzrq);
-		this.yhrzrq = sdf.parse(dd);
+    public void setYhrzrq(Date yhrzrq) {
+		this.yhrzrq = yhrzrq;
     }
 
     public Date getCt() {
-        return ct;
+        return this.ct;
     }
 
-    public void setCt(Date ct) throws ParseException {
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-		String dd = sdf.format(ct);
-		this.ct = sdf.parse(dd);
+    public void setCt(Date ct) {
+		this.ct = ct;
     }
 
     public Integer getZt() {
-        return zt;
+        return this.zt;
     }
 
     public void setZt(Integer zt) {

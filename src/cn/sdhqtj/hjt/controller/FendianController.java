@@ -58,7 +58,6 @@ public class FendianController {
 	@RequestMapping("/doadd")
 	public String doadd(Fendian record, Model model) {
 		fendianlist = fendianservice.checkrepeat(record);
-
 		if (record.getFdbh() == null || record.getFdmc() == null || fendianlist.size() > 0) {
 			// 添加失败
 			for (Fendian temp : fendianlist) {
@@ -93,25 +92,27 @@ public class FendianController {
 	 */
 	@RequestMapping("/doedit")
 	public String doedit(Fendian record, Model model) {
-		fendianlist = fendianservice.checkrepeat(record);
-
-		if (record.getFdbh() == null || record.getFdmc() == null || fendianlist.size() > 0) {
-			// 修改失败
-			for (Fendian temp : fendianlist) {
-				if (temp.getFdbh() != null) {
-					model.addAttribute("bhmsg", "此分店编号已存在");
+		fendian = fendianservice.getfendian(record.getId());
+		if ((!fendian.getFdbh().equals(record.getFdbh())) || (!fendian.getFdmc().equals(record.getFdmc()))) {
+			fendianlist = fendianservice.checkrepeat(record);
+			if (record.getFdbh() == null || record.getFdmc() == null || fendianlist.size() > 0) {
+				// 修改失败
+				for (Fendian temp : fendianlist) {
+					if (temp.getFdbh() != null) {
+						model.addAttribute("bhmsg", "此分店编号已存在");
+					}
+					if (temp.getFdmc() != null) {
+						model.addAttribute("mcmsg", "此分店名称已存在");
+					}
 				}
-				if (temp.getFdmc() != null) {
-					model.addAttribute("mcmsg", "此分店名称已存在");
-				}
+				model.addAttribute("editmsg", "分店修改失败");
+				model.addAttribute("fendian", record);
+				return "fendian/edit";
 			}
-			model.addAttribute("editmsg", "分店修改失败");
-			model.addAttribute("fendian", record);
-			return "fendian/edit";
-		} else {// 修改成功
-			fendianservice.updatefendian(record);
-			return "redirect:list?waymsg=edit";
 		}
+		// 修改成功
+		fendianservice.updatefendian(record);
+		return "redirect:list?waymsg=edit";
 	}
 
 	/**
@@ -122,7 +123,7 @@ public class FendianController {
 		fendianservice.deletefendian(Integer.valueOf(request.getParameter("id")));
 		return "redirect:list?waymsg=delete";
 	}
-	
+
 	/**
 	 * 搜索分店
 	 */
@@ -130,7 +131,7 @@ public class FendianController {
 	public String search(HttpServletRequest request, String searchword, Model model) {
 		fendian = new Fendian();
 		fendian.setFdmc(searchword);
-		fendianlist =  fendianservice.searchfendian(fendian);
+		fendianlist = fendianservice.searchfendian(fendian);
 		model.addAttribute("fendianlist", fendianlist);
 		return "fendian/list";
 	}

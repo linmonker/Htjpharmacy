@@ -19,7 +19,7 @@ import cn.sdhqtj.hjt.service.FendianService;
 @Controller
 @RequestMapping("/cangku")
 public class CangkuController {
-	
+
 	@Resource
 	CangkuService cangkuservice;
 	List<Cangku> cangkulist;
@@ -119,18 +119,20 @@ public class CangkuController {
 	 */
 	@RequestMapping("/doedit")
 	public String doedit(Cangku record, Model model) {
-		cangku = cangkuservice.checkrepeat(record);
-		if (cangku != null) {
-			// 修改失败
-			model.addAttribute("bhmsg", "此仓库编号已存在");
-			model.addAttribute("editmsg", "仓库修改失败");
-			model.addAttribute("cangku", record);
-			return "cangku/edit";
-		} else {
-			// 修改成功
-			cangkuservice.updatecangku(record);
-			return "redirect:list?waymsg=edit&&fdid=" + record.getFdid();
+		cangku = cangkuservice.getcangku(record.getId());
+		if (!cangku.getCkbh().equals(record.getCkbh())) {
+			cangku = cangkuservice.checkrepeat(record);
+			if (cangku != null) {
+				// 修改失败
+				model.addAttribute("bhmsg", "此仓库编号已存在");
+				model.addAttribute("editmsg", "仓库修改失败");
+				model.addAttribute("cangku", record);
+				return "cangku/edit";
+			}
 		}
+		// 修改成功
+		cangkuservice.updatecangku(record);
+		return "redirect:list?waymsg=edit&&fdid=" + record.getFdid();
 	}
 
 	/**

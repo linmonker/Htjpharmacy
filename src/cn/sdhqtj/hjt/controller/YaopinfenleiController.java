@@ -36,7 +36,7 @@ public class YaopinfenleiController {
 	 * 跳转药品分类页面
 	 */
 	@RequestMapping("/list")
-	public String toListLibrary(HttpServletRequest request, Model model) {
+	public String list(HttpServletRequest request, Model model) {
 
 		String waymsg = request.getParameter("waymsg");
 		if ("edit".equals(waymsg)) {
@@ -48,18 +48,9 @@ public class YaopinfenleiController {
 	/**
 	 * 列表
 	 */
-	@RequestMapping("/wwwgetlist")
-	@ResponseBody
-	public List<Object> list() {
-		return ypflservice.gettreelist();
-
-	}
-	/**
-	 * 列表
-	 */
 	@RequestMapping("/getlist")
 	@ResponseBody
-	public String  menulist() {
+	public String  getlist() {
 		List<YaopinflNode> nlist =  ypflservice.getypflnodes();
 		String str=JSON.toJSON(nlist).toString();
 		return str;

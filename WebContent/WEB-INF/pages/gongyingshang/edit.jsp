@@ -201,7 +201,7 @@
 										</div>
 										<div class="field">
 											<input type="date" class="form-control" name="gysyyzzqx"
-												value="${gys.gysyyzzqx }" />
+												value="<fmt:formatDate value='${gys.gysyyzzqx }' pattern='yyyy-MM-dd'/>" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -210,7 +210,7 @@
 										</div>
 										<div class="field">
 											<input type="date" class="form-control" name="gysyyzzfzrq"
-												value="${gys.gysyyzzfzrq }" />
+												value="<fmt:formatDate value='${gys.gysyyzzfzrq }' pattern='yyyy-MM-dd'/>" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -287,7 +287,7 @@
 									</div>
 									<div class="field">
 										<input type="date" class="form-control" name="gysgspzjyxq"
-											value="${gys.gysgspzjyxq }" />
+											value="<fmt:formatDate value='${gys.gysgspzjyxq }' pattern='yyyy-MM-dd'/>" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -341,7 +341,7 @@
 									</div>
 									<div class="field">
 										<input type="date" class="form-control" name="gysxkzfzrq"
-											value="${gys.gysxkzfzrq }" />
+											value="<fmt:formatDate value='${gys.gysxkzfzrq }' pattern='yyyy-MM-dd'/>" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -350,7 +350,7 @@
 									</div>
 									<div class="field">
 										<input type="date" class="form-control" name="gysxkzyxq"
-											value="${gys.gysxkzyxq }" />
+											value="<fmt:formatDate value='${gys.gysxkzyxq }' pattern='yyyy-MM-dd'/>" />
 									</div>
 								</div>
 								<div class="form-group">

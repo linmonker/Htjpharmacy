@@ -59,7 +59,7 @@
 			<div class="col-sm-2 col-md-2 sidebar">
 				<h4>管理项目</h4>
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="${ctx }/fendian/list">分店管理</a></li>
+					<li><a href="${ctx }/fendian/list">分店管理</a></li>
 					<li><a href="${ctx }/yaopinfenlei/list">药品分类</a></li>
 					<li><a href="${ctx }/yaopin/list">药品信息管理</a></li>
 					<li><a href="${ctx }/gongyingshang/list">供应商管理</a></li>
@@ -127,11 +127,11 @@
 						<div class="field">
 							<label class="radio-inline">
 								<input type="radio" name="yhxb" id="yhxb1"
-									<c:if test="${yonghu.yhxb.equal("男") }">checked</c:if> value="男">男
+									<c:if test="${yonghu.yhxb == '1' }">checked</c:if> value="1">男
 							</label>
 							<label class="radio-inline">
 								<input type="radio" name="yhxb" id="yhxb2"
-									<c:if test="${yonghu.yhxb.equal("女") }">checked</c:if> value="女">女
+									<c:if test="${yonghu.yhxb == '2' }">checked</c:if> value="2">女
 							</label>
 						</div>
 					</div>
@@ -158,8 +158,8 @@
 							<label>email：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="form-control" name="yhdzyj"
-								value="${yonghu.yhdzyj }" />
+							<input type="text" class="form-control" name="yhdzyx"
+								value="${yonghu.yhdzyx }" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -186,7 +186,7 @@
 						</div>
 						<div class="field">
 							<input type="date" class="form-control" name="yhcsrq"
-								value="${yonghu.yhcsrq }" />
+								value="<fmt:formatDate value='${yonghu.yhcsrq }' pattern='yyyy-MM-dd'/>" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -195,7 +195,7 @@
 						</div>
 						<div class="field">
 							<input type="date" class="form-control" name="yhrzrq"
-								value="${yonghu.yhrzrq }" />
+								value="<fmt:formatDate value='${yonghu.yhrzrq }' pattern='yyyy-MM-dd'/>" />
 						</div>
 					</div>
 					<div class="form-group">

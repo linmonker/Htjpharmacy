@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 供应商缺类
  */
@@ -36,8 +38,10 @@ public class Gongyingshang {
 
 	private String gysyyzz;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date gysyyzzqx;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date gysyyzzfzrq;
 
 	private String gysfrdb;
@@ -58,14 +62,17 @@ public class Gongyingshang {
 
 	private String gysxkzfzdw;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date gysxkzyxq;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date gysxkzfzrq;
 
 	private String gysgspzj;
 
 	private String gysgspfzr;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date gysgspzjyxq;
 
 	private String gysinfo1;

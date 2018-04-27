@@ -89,7 +89,7 @@
 					<li><a href="${ctx}/role/list">角色管理</a></li>
 				</ul>
 			</div>
-			<div class="col-sm-9 col-md-9 main">
+			<div class="col-sm-10 col-md-10 main">
 				<div class="row">
 					<nav class="navbar navbar-default">
 					<div class="container-fluid">
@@ -129,7 +129,7 @@
 							</c:forEach>
 						</ul>
 					</div>
-					<div class="col-sm-9 col-md-9">
+					<div class="col-sm-10 col-md-10">
 						<h4>用户列表</h4>
 						<span>共${yonghulist.size() }条记录</span>
 					    <button class="btn btn-primary btn-sm" onclick="toexcel()">导出Excel</button>
@@ -158,7 +158,7 @@
 											<td>${yhlist.csmc }</td>
 											<td>${yhlist.yhsj }</td>
 											<td>${yhlist.yhdzyx }</td>
-											<td>${yhlist.yhrzrq }</td>
+											<td><fmt:formatDate value='${yhlist.yhrzrq }' pattern='yyyy-MM-dd'/></td>
 											<td>${yhlist.yhbz }</td>
 										</tr>
 									</c:forEach>

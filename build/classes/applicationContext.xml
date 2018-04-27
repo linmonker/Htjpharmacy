@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:ctx="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ctx="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
+	   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
 	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd 
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 	<!-- 自动扫描注解 -->
-	<ctx:annotation-config />
+	<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
 	<ctx:component-scan base-package="cn.sdhqtj.hjt.service"></ctx:component-scan>
+
+	<!-- 自定义参数绑定 -->
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	</bean>
 
 	<!-- 配置数据源 -->
 	<!-- <bean id="dataSource" class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"> 
-		<property name="url" value="jdbc:mysql://localhost/hjt" /> <property 
-		name="user" value="root" /> <property name="password" value="123456789" /> </bean> -->
+		<property name="url" value="jdbc:mysql://localhost/hjt" /> <property name="user" 
+		value="root" /> <property name="password" value="123456789" /> </bean> -->
 	<!-- 配置数据源 ，dbcp -->
 	<!-- 加载db.properties文件中的内容，db.properties文件中key命名要有一定的特殊规则 -->
 	<ctx:property-placeholder location="classpath:db.properties" />
@@ -117,8 +124,8 @@
 				/login = anon
 				/static/** = anon
 				/info/** = anon
-               <!-- /** = authc -->
-               <!-- /** = perms -->
+				<!-- /** = authc -->
+				<!-- /** = perms -->
 			</value>
 		</property>
 	</bean>

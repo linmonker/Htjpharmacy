@@ -60,7 +60,6 @@ public class GongyingshangController {
 	@RequestMapping("/doadd")
 	public String doadd(GongyingshangWithBLOBs record, Model model) {
 		gys = gysservice.checkrepeat(record);
-
 		if (record.getGysbh() == null || record.getGysmc() == null || gys != null) {
 			// 添加失败
 			if (gys != null) {

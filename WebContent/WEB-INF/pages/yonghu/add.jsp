@@ -99,8 +99,8 @@
 						</div>
 						<div class="field">
 							<select class="form-control" name="yhxb">
-								<option value="男">男</option>
-								<option value="女">女</option>
+								<option value="1">男</option>
+								<option value="2">女</option>
 							</select>
 						</div>
 					</div>
@@ -127,8 +127,8 @@
 							<label>email：</label>
 						</div>
 						<div class="field">
-							<input type="text" class="form-control" name="yhdzyj"
-								value="${yonghu.yhdzyj }" />
+							<input type="text" class="form-control" name="yhdzyx"
+								value="${yonghu.yhdzyx }" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -155,7 +155,7 @@
 						</div>
 						<div class="field">
 							<input type="date" class="form-control" name="yhcsrq"
-								value="${yonghu.yhcsrq }" />
+								value="<fmt:formatDate value='${yonghu.yhcsrq }' pattern='yyyy-MM-dd'/>" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -164,7 +164,7 @@
 						</div>
 						<div class="field">
 							<input type="date" class="form-control" name="yhrzrq"
-								value="${yonghu.yhrzrq }" />
+								value="<fmt:formatDate value='${yonghu.yhrzrq }' pattern='yyyy-MM-dd'/>" />
 						</div>
 					</div>
 					<div class="form-group">

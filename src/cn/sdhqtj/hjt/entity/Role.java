@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 角色类
  */
@@ -16,8 +18,10 @@ public class Role {
 
 	private Long user_id_create;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date gmt_create;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date gmt_modified;
 
 	private Integer zt;

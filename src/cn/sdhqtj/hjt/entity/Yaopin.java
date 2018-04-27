@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 药品缺类
  */
@@ -81,6 +83,7 @@ public class Yaopin {
 
 	private BigDecimal ypkcsl;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date ct;
 
 	private Integer zt;

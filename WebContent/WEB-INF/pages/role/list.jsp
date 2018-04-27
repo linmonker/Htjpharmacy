@@ -94,12 +94,12 @@
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="${ctx}/fendian/add">添加角色</a></li>
+								<li><a href="${ctx}/role/add">添加角色</a></li>
 								<li><a onclick="return edit()">修改角色</a></li>
 								<li><a onclick="return del()">删除角色</a></li>
 							</ul>
 							<div class="nav navbar-nav navbar-right">
-								<form action="${ctx }/fendian/search" method="post">
+								<form action="${ctx }/role/search" method="post">
 									<input type="text" placeholder="请输入搜索关键字" name="searchword"
 										class="input"
 										style="width: 250px; line-height: 15px; display: inline-block;"
@@ -114,29 +114,26 @@
 					<span>${addmsg }</span> <span>${editmsg }</span> <span>${deletemsg }</span>
 				</div>
 				<div class="row">
-					<span>共${fendianlist.size() }条记录</span>
+					<span>共${rolelist.size() }条记录</span>
 					<button class="btn btn-primary btn-sm" onclick="toexcel()">导出Excel</button>
 					<div class="table-responsive">
 						<table id="tablepot" class="table table-bordered table-condensed">
 							<thead>
 								<tr>
-									<th>分店编号</th>
-									<th>分店名称</th>
-									<th>分店地址</th>
-									<th>联系电话</th>
-									<th>店长姓名</th>
-									<th>备注信息</th>
+									<th>角色名称</th>
+									<th>角色备注</th>
+									<th>角色状态</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${fendianlist }" var="list">
-									<tr onclick="setid(this,${list.id })">
-										<td>${list.fdbh }</td>
-										<td>${list.fdmc }</td>
-										<td>${list.fddz }</td>
-										<td>${list.fdlxdh }</td>
-										<td>${list.fddzxm }</td>
-										<td>${list.fdbz }</td>
+								<c:forEach items="${rolelist }" var="list">
+									<tr onclick="setid(this,${list.role_id })">
+										<td>${list.role_name }</td>
+										<td>${list.remark }</td>
+										<td><c:choose>
+													<c:when test="${list.zt == '0'}">启用</c:when>
+													<c:otherwise>禁用</c:otherwise>
+												</c:choose></td>
 									</tr>
 								</c:forEach>
 							</tbody>

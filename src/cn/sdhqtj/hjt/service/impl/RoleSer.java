@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import cn.sdhqtj.hjt.entity.AccessNode;
 import cn.sdhqtj.hjt.entity.MenuNode;
 import cn.sdhqtj.hjt.entity.Role;
 import cn.sdhqtj.hjt.mapper.RoleMapper;
@@ -40,10 +41,10 @@ public class RoleSer implements RoleService {
 	 * 根据角色id获取角色
 	 */
 	@Override
-	public List<Role> getrole(Integer id) {
+	public Role getrole(Integer id) {
 		// TODO Auto-generated method stub
-		rolelist = roleMapperPro.getrole(id);
-		return rolelist;
+		role = roleMapper.selectByPrimaryKey(id);
+		return role;
 	}
 
 	/**
@@ -53,16 +54,6 @@ public class RoleSer implements RoleService {
 	public List<String> rolenamelist(Integer id) {
 		// TODO Auto-generated method stub
 		List<String> sl = roleMapperPro.rolenamelist(id);
-		return sl;
-	}
-
-	/**
-	 * 根据角色id获取相关权限url
-	 */
-	@Override
-	public List<String> urllist(Integer id) {
-		// TODO Auto-generated method stub
-		List<String> sl = roleMapperPro.urllist(id);
 		return sl;
 	}
 
@@ -80,15 +71,10 @@ public class RoleSer implements RoleService {
 	 * 添加角色
 	 */
 	@Override
-	public void addrole(Role record) {
+	public Integer addrole(Role record) {
 		// TODO Auto-generated method stub
-		try {
-			roleMapper.insertSelective(record);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		Integer lastid =  roleMapper.insertSelective(record);
+		return lastid;
 	}
 
 	/**
@@ -120,6 +106,26 @@ public class RoleSer implements RoleService {
 	}
 
 	/**
+	 * 搜索角色
+	 */
+	@Override
+	public List<Role> searchrole(Role record) {
+		// TODO Auto-generated method stub
+		rolelist = roleMapperPro.searchrole(record);
+		return rolelist;
+	}
+
+	/**
+	 * 根据角色id获取相关权限url
+	 */
+	@Override
+	public List<String> urllist(Integer id) {
+		// TODO Auto-generated method stub
+		List<String> sl = roleMapperPro.urllist(id);
+		return sl;
+	}
+
+	/**
 	 * 获取权限菜单
 	 */
 	@Override
@@ -130,13 +136,36 @@ public class RoleSer implements RoleService {
 	}
 
 	/**
-	 * 搜索角色
+	 * 根据角色id获取角色权限
 	 */
 	@Override
-	public List<Role> searchrole(Role record) {
+	public List<AccessNode> getquanxian(Integer id) {
 		// TODO Auto-generated method stub
-		rolelist = roleMapperPro.searchrole(record);
-		return rolelist;
+		List<AccessNode> alist = roleMapperPro.getquanxian(id);
+		return alist;
+	}
+
+	/**
+	 * 批量添加角色权限
+	 */
+	@Override
+	public void addquanxian(List<AccessNode> list) {
+		// TODO Auto-generated method stub
+		try {
+			roleMapperPro.addquanxian(list);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 根据角色id删除所有角色权限
+	 */
+	@Override
+	public void deletequanxian(Integer id) {
+		// TODO Auto-generated method stub
+		roleMapperPro.deletequanxian(id);
 	}
 
 }

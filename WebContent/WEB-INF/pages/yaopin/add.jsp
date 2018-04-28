@@ -66,7 +66,7 @@
 					<label class="sub-header">添加药品</label>
 					<input id="flid" type="hidden" value="${yaopin.yplb }" />
 					<input id="gysid" type="hidden" value="${yaopin.ypgys }" />
-					<span>${addmsg }</span><span>${bhmsg }</span>
+					<span>${addmsg }</span><span>${bhmsg }</span> <span>${mcmsg}</span>
 				</div>
 				<form method="post" class="form-x" action="${ctx }/yaopin/doadd">
 					<div>
@@ -373,9 +373,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label></label>
-						</div>
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
 							<a class="button bg-red" href="${ctx }/yaopin/list"

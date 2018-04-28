@@ -1,8 +1,5 @@
 package cn.sdhqtj.hjt.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -62,39 +59,35 @@ public class YonghuController {
 
 	/**
 	 * 用户列表
-	 * 
-	 * @throws ParseException
 	 */
 	@RequestMapping("/list")
-	public String list(HttpServletRequest request, Model model) throws ParseException {
+	public String list(HttpServletRequest request, Model model) {
 		Integer fdid = Integer.valueOf(request.getParameter("fdid"));
 		if (fdid == null) {
+			// 分店id获取失败，返回用户列表首页
 			return "redirect:sylist";
-		} else {
-			yhvolist = yonghuservice.yonghuquery(fdid);
-			if (yhvolist.size() < 1) {
-				yhvo = new YonghuVo();
-				yhvo.setFdid(fdid);
-				yhvolist.add(yhvo);
-			}
-			fendianlist = fendianservice.fendianquery();
-			model.addAttribute("yonghulist", yhvolist);
-			model.addAttribute("fendianlist", fendianlist);
-
-			String waymsg = request.getParameter("waymsg");
-			if ("add".equals(waymsg)) {
-				model.addAttribute("addmsg", "用户添加成功");
-			} else if ("edit".equals(waymsg)) {
-				model.addAttribute("editmsg", "用户修改成功");
-			} else if ("delete".equals(waymsg)) {
-				model.addAttribute("deletemsg", "用户删除成功");
-			}
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-			Date dd = df.parse("2014-02-25");
-			yhvolist.get(1).setYhrzrq(dd);
-			System.out.println("--------00000000000" + yhvolist.get(1).getYhrzrq());
-			return "yonghu/list";
 		}
+		yhvolist = yonghuservice.yonghuquery(fdid);
+		if (yhvolist.size() < 1) {
+			// 用户列表为空，添加一个用户传递分店id
+			yhvo = new YonghuVo();
+			yhvo.setFdid(fdid);
+			yhvolist.add(yhvo);
+		}
+		model.addAttribute("yonghulist", yhvolist);
+		fendianlist = fendianservice.fendianquery();
+		model.addAttribute("fendianlist", fendianlist);
+
+		// 操作提示信息
+		String waymsg = request.getParameter("waymsg");
+		if ("add".equals(waymsg)) {
+			model.addAttribute("addmsg", "用户添加成功");
+		} else if ("edit".equals(waymsg)) {
+			model.addAttribute("editmsg", "用户修改成功");
+		} else if ("delete".equals(waymsg)) {
+			model.addAttribute("deletemsg", "用户删除成功");
+		}
+		return "yonghu/list";
 	}
 
 	/**
@@ -103,6 +96,10 @@ public class YonghuController {
 	@RequestMapping("/add")
 	public String add(HttpServletRequest request, Model model) {
 		Integer fdid = Integer.valueOf(request.getParameter("fdid"));
+		if (fdid == null) {
+			// 分店id获取失败，返回用户列表首页
+			return "redirect:sylist";
+		}
 		yonghu = new Yonghu();
 		yonghu.setFdid(fdid);
 		model.addAttribute("yonghu", yonghu);
@@ -111,6 +108,7 @@ public class YonghuController {
 		model.addAttribute("rolelist", rolelist);
 		chushilist = chushiservice.chushiquery(fdid);
 		model.addAttribute("chushilist", chushilist);
+
 		return "yonghu/add";
 	}
 
@@ -119,9 +117,18 @@ public class YonghuController {
 	 */
 	@RequestMapping("/doadd")
 	public String doadd(HttpServletRequest request, Yonghu record, Model model) {
+		if (record.getYhbh() == null || record.getYhdlm() == null || record.getYhmm() == null) {
+			// 添加失败，用户编号、用户名称、用户密码不能为空
+			model.addAttribute("addmsg", "用户添加失败");
+			model.addAttribute("bhmsg", "用户编号不能为空");
+			model.addAttribute("mcmsg", "用户名称不能为空");
+			model.addAttribute("mmmsg", "用户密码不能为空");
+			model.addAttribute("yonghu", record);
+			return "yonghu/add";
+		}
 		yonghulist = yonghuservice.checkrepeat(record);
 		if (yonghulist.size() > 0) {
-			// 添加失败
+			// 添加失败，用户编号、用户名不能重复
 			for (Yonghu temp : yonghulist) {
 				if (temp.getYhbh().equals(record.getYhbh())) {
 					model.addAttribute("bhmsg", "此用户编号已存在");
@@ -137,12 +144,12 @@ public class YonghuController {
 			model.addAttribute("rolelist", rolelist);
 			chushilist = chushiservice.chushiquery(record.getFdid());
 			model.addAttribute("chushilist", chushilist);
+
 			return "yonghu/add";
-		} else {
-			// 添加成功
-			yonghuservice.addyonghu(record);
-			return "redirect:list?waymsg=add&&fdid=" + record.getFdid();
 		}
+		// 添加成功
+		yonghuservice.addyonghu(record);
+		return "redirect:list?waymsg=add&&fdid=" + record.getFdid();
 	}
 
 	/**
@@ -152,13 +159,13 @@ public class YonghuController {
 	public String edit(HttpServletRequest request, Model model) {
 		Integer id = Integer.valueOf(request.getParameter("id"));
 		yonghu = yonghuservice.getuser(id);
-		System.out.println("-------------11---------" + yonghu.getYhrzrq());
 		model.addAttribute("yonghu", yonghu);
 
 		rolelist = roleservice.rolequery();
 		model.addAttribute("rolelist", rolelist);
 		chushilist = chushiservice.chushiquery(yonghu.getFdid());
 		model.addAttribute("chushilist", chushilist);
+
 		return "yonghu/edit";
 	}
 
@@ -167,11 +174,22 @@ public class YonghuController {
 	 */
 	@RequestMapping("/doedit")
 	public String doedit(Yonghu record, Model model) {
+		if (record.getYhbh() == null || record.getYhdlm() == null || record.getYhmm() == null) {
+			// 修改失败，用户编号、用户名称、用户密码不能为空
+			model.addAttribute("editmsg", "用户修改失败");
+			model.addAttribute("bhmsg", "用户编号不能为空");
+			model.addAttribute("mcmsg", "用户名称不能为空");
+			model.addAttribute("mmmsg", "用户密码不能为空");
+			model.addAttribute("yonghu", record);
+			return "yonghu/edit";
+		}
+		yonghu = yonghuservice.getuser(record.getId());
+		// 判断用户编号、用户名修改
 		yonghu = yonghuservice.getuser(record.getId());
 		if ((!yonghu.getYhbh().equals(record.getYhbh())) || (!yonghu.getYhdlm().equals(record.getYhdlm()))) {
 			yonghulist = yonghuservice.checkrepeat(record);
 			if (yonghulist.size() > 0) {
-				// 修改失败
+				// 修改失败，用户编号、用户名不能重复
 				for (Yonghu temp : yonghulist) {
 					if (temp.getYhbh().equals(record.getYhbh())) {
 						model.addAttribute("bhmsg", "此用户编号已存在");
@@ -180,7 +198,7 @@ public class YonghuController {
 						model.addAttribute("mcmsg", "此用户名已存在");
 					}
 				}
-				model.addAttribute("addmsg", "用户修改失败");
+				model.addAttribute("editmsg", "用户修改失败");
 				model.addAttribute("yonghu", record);
 
 				rolelist = roleservice.rolequery();
@@ -188,13 +206,11 @@ public class YonghuController {
 				chushilist = chushiservice.chushiquery(record.getFdid());
 				model.addAttribute("chushilist", chushilist);
 				return "yonghu/edit";
-
 			}
 		}
 		// 修改成功
 		yonghuservice.updateyonghu(record);
 		return "redirect:list?waymsg=edit&&fdid=" + record.getFdid();
-
 	}
 
 	/**

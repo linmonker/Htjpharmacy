@@ -56,10 +56,10 @@ public class HuoweiSer implements HuoweiService {
 	 * 检查重复，货物编号同一仓库唯一
 	 */
 	@Override
-	public Huowei checkrepeat(Huowei record) {
+	public List<Huowei> checkrepeat(Huowei record) {
 		// TODO Auto-generated method stub
-		huowei = huoweiMapperPro.checkrepeat(record);
-		return huowei;
+		huoweilist = huoweiMapperPro.checkrepeat(record);
+		return huoweilist;
 	}
 
 	/**

@@ -70,7 +70,7 @@
 					<label class="sub-header">修改科室</label>
 					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
 					<input id="kszt" type="hidden" value="${keshi.zt }" />
-					<span>${editmsg}</span> <span>${bhmsg}</span>
+					<span>${editmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
 				<form id="formpot" method="post" class="form-x"
 					action="${ctx }/keshi/doedit">

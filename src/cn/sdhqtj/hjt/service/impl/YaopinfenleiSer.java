@@ -1,6 +1,5 @@
 package cn.sdhqtj.hjt.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -35,26 +34,6 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 	}
 
 	/**
-	 * 获取药品分类json列表
-	 */
-	public List<Object> gettreelist() {
-		// TODO Auto-generated method stub
-		List<Object> listZTree = new ArrayList<Object>();
-		ypfllist = ypflMapperPro.Yaopinfenleiquery();
-		String str = "0";
-
-		for (int i = 0; i < ypfllist.size(); i++) {
-			ypfl = ypfllist.get(i);// 分类信息
-            // 封装ztree需要格式的字符串
-			str = "{id:'" + ypfl.getId() + "', pId:'" + ypfl.getSjflid() + "', name:\"" + ypfl.getFlmc() + "\",flbz:\""
-					+ ypfl.getFlbz() + "\" }";
-
-			listZTree.add(str);
-		}
-		return listZTree;
-	}
-
-	/**
 	 * 获取药品分类节点
 	 */
 	@Override
@@ -68,14 +47,10 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 	 * 检查重复，药品分类编号
 	 */
 	@Override
-	public Yaopinfenlei checkrepeat(Yaopinfenlei record) {
+	public List<Yaopinfenlei> checkrepeat(Yaopinfenlei record) {
 		// TODO Auto-generated method stub
-		if(record.getFlbh() != null) {
-			ypfl = ypflMapperPro.checkrepeat(record);
-			return ypfl;
-		}else {
-			return null;
-		}	
+		ypfllist = ypflMapperPro.checkrepeat(record);
+		return ypfllist;
 	}
 
 	/**
@@ -94,7 +69,7 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 	@Override
 	public Integer addyaopinfenlei(Yaopinfenlei record) {
 		// TODO Auto-generated method stub
-		ypflMapperPro.insertSelective(record);
+		ypflMapperPro.addyaopinfenlei(record);
 		return record.getId();
 	}
 

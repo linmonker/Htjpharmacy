@@ -54,13 +54,13 @@ public class CangkuSer implements CangkuService {
 	}
 
 	/**
-	 *
+	 * 检查重复，仓库编号每个分店唯一
 	 */
 	@Override
-	public Cangku checkrepeat(Cangku record) {
+	public List<Cangku> checkrepeat(Cangku record) {
 		// TODO Auto-generated method stub
-		cangku = cangkuMapperPro.checkrepeat(record);
-		return null;
+		cangkulist = cangkuMapperPro.checkrepeat(record);
+		return cangkulist;
 	}
 
 	/**

@@ -30,7 +30,6 @@
              removeHoverDom: removeHoverDom,  
              selectedMulti: false,  
              showLine: false,  
-             selectedMulti: false,  
              showIcon: false  
 		},
 		 edit: {  

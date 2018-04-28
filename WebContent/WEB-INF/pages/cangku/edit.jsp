@@ -70,7 +70,7 @@
 					<label class="sub-header">修改仓库</label>
 					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
 					<input id="ckzt" type="hidden" value="${cangku.zt }" />
-				    <span>${editmsg}</span> <span>${bhmsg}</span>
+				    <span>${editmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
 				<form id="formpot" method="post" class="form-x"
 					action="${ctx }/cangku/doedit">
@@ -125,9 +125,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label></label>
-						</div>
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
 							<button class="button bg-main" type="reset">重置</button>

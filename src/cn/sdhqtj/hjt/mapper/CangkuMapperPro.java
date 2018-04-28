@@ -22,7 +22,7 @@ public interface CangkuMapperPro {
 	/**
 	 *检查重复，仓库编号每个分店唯一
 	 */
-	Cangku checkrepeat(Cangku record);
+	List<Cangku> checkrepeat(Cangku record);
 
 	/**
 	 * 更新仓库信息

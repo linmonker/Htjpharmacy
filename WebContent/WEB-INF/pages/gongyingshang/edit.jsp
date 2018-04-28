@@ -72,7 +72,7 @@
 					<label class="sub-header">修改供应商</label>
 					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
 					<input id="gyszt" type="hidden" value="${gys.zt }" />
-					<span>${editmsg}</span> <span>${bhmsg}</span>
+					<span>${editmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
 				<form id="formpot" method="post" class="form-x"
 					action="${ctx }/gongyingshang/doedit">

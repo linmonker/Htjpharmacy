@@ -28,7 +28,7 @@ public interface HuoweiService {
 	/**
 	 * 检查重复，货物编号同一仓库唯一
 	 */
-	public Huowei checkrepeat(Huowei record);
+	public List<Huowei> checkrepeat(Huowei record);
 
 	/**
 	 * 添加货位

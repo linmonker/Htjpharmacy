@@ -32,6 +32,7 @@ public class FendianController {
 		fendianlist = fendianservice.fendianquery();
 		model.addAttribute("fendianlist", fendianlist);
 
+		// 操作提示信息
 		String waymsg = request.getParameter("waymsg");
 		if ("add".equals(waymsg)) {
 			model.addAttribute("addmsg", "分店添加成功");
@@ -48,7 +49,6 @@ public class FendianController {
 	 */
 	@RequestMapping("/add")
 	public String add() {
-
 		return "fendian/add";
 	}
 
@@ -57,9 +57,17 @@ public class FendianController {
 	 */
 	@RequestMapping("/doadd")
 	public String doadd(Fendian record, Model model) {
+		if (record.getFdbh() == null || record.getFdmc() == null) {
+			// 添加失败，分店编号、分店名称不能为空
+			model.addAttribute("addmsg", "分店添加失败");
+			model.addAttribute("bhmsg", "分店编号不能为空");
+			model.addAttribute("mcmsg", "分店名称不能为空");
+			model.addAttribute("fendian", record);
+			return "fendian/add";
+		}
 		fendianlist = fendianservice.checkrepeat(record);
-		if (record.getFdbh() == null || record.getFdmc() == null || fendianlist.size() > 0) {
-			// 添加失败
+		if (fendianlist.size() > 0) {
+			// 添加失败，分店编号或分店名称不能重复
 			for (Fendian temp : fendianlist) {
 				if (temp.getFdbh() != null) {
 					model.addAttribute("bhmsg", "此分店编号已存在");
@@ -71,10 +79,10 @@ public class FendianController {
 			model.addAttribute("addmsg", "分店添加失败");
 			model.addAttribute("fendian", record);
 			return "fendian/add";
-		} else {// 添加成功
-			fendianservice.addfendian(record);
-			return "redirect:list?waymsg=add";
 		}
+		// 添加成功
+		fendianservice.addfendian(record);
+		return "redirect:list?waymsg=add";
 	}
 
 	/**
@@ -92,11 +100,20 @@ public class FendianController {
 	 */
 	@RequestMapping("/doedit")
 	public String doedit(Fendian record, Model model) {
+		if (record.getFdbh() == null || record.getFdmc() == null) {
+			// 修改失败，分店编号、分店名称不能为空
+			model.addAttribute("editmsg", "分店修改失败");
+			model.addAttribute("bhmsg", "分店编号不能为空");
+			model.addAttribute("mcmsg", "分店名称不能为空");
+			model.addAttribute("fendian", record);
+			return "fendian/edit";
+		}
 		fendian = fendianservice.getfendian(record.getId());
+		// 判断分店编号、分店名称修改
 		if ((!fendian.getFdbh().equals(record.getFdbh())) || (!fendian.getFdmc().equals(record.getFdmc()))) {
 			fendianlist = fendianservice.checkrepeat(record);
-			if (record.getFdbh() == null || record.getFdmc() == null || fendianlist.size() > 0) {
-				// 修改失败
+			if (fendianlist.size() > 0) {
+				// 修改失败，分店编号或分店名称不能重复
 				for (Fendian temp : fendianlist) {
 					if (temp.getFdbh() != null) {
 						model.addAttribute("bhmsg", "此分店编号已存在");

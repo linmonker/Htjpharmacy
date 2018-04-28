@@ -47,28 +47,30 @@ public class CangkuController {
 	public String list(HttpServletRequest request, Model model) {
 		Integer fdid = Integer.valueOf(request.getParameter("fdid"));
 		if (fdid == null) {
+			// 分店id获取失败，返回仓库列表首页
 			return "redirect:sylist";
-		} else {
-			cangkulist = cangkuservice.cangkuquery(fdid);
-			if (cangkulist.size() < 1) {
-				cangku = new Cangku();
-				cangku.setFdid(fdid);
-				cangkulist.add(cangku);
-			}
-			model.addAttribute("cangkulist", cangkulist);
-			fendianlist = fendianservice.fendianquery();
-			model.addAttribute("fendianlist", fendianlist);
-
-			String waymsg = request.getParameter("waymsg");
-			if ("add".equals(waymsg)) {
-				model.addAttribute("addmsg", "分店添加成功");
-			} else if ("edit".equals(waymsg)) {
-				model.addAttribute("editmsg", "分店修改成功");
-			} else if ("delete".equals(waymsg)) {
-				model.addAttribute("deletemsg", "分店删除成功");
-			}
-			return "cangku/list";
 		}
+		cangkulist = cangkuservice.cangkuquery(fdid);
+		if (cangkulist.size() < 1) {
+			// 仓库列表为空，添加一个仓库传递分店id
+			cangku = new Cangku();
+			cangku.setFdid(fdid);
+			cangkulist.add(cangku);
+		}
+		model.addAttribute("cangkulist", cangkulist);
+		fendianlist = fendianservice.fendianquery();
+		model.addAttribute("fendianlist", fendianlist);
+
+		// 操作提示信息
+		String waymsg = request.getParameter("waymsg");
+		if ("add".equals(waymsg)) {
+			model.addAttribute("addmsg", "仓库添加成功");
+		} else if ("edit".equals(waymsg)) {
+			model.addAttribute("editmsg", "仓库修改成功");
+		} else if ("delete".equals(waymsg)) {
+			model.addAttribute("deletemsg", "仓库删除成功");
+		}
+		return "cangku/list";
 
 	}
 
@@ -78,6 +80,10 @@ public class CangkuController {
 	@RequestMapping("/add")
 	public String add(HttpServletRequest request, Model model) {
 		Integer fdid = Integer.valueOf(request.getParameter("fdid"));
+		if (fdid == null) {
+			// 分店id获取失败，返回仓库列表首页
+			return "redirect:sylist";
+		}
 		cangku = new Cangku();
 		cangku.setFdid(fdid);
 		model.addAttribute("cangku", cangku);
@@ -89,18 +95,25 @@ public class CangkuController {
 	 */
 	@RequestMapping("/doadd")
 	public String doadd(HttpServletRequest request, Cangku record, Model model) {
-		cangku = cangkuservice.checkrepeat(record);
-		if (cangku != null) {
-			// 添加失败
+		if(record.getCkbh() == null || record.getCkmc() == null) {
+			// 添加失败，仓库编号、仓库名称不能为空
+			model.addAttribute("addmsg", "仓库添加失败");
+			model.addAttribute("bhmsg", "仓库编号不能为空");
+			model.addAttribute("mcmsg", "仓库名称不能为空");
+			model.addAttribute("cangku", record);
+			return "cangku/add";
+		}
+		cangkulist = cangkuservice.checkrepeat(record);
+		if (cangkulist.size() > 0) {
+			// 添加失败，仓库编号不能重复
 			model.addAttribute("bhmsg", "此仓库编号已存在");
 			model.addAttribute("addmsg", "仓库添加失败");
 			model.addAttribute("cangku", record);
 			return "cangku/add";
-		} else {
-			// 添加成功
-			cangkuservice.addcangku(record);
-			return "redirect:list?waymsg=add&&fdid=" + record.getFdid();
-		}
+		} 
+		// 添加成功
+		cangkuservice.addcangku(record);
+		return "redirect:list?waymsg=add&&fdid=" + record.getFdid();
 	}
 
 	/**
@@ -119,11 +132,20 @@ public class CangkuController {
 	 */
 	@RequestMapping("/doedit")
 	public String doedit(Cangku record, Model model) {
+		if(record.getCkbh() == null || record.getCkmc() == null) {
+			// 修改失败，仓库编号、仓库名称不能为空
+			model.addAttribute("editmsg", "仓库修改失败");
+			model.addAttribute("bhmsg", "仓库编号不能为空");
+			model.addAttribute("mcmsg", "仓库名称不能为空");
+			model.addAttribute("cangku", record);
+			return "cangku/edit";
+		}
 		cangku = cangkuservice.getcangku(record.getId());
+		// 判断仓库编号修改
 		if (!cangku.getCkbh().equals(record.getCkbh())) {
-			cangku = cangkuservice.checkrepeat(record);
-			if (cangku != null) {
-				// 修改失败
+			cangkulist = cangkuservice.checkrepeat(record);
+			if (cangkulist.size() > 0) {
+				// 修改失败，仓库编号不能重复
 				model.addAttribute("bhmsg", "此仓库编号已存在");
 				model.addAttribute("editmsg", "仓库修改失败");
 				model.addAttribute("cangku", record);

@@ -60,7 +60,7 @@
 				<div class="field">
 					<label class="sub-header">添加供应商</label>
 					<input id="gyszt" type="hidden" value="${gys.zt }" />
-					<span>${addmsg}</span> <span>${bhmsg}</span>
+					<span>${addmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
 				<form method="post" class="form-x"
 					action="${ctx }/gongyingshang/doadd">
@@ -354,9 +354,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label></label>
-						</div>
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
 							<a class="button bg-red" href="${ctx }/gongyingshang/list"

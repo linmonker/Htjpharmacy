@@ -22,7 +22,7 @@ public interface HuoweiMapperPro {
 	/**
 	 * 检查重复，货物编号同一仓库唯一
 	 */
-	Huowei checkrepeat(Huowei record);
+	List<Huowei> checkrepeat(Huowei record);
 
 	/**
 	 * 更新货物信息

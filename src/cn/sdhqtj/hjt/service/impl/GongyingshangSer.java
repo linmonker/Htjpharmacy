@@ -38,7 +38,7 @@ public class GongyingshangSer implements GongyingshangService {
 	 * 通过供应商id获取供应商信息
 	 */
 	@Override
-	public GongyingshangWithBLOBs selectByPrimaryKey(Integer id) {
+	public GongyingshangWithBLOBs getgongyingshang(Integer id) {
 		// TODO Auto-generated method stub
 		gysB = gysMapper.selectByPrimaryKey(id);
 		return gysB;
@@ -58,10 +58,10 @@ public class GongyingshangSer implements GongyingshangService {
 	 * 检查重复，供应商编号
 	 */
 	@Override
-	public Gongyingshang checkrepeat(Gongyingshang record) {
+	public List<Gongyingshang> checkrepeat(Gongyingshang record) {
 		// TODO Auto-generated method stub
-		gys = gysMapperPro.checkrepeat(record);
-		return gys;
+		gyslist = gysMapperPro.checkrepeat(record);
+		return gyslist;
 	}
 
 	/**

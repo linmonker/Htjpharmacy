@@ -5,23 +5,11 @@ package cn.sdhqtj.hjt.entity;
  */
 public class YaopinflNode {
 
-	private Integer id;
-	private Integer pId;
-	private String name;
-	private short levelid;
-	private String flbz;
-
-	public YaopinflNode() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public YaopinflNode(Integer id, Integer pId, String name, short levelid, String flbz) {
-		this.id = id;
-		this.pId = pId;
-		this.name = name;
-		this.levelid = levelid;
-		this.flbz = flbz;
-	}
+	private Integer id;     // 节点id,药品id
+	private Integer pId;    // 父节点id
+	private String name;    // 节点名称
+	private short levelid;  // 节点等级，tree0开始，数据库1开始
+	private String flbz;    // 备注信息
 
 	public Integer getId() {
 		return id;

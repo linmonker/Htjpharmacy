@@ -24,14 +24,9 @@ public interface YaopinfenleiService {
 	List<YaopinflNode> getypflnodes();
 
 	/**
-	 * 获取药品分类json列表
-	 */
-	public List<Object> gettreelist();
-	
-	/**
 	 *检查重复，药品分类编号
 	 */
-	Yaopinfenlei checkrepeat(Yaopinfenlei record);
+	List<Yaopinfenlei> checkrepeat(Yaopinfenlei record);
 
 	/**
 	 * 根据药品分类id获取药品分类信息

@@ -24,7 +24,7 @@ public interface YaopinMapperPro {
 	/**
 	 * 检查重复，药品编号
 	 */
-	Yaopin checkrepeat(String String);
+	List<Yaopin> checkrepeat(String String);
 
 	/**
 	 * 更新药品信息

@@ -125,9 +125,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label></label>
-						</div>
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
 							<button class="button bg-main" type="reset">重置</button>

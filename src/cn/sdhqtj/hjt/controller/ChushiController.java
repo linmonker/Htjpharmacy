@@ -14,6 +14,9 @@ import cn.sdhqtj.hjt.entity.Login;
 import cn.sdhqtj.hjt.entity.Zuzhijigou;
 import cn.sdhqtj.hjt.service.ChushiService;
 
+/**
+ * 处室controller
+ */
 @Controller
 @RequestMapping("/zuzhijigou")
 public class ChushiController {
@@ -24,56 +27,66 @@ public class ChushiController {
 	Zuzhijigou chushi;
 
 	Login login;
-	
+
 	/**
 	 * 列表
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model, HttpSession session) {
-		login = (Login) session.getAttribute("loginer"); 
+		login = (Login) session.getAttribute("loginer");
 		chushilist = chushiservice.chushiquery(login.getFdid());
 		model.addAttribute("chushilist", chushilist);
+
+		// 操作提示信息
 		String waymsg = request.getParameter("waymsg");
 		if ("add".equals(waymsg)) {
-			model.addAttribute("addmsg", "分店添加成功");
+			model.addAttribute("addmsg", "处室添加成功");
 		} else if ("edit".equals(waymsg)) {
-			model.addAttribute("editmsg", "分店修改成功");
+			model.addAttribute("editmsg", "处室修改成功");
 		} else if ("delete".equals(waymsg)) {
-			model.addAttribute("deletemsg", "分店删除成功");
+			model.addAttribute("deletemsg", "处室删除成功");
 		}
 		return "zuzhijigou/list";
 	}
 
 	/**
-	 * 新增科室
+	 * 新增处室
 	 */
 	@RequestMapping("/add")
 	public String add() {
-
 		return "zuzhijigou/add";
 	}
 
 	/**
-	 * 执行添加科室
+	 * 执行添加处室
 	 */
 	@RequestMapping("/doadd")
 	public String doadd(Zuzhijigou record, Model model, HttpSession session) {
-		chushilist = chushiservice.checkrepeat(record);
-
-		if (chushilist.size() > 0) {
-			model.addAttribute("bhmsg", "此处室编号已存在");
+		if (record.getCsbh() == null || record.getCsmc() == null) {
+			// 添加失败，处室编号、处室名称不能为空
+			model.addAttribute("addmsg", "处室添加失败");
+			model.addAttribute("bhmsg", "处室编号不能为空");
+			model.addAttribute("mcmsg", "处室名称不能为空");
 			model.addAttribute("chushi", record);
 			return "zuzhijigou/add";
-		} else {
-			login = (Login) session.getAttribute("loginer");
-			record.setFdid(login.getFdid());
-			chushiservice.addchushi(record);
-			return "redirect:list?waymsg=add";
 		}
+		chushilist = chushiservice.checkrepeat(record);
+		if (chushilist.size() > 0) {
+			// 添加失败，处室编号不能重复
+			model.addAttribute("bhmsg", "此处室编号已存在");
+			model.addAttribute("addmsg", "处室添加失败");
+			model.addAttribute("chushi", record);
+			return "zuzhijigou/add";
+		}
+		// 添加成功
+		login = (Login) session.getAttribute("loginer");
+		record.setFdid(login.getFdid());
+		chushiservice.addchushi(record);
+		return "redirect:list?waymsg=add";
 	}
 
 	/**
-	 * 修改科室
+	 * 修改处室
 	 */
 	@RequestMapping("/edit")
 	public String edit(HttpServletRequest request, Model model) {
@@ -84,25 +97,38 @@ public class ChushiController {
 	}
 
 	/**
-	 * 执行修改科室
+	 * 执行修改处室
 	 */
 	@RequestMapping("/doedit")
 	public String doedit(Zuzhijigou record, Model model) {
-		chushilist = chushiservice.checkrepeat(record);
-
-		if (chushilist.size() > 0) {
-			model.addAttribute("bhmsg", "此科室编号已存在");
+		if (record.getCsbh() == null || record.getCsmc() == null) {
+			// 修改失败，处室编号、处室名称不能为空
+			model.addAttribute("editmsg", "处室修改失败");
+			model.addAttribute("bhmsg", "处室编号不能为空");
+			model.addAttribute("mcmsg", "处室名称不能为空");
 			model.addAttribute("chushi", record);
 			return "zuzhijigou/edit";
-		} else {
-			chushiservice.updatechushi(record);
-			return "redirect:list?waymsg=edit";
 		}
+		chushi = chushiservice.getchushi(record.getId());
+		// 判断处室编号修改
+		if (!chushi.getCsbh().equals(record.getCsbh())) {
+			chushilist = chushiservice.checkrepeat(record);
+			if (chushilist.size() > 0) {
+				// 修改失败，处室编号不能重复
+				model.addAttribute("bhmsg", "此科室编号已存在");
+				model.addAttribute("editmsg", "处室修改失败");
+				model.addAttribute("chushi", record);
+				return "zuzhijigou/edit";
+			}
+		}
+		// 修改成功
+		chushiservice.updatechushi(record);
+		return "redirect:list?waymsg=edit";
 
 	}
 
 	/**
-	 * 删除科室
+	 * 删除处室
 	 */
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
@@ -110,14 +136,14 @@ public class ChushiController {
 		chushiservice.deletechushi(id);
 		return "redirect:list?waymsg=delete";
 	}
-	
+
 	/**
 	 * 搜索处室
 	 */
 	@RequestMapping("/search")
 	public String search(String searchword, Model model, HttpSession session) {
 		chushi = new Zuzhijigou();
-		login = (Login) session.getAttribute("loginer"); 
+		login = (Login) session.getAttribute("loginer");
 		chushi.setFdid(login.getFdid());
 		chushi.setCsmc(searchword);
 		chushilist = chushiservice.searchchushi(chushi);

@@ -51,7 +51,7 @@
 			<div class="col-sm-9 col-md-9 main">
 				<div class="field">
 					<label class="sub-header">添加用户</label>
-					<span>${addmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
+					<span>${addmsg}</span><span>${bhmsg}</span><span>${mcmsg}</span><span>${mmmsg}</span>
 				</div>
 				<form method="post" class="form-x" action="${ctx}/yonghu/doadd">
 					<input type="hidden" name="fdid" value="${yonghu.fdid }" />

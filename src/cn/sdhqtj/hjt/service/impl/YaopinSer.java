@@ -22,6 +22,7 @@ public class YaopinSer implements YaopinService {
 	@Resource
 	private YaopinMapper yaopinMapper;
 	Yaopin yaopin;
+	List<Yaopin> yaopinlist;
 	YaopinWithBLOBs yaopinB;
 	List<YaopinVo> yaopinvolist;
 
@@ -59,10 +60,10 @@ public class YaopinSer implements YaopinService {
 	 * 检查重复，药品编号
 	 */
 	@Override
-	public Yaopin checkrepeat(String string) {
+	public List<Yaopin> checkrepeat(String string) {
 		// TODO Auto-generated method stub
-		yaopin = yaopinMapperPro.checkrepeat(string);
-		return yaopin;
+		yaopinlist = yaopinMapperPro.checkrepeat(string);
+		return yaopinlist;
 	}
 
 	/**

@@ -32,7 +32,7 @@ public interface YaopinService {
 	/**
 	 * 检查重复，药品编号
 	 */
-	public Yaopin checkrepeat(String record);
+	public List<Yaopin> checkrepeat(String record);
 
 	/**
 	 * 添加药品

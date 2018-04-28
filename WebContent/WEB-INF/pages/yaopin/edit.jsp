@@ -77,7 +77,7 @@
 					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
 					<input id="flid" type="hidden" value="${yaopin.yplb }" />
 					<input id="gysid" type="hidden" value="${yaopin.ypgys }" />
-					<span>${addmsg }</span><span>${bhmsg }</span>
+					<span>${addmsg }</span><span>${bhmsg }</span> <span>${mcmsg}</span>
 				</div>
 				<form id="" formpot method="post" class="form-x"
 					action="${ctx }/yaopin/doedit">
@@ -384,9 +384,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label></label>
-						</div>
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
 							<button class="button bg-main" type="reset">重置</button>

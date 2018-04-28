@@ -76,7 +76,7 @@
 					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
 					<input id="yhjs" type="hidden" value="${yonghu.yhjsid }" />
 					<input id="yhbm" type="hidden" value="${yonghu.yhbmid }" />
-					<span>${editmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
+					<span>${editmsg}</span><span>${bhmsg}</span><span>${mcmsg}</span><span>${mmmsg}</span>
 				</div>
 				<form id="formpot" method="post" class="form-x"
 					action="${ctx }/yonghu/doedit">

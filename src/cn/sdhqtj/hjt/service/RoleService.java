@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import cn.sdhqtj.hjt.entity.AccessNode;
 import cn.sdhqtj.hjt.entity.MenuNode;
 import cn.sdhqtj.hjt.entity.Role;
 
@@ -21,17 +22,12 @@ public interface RoleService {
 	/**
 	 * 根据角色id获取角色
 	 */
-	List<Role> getrole(Integer id);
+	Role getrole(Integer id);
 	
 	/**
 	 * 根据角色id获取角色名称
 	 */
 	List<String> rolenamelist(Integer id);
-
-	/**
-	 * 根据角色id获取相关权限url
-	 */
-	List<String> urllist(Integer id);
 
 	/**
 	 * 检查重复，角色名称
@@ -41,7 +37,7 @@ public interface RoleService {
 	/**
 	 * 添加角色
 	 */
-	void addrole(Role record);
+	Integer addrole(Role record);
 
 	/**
 	 * 更新角色信息
@@ -54,13 +50,33 @@ public interface RoleService {
 	void deleterole(Integer id);
 	
 	/**
+	 * 搜索角色
+	 */
+	List<Role> searchrole(Role record);
+
+	/**
+	 * 根据角色id获取相关权限url
+	 */
+	List<String> urllist(Integer id);
+
+	/**
 	 * 获取权限菜单
 	 */
 	List<MenuNode> getmenunodes();
 	
 	/**
-	 * 搜索角色
+	 * 根据角色id获取角色权限
 	 */
-	List<Role> searchrole(Role record);
+	List<AccessNode> getquanxian(Integer id);
+	
+	/**
+	 * 批量添加角色权限
+	 */
+	void addquanxian(List<AccessNode> list);
+	
+	/**
+	 * 根据角色id删除所有角色权限
+	 */
+	void deletequanxian(Integer id);
 
 }

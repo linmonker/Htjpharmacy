@@ -4,22 +4,11 @@ package cn.sdhqtj.hjt.entity;
  * 登录用户类
  */
 public class Login {
-	private Integer id;
-	private String username;
-	private String password;
-	private Integer fdid;
-	private String fdmc;
-
-	public Login() {
-	}
-
-	public Login(Integer id, String username, String password, Integer fdid, String fdmc) {
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.fdid = fdid;
-		this.fdmc = fdmc;
-	}
+	private Integer id;        // 用户id
+	private String username;   // 用户名
+	private String password;   // 用户密码
+	private Integer fdid;      // 用户所属分店id
+	private String fdmc;       // 用户所属分店名称
 
 	public Integer getId() {
 		return id;

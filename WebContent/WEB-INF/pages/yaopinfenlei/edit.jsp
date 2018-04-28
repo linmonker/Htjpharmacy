@@ -71,7 +71,7 @@
 					<label class="sub-header">修改药品分类</label>
 					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
 					<input id="sjflidtemp" type="hidden" value="${ypfl.sjflid }" />
-					<span>${addmsg }</span><span>${bhmsg }</span>
+					<span>${addmsg }</span><span>${bhmsg }</span><span>${mcmsg}</span>
 				</div>
 				<form method="post" class="form-x"
 					action="${ctx }/yaopinfenlei/doedit">
@@ -117,9 +117,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label></label>
-						</div>
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
 							<button class="button bg-main" type="reset">重置</button>

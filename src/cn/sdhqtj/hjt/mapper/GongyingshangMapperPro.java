@@ -23,7 +23,7 @@ public interface GongyingshangMapperPro {
 	/**
 	 * 检查重复，供应商编号
 	 */
-	Gongyingshang checkrepeat(Gongyingshang record);
+	List<Gongyingshang> checkrepeat(Gongyingshang record);
 	
 	/**
 	 *更新供应商信息，选择字段

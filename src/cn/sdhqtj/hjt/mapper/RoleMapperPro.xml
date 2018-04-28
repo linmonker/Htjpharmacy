@@ -36,15 +36,6 @@
 		from hjt_role
 		where role_name like concat("%",#{role_name},"%") and dm = 0
 	</select>
-	<select id="getrole" resultMap="ResultMapWithBLOBs"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		,
-		<include refid="Blob_Column_List" />
-		from hjt_role
-		where role_id = #{role_id,jdbcType=INTEGER} and dm = 0
-	</select>
 	<select id="rolenamelist" resultType="java.lang.String" parameterType="java.lang.Integer">
 		select role_name
 		from
@@ -72,6 +63,66 @@
 		from hjt_role
 		where role_name = #{role_name,jdbcType=VARCHAR}
 	</select>
+	<select id="getmenunodes" resultType="cn.sdhqtj.hjt.entity.MenuNode">
+		select menu_id id, parent_id pId, name
+		from hjt_menu
+	</select>
+	<select id="getquanxian" resultType="cn.sdhqtj.hjt.entity.AccessNode" parameterType="java.lang.Integer">
+		select roleid, useableid id
+		from hjt_access
+		where roleid = #{roleid,jdbcType=INTEGER}
+	</select>
+	<delete id="deletequanxian" parameterType="cn.sdhqtj.hjt.entity.AccessNode">
+	    delete from hjt_access
+	    where roleid = #{role_id,jdbcType=INTEGER}
+	</delete>
+	<insert id="addquanxian" parameterType="java.util.List">
+        insert into hjt_access (roleid, usebleid)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.roleid,jdbcType=INTEGER}, #{item.id,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+	<insert id="addrole" parameterType="cn.sdhqtj.hjt.entity.Role">
+		insert into hjt_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="role_id != null">
+				role_id,
+			</if>
+			<if test="role_name != null">
+				role_name,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="user_id_create != null">
+				user_id_create,
+			</if>
+			<if test="zt != null">
+				zt,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="role_id != null">
+				#{role_id,jdbcType=INTEGER},
+			</if>
+			<if test="role_name != null">
+				#{role_name,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="user_id_create != null">
+				#{user_id_create,jdbcType=BIGINT},
+			</if>
+			<if test="zt != null">
+				#{zt,jdbcType=INTEGER},
+			</if>
+		</trim>
+		<selectKey keyProperty="role_id" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
 	<update id="updaterole" parameterType="cn.sdhqtj.hjt.entity.Role">
 		update hjt_role
 		set role_name = #{role_name,jdbcType=VARCHAR},
@@ -80,9 +131,5 @@
 		remark = #{remark,jdbcType=LONGVARCHAR}
 		where role_id = #{role_id,jdbcType=INTEGER}
 	</update>
-	<select id="getmenunodes" resultType="cn.sdhqtj.hjt.entity.MenuNode">
-		select menu_id id, parent_id pId, name
-		from hjt_menu
-	</select>
 
 </mapper>

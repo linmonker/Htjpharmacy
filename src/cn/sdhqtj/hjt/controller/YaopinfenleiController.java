@@ -38,9 +38,10 @@ public class YaopinfenleiController {
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
 
+		// 操作提示信息
 		String waymsg = request.getParameter("waymsg");
 		if ("edit".equals(waymsg)) {
-			model.addAttribute("editmsg", "分店修改成功");
+			model.addAttribute("editmsg", "药品分类修改成功");
 		}
 		return "yaopinfenlei/list";
 	}
@@ -50,9 +51,9 @@ public class YaopinfenleiController {
 	 */
 	@RequestMapping("/getlist")
 	@ResponseBody
-	public String  getlist() {
-		List<YaopinflNode> nlist =  ypflservice.getypflnodes();
-		String str=JSON.toJSON(nlist).toString();
+	public String getlist() {
+		List<YaopinflNode> nlist = ypflservice.getypflnodes();
+		String str = JSON.toJSON(nlist).toString();
 		return str;
 	}
 
@@ -103,25 +104,35 @@ public class YaopinfenleiController {
 	 */
 	@RequestMapping("/doedit")
 	public String doedit(Yaopinfenlei record, Model model) {
-		ypfl = ypflservice.checkrepeat(record);
-
-		if (record.getFlbh() == null || record.getFlmc() == null || ypfl != null) {
-			// 修改失败
-			if (ypfl != null) {
-				model.addAttribute("bhmsg", "此药品分类编号已存在");
-			}
-
+		if (record.getFlbh() == null || record.getFlmc() == null) {
+			// 修改失败，药品分类编号、药品分类名称不能为空
 			model.addAttribute("editmsg", "药品分类修改失败");
+			model.addAttribute("bhmsg", "药品分类编号不能为空");
+			model.addAttribute("mcmsg", "药品分类名称不能为空");
 			model.addAttribute("ypfl", record);
-			ypfllist = ypflservice.Yaopinfenleiquery();
-			model.addAttribute("ypfllist", ypfllist);
 			return "yaopinfenlei/edit";
-		} else {// 修改成功
-			ypfl = ypflservice.getyaopinfenlei(record.getSjflid());
-			record.setFldj((short) (ypfl.getFldj() + 1));
-			ypflservice.updateyaopinfenlei(record);
-			return "redirect:list?waymsg=edit";
 		}
+		ypfl = ypflservice.getyaopinfenlei(record.getId());
+		// 判断药品分类编号修改
+		if (!ypfl.getFlbh().equals(record.getFlbh())) {
+			ypfllist = ypflservice.checkrepeat(record);
+			if (ypfllist.size() > 0) {
+				// 修改失败，药品分类编号不能重复
+				model.addAttribute("bhmsg", "此药品分类编号已存在");
+				model.addAttribute("editmsg", "药品分类修改失败");
+				model.addAttribute("ypfl", record);
+				ypfllist = ypflservice.Yaopinfenleiquery();
+				model.addAttribute("ypfllist", ypfllist);
+				return "yaopinfenlei/edit";
+			}
+		}
+		// 修改成功
+		// 设置药品分类等级
+		ypfl = ypflservice.getyaopinfenlei(record.getSjflid());
+		record.setFldj((short) (ypfl.getFldj() + 1));
+		ypflservice.updateyaopinfenlei(record);
+		return "redirect:list?waymsg=edit";
+
 	}
 
 	/**
@@ -129,7 +140,7 @@ public class YaopinfenleiController {
 	 */
 	@RequestMapping("/delete")
 	@ResponseBody
-	public String delete(HttpServletRequest request, @RequestParam(value = "id") Integer id) {
+	public String delete(@RequestParam(value = "id") Integer id) {
 		ypflservice.deleteyaopinfenlei(id);
 		return "success";
 	}

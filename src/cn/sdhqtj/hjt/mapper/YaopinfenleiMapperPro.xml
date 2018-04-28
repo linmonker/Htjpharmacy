@@ -42,14 +42,11 @@
 		from hjt_yaopinfenlei a,hjt_yaopinfenlei b
 		where a.sjflid = b.id
 	</select>
-	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
+	<insert id="addyaopinfenlei" parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
 		insert into hjt_yaopinfenlei
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
-			</if>
-			<if test="jtid != null">
-				jtid,
 			</if>
 			<if test="flbh != null">
 				flbh,
@@ -73,9 +70,6 @@
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				#{id,jdbcType=INTEGER},
-			</if>
-			<if test="jtid != null">
-				#{jtid,jdbcType=INTEGER},
 			</if>
 			<if test="flbh != null">
 				#{flbh,jdbcType=VARCHAR},

@@ -51,10 +51,8 @@
 			<div class="col-sm-9 col-md-9 main">
 				<div>
 					<label class="sub-header">添加货位</label>
-					<span>${addmsg}</span> <span>${bhmsg}</span>
+					<span>${addmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
-				<h4 class="sub-header">添加货位</h4>
-				<span>${addmsg}</span> <span>${bhmsg}</span>
 				<form method="post" class="form-x" action="${ctx}/huowei/doadd">
 					<input type="hidden" name="fdid" value="${huowei.fdid }" />
 					<input type="hidden" name="ckid" value="${huowei.ckid }" />
@@ -107,9 +105,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label></label>
-						</div>
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
 							<a class="button bg-red" href="${ctx}/huowei/list"

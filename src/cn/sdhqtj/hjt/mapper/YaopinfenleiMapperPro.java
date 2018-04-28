@@ -24,12 +24,12 @@ public interface YaopinfenleiMapperPro {
 	/**
 	 * 检查重复，药品分类编号
 	 */
-	Yaopinfenlei checkrepeat(Yaopinfenlei record);
+	List<Yaopinfenlei> checkrepeat(Yaopinfenlei record);
 
 	/**
-	 * 插入药品分类，不为null字段，返回id
+	 * 插入药品分类，返回id
 	 */
-	Integer insertSelective(Yaopinfenlei record);
+	Integer addyaopinfenlei(Yaopinfenlei record);
 
 	/**
 	 * 根据药品分类id获取药品分类信息

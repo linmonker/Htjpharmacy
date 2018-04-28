@@ -5,19 +5,9 @@ package cn.sdhqtj.hjt.entity;
  */
 public class MenuNode {
 
-	private Integer id;
-	private Integer pId;
-	private String name;
-
-	public MenuNode() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public MenuNode(Integer id, Integer pId, String name) {
-		this.id = id;
-		this.pId = pId;
-		this.name = name;
-	}
+	private Integer id;  // 节点id
+	private Integer pId; // 父节点id
+	private String name; // 节点名称
 
 	public Integer getId() {
 		return id;

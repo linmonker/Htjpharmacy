@@ -50,7 +50,7 @@
 		join
 			hjt_access a
 		on
-			u.id=a.usesbleid
+			u.id=a.useableid
 		where
 			a.roleid = #{id,jdbcType=INTEGER}
 	</select>

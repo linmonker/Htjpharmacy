@@ -31,8 +31,8 @@
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx }/index">首页</a></li>
 				<li><a>当前用户：</a></li>
-				<li><a>${session.loginer.login }</a></li>
-				<li><a>${session.loginer.fdmc }</a></li>
+				<li><a>${sessionScope.loginer.username }</a></li>
+				<li><a>${sessionScope.loginer.fdmc }</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="${ctx}/outlogin">退出</a></li>

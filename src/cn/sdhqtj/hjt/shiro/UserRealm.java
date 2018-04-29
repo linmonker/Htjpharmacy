@@ -63,12 +63,10 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String username = (String) token.getPrincipal();
-		System.out.println("---aa----"+username);
 		Login lo = new Login();
 		lo.setUsername(username);
 		Login login = loginService.validatelogon(lo);
 
-		System.out.println("----bb---"+login.getUsername()+"--b"+login.getPassword());
 		if (login == null) {
 			throw new IncorrectCredentialsException();// 没找到帐号
 		}
@@ -76,14 +74,12 @@ public class UserRealm extends AuthorizingRealm {
 		// if (Boolean.FALSE.equals(login.getEnable())) {
 		// throw new LockedAccountException(); //帐号锁定
 		// }
-
 		/**
 		 * 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得的不好可以在此判断或自定义实现
 		 */
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(login.getUsername(), login.getPassword(),
 				getName());
 		return info;
-
 	}
 
 	@Override

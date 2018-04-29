@@ -23,8 +23,8 @@
 			<ul class="nav navbar-nav">
 				<li><a href="${ctx}/index">首页</a></li>
 				<li><a>当前用户：</a></li>
-				<li><a>${session.loginer.login }</a></li>
-				<li><a>${session.loginer.fdmc }</a></li>
+				<li><a>${sessionScope.loginer.username }</a></li>
+				<li><a>${sessionScope.loginer.fdmc }</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="${ctx}/outlogin">退出</a></li>
@@ -54,7 +54,7 @@
 					<span>${addmsg }</span> <span>${bhmsg }</span> <span>${mcmsg}</span>
 				</div>
 				<form method="post" class="form-x" action="${ctx}/keshi/doadd">
-					<input type="hidden" name="fdid" value="${session.loginer.fdid }">
+					<input type="hidden" name="fdid" value="${sessionScope.loginer.fdid }">
 					<div class="form-group">
 						<div class="label">
 							<label>科室编号：</label>

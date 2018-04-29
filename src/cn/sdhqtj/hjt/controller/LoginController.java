@@ -39,16 +39,17 @@ public class LoginController {
 	 * 进入首页
 	 */
 	@RequestMapping("/index")
-	public void  index() {
-		
+	public void  index(HttpSession session) {
+		session.setAttribute("loginer", login);
 	}
 
 	/**
 	 * 登录操作
 	 */
 	@RequestMapping("/dologin")
-	public Object dologin(Login record, Model model, HttpSession session) {
+	public Object dologin(Login record, Model model) {
 
+		login = loginService.getuserwithfdmc(record.getUsername());
 		// shiro安全框架调用
 		Subject subject = SecurityUtils.getSubject();
 
@@ -67,8 +68,6 @@ public class LoginController {
 			model.addAttribute("loginmsg", "用户名或密码不正确");
 			return "login";
 		}
-		login = loginService.getuserwithfdmc(record.getUsername());
-		session.setAttribute("loginer", login);
 		return "redirect:index";
 	}
 

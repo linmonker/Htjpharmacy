@@ -77,7 +77,7 @@
 	    where roleid = #{role_id,jdbcType=INTEGER}
 	</delete>
 	<insert id="addquanxian" parameterType="java.util.List">
-        insert into hjt_access (roleid, usebleid)
+        insert into hjt_access (roleid, useableid)
         values
         <foreach collection="list" item="item" separator=",">
             (#{item.roleid,jdbcType=INTEGER}, #{item.id,jdbcType=INTEGER})

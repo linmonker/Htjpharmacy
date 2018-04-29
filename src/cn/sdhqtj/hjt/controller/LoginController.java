@@ -39,8 +39,8 @@ public class LoginController {
 	 * 进入首页
 	 */
 	@RequestMapping("/index")
-	public String index() {
-		return "index";
+	public void  index() {
+		
 	}
 
 	/**
@@ -70,7 +70,6 @@ public class LoginController {
 		login = loginService.getuserwithfdmc(record.getUsername());
 		session.setAttribute("loginer", login);
 		return "redirect:index";
-
 	}
 
 	/**

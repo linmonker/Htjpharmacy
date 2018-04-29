@@ -18,5 +18,4 @@ public class PermFilter extends AuthorizationFilter {
 
 		return subject.isPermitted(requeest.getServletPath());
 	}
-
 }

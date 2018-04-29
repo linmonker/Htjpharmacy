@@ -107,7 +107,7 @@
 		<property name="loginUrl" value="/login" />
 		<property name="successUrl" value="/index" />
 		<!-- 权限认证失败，则跳转到指定错误页面 -->
-		<property name="unauthorizedUrl" value="/info/error" />
+		<property name="unauthorizedUrl" value="/info/quanxianerror" />
 		<property name="filters">
 			<map>
 				<entry key="perms">
@@ -121,11 +121,11 @@
 				<!-- 匿名anon -->
 				<!-- authc登录验证 -->
 				<!-- perms权限过滤验证 -->
-				/login = anon
+				/*login = anon
 				/static/** = anon
 				/info/** = anon
-				<!-- /** = authc -->
-				<!-- /** = perms -->
+				/** = authc
+			    /** = perms
 			</value>
 		</property>
 	</bean>

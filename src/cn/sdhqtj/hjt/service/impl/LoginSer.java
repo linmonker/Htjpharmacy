@@ -31,6 +31,8 @@ public class LoginSer implements LoginService {
 	public Login validatelogon(Login record) {
 		yonghu = yonghuMapperPro.validatelogon(record);
 		if (yonghu != null) {
+			login.setUsername(yonghu.getYhdlm());
+			login.setPassword(yonghu.getYhmm());
 			return login;
 		} else {
 			return null;

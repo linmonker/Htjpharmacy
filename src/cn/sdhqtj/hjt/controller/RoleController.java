@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 
 import cn.sdhqtj.hjt.entity.AccessNode;
 import cn.sdhqtj.hjt.entity.Login;
@@ -65,7 +66,7 @@ public class RoleController {
 		String str = JSON.toJSON(mlist).toString();
 		return str;
 	}
-	
+
 	/**
 	 * 据角色id获取角色权限
 	 */
@@ -73,8 +74,8 @@ public class RoleController {
 	@ResponseBody
 	public String getquanxian(@RequestParam(value = "id") Integer id) {
 		List<AccessNode> alist = roleservice.getquanxian(id);
-		String str = JSON.toJSON(alist).toString();
-		return str;
+		String quanxians = JSON.toJSON(alist).toString();
+		return quanxians;
 	}
 
 	/**
@@ -90,11 +91,15 @@ public class RoleController {
 	 */
 	@RequestMapping("/doadd")
 	public String doadd(HttpServletRequest request, Role record, Model model, HttpSession session) {
+		// 获取前端权限useableid json字符串
+		String quanxians = request.getParameter("quanxians");
 		if (record.getRole_name() == null) {
 			// 角色名称不能为空
 			model.addAttribute("mcmsg", "此角色名称不能为空");
 			model.addAttribute("addmsg", "角色添加失败");
 			model.addAttribute("role", record);
+			quanxians = quanxians.replaceAll("\"", "&quot;");
+			model.addAttribute("quanxians", quanxians);
 			return "role/add";
 		}
 		rolelist = roleservice.checkrepeat(record);
@@ -103,21 +108,20 @@ public class RoleController {
 			model.addAttribute("mcmsg", "此角色名称已存在");
 			model.addAttribute("addmsg", "角色添加失败");
 			model.addAttribute("role", record);
+			quanxians = quanxians.replaceAll("\"", "&quot;");
+			model.addAttribute("quanxians", quanxians);
 			return "role/add";
 		}
 		// 添加成功
 		Login login = (Login) session.getAttribute("loginer");
 		record.setUser_id_create(Long.valueOf(login.getId()));
 		Integer roleid = roleservice.addrole(record);
-		// 获取前端权限useableid字符串
-		String quanxians = request.getParameter("quanxians");
-		String[] marr = quanxians.split(",");
-		AccessNode an = new AccessNode();
-		List<AccessNode> alist = new ArrayList<AccessNode>();
-		for (int i = 0; i < marr.length; i++) {
-			an.setId(Integer.valueOf(marr[i]));
-			an.setRoleid(roleid);
-			alist.add(an);
+
+		// 将权限json字符串转换成Java对象list
+		List<AccessNode> alist = JSON.parseObject(quanxians, new TypeReference<ArrayList<AccessNode>>() {
+		});
+		for (AccessNode temp : alist) {
+			temp.setRoleid(roleid);
 		}
 		// 先根据角色role_id删除所有权限
 		roleservice.deletequanxian(roleid);
@@ -131,8 +135,15 @@ public class RoleController {
 	 */
 	@RequestMapping("/edit")
 	public String edit(HttpServletRequest request, Model model) {
-		role = roleservice.getrole(Integer.valueOf(request.getParameter("id")));
+		Integer id = Integer.valueOf(request.getParameter("id"));
+		role = roleservice.getrole(id);
 		model.addAttribute("role", role);
+		
+		// 获取角色权限
+		List<AccessNode> alist = roleservice.getquanxian(id);
+		String quanxians = JSON.toJSON(alist).toString();
+		quanxians = quanxians.replaceAll("\"", "&quot;");
+		model.addAttribute("quanxians", quanxians);
 		return "role/edit";
 	}
 
@@ -141,11 +152,15 @@ public class RoleController {
 	 */
 	@RequestMapping("/doedit")
 	public String doedit(HttpServletRequest request, Role record, Model model) {
+		// 获取前端权限useableid json字符串
+		String quanxians = request.getParameter("quanxians");
 		if (record.getRole_name() == null) {
 			// 角色名称不能为空
 			model.addAttribute("mcmsg", "此角色名称不能为空");
 			model.addAttribute("editmsg", "角色修改失败");
 			model.addAttribute("role", record);
+			quanxians = quanxians.replaceAll("\"", "&quot;");
+			model.addAttribute("quanxians", quanxians);
 			return "role/add";
 		}
 		role = roleservice.getrole(record.getRole_id());
@@ -157,6 +172,8 @@ public class RoleController {
 				model.addAttribute("mcmsg", "此角色名称已存在");
 				model.addAttribute("editmsg", "角色修改失败");
 				model.addAttribute("role", record);
+				quanxians = quanxians.replaceAll("\"", "&quot;");
+				model.addAttribute("quanxians", quanxians);
 				return "role/edit";
 			}
 		}
@@ -168,15 +185,11 @@ public class RoleController {
 			e.printStackTrace();
 		}
 		roleservice.updaterole(record);
-		// 获取前端权限useableid字符串
-		String quanxians = request.getParameter("quanxians");
-		String[] marr = quanxians.split(",");
-		AccessNode an = new AccessNode();
-		List<AccessNode> alist = new ArrayList<AccessNode>();
-		for (int i = 0; i < marr.length; i++) {
-			an.setId(Integer.valueOf(marr[i]));
-			an.setRoleid(record.getRole_id());
-			alist.add(an);
+		
+		// 将权限json字符串转换成Java对象list
+		List<AccessNode> alist = JSON.parseObject(quanxians, new TypeReference<ArrayList<AccessNode>>() {});
+		for (AccessNode temp : alist) {
+			temp.setRoleid(record.getRole_id());
 		}
 		// 先根据角色role_id删除所有权限
 		roleservice.deletequanxian(record.getRole_id());

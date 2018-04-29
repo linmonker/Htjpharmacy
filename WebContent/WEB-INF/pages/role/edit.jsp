@@ -54,27 +54,64 @@
 			success : function(data) {
 				$.fn.zTree.init($("#treeDemo"), setting, data);
 				zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");
+				getquanxianfrompaga();
 			}
 		});
 	}
 
-	function setquanxians() {
-		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-		var nodes = zTree.getCheckedNodes(true);
-		var v = "";
-		for (var i = 0, l = nodes.length; i < l; i++) {
-			if (!nodes[i].isParent) { //isParent判断是否为父级，也就是是否有下级
-				v += nodes[i].id + ","; //获取所选节点的id
+	// 从页面input获取角色权限，并勾选权限复选框
+	function getquanxianfrompaga() {
+		var qxs = $("#quanxians").val();
+		if(qxs.length > 0){
+			qxs = $.parseJSON(qxs);
+			for (var i = 0; i < qxs.length; i++) {
+				var nodes = zTree_Menu.getNodesByParam("id", qxs[i].id);
+				zTree_Menu.checkNode(nodes[0], true, true);
 			}
 		}
-		if (v.length > 0) {
-			v = v.substring(0, v.length - 1);
-		}
-		$("#quanxians").val(v)
-		alert(v);
-		return false;
 	}
-	
+
+	// 从服务器获取角色权限，并勾选权限复选框
+	function getquanxianfromser() {
+		var ztreeNodes;
+		$.ajax({
+			async : true, //是否异步  
+			cache : false, //是否使用缓存  
+			type : 'post', //请求方式,post  
+			dataType : "json", //数据传输格式  
+			url : "${ctx}/role/getquanxian?id="
+					+ $("input[name='role_id']").val(), //请求链接  
+			error : function() {
+				alert('获取权限数据失败，请重新操作');
+			},
+			success : function(qxs) {
+				for (var i = 0; i < qxs.length; i++) {
+					var nodes = zTree_Menu.getNodesByParam("id", qxs[i].id);
+					zTree_Menu.checkNode(nodes[0], true, true);
+				}
+			}
+		});
+		return true;
+	}
+
+	// 记录权限复选框数据
+	function jiluquanxian() {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+		var nodes = zTree.getCheckedNodes(true);
+		var qxs = [];
+		for (var i = 0, l = nodes.length; i < l; i++) {
+			if (!nodes[i].isParent) { //isParent判断是否为父级，也就是是否有下级
+				var qx = {
+					id : nodes[i].id
+				}; //获取所选节点的id
+				qxs.push(qx);
+			}
+		}
+		$("#quanxians").val(JSON.stringify(qxs));
+		return true;
+	}
+
+	// 打印pdf
 	function topdf() {
 		$("#formpot").jqprint({
 			debug : false,
@@ -87,7 +124,7 @@
 	//初始化操作  
 	$(document).ready(function() {
 		onloadZTree();
-	});	
+	});
 </script>
 </head>
 <body>
@@ -132,9 +169,10 @@
 					<span>${editmsg}</span><span>${mcmsg}</span>
 				</div>
 				<form id="formpot" method="post" class="form-x"
-					action="${ctx }/role/doedit">
+					action="${ctx }/role/doedit" onsubmit="return jiluquanxian()">
 					<input type="hidden" name="role_id" value="${role.role_id }" />
-					<input id="quanxians" name="quanxians" type="hidden" >
+					<input id="quanxians" name="quanxians" type="hidden"
+						value="${quanxians }">
 					<div class="form-group">
 						<div class="label">
 							<label>角色名称：</label>
@@ -179,7 +217,8 @@
 					<div class="form-group">
 						<div class="field">
 							<button class="button bg-main" type="submit">提交</button>
-							<button class="button bg-main" type="reset">重置</button>
+							<button class="button bg-main" type="reset"
+								onclick="return getquanxianfromser()">重置</button>
 						</div>
 					</div>
 				</form>

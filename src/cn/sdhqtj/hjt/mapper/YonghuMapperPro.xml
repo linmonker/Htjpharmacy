@@ -86,11 +86,9 @@
 	</select>
 	<select id="validatelogon" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Login">
-		select
-		<include refid="Base_Column_List" />
+		select <include refid="Base_Column_List" />
 		from hjt_yonghu
-		where yhdlm = #{username,jdbcType=VARCHAR} and
-		yhmm = #{password,jdbcType=VARCHAR} and dm = 0
+		where yhdlm = #{username,jdbcType=VARCHAR} and dm = 0
 	</select>
 	<update id="updateyonghu" parameterType="cn.sdhqtj.hjt.entity.Yonghu">
 		update

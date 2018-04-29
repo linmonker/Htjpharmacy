@@ -34,7 +34,7 @@
 			simpleData : {
 				enable : true
 			},
-		},		
+		},
 	};
 
 	//加载ztree  
@@ -52,25 +52,39 @@
 			success : function(data) {
 				$.fn.zTree.init($("#treeDemo"), setting, data);
 				zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");
+				getquanxianfrompaga();
 			}
 		});
 	}
-	
-	function setquanxians() {
+
+	// 从input获取角色权限，并勾选权限复选框
+	function getquanxianfrompaga() {
+		var qxs = $("#quanxians").val();
+		if(qxs.length > 0){
+			qxs = $.parseJSON(qxs);
+			for (var i = 0; i < qxs.length; i++) {
+				var nodes = zTree_Menu.getNodesByParam("id", qxs[i].id);
+				zTree_Menu.checkNode(nodes[0], true, true);
+			}
+		}
+	}
+
+	// 记录权限复选框数据
+	function jiluquanxian() {
 		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-	    var nodes = zTree.getCheckedNodes(true);
-	    var v = "";
-	    for (var i = 0, l = nodes.length; i < l; i++) {
-	        if (!nodes[i].isParent) {       //isParent判断是否为父级，也就是是否有下级
-	            v += nodes[i].id + ",";   //获取所选节点的id
-	        }
-	    }
-	    if (v.length > 0){
-	    	v = v.substring(0, v.length - 1);
-	    }
-	   $("#quanxians").val(v)
-	   alert(v);
-	   return false;
+		var nodes = zTree.getCheckedNodes(true);
+		var qxs = [];
+		for (var i = 0, l = nodes.length; i < l; i++) {
+			if (!nodes[i].isParent) { //isParent判断是否为父节点
+				//获取所选节点的id
+				var qx = {
+					id : nodes[i].id
+				};
+				qxs.push(qx);
+			}
+		}
+		$("#quanxians").val(JSON.stringify(qxs));
+		return true;
 	}
 
 	//初始化操作  
@@ -119,8 +133,10 @@
 					<label class="sub-header">添加角色</label>
 					<span>${addmsg}</span> <span>${mcmsg}</span>
 				</div>
-				<form method="post" class="form-x" action="${ctx}/role/doadd">
-				    <input id="quanxians" name="quanxians" type="hidden" >
+				<form method="post" class="form-x" action="${ctx}/role/doadd"
+					onsubmit="return jiluquanxian()">
+					<input id="quanxians" name="quanxians" type="hidden"
+						value="${quanxians }">
 					<div class="form-group">
 						<div class="label">
 							<label>角色名称：</label>
@@ -164,7 +180,7 @@
 					</div>
 					<div class="form-group">
 						<div class="field">
-							<button class="button bg-main" type="submit" onclick="return setquanxians()">提交</button>
+							<button class="button bg-main" type="submit">提交</button>
 							<a class="button bg-red" href="${ctx}/role/list"
 								style="margin-left: 10px;"> 取消</a>
 						</div>

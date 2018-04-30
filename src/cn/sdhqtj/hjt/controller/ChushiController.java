@@ -79,8 +79,6 @@ public class ChushiController {
 			return "zuzhijigou/add";
 		}
 		// 添加成功
-		login = (Login) session.getAttribute("loginer");
-		record.setFdid(login.getFdid());
 		chushiservice.addchushi(record);
 		return "redirect:list?waymsg=add";
 	}

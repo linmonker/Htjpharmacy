@@ -80,8 +80,6 @@ public class KeshiController {
 			return "keshi/add";
 		}
 		// 添加成功
-		login = (Login) session.getAttribute("longiner");
-		record.setFdid(login.getFdid());
 		keshiservice.addkeshi(record);
 		return "redirect:list?waymsg=add";
 	}

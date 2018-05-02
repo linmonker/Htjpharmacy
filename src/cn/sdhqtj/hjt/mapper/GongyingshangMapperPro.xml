@@ -4,6 +4,7 @@
 	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Gongyingshang">
 		<id column="Id" property="id" jdbcType="INTEGER" />
 		<result column="jtid" property="jtid" jdbcType="INTEGER" />
+		<result column="fdid" property="fdid" jdbcType="INTEGER" />
 		<result column="gysbh" property="gysbh" jdbcType="VARCHAR" />
 		<result column="gysmc" property="gysmc" jdbcType="VARCHAR" />
 		<result column="gysmcjp" property="gysmcjp" jdbcType="VARCHAR" />
@@ -43,7 +44,7 @@
 		<result column="gysbz" property="gysbz" jdbcType="LONGVARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		Id, jtid, gysbh, gysmc, gysmcjp, gyslxdh, gyslxr,
+		Id, jtid, fdid, gysbh, gysmc, gysmcjp, gyslxdh, gyslxr,
 		gysxxdz, gysywy,
 		gysywydh,
 		gysywysfz, gysyzbm, gyslyxdz, gysyyzz,
@@ -64,17 +65,24 @@
 		where dm = 0
 		order by gysbh asc
 	</select>
+	<select id="getquerybyfdid" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" />
+		from hjt_gongyingshang
+		where fdid = #{fdid} and dm = 0
+		order by gysbh asc
+	</select>
 	<select id="searchgongyingshang" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Gongyingshang">
 		select <include refid="Base_Column_List" />
 		from hjt_gongyingshang
-		where dm = 0 and (gysbh like concat("%",#{gysbh},"%") or gysmc like concat("%",#{gysmc},"%"))
+		where fdid = #{fdid,jdbcType=INTEGER} dm = 0 and 
+		(gysbh like concat("%",#{gysbh},"%") or gysmc like concat("%",#{gysmc},"%"))
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Gongyingshang">
 		select <include refid="Base_Column_List" />
 		from hjt_gongyingshang
-		where gysbh = #{gysbh,jdbcType=VARCHAR}
+		where Id != #{id,jdbcType=INTEGER} and gysbh = #{gysbh,jdbcType=VARCHAR}
 	</select>
     <update id="updategongyingshang" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs">
 		update hjt_gongyingshang

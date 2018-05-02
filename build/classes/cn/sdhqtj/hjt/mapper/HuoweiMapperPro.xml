@@ -42,7 +42,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from hjt_cangku_huowei
-		where ckid = #{ckid,jdbcType=INTEGER} and hwbh = #{hwbh,jdbcType=VARCHAR}
+		where Id != #{id,jdbcType=INTEGER} and ckid = #{ckid,jdbcType=INTEGER} and hwbh = #{hwbh,jdbcType=VARCHAR}
 	</select>
 	<update id="updatehuowei" parameterType="cn.sdhqtj.hjt.entity.Huowei">
 		update hjt_cangku_huowei

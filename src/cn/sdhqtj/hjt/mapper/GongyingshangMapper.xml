@@ -1,512 +1,515 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.sdhqtj.hjt.mapper.GongyingshangMapper">
-	<resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Gongyingshang">
-		<id column="Id" property="id" jdbcType="INTEGER" />
-		<result column="jtid" property="jtid" jdbcType="INTEGER" />
-		<result column="gysbh" property="gysbh" jdbcType="VARCHAR" />
-		<result column="gysmc" property="gysmc" jdbcType="VARCHAR" />
-		<result column="gysmcjp" property="gysmcjp" jdbcType="VARCHAR" />
-		<result column="gyslxdh" property="gyslxdh" jdbcType="VARCHAR" />
-		<result column="gyslxr" property="gyslxr" jdbcType="VARCHAR" />
-		<result column="gysxxdz" property="gysxxdz" jdbcType="VARCHAR" />
-		<result column="gysywy" property="gysywy" jdbcType="VARCHAR" />
-		<result column="gysywydh" property="gysywydh" jdbcType="VARCHAR" />
-		<result column="gysywysfz" property="gysywysfz" jdbcType="VARCHAR" />
-		<result column="gysyzbm" property="gysyzbm" jdbcType="VARCHAR" />
-		<result column="gyslyxdz" property="gyslyxdz" jdbcType="VARCHAR" />
-		<result column="gysyyzz" property="gysyyzz" jdbcType="VARCHAR" />
-		<result column="gysyyzzqx" property="gysyyzzqx" jdbcType="DATE" />
-		<result column="gysyyzzfzrq" property="gysyyzzfzrq" jdbcType="DATE" />
-		<result column="gysfrdb" property="gysfrdb" jdbcType="VARCHAR" />
-		<result column="gysjyxz" property="gysjyxz" jdbcType="VARCHAR" />
-		<result column="gyszczb" property="gyszczb" jdbcType="VARCHAR" />
-		<result column="gysjyfs" property="gysjyfs" jdbcType="VARCHAR" />
-		<result column="gysscjyxkz" property="gysscjyxkz" jdbcType="VARCHAR" />
-		<result column="gysxkzmc" property="gysxkzmc" jdbcType="VARCHAR" />
-		<result column="gysxkzdz" property="gysxkzdz" jdbcType="VARCHAR" />
-		<result column="gysxkzbh" property="gysxkzbh" jdbcType="VARCHAR" />
-		<result column="gysxkzfzdw" property="gysxkzfzdw" jdbcType="VARCHAR" />
-		<result column="gysxkzyxq" property="gysxkzyxq" jdbcType="DATE" />
-		<result column="gysxkzfzrq" property="gysxkzfzrq" jdbcType="DATE" />
-		<result column="gysgspzj" property="gysgspzj" jdbcType="VARCHAR" />
-		<result column="gysgspfzr" property="gysgspfzr" jdbcType="VARCHAR" />
-		<result column="gysgspzjyxq" property="gysgspzjyxq" jdbcType="DATE" />
-		<result column="gysinfo1" property="gysinfo1" jdbcType="VARCHAR" />
-		<result column="gysinfo2" property="gysinfo2" jdbcType="VARCHAR" />
-		<result column="zt" property="zt" jdbcType="INTEGER" />
-		<result column="dm" property="dm" jdbcType="INTEGER" />
-	</resultMap>
-	<resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs"
-		extends="BaseResultMap">
-		<result column="gysjyfw" property="gysjyfw" jdbcType="LONGVARCHAR" />
-		<result column="gysbz" property="gysbz" jdbcType="LONGVARCHAR" />
-	</resultMap>
-	<sql id="Base_Column_List">
-		Id, jtid, gysbh, gysmc, gysmcjp, gyslxdh, gyslxr, gysxxdz, gysywy,
-		gysywydh,
-		gysywysfz, gysyzbm, gyslyxdz, gysyyzz, gysyyzzqx, gysyyzzfzrq, gysfrdb, gysjyxz,
-		gyszczb, gysjyfs, gysscjyxkz, gysxkzmc, gysxkzdz, gysxkzbh,
-		gysxkzfzdw, gysxkzyxq,
-		gysxkzfzrq, gysgspzj, gysgspfzr, gysgspzjyxq, gysinfo1, gysinfo2, zt, dm
-	</sql>
-	<sql id="Blob_Column_List">
-		gysjyfw, gysbz
-	</sql>
-	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		,
-		<include refid="Blob_Column_List" />
-		from hjt_gongyingshang
-		where Id = #{id,jdbcType=INTEGER}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from hjt_gongyingshang
-		where Id = #{id,jdbcType=INTEGER}
-	</delete>
-	<insert id="insert" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs">
-		insert into hjt_gongyingshang (Id, jtid, fdid,
-		gysbh, gysmc, gysmcjp,
-		gyslxdh, gyslxr, gysxxdz,
-		gysywy, gysywydh, gysywysfz,
-		gysyzbm, gyslyxdz, gysyyzz,
-		gysyyzzqx, gysyyzzfzrq, gysfrdb,
-		gysjyxz, gyszczb, gysjyfs,
-		gysscjyxkz, gysxkzmc, gysxkzdz,
-		gysxkzbh, gysxkzfzdw, gysxkzyxq,
-		gysxkzfzrq, gysgspzj, gysgspfzr,
-		gysgspzjyxq, gysinfo1, gysinfo2,
-		zt, dm, gysjyfw,
-		gysbz)
-		values (#{id,jdbcType=INTEGER}, #{jtid,jdbcType=INTEGER},
-		#{gysbh,jdbcType=VARCHAR}, #{gysmc,jdbcType=VARCHAR}, #{gysmcjp,jdbcType=VARCHAR},
-		#{gyslxdh,jdbcType=VARCHAR}, #{gyslxr,jdbcType=VARCHAR},
-		#{gysxxdz,jdbcType=VARCHAR},
-		#{gysywy,jdbcType=VARCHAR}, #{gysywydh,jdbcType=VARCHAR}, #{gysywysfz,jdbcType=VARCHAR},
-		#{gysyzbm,jdbcType=VARCHAR}, #{gyslyxdz,jdbcType=VARCHAR},
-		#{gysyyzz,jdbcType=VARCHAR},
-		#{gysyyzzqx,jdbcType=DATE}, #{gysyyzzfzrq,jdbcType=DATE}, #{gysfrdb,jdbcType=VARCHAR},
-		#{gysjyxz,jdbcType=VARCHAR}, #{gyszczb,jdbcType=VARCHAR},
-		#{gysjyfs,jdbcType=VARCHAR},
-		#{gysscjyxkz,jdbcType=VARCHAR}, #{gysxkzmc,jdbcType=VARCHAR}, #{gysxkzdz,jdbcType=VARCHAR},
-		#{gysxkzbh,jdbcType=VARCHAR}, #{gysxkzfzdw,jdbcType=VARCHAR},
-		#{gysxkzyxq,jdbcType=DATE},
-		#{gysxkzfzrq,jdbcType=DATE}, #{gysgspzj,jdbcType=VARCHAR}, #{gysgspfzr,jdbcType=VARCHAR},
-		#{gysgspzjyxq,jdbcType=DATE}, #{gysinfo1,jdbcType=VARCHAR},
-		#{gysinfo2,jdbcType=VARCHAR},
-		#{zt,jdbcType=INTEGER}, #{dm,jdbcType=INTEGER}, #{gysjyfw,jdbcType=LONGVARCHAR},
-		#{gysbz,jdbcType=LONGVARCHAR})
-	</insert>
-	<insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs">
-		insert into hjt_gongyingshang
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				Id,
-			</if>
-			<if test="jtid != null">
-				jtid,
-			</if>
-			<if test="gysbh != null">
-				gysbh,
-			</if>
-			<if test="gysmc != null">
-				gysmc,
-			</if>
-			<if test="gysmcjp != null">
-				gysmcjp,
-			</if>
-			<if test="gyslxdh != null">
-				gyslxdh,
-			</if>
-			<if test="gyslxr != null">
-				gyslxr,
-			</if>
-			<if test="gysxxdz != null">
-				gysxxdz,
-			</if>
-			<if test="gysywy != null">
-				gysywy,
-			</if>
-			<if test="gysywydh != null">
-				gysywydh,
-			</if>
-			<if test="gysywysfz != null">
-				gysywysfz,
-			</if>
-			<if test="gysyzbm != null">
-				gysyzbm,
-			</if>
-			<if test="gyslyxdz != null">
-				gyslyxdz,
-			</if>
-			<if test="gysyyzz != null">
-				gysyyzz,
-			</if>
-			<if test="gysyyzzqx != null">
-				gysyyzzqx,
-			</if>
-			<if test="gysyyzzfzrq != null">
-				gysyyzzfzrq,
-			</if>
-			<if test="gysfrdb != null">
-				gysfrdb,
-			</if>
-			<if test="gysjyxz != null">
-				gysjyxz,
-			</if>
-			<if test="gyszczb != null">
-				gyszczb,
-			</if>
-			<if test="gysjyfs != null">
-				gysjyfs,
-			</if>
-			<if test="gysscjyxkz != null">
-				gysscjyxkz,
-			</if>
-			<if test="gysxkzmc != null">
-				gysxkzmc,
-			</if>
-			<if test="gysxkzdz != null">
-				gysxkzdz,
-			</if>
-			<if test="gysxkzbh != null">
-				gysxkzbh,
-			</if>
-			<if test="gysxkzfzdw != null">
-				gysxkzfzdw,
-			</if>
-			<if test="gysxkzyxq != null">
-				gysxkzyxq,
-			</if>
-			<if test="gysxkzfzrq != null">
-				gysxkzfzrq,
-			</if>
-			<if test="gysgspzj != null">
-				gysgspzj,
-			</if>
-			<if test="gysgspfzr != null">
-				gysgspfzr,
-			</if>
-			<if test="gysgspzjyxq != null">
-				gysgspzjyxq,
-			</if>
-			<if test="gysinfo1 != null">
-				gysinfo1,
-			</if>
-			<if test="gysinfo2 != null">
-				gysinfo2,
-			</if>
-			<if test="zt != null">
-				zt,
-			</if>
-			<if test="dm != null">
-				dm,
-			</if>
-			<if test="gysjyfw != null">
-				gysjyfw,
-			</if>
-			<if test="gysbz != null">
-				gysbz,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=INTEGER},
-			</if>
-			<if test="jtid != null">
-				#{jtid,jdbcType=INTEGER},
-			</if>
-			<if test="gysbh != null">
-				#{gysbh,jdbcType=VARCHAR},
-			</if>
-			<if test="gysmc != null">
-				#{gysmc,jdbcType=VARCHAR},
-			</if>
-			<if test="gysmcjp != null">
-				#{gysmcjp,jdbcType=VARCHAR},
-			</if>
-			<if test="gyslxdh != null">
-				#{gyslxdh,jdbcType=VARCHAR},
-			</if>
-			<if test="gyslxr != null">
-				#{gyslxr,jdbcType=VARCHAR},
-			</if>
-			<if test="gysxxdz != null">
-				#{gysxxdz,jdbcType=VARCHAR},
-			</if>
-			<if test="gysywy != null">
-				#{gysywy,jdbcType=VARCHAR},
-			</if>
-			<if test="gysywydh != null">
-				#{gysywydh,jdbcType=VARCHAR},
-			</if>
-			<if test="gysywysfz != null">
-				#{gysywysfz,jdbcType=VARCHAR},
-			</if>
-			<if test="gysyzbm != null">
-				#{gysyzbm,jdbcType=VARCHAR},
-			</if>
-			<if test="gyslyxdz != null">
-				#{gyslyxdz,jdbcType=VARCHAR},
-			</if>
-			<if test="gysyyzz != null">
-				#{gysyyzz,jdbcType=VARCHAR},
-			</if>
-			<if test="gysyyzzqx != null">
-				#{gysyyzzqx,jdbcType=DATE},
-			</if>
-			<if test="gysyyzzfzrq != null">
-				#{gysyyzzfzrq,jdbcType=DATE},
-			</if>
-			<if test="gysfrdb != null">
-				#{gysfrdb,jdbcType=VARCHAR},
-			</if>
-			<if test="gysjyxz != null">
-				#{gysjyxz,jdbcType=VARCHAR},
-			</if>
-			<if test="gyszczb != null">
-				#{gyszczb,jdbcType=VARCHAR},
-			</if>
-			<if test="gysjyfs != null">
-				#{gysjyfs,jdbcType=VARCHAR},
-			</if>
-			<if test="gysscjyxkz != null">
-				#{gysscjyxkz,jdbcType=VARCHAR},
-			</if>
-			<if test="gysxkzmc != null">
-				#{gysxkzmc,jdbcType=VARCHAR},
-			</if>
-			<if test="gysxkzdz != null">
-				#{gysxkzdz,jdbcType=VARCHAR},
-			</if>
-			<if test="gysxkzbh != null">
-				#{gysxkzbh,jdbcType=VARCHAR},
-			</if>
-			<if test="gysxkzfzdw != null">
-				#{gysxkzfzdw,jdbcType=VARCHAR},
-			</if>
-			<if test="gysxkzyxq != null">
-				#{gysxkzyxq,jdbcType=DATE},
-			</if>
-			<if test="gysxkzfzrq != null">
-				#{gysxkzfzrq,jdbcType=DATE},
-			</if>
-			<if test="gysgspzj != null">
-				#{gysgspzj,jdbcType=VARCHAR},
-			</if>
-			<if test="gysgspfzr != null">
-				#{gysgspfzr,jdbcType=VARCHAR},
-			</if>
-			<if test="gysgspzjyxq != null">
-				#{gysgspzjyxq,jdbcType=DATE},
-			</if>
-			<if test="gysinfo1 != null">
-				#{gysinfo1,jdbcType=VARCHAR},
-			</if>
-			<if test="gysinfo2 != null">
-				#{gysinfo2,jdbcType=VARCHAR},
-			</if>
-			<if test="zt != null">
-				#{zt,jdbcType=INTEGER},
-			</if>
-			<if test="dm != null">
-				#{dm,jdbcType=INTEGER},
-			</if>
-			<if test="gysjyfw != null">
-				#{gysjyfw,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="gysbz != null">
-				#{gysbz,jdbcType=LONGVARCHAR},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs">
-		update hjt_gongyingshang
-		<set>
-			<if test="jtid != null">
-				jtid = #{jtid,jdbcType=INTEGER},
-			</if>
-			<if test="gysbh != null">
-				gysbh = #{gysbh,jdbcType=VARCHAR},
-			</if>
-			<if test="gysmc != null">
-				gysmc = #{gysmc,jdbcType=VARCHAR},
-			</if>
-			<if test="gysmcjp != null">
-				gysmcjp = #{gysmcjp,jdbcType=VARCHAR},
-			</if>
-			<if test="gyslxdh != null">
-				gyslxdh = #{gyslxdh,jdbcType=VARCHAR},
-			</if>
-			<if test="gyslxr != null">
-				gyslxr = #{gyslxr,jdbcType=VARCHAR},
-			</if>
-			<if test="gysxxdz != null">
-				gysxxdz = #{gysxxdz,jdbcType=VARCHAR},
-			</if>
-			<if test="gysywy != null">
-				gysywy = #{gysywy,jdbcType=VARCHAR},
-			</if>
-			<if test="gysywydh != null">
-				gysywydh = #{gysywydh,jdbcType=VARCHAR},
-			</if>
-			<if test="gysywysfz != null">
-				gysywysfz = #{gysywysfz,jdbcType=VARCHAR},
-			</if>
-			<if test="gysyzbm != null">
-				gysyzbm = #{gysyzbm,jdbcType=VARCHAR},
-			</if>
-			<if test="gyslyxdz != null">
-				gyslyxdz = #{gyslyxdz,jdbcType=VARCHAR},
-			</if>
-			<if test="gysyyzz != null">
-				gysyyzz = #{gysyyzz,jdbcType=VARCHAR},
-			</if>
-			<if test="gysyyzzqx != null">
-				gysyyzzqx = #{gysyyzzqx,jdbcType=DATE},
-			</if>
-			<if test="gysyyzzfzrq != null">
-				gysyyzzfzrq = #{gysyyzzfzrq,jdbcType=DATE},
-			</if>
-			<if test="gysfrdb != null">
-				gysfrdb = #{gysfrdb,jdbcType=VARCHAR},
-			</if>
-			<if test="gysjyxz != null">
-				gysjyxz = #{gysjyxz,jdbcType=VARCHAR},
-			</if>
-			<if test="gyszczb != null">
-				gyszczb = #{gyszczb,jdbcType=VARCHAR},
-			</if>
-			<if test="gysjyfs != null">
-				gysjyfs = #{gysjyfs,jdbcType=VARCHAR},
-			</if>
-			<if test="gysscjyxkz != null">
-				gysscjyxkz = #{gysscjyxkz,jdbcType=VARCHAR},
-			</if>
-			<if test="gysxkzmc != null">
-				gysxkzmc = #{gysxkzmc,jdbcType=VARCHAR},
-			</if>
-			<if test="gysxkzdz != null">
-				gysxkzdz = #{gysxkzdz,jdbcType=VARCHAR},
-			</if>
-			<if test="gysxkzbh != null">
-				gysxkzbh = #{gysxkzbh,jdbcType=VARCHAR},
-			</if>
-			<if test="gysxkzfzdw != null">
-				gysxkzfzdw = #{gysxkzfzdw,jdbcType=VARCHAR},
-			</if>
-			<if test="gysxkzyxq != null">
-				gysxkzyxq = #{gysxkzyxq,jdbcType=DATE},
-			</if>
-			<if test="gysxkzfzrq != null">
-				gysxkzfzrq = #{gysxkzfzrq,jdbcType=DATE},
-			</if>
-			<if test="gysgspzj != null">
-				gysgspzj = #{gysgspzj,jdbcType=VARCHAR},
-			</if>
-			<if test="gysgspfzr != null">
-				gysgspfzr = #{gysgspfzr,jdbcType=VARCHAR},
-			</if>
-			<if test="gysgspzjyxq != null">
-				gysgspzjyxq = #{gysgspzjyxq,jdbcType=DATE},
-			</if>
-			<if test="gysinfo1 != null">
-				gysinfo1 = #{gysinfo1,jdbcType=VARCHAR},
-			</if>
-			<if test="gysinfo2 != null">
-				gysinfo2 = #{gysinfo2,jdbcType=VARCHAR},
-			</if>
-			<if test="zt != null">
-				zt = #{zt,jdbcType=INTEGER},
-			</if>
-			<if test="dm != null">
-				dm = #{dm,jdbcType=INTEGER},
-			</if>
-			<if test="gysjyfw != null">
-				gysjyfw = #{gysjyfw,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="gysbz != null">
-				gysbz = #{gysbz,jdbcType=LONGVARCHAR},
-			</if>
-		</set>
-		where Id = #{id,jdbcType=INTEGER}
-	</update>
-	<update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs">
-		update hjt_gongyingshang
-		set jtid = #{jtid,jdbcType=INTEGER},
-		gysbh = #{gysbh,jdbcType=VARCHAR},
-		gysmc = #{gysmc,jdbcType=VARCHAR},
-		gysmcjp = #{gysmcjp,jdbcType=VARCHAR},
-		gyslxdh = #{gyslxdh,jdbcType=VARCHAR},
-		gyslxr = #{gyslxr,jdbcType=VARCHAR},
-		gysxxdz = #{gysxxdz,jdbcType=VARCHAR},
-		gysywy = #{gysywy,jdbcType=VARCHAR},
-		gysywydh = #{gysywydh,jdbcType=VARCHAR},
-		gysywysfz = #{gysywysfz,jdbcType=VARCHAR},
-		gysyzbm = #{gysyzbm,jdbcType=VARCHAR},
-		gyslyxdz = #{gyslyxdz,jdbcType=VARCHAR},
-		gysyyzz = #{gysyyzz,jdbcType=VARCHAR},
-		gysyyzzqx = #{gysyyzzqx,jdbcType=DATE},
-		gysyyzzfzrq = #{gysyyzzfzrq,jdbcType=DATE},
-		gysfrdb = #{gysfrdb,jdbcType=VARCHAR},
-		gysjyxz = #{gysjyxz,jdbcType=VARCHAR},
-		gyszczb = #{gyszczb,jdbcType=VARCHAR},
-		gysjyfs = #{gysjyfs,jdbcType=VARCHAR},
-		gysscjyxkz = #{gysscjyxkz,jdbcType=VARCHAR},
-		gysxkzmc = #{gysxkzmc,jdbcType=VARCHAR},
-		gysxkzdz = #{gysxkzdz,jdbcType=VARCHAR},
-		gysxkzbh = #{gysxkzbh,jdbcType=VARCHAR},
-		gysxkzfzdw = #{gysxkzfzdw,jdbcType=VARCHAR},
-		gysxkzyxq = #{gysxkzyxq,jdbcType=DATE},
-		gysxkzfzrq = #{gysxkzfzrq,jdbcType=DATE},
-		gysgspzj = #{gysgspzj,jdbcType=VARCHAR},
-		gysgspfzr = #{gysgspfzr,jdbcType=VARCHAR},
-		gysgspzjyxq = #{gysgspzjyxq,jdbcType=DATE},
-		gysinfo1 = #{gysinfo1,jdbcType=VARCHAR},
-		gysinfo2 = #{gysinfo2,jdbcType=VARCHAR},
-		zt = #{zt,jdbcType=INTEGER},
-		dm = #{dm,jdbcType=INTEGER},
-		gysjyfw = #{gysjyfw,jdbcType=LONGVARCHAR},
-		gysbz = #{gysbz,jdbcType=LONGVARCHAR}
-		where Id = #{id,jdbcType=INTEGER}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Gongyingshang">
-		update hjt_gongyingshang
-		set jtid = #{jtid,jdbcType=INTEGER},
-		gysbh = #{gysbh,jdbcType=VARCHAR},
-		gysmc = #{gysmc,jdbcType=VARCHAR},
-		gysmcjp = #{gysmcjp,jdbcType=VARCHAR},
-		gyslxdh = #{gyslxdh,jdbcType=VARCHAR},
-		gyslxr = #{gyslxr,jdbcType=VARCHAR},
-		gysxxdz = #{gysxxdz,jdbcType=VARCHAR},
-		gysywy = #{gysywy,jdbcType=VARCHAR},
-		gysywydh = #{gysywydh,jdbcType=VARCHAR},
-		gysywysfz = #{gysywysfz,jdbcType=VARCHAR},
-		gysyzbm = #{gysyzbm,jdbcType=VARCHAR},
-		gyslyxdz = #{gyslyxdz,jdbcType=VARCHAR},
-		gysyyzz = #{gysyyzz,jdbcType=VARCHAR},
-		gysyyzzqx = #{gysyyzzqx,jdbcType=DATE},
-		gysyyzzfzrq = #{gysyyzzfzrq,jdbcType=DATE},
-		gysfrdb = #{gysfrdb,jdbcType=VARCHAR},
-		gysjyxz = #{gysjyxz,jdbcType=VARCHAR},
-		gyszczb = #{gyszczb,jdbcType=VARCHAR},
-		gysjyfs = #{gysjyfs,jdbcType=VARCHAR},
-		gysscjyxkz = #{gysscjyxkz,jdbcType=VARCHAR},
-		gysxkzmc = #{gysxkzmc,jdbcType=VARCHAR},
-		gysxkzdz = #{gysxkzdz,jdbcType=VARCHAR},
-		gysxkzbh = #{gysxkzbh,jdbcType=VARCHAR},
-		gysxkzfzdw = #{gysxkzfzdw,jdbcType=VARCHAR},
-		gysxkzyxq = #{gysxkzyxq,jdbcType=DATE},
-		gysxkzfzrq = #{gysxkzfzrq,jdbcType=DATE},
-		gysgspzj = #{gysgspzj,jdbcType=VARCHAR},
-		gysgspfzr = #{gysgspfzr,jdbcType=VARCHAR},
-		gysgspzjyxq = #{gysgspzjyxq,jdbcType=DATE},
-		gysinfo1 = #{gysinfo1,jdbcType=VARCHAR},
-		gysinfo2 = #{gysinfo2,jdbcType=VARCHAR},
-		zt = #{zt,jdbcType=INTEGER},
-		dm = #{dm,jdbcType=INTEGER}
-		where Id = #{id,jdbcType=INTEGER}
-	</update>
+<mapper namespace="cn.sdhqtj.hjt.mapper.GongyingshangMapper" >
+  <resultMap id="BaseResultMap" type="cn.sdhqtj.hjt.entity.Gongyingshang" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="jtid" property="jtid" jdbcType="INTEGER" />
+    <result column="fdid" property="fdid" jdbcType="INTEGER" />
+    <result column="gysbh" property="gysbh" jdbcType="VARCHAR" />
+    <result column="gysmc" property="gysmc" jdbcType="VARCHAR" />
+    <result column="gysmcjp" property="gysmcjp" jdbcType="VARCHAR" />
+    <result column="gyslxdh" property="gyslxdh" jdbcType="VARCHAR" />
+    <result column="gyslxr" property="gyslxr" jdbcType="VARCHAR" />
+    <result column="gysxxdz" property="gysxxdz" jdbcType="VARCHAR" />
+    <result column="gysywy" property="gysywy" jdbcType="VARCHAR" />
+    <result column="gysywydh" property="gysywydh" jdbcType="VARCHAR" />
+    <result column="gysywysfz" property="gysywysfz" jdbcType="VARCHAR" />
+    <result column="gysyzbm" property="gysyzbm" jdbcType="VARCHAR" />
+    <result column="gyslyxdz" property="gyslyxdz" jdbcType="VARCHAR" />
+    <result column="gysyyzz" property="gysyyzz" jdbcType="VARCHAR" />
+    <result column="gysyyzzqx" property="gysyyzzqx" jdbcType="DATE" />
+    <result column="gysyyzzfzrq" property="gysyyzzfzrq" jdbcType="DATE" />
+    <result column="gysfrdb" property="gysfrdb" jdbcType="VARCHAR" />
+    <result column="gysjyxz" property="gysjyxz" jdbcType="VARCHAR" />
+    <result column="gyszczb" property="gyszczb" jdbcType="VARCHAR" />
+    <result column="gysjyfs" property="gysjyfs" jdbcType="VARCHAR" />
+    <result column="gysscjyxkz" property="gysscjyxkz" jdbcType="VARCHAR" />
+    <result column="gysxkzmc" property="gysxkzmc" jdbcType="VARCHAR" />
+    <result column="gysxkzdz" property="gysxkzdz" jdbcType="VARCHAR" />
+    <result column="gysxkzbh" property="gysxkzbh" jdbcType="VARCHAR" />
+    <result column="gysxkzfzdw" property="gysxkzfzdw" jdbcType="VARCHAR" />
+    <result column="gysxkzyxq" property="gysxkzyxq" jdbcType="DATE" />
+    <result column="gysxkzfzrq" property="gysxkzfzrq" jdbcType="DATE" />
+    <result column="gysgspzj" property="gysgspzj" jdbcType="VARCHAR" />
+    <result column="gysgspfzr" property="gysgspfzr" jdbcType="VARCHAR" />
+    <result column="gysgspzjyxq" property="gysgspzjyxq" jdbcType="DATE" />
+    <result column="gysinfo1" property="gysinfo1" jdbcType="VARCHAR" />
+    <result column="gysinfo2" property="gysinfo2" jdbcType="VARCHAR" />
+    <result column="zt" property="zt" jdbcType="INTEGER" />
+    <result column="dm" property="dm" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs" extends="BaseResultMap" >
+    <result column="gysjyfw" property="gysjyfw" jdbcType="LONGVARCHAR" />
+    <result column="gysbz" property="gysbz" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, jtid, fdid, gysbh, gysmc, gysmcjp, gyslxdh, gyslxr, gysxxdz, gysywy, gysywydh, 
+    gysywysfz, gysyzbm, gyslyxdz, gysyyzz, gysyyzzqx, gysyyzzfzrq, gysfrdb, gysjyxz, 
+    gyszczb, gysjyfs, gysscjyxkz, gysxkzmc, gysxkzdz, gysxkzbh, gysxkzfzdw, gysxkzyxq, 
+    gysxkzfzrq, gysgspzj, gysgspfzr, gysgspzjyxq, gysinfo1, gysinfo2, zt, dm
+  </sql>
+  <sql id="Blob_Column_List" >
+    gysjyfw, gysbz
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hjt_gongyingshang
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hjt_gongyingshang
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs" >
+    insert into hjt_gongyingshang (Id, jtid, fdid, 
+      gysbh, gysmc, gysmcjp, 
+      gyslxdh, gyslxr, gysxxdz, 
+      gysywy, gysywydh, gysywysfz, 
+      gysyzbm, gyslyxdz, gysyyzz, 
+      gysyyzzqx, gysyyzzfzrq, gysfrdb, 
+      gysjyxz, gyszczb, gysjyfs, 
+      gysscjyxkz, gysxkzmc, gysxkzdz, 
+      gysxkzbh, gysxkzfzdw, gysxkzyxq, 
+      gysxkzfzrq, gysgspzj, gysgspfzr, 
+      gysgspzjyxq, gysinfo1, gysinfo2, 
+      zt, dm, gysjyfw, 
+      gysbz)
+    values (#{id,jdbcType=INTEGER}, #{jtid,jdbcType=INTEGER}, #{fdid,jdbcType=INTEGER}, 
+      #{gysbh,jdbcType=VARCHAR}, #{gysmc,jdbcType=VARCHAR}, #{gysmcjp,jdbcType=VARCHAR}, 
+      #{gyslxdh,jdbcType=VARCHAR}, #{gyslxr,jdbcType=VARCHAR}, #{gysxxdz,jdbcType=VARCHAR}, 
+      #{gysywy,jdbcType=VARCHAR}, #{gysywydh,jdbcType=VARCHAR}, #{gysywysfz,jdbcType=VARCHAR}, 
+      #{gysyzbm,jdbcType=VARCHAR}, #{gyslyxdz,jdbcType=VARCHAR}, #{gysyyzz,jdbcType=VARCHAR}, 
+      #{gysyyzzqx,jdbcType=DATE}, #{gysyyzzfzrq,jdbcType=DATE}, #{gysfrdb,jdbcType=VARCHAR}, 
+      #{gysjyxz,jdbcType=VARCHAR}, #{gyszczb,jdbcType=VARCHAR}, #{gysjyfs,jdbcType=VARCHAR}, 
+      #{gysscjyxkz,jdbcType=VARCHAR}, #{gysxkzmc,jdbcType=VARCHAR}, #{gysxkzdz,jdbcType=VARCHAR}, 
+      #{gysxkzbh,jdbcType=VARCHAR}, #{gysxkzfzdw,jdbcType=VARCHAR}, #{gysxkzyxq,jdbcType=DATE}, 
+      #{gysxkzfzrq,jdbcType=DATE}, #{gysgspzj,jdbcType=VARCHAR}, #{gysgspfzr,jdbcType=VARCHAR}, 
+      #{gysgspzjyxq,jdbcType=DATE}, #{gysinfo1,jdbcType=VARCHAR}, #{gysinfo2,jdbcType=VARCHAR}, 
+      #{zt,jdbcType=INTEGER}, #{dm,jdbcType=INTEGER}, #{gysjyfw,jdbcType=LONGVARCHAR}, 
+      #{gysbz,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs" >
+    insert into hjt_gongyingshang
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="jtid != null" >
+        jtid,
+      </if>
+      <if test="fdid != null" >
+        fdid,
+      </if>
+      <if test="gysbh != null" >
+        gysbh,
+      </if>
+      <if test="gysmc != null" >
+        gysmc,
+      </if>
+      <if test="gysmcjp != null" >
+        gysmcjp,
+      </if>
+      <if test="gyslxdh != null" >
+        gyslxdh,
+      </if>
+      <if test="gyslxr != null" >
+        gyslxr,
+      </if>
+      <if test="gysxxdz != null" >
+        gysxxdz,
+      </if>
+      <if test="gysywy != null" >
+        gysywy,
+      </if>
+      <if test="gysywydh != null" >
+        gysywydh,
+      </if>
+      <if test="gysywysfz != null" >
+        gysywysfz,
+      </if>
+      <if test="gysyzbm != null" >
+        gysyzbm,
+      </if>
+      <if test="gyslyxdz != null" >
+        gyslyxdz,
+      </if>
+      <if test="gysyyzz != null" >
+        gysyyzz,
+      </if>
+      <if test="gysyyzzqx != null" >
+        gysyyzzqx,
+      </if>
+      <if test="gysyyzzfzrq != null" >
+        gysyyzzfzrq,
+      </if>
+      <if test="gysfrdb != null" >
+        gysfrdb,
+      </if>
+      <if test="gysjyxz != null" >
+        gysjyxz,
+      </if>
+      <if test="gyszczb != null" >
+        gyszczb,
+      </if>
+      <if test="gysjyfs != null" >
+        gysjyfs,
+      </if>
+      <if test="gysscjyxkz != null" >
+        gysscjyxkz,
+      </if>
+      <if test="gysxkzmc != null" >
+        gysxkzmc,
+      </if>
+      <if test="gysxkzdz != null" >
+        gysxkzdz,
+      </if>
+      <if test="gysxkzbh != null" >
+        gysxkzbh,
+      </if>
+      <if test="gysxkzfzdw != null" >
+        gysxkzfzdw,
+      </if>
+      <if test="gysxkzyxq != null" >
+        gysxkzyxq,
+      </if>
+      <if test="gysxkzfzrq != null" >
+        gysxkzfzrq,
+      </if>
+      <if test="gysgspzj != null" >
+        gysgspzj,
+      </if>
+      <if test="gysgspfzr != null" >
+        gysgspfzr,
+      </if>
+      <if test="gysgspzjyxq != null" >
+        gysgspzjyxq,
+      </if>
+      <if test="gysinfo1 != null" >
+        gysinfo1,
+      </if>
+      <if test="gysinfo2 != null" >
+        gysinfo2,
+      </if>
+      <if test="zt != null" >
+        zt,
+      </if>
+      <if test="dm != null" >
+        dm,
+      </if>
+      <if test="gysjyfw != null" >
+        gysjyfw,
+      </if>
+      <if test="gysbz != null" >
+        gysbz,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="jtid != null" >
+        #{jtid,jdbcType=INTEGER},
+      </if>
+      <if test="fdid != null" >
+        #{fdid,jdbcType=INTEGER},
+      </if>
+      <if test="gysbh != null" >
+        #{gysbh,jdbcType=VARCHAR},
+      </if>
+      <if test="gysmc != null" >
+        #{gysmc,jdbcType=VARCHAR},
+      </if>
+      <if test="gysmcjp != null" >
+        #{gysmcjp,jdbcType=VARCHAR},
+      </if>
+      <if test="gyslxdh != null" >
+        #{gyslxdh,jdbcType=VARCHAR},
+      </if>
+      <if test="gyslxr != null" >
+        #{gyslxr,jdbcType=VARCHAR},
+      </if>
+      <if test="gysxxdz != null" >
+        #{gysxxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="gysywy != null" >
+        #{gysywy,jdbcType=VARCHAR},
+      </if>
+      <if test="gysywydh != null" >
+        #{gysywydh,jdbcType=VARCHAR},
+      </if>
+      <if test="gysywysfz != null" >
+        #{gysywysfz,jdbcType=VARCHAR},
+      </if>
+      <if test="gysyzbm != null" >
+        #{gysyzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="gyslyxdz != null" >
+        #{gyslyxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="gysyyzz != null" >
+        #{gysyyzz,jdbcType=VARCHAR},
+      </if>
+      <if test="gysyyzzqx != null" >
+        #{gysyyzzqx,jdbcType=DATE},
+      </if>
+      <if test="gysyyzzfzrq != null" >
+        #{gysyyzzfzrq,jdbcType=DATE},
+      </if>
+      <if test="gysfrdb != null" >
+        #{gysfrdb,jdbcType=VARCHAR},
+      </if>
+      <if test="gysjyxz != null" >
+        #{gysjyxz,jdbcType=VARCHAR},
+      </if>
+      <if test="gyszczb != null" >
+        #{gyszczb,jdbcType=VARCHAR},
+      </if>
+      <if test="gysjyfs != null" >
+        #{gysjyfs,jdbcType=VARCHAR},
+      </if>
+      <if test="gysscjyxkz != null" >
+        #{gysscjyxkz,jdbcType=VARCHAR},
+      </if>
+      <if test="gysxkzmc != null" >
+        #{gysxkzmc,jdbcType=VARCHAR},
+      </if>
+      <if test="gysxkzdz != null" >
+        #{gysxkzdz,jdbcType=VARCHAR},
+      </if>
+      <if test="gysxkzbh != null" >
+        #{gysxkzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="gysxkzfzdw != null" >
+        #{gysxkzfzdw,jdbcType=VARCHAR},
+      </if>
+      <if test="gysxkzyxq != null" >
+        #{gysxkzyxq,jdbcType=DATE},
+      </if>
+      <if test="gysxkzfzrq != null" >
+        #{gysxkzfzrq,jdbcType=DATE},
+      </if>
+      <if test="gysgspzj != null" >
+        #{gysgspzj,jdbcType=VARCHAR},
+      </if>
+      <if test="gysgspfzr != null" >
+        #{gysgspfzr,jdbcType=VARCHAR},
+      </if>
+      <if test="gysgspzjyxq != null" >
+        #{gysgspzjyxq,jdbcType=DATE},
+      </if>
+      <if test="gysinfo1 != null" >
+        #{gysinfo1,jdbcType=VARCHAR},
+      </if>
+      <if test="gysinfo2 != null" >
+        #{gysinfo2,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        #{zt,jdbcType=INTEGER},
+      </if>
+      <if test="dm != null" >
+        #{dm,jdbcType=INTEGER},
+      </if>
+      <if test="gysjyfw != null" >
+        #{gysjyfw,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="gysbz != null" >
+        #{gysbz,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs" >
+    update hjt_gongyingshang
+    <set >
+      <if test="jtid != null" >
+        jtid = #{jtid,jdbcType=INTEGER},
+      </if>
+      <if test="fdid != null" >
+        fdid = #{fdid,jdbcType=INTEGER},
+      </if>
+      <if test="gysbh != null" >
+        gysbh = #{gysbh,jdbcType=VARCHAR},
+      </if>
+      <if test="gysmc != null" >
+        gysmc = #{gysmc,jdbcType=VARCHAR},
+      </if>
+      <if test="gysmcjp != null" >
+        gysmcjp = #{gysmcjp,jdbcType=VARCHAR},
+      </if>
+      <if test="gyslxdh != null" >
+        gyslxdh = #{gyslxdh,jdbcType=VARCHAR},
+      </if>
+      <if test="gyslxr != null" >
+        gyslxr = #{gyslxr,jdbcType=VARCHAR},
+      </if>
+      <if test="gysxxdz != null" >
+        gysxxdz = #{gysxxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="gysywy != null" >
+        gysywy = #{gysywy,jdbcType=VARCHAR},
+      </if>
+      <if test="gysywydh != null" >
+        gysywydh = #{gysywydh,jdbcType=VARCHAR},
+      </if>
+      <if test="gysywysfz != null" >
+        gysywysfz = #{gysywysfz,jdbcType=VARCHAR},
+      </if>
+      <if test="gysyzbm != null" >
+        gysyzbm = #{gysyzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="gyslyxdz != null" >
+        gyslyxdz = #{gyslyxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="gysyyzz != null" >
+        gysyyzz = #{gysyyzz,jdbcType=VARCHAR},
+      </if>
+      <if test="gysyyzzqx != null" >
+        gysyyzzqx = #{gysyyzzqx,jdbcType=DATE},
+      </if>
+      <if test="gysyyzzfzrq != null" >
+        gysyyzzfzrq = #{gysyyzzfzrq,jdbcType=DATE},
+      </if>
+      <if test="gysfrdb != null" >
+        gysfrdb = #{gysfrdb,jdbcType=VARCHAR},
+      </if>
+      <if test="gysjyxz != null" >
+        gysjyxz = #{gysjyxz,jdbcType=VARCHAR},
+      </if>
+      <if test="gyszczb != null" >
+        gyszczb = #{gyszczb,jdbcType=VARCHAR},
+      </if>
+      <if test="gysjyfs != null" >
+        gysjyfs = #{gysjyfs,jdbcType=VARCHAR},
+      </if>
+      <if test="gysscjyxkz != null" >
+        gysscjyxkz = #{gysscjyxkz,jdbcType=VARCHAR},
+      </if>
+      <if test="gysxkzmc != null" >
+        gysxkzmc = #{gysxkzmc,jdbcType=VARCHAR},
+      </if>
+      <if test="gysxkzdz != null" >
+        gysxkzdz = #{gysxkzdz,jdbcType=VARCHAR},
+      </if>
+      <if test="gysxkzbh != null" >
+        gysxkzbh = #{gysxkzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="gysxkzfzdw != null" >
+        gysxkzfzdw = #{gysxkzfzdw,jdbcType=VARCHAR},
+      </if>
+      <if test="gysxkzyxq != null" >
+        gysxkzyxq = #{gysxkzyxq,jdbcType=DATE},
+      </if>
+      <if test="gysxkzfzrq != null" >
+        gysxkzfzrq = #{gysxkzfzrq,jdbcType=DATE},
+      </if>
+      <if test="gysgspzj != null" >
+        gysgspzj = #{gysgspzj,jdbcType=VARCHAR},
+      </if>
+      <if test="gysgspfzr != null" >
+        gysgspfzr = #{gysgspfzr,jdbcType=VARCHAR},
+      </if>
+      <if test="gysgspzjyxq != null" >
+        gysgspzjyxq = #{gysgspzjyxq,jdbcType=DATE},
+      </if>
+      <if test="gysinfo1 != null" >
+        gysinfo1 = #{gysinfo1,jdbcType=VARCHAR},
+      </if>
+      <if test="gysinfo2 != null" >
+        gysinfo2 = #{gysinfo2,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        zt = #{zt,jdbcType=INTEGER},
+      </if>
+      <if test="dm != null" >
+        dm = #{dm,jdbcType=INTEGER},
+      </if>
+      <if test="gysjyfw != null" >
+        gysjyfw = #{gysjyfw,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="gysbz != null" >
+        gysbz = #{gysbz,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs" >
+    update hjt_gongyingshang
+    set jtid = #{jtid,jdbcType=INTEGER},
+      fdid = #{fdid,jdbcType=INTEGER},
+      gysbh = #{gysbh,jdbcType=VARCHAR},
+      gysmc = #{gysmc,jdbcType=VARCHAR},
+      gysmcjp = #{gysmcjp,jdbcType=VARCHAR},
+      gyslxdh = #{gyslxdh,jdbcType=VARCHAR},
+      gyslxr = #{gyslxr,jdbcType=VARCHAR},
+      gysxxdz = #{gysxxdz,jdbcType=VARCHAR},
+      gysywy = #{gysywy,jdbcType=VARCHAR},
+      gysywydh = #{gysywydh,jdbcType=VARCHAR},
+      gysywysfz = #{gysywysfz,jdbcType=VARCHAR},
+      gysyzbm = #{gysyzbm,jdbcType=VARCHAR},
+      gyslyxdz = #{gyslyxdz,jdbcType=VARCHAR},
+      gysyyzz = #{gysyyzz,jdbcType=VARCHAR},
+      gysyyzzqx = #{gysyyzzqx,jdbcType=DATE},
+      gysyyzzfzrq = #{gysyyzzfzrq,jdbcType=DATE},
+      gysfrdb = #{gysfrdb,jdbcType=VARCHAR},
+      gysjyxz = #{gysjyxz,jdbcType=VARCHAR},
+      gyszczb = #{gyszczb,jdbcType=VARCHAR},
+      gysjyfs = #{gysjyfs,jdbcType=VARCHAR},
+      gysscjyxkz = #{gysscjyxkz,jdbcType=VARCHAR},
+      gysxkzmc = #{gysxkzmc,jdbcType=VARCHAR},
+      gysxkzdz = #{gysxkzdz,jdbcType=VARCHAR},
+      gysxkzbh = #{gysxkzbh,jdbcType=VARCHAR},
+      gysxkzfzdw = #{gysxkzfzdw,jdbcType=VARCHAR},
+      gysxkzyxq = #{gysxkzyxq,jdbcType=DATE},
+      gysxkzfzrq = #{gysxkzfzrq,jdbcType=DATE},
+      gysgspzj = #{gysgspzj,jdbcType=VARCHAR},
+      gysgspfzr = #{gysgspfzr,jdbcType=VARCHAR},
+      gysgspzjyxq = #{gysgspzjyxq,jdbcType=DATE},
+      gysinfo1 = #{gysinfo1,jdbcType=VARCHAR},
+      gysinfo2 = #{gysinfo2,jdbcType=VARCHAR},
+      zt = #{zt,jdbcType=INTEGER},
+      dm = #{dm,jdbcType=INTEGER},
+      gysjyfw = #{gysjyfw,jdbcType=LONGVARCHAR},
+      gysbz = #{gysbz,jdbcType=LONGVARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sdhqtj.hjt.entity.Gongyingshang" >
+    update hjt_gongyingshang
+    set jtid = #{jtid,jdbcType=INTEGER},
+      fdid = #{fdid,jdbcType=INTEGER},
+      gysbh = #{gysbh,jdbcType=VARCHAR},
+      gysmc = #{gysmc,jdbcType=VARCHAR},
+      gysmcjp = #{gysmcjp,jdbcType=VARCHAR},
+      gyslxdh = #{gyslxdh,jdbcType=VARCHAR},
+      gyslxr = #{gyslxr,jdbcType=VARCHAR},
+      gysxxdz = #{gysxxdz,jdbcType=VARCHAR},
+      gysywy = #{gysywy,jdbcType=VARCHAR},
+      gysywydh = #{gysywydh,jdbcType=VARCHAR},
+      gysywysfz = #{gysywysfz,jdbcType=VARCHAR},
+      gysyzbm = #{gysyzbm,jdbcType=VARCHAR},
+      gyslyxdz = #{gyslyxdz,jdbcType=VARCHAR},
+      gysyyzz = #{gysyyzz,jdbcType=VARCHAR},
+      gysyyzzqx = #{gysyyzzqx,jdbcType=DATE},
+      gysyyzzfzrq = #{gysyyzzfzrq,jdbcType=DATE},
+      gysfrdb = #{gysfrdb,jdbcType=VARCHAR},
+      gysjyxz = #{gysjyxz,jdbcType=VARCHAR},
+      gyszczb = #{gyszczb,jdbcType=VARCHAR},
+      gysjyfs = #{gysjyfs,jdbcType=VARCHAR},
+      gysscjyxkz = #{gysscjyxkz,jdbcType=VARCHAR},
+      gysxkzmc = #{gysxkzmc,jdbcType=VARCHAR},
+      gysxkzdz = #{gysxkzdz,jdbcType=VARCHAR},
+      gysxkzbh = #{gysxkzbh,jdbcType=VARCHAR},
+      gysxkzfzdw = #{gysxkzfzdw,jdbcType=VARCHAR},
+      gysxkzyxq = #{gysxkzyxq,jdbcType=DATE},
+      gysxkzfzrq = #{gysxkzfzrq,jdbcType=DATE},
+      gysgspzj = #{gysgspzj,jdbcType=VARCHAR},
+      gysgspfzr = #{gysgspfzr,jdbcType=VARCHAR},
+      gysgspzjyxq = #{gysgspzjyxq,jdbcType=DATE},
+      gysinfo1 = #{gysinfo1,jdbcType=VARCHAR},
+      gysinfo2 = #{gysinfo2,jdbcType=VARCHAR},
+      zt = #{zt,jdbcType=INTEGER},
+      dm = #{dm,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -40,14 +40,14 @@ public class YaopinSer implements YaopinService {
 	 * 根据药品id获取药品信息
 	 */
 	@Override
-	public YaopinWithBLOBs getyaopin(Integer id) {
+	public YaopinWithBLOBs getyaopin(int id) {
 		// TODO Auto-generated method stub
 		yaopinB = yaopinMapper.selectByPrimaryKey(id);
 		return yaopinB;
 	}
 
 	/**
-	 * 搜索药品
+	 * 模糊搜索药品：药品编号，药品商品名，药品通用名
 	 */
 	@Override
 	public List<YaopinVo> searchyaopin(Yaopin record) {
@@ -57,12 +57,16 @@ public class YaopinSer implements YaopinService {
 	}
 
 	/**
-	 * 检查重复，药品编号
+	 * 检查重复：药品编号
 	 */
 	@Override
-	public List<Yaopin> checkrepeat(String string) {
+	public List<Yaopin> checkrepeat(YaopinWithBLOBs record) {
 		// TODO Auto-generated method stub
-		yaopinlist = yaopinMapperPro.checkrepeat(string);
+		// 如果id为null，则设置id=-1，与数据库所有记录比较
+		if (record.getId() == null) {
+			record.setId(-1);
+		}
+		yaopinlist = yaopinMapperPro.checkrepeat(record);
 		return yaopinlist;
 	}
 
@@ -70,31 +74,30 @@ public class YaopinSer implements YaopinService {
 	 * 添加药品
 	 */
 	@Override
-	public void addyaopin(YaopinWithBLOBs record) {
+	public int addyaopin(YaopinWithBLOBs record) {
 		// TODO Auto-generated method stub
 		try {
-			yaopinMapper.insertSelective(record);
+			return yaopinMapper.insertSelective(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
-
 	}
 
 	/**
 	 * 根据药品id删除药品
 	 */
 	@Override
-	public void deleteyaopin(Integer id) {
+	public int deleteyaopin(int id) {
 		// TODO Auto-generated method stub
 		yaopinB = new YaopinWithBLOBs();
 		yaopinB.setId(id);
 		yaopinB.setDm(1);
 		try {
-			yaopinMapper.updateByPrimaryKeySelective(yaopinB);
+			return yaopinMapper.updateByPrimaryKeySelective(yaopinB);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
 
@@ -102,13 +105,14 @@ public class YaopinSer implements YaopinService {
 	 * 更新药品信息
 	 */
 	@Override
-	public void updateyaopin(YaopinWithBLOBs record) {
+	public int updateyaopin(YaopinWithBLOBs record) {
 		// TODO Auto-generated method stub
 		try {
-			yaopinMapperPro.updateyaopin(record);
+			return yaopinMapperPro.updateyaopin(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
+
 }

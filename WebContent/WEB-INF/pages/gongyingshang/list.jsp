@@ -84,7 +84,7 @@
 					<li><a href="${ctx}/role/list">角色管理</a></li>
 				</ul>
 			</div>
-			<div class="col-sm-9 col-md-9 main">
+			<div class="col-sm-10 col-md-10 main">
 				<div class="row">
 					<nav class="navbar navbar-default">
 					<div class="container-fluid">
@@ -110,7 +110,7 @@
 					</div>
 					</nav>
 					<input type="hidden" id="tempid" />
-					<span>${addmsg}</span> <span>${editmsg}</span> <span>${deletemsg}</span>
+					<span>${waymsg}</span>
 				</div>
 				<div class="row">
 				    <span>共${gyslist.size() }条记录</span>
@@ -141,7 +141,10 @@
 										<td>${list.gysywydh}</td>
 										<td>${list.gysxxdz}</td>
 										<td>${list.gysyzbm}</td>
-										<td>${list.zt}</td>
+										<td><c:choose>
+													<c:when test="${list.zt == 0}">启用</c:when>
+													<c:otherwise>禁用</c:otherwise>
+												</c:choose></td>
 									</tr>
 								</c:forEach>
 							</tbody>

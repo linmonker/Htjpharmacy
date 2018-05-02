@@ -112,7 +112,7 @@
 					</div>
 					</nav>
 					<input type="hidden" id="tempid" />
-					<span>${addmsg }</span> <span>${editmsg }</span> <span>${deletemsg }</span>
+					<span>${waymsg }</span>
 				</div>
 				<div class="row">
 				    <span>共${yaopinlist.size() }条记录</span>
@@ -156,7 +156,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
-
 </html>

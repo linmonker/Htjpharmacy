@@ -58,6 +58,10 @@ public class ChushiSer implements ChushiService {
 	@Override
 	public List<Zuzhijigou> checkrepeat(Zuzhijigou record) {
 		// TODO Auto-generated method stub
+		// 如果id为null，则设置id=-1，与数据库所有记录比较
+		if (record.getId() == null) {
+			record.setId(-1);
+		}
 		chushilist = zuzhijigouMapperPro.checkrepeat(record);
 		return chushilist;
 	}

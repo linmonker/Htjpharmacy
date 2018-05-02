@@ -77,7 +77,7 @@
 					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
 					<input id="flid" type="hidden" value="${yaopin.yplb }" />
 					<input id="gysid" type="hidden" value="${yaopin.ypgys }" />
-					<span>${addmsg }</span><span>${bhmsg }</span> <span>${mcmsg}</span>
+					<span>${msgmsg }</span><span>${bhmsg }</span> <span>${mcmsg}</span>
 				</div>
 				<form id="" formpot method="post" class="form-x"
 					action="${ctx }/yaopin/doedit">

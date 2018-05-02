@@ -73,6 +73,10 @@ public class YonghuSer implements YonghuService {
 	@Override
 	public List<Yonghu> checkrepeat(Yonghu record) {
 		// TODO Auto-generated method stub
+		// 如果id为null，则设置id=-1，与数据库所有记录比较
+		if (record.getId() == null) {
+			record.setId(-1);
+		}
 		yonghulist = yonghuMapperPro.checkrepeat(record);
 		return yonghulist;
 	}

@@ -36,15 +36,16 @@
 		parameterType="cn.sdhqtj.hjt.entity.Cangku">
 		select *
 		from hjt_cangku
-		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0 and (ckbh like concat("%",#{ckbh},"%") or 
-		ckmc like concat("%",#{ckmc},"%"))
+		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0 and 
+		(ckbh like concat("%",#{ckbh},"%") or ckmc like concat("%",#{ckmc},"%"))
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Cangku">
 		select
 		<include refid="Base_Column_List" />
 		fron hjt_cangku
-		where fdid = #{fdid,jdbcType=INTEGER} and ckbh = #{ckbh,jdbcType=VARCHAR}
+		where Id != #{id,jdbcType=INTEGER} and fdid = #{fdid,jdbcType=INTEGER} and 
+		ckbh = #{ckbh,jdbcType=VARCHAR}
 	</select>
 	<update id="updatecangku" parameterType="cn.sdhqtj.hjt.entity.Cangku">
 		update hjt_cangku

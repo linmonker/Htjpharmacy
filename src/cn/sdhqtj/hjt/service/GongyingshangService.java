@@ -19,33 +19,38 @@ public interface GongyingshangService {
 	public List<Gongyingshang> gongyingshangquery();
 
 	/**
+	 * 根据分店id获取供应商列表
+	 */
+	List<Gongyingshang> getquerybyfdid(int fdid);
+
+	/**
 	 * 通过供应商id获取供应商信息
 	 */
-	GongyingshangWithBLOBs getgongyingshang(Integer id);
-	
+	GongyingshangWithBLOBs getgongyingshang(int id);
+
 	/**
-	 * 搜索供应商
+	 * 模糊搜索供应商：供应商编号，供应商名称
 	 */
 	public List<Gongyingshang> searchgongyingshang(Gongyingshang record);
 
 	/**
-	 * 检查重复，供应商编号
+	 * 检查重复：供应商编号
 	 */
 	public List<Gongyingshang> checkrepeat(Gongyingshang record);
 
 	/**
 	 * 添加供应商
 	 */
-	public void addgongyingshang(GongyingshangWithBLOBs record);
+	public int addgongyingshang(GongyingshangWithBLOBs record);
 
 	/**
-	 * 更新供应商信息
+	 * 更新供应商信息，部分字段
 	 */
-	public void updategongyingshang(GongyingshangWithBLOBs record);
+	public int updategongyingshang(GongyingshangWithBLOBs record);
 
 	/**
 	 * 根据供应商id删除供应商
 	 */
-	public void deletegongyingshang(Integer id);
+	public int deletegongyingshang(int id);
 
 }

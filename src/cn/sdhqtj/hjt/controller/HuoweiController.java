@@ -33,17 +33,22 @@ public class HuoweiController {
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
-		Integer fdid = Integer.valueOf(request.getParameter("fdid"));
-		Integer ckid = Integer.valueOf(request.getParameter("ckid"));
-		if (fdid == null) {
-			if (ckid == null) {
-				// 分店id、仓库id都为空，返回仓库列表首页
-				return "redirect:/Htjpharmacy/cangku/sylist";
-			} else {
-				cangku = cangkuservice.getcangku(ckid);
-				fdid = cangku.getFdid();
-			}
+		String fdidstr = request.getParameter("fdid");
+		String ckidstr = request.getParameter("ckid");
+		int fdid, ckid;
+		if (ckidstr == null) {
+			// 仓库id都为空，返回仓库列表首页
+			return "redirect:/Htjpharmacy/cangku/sylist?waymsg=error";
+		} else if (fdidstr == null) {
+			// 分店id为空，从数据库获取fdid
+			ckid = Integer.valueOf(ckidstr);
+			cangku = cangkuservice.getcangku(ckid);
+			fdid = cangku.getFdid();
+		} else {
+			fdid = Integer.valueOf(fdidstr);
+			ckid = Integer.valueOf(ckidstr);
 		}
+
 		huoweilist = huoweiservice.huoweiquery(ckid);
 		if (huoweilist.size() < 1) {
 			// 货位列表为空，添加一个货位传递分店id、仓库id
@@ -57,15 +62,16 @@ public class HuoweiController {
 		// 操作提示信息
 		String waymsg = request.getParameter("waymsg");
 		if ("add".equals(waymsg)) {
-			model.addAttribute("addmsg", "货位添加成功");
+			model.addAttribute("waymsg", "货位添加成功");
 		} else if ("edit".equals(waymsg)) {
-			model.addAttribute("editmsg", "货位修改成功");
+			model.addAttribute("waymsg", "货位修改成功");
 		} else if ("delete".equals(waymsg)) {
-			model.addAttribute("deletemsg", "货位删除成功");
+			model.addAttribute("waymsg", "货位删除成功");
+		} else if ("error".equals(waymsg)) {
+			model.addAttribute("waymsg", "操作失误");
 		}
 
 		return "huowei/list";
-
 	}
 
 	/**
@@ -73,17 +79,22 @@ public class HuoweiController {
 	 */
 	@RequestMapping("/add")
 	public String add(HttpServletRequest request, Model model) {
-		Integer fdid = Integer.valueOf(request.getParameter("fdid"));
-		Integer ckid = Integer.valueOf(request.getParameter("ckid"));
-		if (fdid == null) {
-			if (ckid == null) {
-				// 分店id、仓库id都为空，返回仓库列表首页
-				return "redirect:/Htjpharmacy/cangku/sylist";
-			} else {
-				cangku = cangkuservice.getcangku(ckid);
-				fdid = cangku.getFdid();
-			}
+		String fdidstr = request.getParameter("fdid");
+		String ckidstr = request.getParameter("ckid");
+		int fdid, ckid;
+		if (ckidstr == null) {
+			// 仓库id都为空，返回仓库列表首页
+			return "redirect:/Htjpharmacy/cangku/sylist?waymsg=error";
+		} else if (fdidstr == null) {
+			// 分店id为空，从数据库获取fdid
+			ckid = Integer.valueOf(ckidstr);
+			cangku = cangkuservice.getcangku(ckid);
+			fdid = cangku.getFdid();
+		} else {
+			fdid = Integer.valueOf(fdidstr);
+			ckid = Integer.valueOf(ckidstr);
 		}
+
 		huowei = new Huowei();
 		huowei.setFdid(fdid);
 		huowei.setCkid(ckid);
@@ -99,23 +110,33 @@ public class HuoweiController {
 	public String doadd(Huowei record, Model model) {
 		if (record.getHwbh() == null || record.getHwmc() == null) {
 			// 添加失败，货位编号、货位名称不能为空
-			model.addAttribute("addmsg", "货位添加失败");
+			model.addAttribute("waymsg", "货位添加失败");
 			model.addAttribute("bhmsg", "货位编号不能为空");
 			model.addAttribute("mcmsg", "货位名称不能为空");
 			model.addAttribute("huowei", record);
 			return "huowei/add";
 		}
+
+		// 检查重复
 		huoweilist = huoweiservice.checkrepeat(record);
 		if (huoweilist.size() > 0) {
 			// 添加失败，货位编号不能重复
 			model.addAttribute("bhmsg", "此货位编号已存在");
-			model.addAttribute("addmsg", "货位添加失败");
+			model.addAttribute("waymsg", "货位添加失败");
 			model.addAttribute("huowei", record);
 			return "huowei/add";
 		}
-		// 添加成功
-		huoweiservice.addhuowei(record);
-		return "redirect:list?waymsg=add&&fdid=" + record.getFdid() + "&&ckid=" + record.getCkid();
+
+		int res = huoweiservice.addhuowei(record);
+		if (res > 0) {
+			// 添加成功
+			return "redirect:list?waymsg=add&&fdid=" + record.getFdid() + "&&ckid=" + record.getCkid();
+		} else {
+			// 添加失败
+			model.addAttribute("waymsg", "货位添加失败");
+			model.addAttribute("huowei", record);
+			return "huowei/add";
+		}
 	}
 
 	/**
@@ -123,7 +144,7 @@ public class HuoweiController {
 	 */
 	@RequestMapping("/edit")
 	public String edit(HttpServletRequest request, Model model) {
-		Integer id = Integer.valueOf(request.getParameter("id"));
+		int id = Integer.valueOf(request.getParameter("id"));
 		huowei = huoweiservice.gethuowei(id);
 		model.addAttribute("huowei", huowei);
 		return "huowei/edit";
@@ -136,27 +157,33 @@ public class HuoweiController {
 	public String doedit(Huowei record, Model model) {
 		if (record.getHwbh() == null || record.getHwmc() == null) {
 			// 修改失败，货位编号、货位名称不能为空
-			model.addAttribute("editmsg", "货位修改失败");
+			model.addAttribute("waymsg", "货位修改失败");
 			model.addAttribute("bhmsg", "货位编号不能为空");
 			model.addAttribute("mcmsg", "货位名称不能为空");
 			model.addAttribute("huowei", record);
 			return "huowei/edit";
 		}
-		huowei = huoweiservice.gethuowei(record.getId());
-		// 判断货位编号修改
-		if (!huowei.getHwbh().equals(record.getHwbh())) {
-			huoweilist = huoweiservice.checkrepeat(record);
-			if (huoweilist.size() > 0) {
-				// 修改失败，货位编号不能重复
-				model.addAttribute("bhmsg", "此货位编号已存在");
-				model.addAttribute("editmsg", "货位修改失败");
-				model.addAttribute("huowei", record);
-				return "huowei/edit";
-			}
+
+		// 检查重复
+		huoweilist = huoweiservice.checkrepeat(record);
+		if (huoweilist.size() > 0) {
+			// 修改失败，货位编号不能重复
+			model.addAttribute("bhmsg", "此货位编号已存在");
+			model.addAttribute("waymsg", "货位修改失败");
+			model.addAttribute("huowei", record);
+			return "huowei/edit";
 		}
-		// 修改成功
-		huoweiservice.addhuowei(record);
-		return "redirect:list?waymsg=edit&&fdid=" + record.getFdid() + "&&ckid=" + record.getCkid();
+
+		int res = huoweiservice.addhuowei(record);
+		if (res >= 0) {
+			// 修改成功
+			return "redirect:list?waymsg=edit&&fdid=" + record.getFdid() + "&&ckid=" + record.getCkid();
+		} else {
+			// 修改失败
+			model.addAttribute("waymsg", "货位修改失败");
+			model.addAttribute("huowei", record);
+			return "huowei/edit";
+		}
 	}
 
 	/**
@@ -164,11 +191,18 @@ public class HuoweiController {
 	 */
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
-		Integer id = Integer.valueOf(request.getParameter("id"));
-		Integer fdid = Integer.valueOf(request.getParameter("fdid"));
-		Integer ckid = Integer.valueOf(request.getParameter("ckid"));
-		huoweiservice.deletehuowei(id);
-		return "redirect:list?waymsg=delete&&fdid=" + fdid + "&&ckid=" + ckid;
+		int id = Integer.valueOf(request.getParameter("id"));
+		String fdid = request.getParameter("fdid");
+		String ckid = request.getParameter("ckid");
+
+		int res = huoweiservice.deletehuowei(id);
+		if (res > 0) {
+			// 删除成功
+			return "redirect:list?waymsg=delete&&fdid=" + fdid + "&&ckid=" + ckid;
+		} else {
+			// 删除失败
+			return "redirect:list?waymsg=error&&fdid=" + fdid + "&&ckid=" + ckid;
+		}
 	}
 
 	/**
@@ -176,7 +210,7 @@ public class HuoweiController {
 	 */
 	@RequestMapping("/search")
 	public String search(HttpServletRequest request, String searchword, Model model) {
-		Integer ckid = Integer.valueOf(request.getParameter("ckid"));
+		int ckid = Integer.valueOf(request.getParameter("ckid"));
 		huowei = new Huowei();
 		huowei.setCkid(ckid);
 		huowei.setHwmc(searchword);

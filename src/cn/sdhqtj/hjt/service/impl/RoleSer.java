@@ -63,6 +63,10 @@ public class RoleSer implements RoleService {
 	@Override
 	public List<Role> checkrepeat(Role record) {
 		// TODO Auto-generated method stub
+		// 如果id为null，则设置id=-1，与数据库所有记录比较
+		if (record.getRole_id() == null) {
+			record.setRole_id(-1);
+		}
 		rolelist = roleMapperPro.checkrepeat(record);
 		return rolelist;
 	}
@@ -73,7 +77,7 @@ public class RoleSer implements RoleService {
 	@Override
 	public Integer addrole(Role record) {
 		// TODO Auto-generated method stub
-		Integer lastid =  roleMapper.insertSelective(record);
+		Integer lastid = roleMapper.insertSelective(record);
 		return lastid;
 	}
 

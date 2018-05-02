@@ -36,14 +36,14 @@ public class FendianSer implements FendianService {
 	 * 通过分店id获取分店信息
 	 */
 	@Override
-	public Fendian getfendian(Integer id) {
+	public Fendian getfendian(int id) {
 		// TODO Auto-generated method stub
 		fendian = fendianMapper.selectByPrimaryKey(id);
 		return fendian;
 	}
 
 	/**
-	 * 搜索分店
+	 * 模糊搜索分店：分店名称
 	 */
 	@Override
 	public List<Fendian> searchfendian(Fendian record) {
@@ -53,11 +53,15 @@ public class FendianSer implements FendianService {
 	}
 
 	/**
-	 * 检查重复，分店编号和分店名称
+	 * 检查重复：分店编号，分店名称
 	 */
 	@Override
 	public List<Fendian> checkrepeat(Fendian record) {
 		// TODO Auto-generated method stub
+		// 如果id为null，则设置id=-1，与数据库所有记录比较
+		if (record.getId() == null) {
+			record.setId(-1);
+		}
 		fendianlist = fendianMapperPro.checkrepeat(record);
 		return fendianlist;
 	}
@@ -66,13 +70,13 @@ public class FendianSer implements FendianService {
 	 * 添加分店
 	 */
 	@Override
-	public void addfendian(Fendian record) {
+	public int addfendian(Fendian record) {
 		// TODO Auto-generated method stub
 		try {
-			fendianMapper.insertSelective(record);
+			return fendianMapper.insertSelective(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
 
@@ -80,30 +84,30 @@ public class FendianSer implements FendianService {
 	 * 根据分店id删除分店
 	 */
 	@Override
-	public void deletefendian(Integer id) {
+	public int deletefendian(int id) {
 		// TODO Auto-generated method stub
 		fendian = new Fendian();
 		fendian.setId(id);
 		fendian.setZt(1);
 		try {
-			fendianMapper.updateByPrimaryKeySelective(fendian);
+			return fendianMapper.updateByPrimaryKeySelective(fendian);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
 
 	/**
-	 * 更新分店信息
+	 * 更新分店信息，部分字段
 	 */
 	@Override
-	public void updatefendian(Fendian record) {
+	public int updatefendian(Fendian record) {
 		// TODO Auto-generated method stub
 		try {
-			fendianMapperPro.updatefendian(record);
+			return fendianMapperPro.updatefendian(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
 }

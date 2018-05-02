@@ -66,7 +66,7 @@
 					<label class="sub-header">添加药品</label>
 					<input id="flid" type="hidden" value="${yaopin.yplb }" />
 					<input id="gysid" type="hidden" value="${yaopin.ypgys }" />
-					<span>${addmsg }</span><span>${bhmsg }</span> <span>${mcmsg}</span>
+					<span>${msgmsg }</span><span>${bhmsg }</span> <span>${mcmsg}</span>
 				</div>
 				<form method="post" class="form-x" action="${ctx }/yaopin/doadd">
 					<div>
@@ -125,7 +125,7 @@
 										<div class="field">
 											<select id="ypgys" class="form-control" name="ypgys">
 												<c:forEach items="${gyslist }" var="glist">
-													<option value="${glist.id }">${glist.gysmc }</option>
+													<option value="${glist.id }">${glist.gysbh }, ${glist.gysmc }</option>
 												</c:forEach>
 											</select>
 										</div>

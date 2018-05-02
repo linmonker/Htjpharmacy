@@ -26,7 +26,7 @@ public class HuoweiSer implements HuoweiService {
 	 * 根据仓库id获取货位列表
 	 */
 	@Override
-	public List<Huowei> huoweiquery(Integer id) {
+	public List<Huowei> huoweiquery(int id) {
 		// TODO Auto-generated method stub
 		huoweilist = huoweiMapperPro.huoweiquery(id);
 		return huoweilist;
@@ -36,14 +36,14 @@ public class HuoweiSer implements HuoweiService {
 	 * 通过货位id获取货位信息
 	 */
 	@Override
-	public Huowei gethuowei(Integer id) {
+	public Huowei gethuowei(int id) {
 		// TODO Auto-generated method stub
 		huowei = huoweiMapper.selectByPrimaryKey(id);
 		return huowei;
 	}
 
 	/**
-	 * 搜索货位
+	 * 模糊搜索货位：货位名称
 	 */
 	@Override
 	public List<Huowei> searchhuowei(Huowei record) {
@@ -53,11 +53,15 @@ public class HuoweiSer implements HuoweiService {
 	}
 
 	/**
-	 * 检查重复，货物编号同一仓库唯一
+	 * 检查重复：货物编号同一仓库唯一
 	 */
 	@Override
 	public List<Huowei> checkrepeat(Huowei record) {
 		// TODO Auto-generated method stub
+		// 如果id为null，则设置id=-1，与数据库所有记录比较
+		if (record.getId() == null) {
+			record.setId(-1);
+		}
 		huoweilist = huoweiMapperPro.checkrepeat(record);
 		return huoweilist;
 	}
@@ -66,13 +70,13 @@ public class HuoweiSer implements HuoweiService {
 	 * 添加货位
 	 */
 	@Override
-	public void addhuowei(Huowei record) {
+	public int addhuowei(Huowei record) {
 		// TODO Auto-generated method stub
 		try {
-			huoweiMapper.insertSelective(record);
+			return huoweiMapper.insertSelective(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
 
@@ -80,16 +84,16 @@ public class HuoweiSer implements HuoweiService {
 	 * 根据货位id删除货位
 	 */
 	@Override
-	public void deletehuowei(Integer id) {
+	public int deletehuowei(int id) {
 		// TODO Auto-generated method stub
 		huowei = new Huowei();
 		huowei.setId(id);
 		huowei.setDm(1);
 		try {
-			huoweiMapper.updateByPrimaryKeySelective(huowei);
+			return huoweiMapper.updateByPrimaryKeySelective(huowei);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
 
@@ -97,13 +101,13 @@ public class HuoweiSer implements HuoweiService {
 	 * 更新货位信息
 	 */
 	@Override
-	public void updatehuowei(Huowei record) {
+	public int updatehuowei(Huowei record) {
 		// TODO Auto-generated method stub
 		try {
-			huoweiMapperPro.updatehuowei(record);
+			return huoweiMapperPro.updatehuowei(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
 

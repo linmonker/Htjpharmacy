@@ -17,18 +17,18 @@ public interface YaopinMapperPro {
 	List<YaopinVo> yaopinquery();
 	
 	/**
-	 * 搜索药品
+	 * 模糊搜索药品：药品编号，药品商品名，药品通用名
 	 */
 	List<YaopinVo> searchyaopin(Yaopin record);
 
 	/**
-	 * 检查重复，药品编号
+	 * 检查重复：药品编号
 	 */
-	List<Yaopin> checkrepeat(String String);
+	List<Yaopin> checkrepeat(YaopinWithBLOBs record);
 
 	/**
 	 * 更新药品信息
 	 */
-	void updateyaopin(YaopinWithBLOBs record);
+	int updateyaopin(YaopinWithBLOBs record);
 
 }

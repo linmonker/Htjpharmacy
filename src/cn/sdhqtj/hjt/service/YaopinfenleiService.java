@@ -17,40 +17,40 @@ public interface YaopinfenleiService {
 	 * 获取药品分类列表
 	 */
 	public List<Yaopinfenlei> Yaopinfenleiquery();
-	
+
 	/**
 	 * 获取药品分类节点
 	 */
 	List<YaopinflNode> getypflnodes();
 
 	/**
-	 *检查重复，药品分类编号
+	 * 检查重复：药品分类编号
 	 */
 	List<Yaopinfenlei> checkrepeat(Yaopinfenlei record);
 
 	/**
 	 * 根据药品分类id获取药品分类信息
 	 */
-	Yaopinfenlei getyaopinfenlei(Integer id);
+	Yaopinfenlei getyaopinfenlei(int id);
 
 	/**
-	 * 添加药品分类
+	 * 添加药品分类，添加药品分类，返回id
 	 */
-	public Integer addyaopinfenlei(Yaopinfenlei record);
+	public int addyaopinfenlei(Yaopinfenlei record);
 
 	/**
 	 * 更新药品分类
 	 */
-	public void updateyaopinfenlei(Yaopinfenlei record);
+	public int updateyaopinfenlei(Yaopinfenlei record);
 
 	/**
 	 * 更新药品分类名称
 	 */
-	public void updatemingchen(Yaopinfenlei record);
+	public int updatemingchen(Yaopinfenlei record);
 
 	/**
 	 * 删除药品分类
 	 */
-	public void deleteyaopinfenlei(Integer id);
+	public int deleteyaopinfenlei(int id);
 
 }

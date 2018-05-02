@@ -12,6 +12,13 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		if ("1" == $("#hwzt").val) {
+			$("select option:eq(1)").attr("selected", true);
+		}
+	})
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -51,6 +58,7 @@
 			<div class="col-sm-9 col-md-9 main">
 				<div>
 					<label class="sub-header">添加货位</label>
+					<input id="hwzt" type="hidden" value="${huowei.zt }" />
 					<span>${addmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
 				<form method="post" class="form-x" action="${ctx}/huowei/doadd">

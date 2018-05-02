@@ -12,20 +12,20 @@ public interface CangkuMapperPro {
 	/**
 	 * 根据分店id获取仓库列表
 	 */
-	List<Cangku> cangkuquery(Integer id);
+	List<Cangku> cangkuquery(int id);
 	
 	/**
-	 * 搜索仓库
+	 * 模糊搜索仓库：仓库编号，仓库名称
 	 */
 	List<Cangku> searchcangku(Cangku record);
 
 	/**
-	 *检查重复，仓库编号每个分店唯一
+	 *检查重复：仓库编号每个分店唯一
 	 */
 	List<Cangku> checkrepeat(Cangku record);
 
 	/**
-	 * 更新仓库信息
+	 * 更新仓库信息，部分字段
 	 */
-	void updatecangku(Cangku record);
+	int updatecangku(Cangku record);
 }

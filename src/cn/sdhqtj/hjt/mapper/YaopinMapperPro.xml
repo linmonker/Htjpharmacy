@@ -48,7 +48,7 @@
 		<result column="ypxf" property="ypxf" jdbcType="LONGVARCHAR" />
 		<result column="ypxw" property="ypxw" jdbcType="LONGVARCHAR" />
 	</resultMap>
-	<resultMap id="ResultMapPro" type="cn.sdhqtj.hjt.entity.YaopinVo"
+	<resultMap id="ResultMapVo" type="cn.sdhqtj.hjt.entity.YaopinVo"
 		extends="ResultMapWithBLOBs">
 		<result column="flmc" property="flmc" jdbcType="VARCHAR" />
 		<result column="gysmc" property="gysmc" jdbcType="VARCHAR" />
@@ -74,22 +74,22 @@
 		flmc, gysmc
 	</sql>
 
-	<select id="yaopinquery" resultMap="ResultMapPro">
+	<select id="yaopinquery" resultMap="ResultMapVo">
 		select a.*,b.flmc
 		from hjt_yaopin a,hjt_yaopinfenlei b
 		where a.dm=0 and a.yplb = b.id
 		order by ypbh asc
 	</select>
-	<select id="searchyaopin" resultMap="ResultMapPro" parameterType="cn.sdhqtj.hjt.entity.Yaopin">
+	<select id="searchyaopin" resultMap="ResultMapVo" parameterType="cn.sdhqtj.hjt.entity.Yaopin">
 		select a.*,b.flmc
 		from hjt_yaopin a,hjt_yaopinfenlei b
 		where a.dm=0 and a.yplb = b.id and (a.ypbh like concat("%",#{ypbh},"%") or
 		a.ypspm like concat("%",#{ypspm},"%") or a.yptym like concat("%",#{yptym},"%"))
 	</select>
-	<select id="checkrepeat" resultMap="BaseResultMap" parameterType="java.lang.String">
+	<select id="checkrepeat" resultMap="BaseResultMap" parameterType="cn.sdhqtj.hjt.entity.YaopinWithBLOBs">
 		select <include refid="Base_Column_List" />
 		from hjt_yaopin
-		where ypbh = #{parameter jdbcType=VARCHAR} and dm = 0
+		where id != #{id,jdbcType=INTEGER} and ypbh = #{ypbh jdbcType=VARCHAR} and dm = 0
 	</select>
 	<update id="updateyaopin" parameterType="cn.sdhqtj.hjt.entity.YaopinWithBLOBs">
 		update hjt_yaopin

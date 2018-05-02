@@ -22,31 +22,31 @@ public interface YaopinService {
 	/**
 	 * 根据药品id获取药品信息
 	 */
-	public YaopinWithBLOBs getyaopin(Integer id);
+	public YaopinWithBLOBs getyaopin(int id);
 	
 	/**
-	 * 搜索药品
+	 * 模糊搜索药品：药品编号，药品商品名，药品通用名
 	 */
 	List<YaopinVo> searchyaopin(Yaopin record);
 
 	/**
-	 * 检查重复，药品编号
+	 * 检查重复：药品编号
 	 */
-	public List<Yaopin> checkrepeat(String record);
+	public List<Yaopin> checkrepeat(YaopinWithBLOBs record);
 
 	/**
 	 * 添加药品
 	 */
-	public void addyaopin(YaopinWithBLOBs record);
+	public int addyaopin(YaopinWithBLOBs record);
 
 	/**
 	 * 根据药品id删除药品
 	 */
-	public void deleteyaopin(Integer id);
+	public int deleteyaopin(int id);
 
 	/**
 	 * 更新药品
 	 */
-	public void updateyaopin(YaopinWithBLOBs record);
+	public int updateyaopin(YaopinWithBLOBs record);
 
 }

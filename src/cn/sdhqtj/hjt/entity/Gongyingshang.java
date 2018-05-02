@@ -1,368 +1,358 @@
 package cn.sdhqtj.hjt.entity;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 供应商缺类
  */
 public class Gongyingshang {
-	private Integer id;
+    private Integer id;
 
-	private Integer jtid;
+    private Integer jtid;
 
-	private String gysbh;
+    private Integer fdid;
 
-	private String gysmc;
+    private String gysbh;
 
-	private String gysmcjp;
+    private String gysmc;
 
-	private String gyslxdh;
+    private String gysmcjp;
 
-	private String gyslxr;
+    private String gyslxdh;
 
-	private String gysxxdz;
+    private String gyslxr;
 
-	private String gysywy;
+    private String gysxxdz;
 
-	private String gysywydh;
+    private String gysywy;
 
-	private String gysywysfz;
+    private String gysywydh;
 
-	private String gysyzbm;
+    private String gysywysfz;
 
-	private String gyslyxdz;
+    private String gysyzbm;
 
-	private String gysyyzz;
+    private String gyslyxdz;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date gysyyzzqx;
+    private String gysyyzz;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date gysyyzzfzrq;
+    private Date gysyyzzqx;
 
-	private String gysfrdb;
+    private Date gysyyzzfzrq;
 
-	private String gysjyxz;
+    private String gysfrdb;
 
-	private String gyszczb;
+    private String gysjyxz;
 
-	private String gysjyfs;
+    private String gyszczb;
 
-	private String gysscjyxkz;
+    private String gysjyfs;
 
-	private String gysxkzmc;
+    private String gysscjyxkz;
 
-	private String gysxkzdz;
+    private String gysxkzmc;
 
-	private String gysxkzbh;
+    private String gysxkzdz;
 
-	private String gysxkzfzdw;
+    private String gysxkzbh;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date gysxkzyxq;
+    private String gysxkzfzdw;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date gysxkzfzrq;
+    private Date gysxkzyxq;
 
-	private String gysgspzj;
+    private Date gysxkzfzrq;
 
-	private String gysgspfzr;
+    private String gysgspzj;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date gysgspzjyxq;
+    private String gysgspfzr;
 
-	private String gysinfo1;
+    private Date gysgspzjyxq;
 
-	private String gysinfo2;
+    private String gysinfo1;
 
-	private Integer zt;
+    private String gysinfo2;
 
-	private Integer dm;
+    private Integer zt;
 
-	public Integer getId() {
-		return id;
-	}
+    private Integer dm;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Integer getJtid() {
-		return jtid;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setJtid(Integer jtid) {
-		this.jtid = jtid;
-	}
+    public Integer getJtid() {
+        return jtid;
+    }
 
-	public String getGysbh() {
-		return gysbh;
-	}
+    public void setJtid(Integer jtid) {
+        this.jtid = jtid;
+    }
 
-	public void setGysbh(String gysbh) {
-		this.gysbh = gysbh == null ? null : gysbh.trim();
-	}
+    public Integer getFdid() {
+        return fdid;
+    }
 
-	public String getGysmc() {
-		return gysmc;
-	}
+    public void setFdid(Integer fdid) {
+        this.fdid = fdid;
+    }
 
-	public void setGysmc(String gysmc) {
-		this.gysmc = gysmc == null ? null : gysmc.trim();
-	}
-
-	public String getGysmcjp() {
-		return gysmcjp;
-	}
-
-	public void setGysmcjp(String gysmcjp) {
-		this.gysmcjp = gysmcjp == null ? null : gysmcjp.trim();
-	}
-
-	public String getGyslxdh() {
-		return gyslxdh;
-	}
-
-	public void setGyslxdh(String gyslxdh) {
-		this.gyslxdh = gyslxdh == null ? null : gyslxdh.trim();
-	}
-
-	public String getGyslxr() {
-		return gyslxr;
-	}
-
-	public void setGyslxr(String gyslxr) {
-		this.gyslxr = gyslxr == null ? null : gyslxr.trim();
-	}
-
-	public String getGysxxdz() {
-		return gysxxdz;
-	}
-
-	public void setGysxxdz(String gysxxdz) {
-		this.gysxxdz = gysxxdz == null ? null : gysxxdz.trim();
-	}
-
-	public String getGysywy() {
-		return gysywy;
-	}
-
-	public void setGysywy(String gysywy) {
-		this.gysywy = gysywy == null ? null : gysywy.trim();
-	}
-
-	public String getGysywydh() {
-		return gysywydh;
-	}
-
-	public void setGysywydh(String gysywydh) {
-		this.gysywydh = gysywydh == null ? null : gysywydh.trim();
-	}
-
-	public String getGysywysfz() {
-		return gysywysfz;
-	}
-
-	public void setGysywysfz(String gysywysfz) {
-		this.gysywysfz = gysywysfz == null ? null : gysywysfz.trim();
-	}
-
-	public String getGysyzbm() {
-		return gysyzbm;
-	}
-
-	public void setGysyzbm(String gysyzbm) {
-		this.gysyzbm = gysyzbm == null ? null : gysyzbm.trim();
-	}
-
-	public String getGyslyxdz() {
-		return gyslyxdz;
-	}
-
-	public void setGyslyxdz(String gyslyxdz) {
-		this.gyslyxdz = gyslyxdz == null ? null : gyslyxdz.trim();
-	}
-
-	public String getGysyyzz() {
-		return gysyyzz;
-	}
-
-	public void setGysyyzz(String gysyyzz) {
-		this.gysyyzz = gysyyzz == null ? null : gysyyzz.trim();
-	}
-
-	public Date getGysyyzzqx() {
-		return gysyyzzqx;
-	}
-
-	public void setGysyyzzqx(Date gysyyzzqx) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-		String dd = sdf.format(gysyyzzqx);
-		this.gysyyzzqx = sdf.parse(dd);
-	}
-
-	public Date getGysyyzzfzrq() {
-		return gysyyzzfzrq;
-	}
-
-	public void setGysyyzzfzrq(Date gysyyzzfzrq) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-		String dd = sdf.format(gysyyzzfzrq);
-		this.gysyyzzfzrq = sdf.parse(dd);
-		
-	}
-
-	public String getGysfrdb() {
-		return gysfrdb;
-	}
-
-	public void setGysfrdb(String gysfrdb) {
-		this.gysfrdb = gysfrdb == null ? null : gysfrdb.trim();
-	}
-
-	public String getGysjyxz() {
-		return gysjyxz;
-	}
-
-	public void setGysjyxz(String gysjyxz) {
-		this.gysjyxz = gysjyxz == null ? null : gysjyxz.trim();
-	}
-
-	public String getGyszczb() {
-		return gyszczb;
-	}
-
-	public void setGyszczb(String gyszczb) {
-		this.gyszczb = gyszczb == null ? null : gyszczb.trim();
-	}
-
-	public String getGysjyfs() {
-		return gysjyfs;
-	}
-
-	public void setGysjyfs(String gysjyfs) {
-		this.gysjyfs = gysjyfs == null ? null : gysjyfs.trim();
-	}
-
-	public String getGysscjyxkz() {
-		return gysscjyxkz;
-	}
-
-	public void setGysscjyxkz(String gysscjyxkz) {
-		this.gysscjyxkz = gysscjyxkz == null ? null : gysscjyxkz.trim();
-	}
-
-	public String getGysxkzmc() {
-		return gysxkzmc;
-	}
-
-	public void setGysxkzmc(String gysxkzmc) {
-		this.gysxkzmc = gysxkzmc == null ? null : gysxkzmc.trim();
-	}
-
-	public String getGysxkzdz() {
-		return gysxkzdz;
-	}
-
-	public void setGysxkzdz(String gysxkzdz) {
-		this.gysxkzdz = gysxkzdz == null ? null : gysxkzdz.trim();
-	}
-
-	public String getGysxkzbh() {
-		return gysxkzbh;
-	}
-
-	public void setGysxkzbh(String gysxkzbh) {
-		this.gysxkzbh = gysxkzbh == null ? null : gysxkzbh.trim();
-	}
-
-	public String getGysxkzfzdw() {
-		return gysxkzfzdw;
-	}
-
-	public void setGysxkzfzdw(String gysxkzfzdw) {
-		this.gysxkzfzdw = gysxkzfzdw == null ? null : gysxkzfzdw.trim();
-	}
-
-	public Date getGysxkzyxq() {
-		return gysxkzyxq;
-	}
-
-	public void setGysxkzyxq(Date gysxkzyxq) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-		String dd = sdf.format(gysxkzyxq);
-		this.gysxkzyxq = sdf.parse(dd);
-	}
-
-	public Date getGysxkzfzrq() {
-		return gysxkzfzrq;
-	}
-
-	public void setGysxkzfzrq(Date gysxkzfzrq) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-		String dd = sdf.format(gysxkzfzrq);
-		this.gysxkzfzrq = sdf.parse(dd);
-	}
-
-	public String getGysgspzj() {
-		return gysgspzj;
-	}
-
-	public void setGysgspzj(String gysgspzj) {
-		this.gysgspzj = gysgspzj == null ? null : gysgspzj.trim();
-	}
-
-	public String getGysgspfzr() {
-		return gysgspfzr;
-	}
-
-	public void setGysgspfzr(String gysgspfzr) {
-		this.gysgspfzr = gysgspfzr == null ? null : gysgspfzr.trim();
-	}
-
-	public Date getGysgspzjyxq() {
-		return gysgspzjyxq;
-	}
-
-	public void setGysgspzjyxq(Date gysgspzjyxq) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-		String dd = sdf.format(gysgspzjyxq);
-		this.gysgspzjyxq = sdf.parse(dd);
-	}
-
-	public String getGysinfo1() {
-		return gysinfo1;
-	}
-
-	public void setGysinfo1(String gysinfo1) {
-		this.gysinfo1 = gysinfo1 == null ? null : gysinfo1.trim();
-	}
-
-	public String getGysinfo2() {
-		return gysinfo2;
-	}
-
-	public void setGysinfo2(String gysinfo2) {
-		this.gysinfo2 = gysinfo2 == null ? null : gysinfo2.trim();
-	}
-
-	public Integer getZt() {
-		return zt;
-	}
-
-	public void setZt(Integer zt) {
-		this.zt = zt;
-	}
-
-	public Integer getDm() {
-		return dm;
-	}
-
-	public void setDm(Integer dm) {
-		this.dm = dm;
-	}
+    public String getGysbh() {
+        return gysbh;
+    }
+
+    public void setGysbh(String gysbh) {
+        this.gysbh = gysbh == null ? null : gysbh.trim();
+    }
+
+    public String getGysmc() {
+        return gysmc;
+    }
+
+    public void setGysmc(String gysmc) {
+        this.gysmc = gysmc == null ? null : gysmc.trim();
+    }
+
+    public String getGysmcjp() {
+        return gysmcjp;
+    }
+
+    public void setGysmcjp(String gysmcjp) {
+        this.gysmcjp = gysmcjp == null ? null : gysmcjp.trim();
+    }
+
+    public String getGyslxdh() {
+        return gyslxdh;
+    }
+
+    public void setGyslxdh(String gyslxdh) {
+        this.gyslxdh = gyslxdh == null ? null : gyslxdh.trim();
+    }
+
+    public String getGyslxr() {
+        return gyslxr;
+    }
+
+    public void setGyslxr(String gyslxr) {
+        this.gyslxr = gyslxr == null ? null : gyslxr.trim();
+    }
+
+    public String getGysxxdz() {
+        return gysxxdz;
+    }
+
+    public void setGysxxdz(String gysxxdz) {
+        this.gysxxdz = gysxxdz == null ? null : gysxxdz.trim();
+    }
+
+    public String getGysywy() {
+        return gysywy;
+    }
+
+    public void setGysywy(String gysywy) {
+        this.gysywy = gysywy == null ? null : gysywy.trim();
+    }
+
+    public String getGysywydh() {
+        return gysywydh;
+    }
+
+    public void setGysywydh(String gysywydh) {
+        this.gysywydh = gysywydh == null ? null : gysywydh.trim();
+    }
+
+    public String getGysywysfz() {
+        return gysywysfz;
+    }
+
+    public void setGysywysfz(String gysywysfz) {
+        this.gysywysfz = gysywysfz == null ? null : gysywysfz.trim();
+    }
+
+    public String getGysyzbm() {
+        return gysyzbm;
+    }
+
+    public void setGysyzbm(String gysyzbm) {
+        this.gysyzbm = gysyzbm == null ? null : gysyzbm.trim();
+    }
+
+    public String getGyslyxdz() {
+        return gyslyxdz;
+    }
+
+    public void setGyslyxdz(String gyslyxdz) {
+        this.gyslyxdz = gyslyxdz == null ? null : gyslyxdz.trim();
+    }
+
+    public String getGysyyzz() {
+        return gysyyzz;
+    }
+
+    public void setGysyyzz(String gysyyzz) {
+        this.gysyyzz = gysyyzz == null ? null : gysyyzz.trim();
+    }
+
+    public Date getGysyyzzqx() {
+        return gysyyzzqx;
+    }
+
+    public void setGysyyzzqx(Date gysyyzzqx) {
+        this.gysyyzzqx = gysyyzzqx;
+    }
+
+    public Date getGysyyzzfzrq() {
+        return gysyyzzfzrq;
+    }
+
+    public void setGysyyzzfzrq(Date gysyyzzfzrq) {
+        this.gysyyzzfzrq = gysyyzzfzrq;
+    }
+
+    public String getGysfrdb() {
+        return gysfrdb;
+    }
+
+    public void setGysfrdb(String gysfrdb) {
+        this.gysfrdb = gysfrdb == null ? null : gysfrdb.trim();
+    }
+
+    public String getGysjyxz() {
+        return gysjyxz;
+    }
+
+    public void setGysjyxz(String gysjyxz) {
+        this.gysjyxz = gysjyxz == null ? null : gysjyxz.trim();
+    }
+
+    public String getGyszczb() {
+        return gyszczb;
+    }
+
+    public void setGyszczb(String gyszczb) {
+        this.gyszczb = gyszczb == null ? null : gyszczb.trim();
+    }
+
+    public String getGysjyfs() {
+        return gysjyfs;
+    }
+
+    public void setGysjyfs(String gysjyfs) {
+        this.gysjyfs = gysjyfs == null ? null : gysjyfs.trim();
+    }
+
+    public String getGysscjyxkz() {
+        return gysscjyxkz;
+    }
+
+    public void setGysscjyxkz(String gysscjyxkz) {
+        this.gysscjyxkz = gysscjyxkz == null ? null : gysscjyxkz.trim();
+    }
+
+    public String getGysxkzmc() {
+        return gysxkzmc;
+    }
+
+    public void setGysxkzmc(String gysxkzmc) {
+        this.gysxkzmc = gysxkzmc == null ? null : gysxkzmc.trim();
+    }
+
+    public String getGysxkzdz() {
+        return gysxkzdz;
+    }
+
+    public void setGysxkzdz(String gysxkzdz) {
+        this.gysxkzdz = gysxkzdz == null ? null : gysxkzdz.trim();
+    }
+
+    public String getGysxkzbh() {
+        return gysxkzbh;
+    }
+
+    public void setGysxkzbh(String gysxkzbh) {
+        this.gysxkzbh = gysxkzbh == null ? null : gysxkzbh.trim();
+    }
+
+    public String getGysxkzfzdw() {
+        return gysxkzfzdw;
+    }
+
+    public void setGysxkzfzdw(String gysxkzfzdw) {
+        this.gysxkzfzdw = gysxkzfzdw == null ? null : gysxkzfzdw.trim();
+    }
+
+    public Date getGysxkzyxq() {
+        return gysxkzyxq;
+    }
+
+    public void setGysxkzyxq(Date gysxkzyxq) {
+        this.gysxkzyxq = gysxkzyxq;
+    }
+
+    public Date getGysxkzfzrq() {
+        return gysxkzfzrq;
+    }
+
+    public void setGysxkzfzrq(Date gysxkzfzrq) {
+        this.gysxkzfzrq = gysxkzfzrq;
+    }
+
+    public String getGysgspzj() {
+        return gysgspzj;
+    }
+
+    public void setGysgspzj(String gysgspzj) {
+        this.gysgspzj = gysgspzj == null ? null : gysgspzj.trim();
+    }
+
+    public String getGysgspfzr() {
+        return gysgspfzr;
+    }
+
+    public void setGysgspfzr(String gysgspfzr) {
+        this.gysgspfzr = gysgspfzr == null ? null : gysgspfzr.trim();
+    }
+
+    public Date getGysgspzjyxq() {
+        return gysgspzjyxq;
+    }
+
+    public void setGysgspzjyxq(Date gysgspzjyxq) {
+        this.gysgspzjyxq = gysgspzjyxq;
+    }
+
+    public String getGysinfo1() {
+        return gysinfo1;
+    }
+
+    public void setGysinfo1(String gysinfo1) {
+        this.gysinfo1 = gysinfo1 == null ? null : gysinfo1.trim();
+    }
+
+    public String getGysinfo2() {
+        return gysinfo2;
+    }
+
+    public void setGysinfo2(String gysinfo2) {
+        this.gysinfo2 = gysinfo2 == null ? null : gysinfo2.trim();
+    }
+
+    public Integer getZt() {
+        return zt;
+    }
+
+    public void setZt(Integer zt) {
+        this.zt = zt;
+    }
+
+    public Integer getDm() {
+        return dm;
+    }
+
+    public void setDm(Integer dm) {
+        this.dm = dm;
+    }
 }

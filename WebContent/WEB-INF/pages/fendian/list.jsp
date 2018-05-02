@@ -85,7 +85,7 @@
 					<li><a href="${ctx}/role/list">角色管理</a></li>
 				</ul>
 			</div>
-			<div class="col-sm-9 col-md-9 main">
+			<div class="col-sm-10 col-md-10 main">
 				<div class="row">
 					<nav class="navbar navbar-default">
 					<div class="container-fluid">
@@ -111,7 +111,7 @@
 					</div>
 					</nav>
 					<input type="hidden" id="tempid" />
-					<span>${addmsg }</span> <span>${editmsg }</span> <span>${deletemsg }</span>
+					<span>${waymsg }</span>
 				</div>
 				<div class="row">
 					<span>共${fendianlist.size() }条记录</span>

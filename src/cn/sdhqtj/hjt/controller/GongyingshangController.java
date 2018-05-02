@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.sdhqtj.hjt.entity.Gongyingshang;
 import cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs;
+import cn.sdhqtj.hjt.entity.Login;
 import cn.sdhqtj.hjt.service.GongyingshangService;
 
 /**
@@ -30,18 +32,21 @@ public class GongyingshangController {
 	 * 供应商列表
 	 */
 	@RequestMapping("/list")
-	public String list(HttpServletRequest request, Model model) {
-		gyslist = gysservice.gongyingshangquery();
+	public String list(HttpServletRequest request, Model model, HttpSession session) {
+		Login login = (Login) session.getAttribute("loginer");
+		gyslist = gysservice.getquerybyfdid(login.getFdid());
 		model.addAttribute("gyslist", gyslist);
 
 		// 操作提示信息
 		String waymsg = request.getParameter("waymsg");
 		if ("add".equals(waymsg)) {
-			model.addAttribute("addmsg", "供应商添加成功");
+			model.addAttribute("waymsg", "供应商添加成功");
 		} else if ("edit".equals(waymsg)) {
-			model.addAttribute("editmsg", "供应商修改成功");
+			model.addAttribute("waymsg", "供应商修改成功");
 		} else if ("delete".equals(waymsg)) {
-			model.addAttribute("deletemsg", "供应商删除成功");
+			model.addAttribute("waymsg", "供应商删除成功");
+		} else if ("error".equals(waymsg)) {
+			model.addAttribute("waymsg", "操作失误");
 		}
 		return "gongyingshang/list";
 	}
@@ -58,26 +63,39 @@ public class GongyingshangController {
 	 * 执行添加供应商
 	 */
 	@RequestMapping("/doadd")
-	public String doadd(GongyingshangWithBLOBs record, Model model) {
+	public String doadd(GongyingshangWithBLOBs record, Model model, HttpSession session) {
 		if (record.getGysbh() == null || record.getGysmc() == null) {
 			// 添加失败，供应商编号不能为空
-			model.addAttribute("addmsg", "供应商添加失败");
+			model.addAttribute("waymsg", "供应商添加失败");
 			model.addAttribute("bhmsg", "供应商编号不能为空");
 			model.addAttribute("mcmsg", "供应商名称不能为空");
 			model.addAttribute("gys", record);
 			return "gongyingshang/add";
 		}
+
+		// 检查重复
 		gyslist = gysservice.checkrepeat(record);
 		if (gyslist.size() > 0) {
 			// 添加失败，供应商编号不能重复
 			model.addAttribute("bhmsg", "此供应商编号已存在");
-			model.addAttribute("addmsg", "供应商添加失败");
+			model.addAttribute("waymsg", "供应商添加失败");
 			model.addAttribute("gys", record);
 			return "gongyingshang/add";
 		}
-		// 添加成功
-		gysservice.addgongyingshang(record);
-		return "redirect:list?waymsg=add";
+
+		Login login = (Login) session.getAttribute("loginer");
+		record.setFdid(login.getFdid());
+		// 尝试添加
+		int res = gysservice.addgongyingshang(record);
+		if (res > 0) {
+			// 添加成功
+			return "redirect:list?waymsg=add";
+		} else {
+			// 添加失败
+			model.addAttribute("waymsg", "供应商添加失败");
+			model.addAttribute("gys", record);
+			return "gongyingshang/add";
+		}
 	}
 
 	/**
@@ -94,30 +112,37 @@ public class GongyingshangController {
 	 * 执行修改供应商
 	 */
 	@RequestMapping("/doedit")
-	public String doedit(GongyingshangWithBLOBs record, Model model) {
+	public String doedit(GongyingshangWithBLOBs record, Model model, HttpSession session) {
 		if (record.getGysbh() == null || record.getGysmc() == null) {
 			// 修改失败，供应商编号不能为空
-			model.addAttribute("editmsg", "供应商修改失败");
+			model.addAttribute("waymsg", "供应商修改失败");
 			model.addAttribute("bhmsg", "供应商编号不能为空");
 			model.addAttribute("mcmsg", "供应商名称不能为空");
 			model.addAttribute("gys", record);
 			return "gongyingshang/edit";
 		}
-		gys = gysservice.getgongyingshang(record.getId());
-		// 判断供应商编号修改
-		if (!gys.getGysbh().equals(record.getGysbh())) {
-			gyslist = gysservice.checkrepeat(record);
-			if (gyslist.size() > 0) {
-				// 修改失败，供应商编号不能重复
-				model.addAttribute("bhmsg", "此供应商编号已存在");
-				model.addAttribute("editmsg", "供应商修改失败");
-				model.addAttribute("gys", record);
-				return "gongyingshang/edit";
-			}
+
+		// 检查重复
+		gyslist = gysservice.checkrepeat(record);
+		if (gyslist.size() > 0) {
+			// 修改失败，供应商编号不能重复
+			model.addAttribute("bhmsg", "此供应商编号已存在");
+			model.addAttribute("waymsg", "供应商修改失败");
+			model.addAttribute("gys", record);
+			return "gongyingshang/edit";
 		}
-		// 修改成功
-		gysservice.updategongyingshang(record);
-		return "redirect:list?waymsg=edit";
+
+		// 尝试修改
+		int res = gysservice.updategongyingshang(record);
+		if (res >= 0) {
+			// 修改成功
+			return "redirect:list?waymsg=edit";
+		} else {
+			// 修改失败
+			model.addAttribute("waymsg", "供应商修改失败");
+			model.addAttribute("gys", record);
+			return "gongyingshang/edit";
+		}
 	}
 
 	/**
@@ -125,16 +150,27 @@ public class GongyingshangController {
 	 */
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request) {
-		gysservice.deletegongyingshang(Integer.valueOf(request.getParameter("id")));
-		return "redirect:list?waymsg=delete";
+		// 尝试删除
+		int res = gysservice.deletegongyingshang(Integer.valueOf(request.getParameter("id")));
+		if (res > 0) {
+			// 删除成功
+			return "redirect:list?waymsg=delete";
+		} else {
+			// 删除失败
+			return "redirect:list?waymsg=error";
+		}
 	}
 
 	/**
 	 * 搜索供应商
+	 * 
+	 * @param session
 	 */
 	@RequestMapping("/search")
-	public String search(String searchword, Model model) {
+	public String search(String searchword, Model model, HttpSession session) {
 		gys = new Gongyingshang();
+		Login login = (Login) session.getAttribute("loginer");
+		gys.setFdid(login.getFdid());
 		gys.setGysbh(searchword);
 		gys.setGysmc(searchword);
 		gyslist = gysservice.searchgongyingshang(gys);

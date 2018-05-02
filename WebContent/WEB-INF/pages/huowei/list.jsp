@@ -93,12 +93,14 @@
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="${ctx}/huowei/add">添加货位</a></li>
+								<li><a href="${ctx}/huowei/add?fdid=${huoweilist.get(0).fdid }&&ckid=${huoweilist.get(0).ckid }">添加货位</a></li>
 								<li><a onclick="return edit()">修改货位</a></li>
 								<li><a onclick="return del()">删除货位</a></li>
 							</ul>
 							<div class="nav navbar-nav navbar-right">
 								<form action="${ctx }/huowei/search" method="post">
+								    <input type="hidden" name="fdid" value="${huoweilist.get(0).fdid }" />
+					                <input type="hidden" name="ckid" value="${huoweilist.get(0).ckid }" />
 									<input type="text" placeholder="请输入搜索关键字" name="searchword"
 										class="input"
 										style="width: 250px; line-height: 15px; display: inline-block;"
@@ -110,9 +112,7 @@
 					</div>
 					</nav>
 					<input type="hidden" id="tempid" />
-					<input type="hidden" name="fdid" value="${huoweilist.get(0).fdid }" />
-					<input type="hidden" name="ckid" value="${huoweilist.get(0).ckid }" />
-					<span>${addmsg}</span> <span>${editmsg}</span> <span>${deletemsg}</span>
+					<span>${waymsg}</span>
 				</div>
 				<div class="row">
 				    <span>共${huoweilist.size() }条记录</span>
@@ -149,5 +149,4 @@
 		</div>
 	</div>
 </body>
-
 </html>

@@ -14,36 +14,36 @@ public interface CangkuService {
 	/**
 	 * 根据分店id获取仓库列表
 	 */
-	public List<Cangku> cangkuquery(Integer id);
+	public List<Cangku> cangkuquery(int id);
 
 	/**
 	 * 通过仓库id获取仓库信息
 	 */
-	public Cangku getcangku(Integer id);
-	
+	public Cangku getcangku(int id);
+
 	/**
-	 * 搜索仓库
+	 * 模糊搜索仓库：仓库编号，仓库名称
 	 */
 	public List<Cangku> searchcangku(Cangku record);
-	
+
 	/**
-	 *检查重复，仓库编号每个分店唯一
+	 * 检查重复：仓库编号每个分店唯一
 	 */
 	List<Cangku> checkrepeat(Cangku record);
 
 	/**
 	 * 添加仓库
 	 */
-	public void addcangku(Cangku record);
+	public int addcangku(Cangku record);
 
 	/**
 	 * 根据仓库id删除分店
 	 */
-	public void deletecangku(Integer id);
+	public int deletecangku(int id);
 
 	/**
-	 * 更新仓库信息
+	 * 更新仓库信息，部分字段
 	 */
-	public void updatecangku(Cangku record);
+	public int updatecangku(Cangku record);
 
 }

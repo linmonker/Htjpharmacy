@@ -35,11 +35,13 @@ public class FendianController {
 		// 操作提示信息
 		String waymsg = request.getParameter("waymsg");
 		if ("add".equals(waymsg)) {
-			model.addAttribute("addmsg", "分店添加成功");
+			model.addAttribute("waymsg", "分店添加成功");
 		} else if ("edit".equals(waymsg)) {
-			model.addAttribute("editmsg", "分店修改成功");
+			model.addAttribute("waymsg", "分店修改成功");
 		} else if ("delete".equals(waymsg)) {
-			model.addAttribute("deletemsg", "分店删除成功");
+			model.addAttribute("waymsg", "分店删除成功");
+		} else if ("error".equals(waymsg)) {
+			model.addAttribute("waymsg", "操作失误");
 		}
 		return "fendian/list";
 	}
@@ -59,30 +61,41 @@ public class FendianController {
 	public String doadd(Fendian record, Model model) {
 		if (record.getFdbh() == null || record.getFdmc() == null) {
 			// 添加失败，分店编号、分店名称不能为空
-			model.addAttribute("addmsg", "分店添加失败");
+			model.addAttribute("waymsg", "分店添加失败");
 			model.addAttribute("bhmsg", "分店编号不能为空");
 			model.addAttribute("mcmsg", "分店名称不能为空");
 			model.addAttribute("fendian", record);
 			return "fendian/add";
 		}
+
+		// 检查重复
 		fendianlist = fendianservice.checkrepeat(record);
 		if (fendianlist.size() > 0) {
 			// 添加失败，分店编号或分店名称不能重复
 			for (Fendian temp : fendianlist) {
-				if (temp.getFdbh() != null) {
+				if (temp.getFdbh().equals(record.getFdbh())) {
 					model.addAttribute("bhmsg", "此分店编号已存在");
 				}
-				if (temp.getFdmc() != null) {
+				if (temp.getFdmc().equals(record.getFdmc())) {
 					model.addAttribute("mcmsg", "此分店名称已存在");
 				}
 			}
-			model.addAttribute("addmsg", "分店添加失败");
+			model.addAttribute("waymsg", "分店添加失败");
 			model.addAttribute("fendian", record);
 			return "fendian/add";
 		}
-		// 添加成功
-		fendianservice.addfendian(record);
-		return "redirect:list?waymsg=add";
+
+		// 尝试添加
+		int res = fendianservice.addfendian(record);
+		if (res > 0) {
+			// 添加成功
+			return "redirect:list?waymsg=add";
+		} else {
+			// 添加失败
+			model.addAttribute("waymsg", "分店添加失败");
+			model.addAttribute("fendian", record);
+			return "fendian/add";
+		}
 	}
 
 	/**
@@ -102,34 +115,41 @@ public class FendianController {
 	public String doedit(Fendian record, Model model) {
 		if (record.getFdbh() == null || record.getFdmc() == null) {
 			// 修改失败，分店编号、分店名称不能为空
-			model.addAttribute("editmsg", "分店修改失败");
+			model.addAttribute("waymsg", "分店修改失败");
 			model.addAttribute("bhmsg", "分店编号不能为空");
 			model.addAttribute("mcmsg", "分店名称不能为空");
 			model.addAttribute("fendian", record);
 			return "fendian/edit";
 		}
-		fendian = fendianservice.getfendian(record.getId());
-		// 判断分店编号、分店名称修改
-		if ((!fendian.getFdbh().equals(record.getFdbh())) || (!fendian.getFdmc().equals(record.getFdmc()))) {
-			fendianlist = fendianservice.checkrepeat(record);
-			if (fendianlist.size() > 0) {
-				// 修改失败，分店编号或分店名称不能重复
-				for (Fendian temp : fendianlist) {
-					if (temp.getFdbh() != null) {
-						model.addAttribute("bhmsg", "此分店编号已存在");
-					}
-					if (temp.getFdmc() != null) {
-						model.addAttribute("mcmsg", "此分店名称已存在");
-					}
+
+		// 检查重复
+		fendianlist = fendianservice.checkrepeat(record);
+		if (fendianlist.size() > 0) {
+			// 修改失败，分店编号或分店名称不能重复
+			for (Fendian temp : fendianlist) {
+				if (temp.getFdbh().equals(record.getFdbh())) {
+					model.addAttribute("bhmsg", "此分店编号已存在");
 				}
-				model.addAttribute("editmsg", "分店修改失败");
-				model.addAttribute("fendian", record);
-				return "fendian/edit";
+				if (temp.getFdmc().equals(record.getFdmc())) {
+					model.addAttribute("mcmsg", "此分店名称已存在");
+				}
 			}
+			model.addAttribute("waymsg", "分店修改失败");
+			model.addAttribute("fendian", record);
+			return "fendian/edit";
 		}
-		// 修改成功
-		fendianservice.updatefendian(record);
-		return "redirect:list?waymsg=edit";
+
+		// 尝试修改
+		int res = fendianservice.updatefendian(record);
+		if (res >= 0) {
+			// 修改成功
+			return "redirect:list?waymsg=edit";
+		} else {
+			// 修改失败
+			model.addAttribute("waymsg", "分店修改失败");
+			model.addAttribute("fendian", record);
+			return "fendian/edit";
+		}
 	}
 
 	/**
@@ -137,8 +157,15 @@ public class FendianController {
 	 */
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request) {
-		fendianservice.deletefendian(Integer.valueOf(request.getParameter("id")));
-		return "redirect:list?waymsg=delete";
+		// 尝试删除
+		int res = fendianservice.deletefendian(Integer.valueOf(request.getParameter("id")));
+		if (res > 0) {
+			// 删除成功
+			return "redirect:list?waymsg=delete";
+		} else {
+			// 删除失败
+			return "redirect:list?waymsg=error";
+		}
 	}
 
 	/**

@@ -51,7 +51,7 @@
 			<div class="col-sm-9 col-md-9 main">
 				<div class="field">
 					<label class="sub-header">添加分店</label>
-					<span>${addmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
+					<span>${waymsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
 				<form method="post" class="form-x" action="${ctx}/fendian/doadd">
 					<div class="form-group">

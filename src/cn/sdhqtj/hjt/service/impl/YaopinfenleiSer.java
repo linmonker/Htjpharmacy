@@ -44,11 +44,15 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 	}
 
 	/**
-	 * 检查重复，药品分类编号
+	 * 检查重复：药品分类编号
 	 */
 	@Override
 	public List<Yaopinfenlei> checkrepeat(Yaopinfenlei record) {
 		// TODO Auto-generated method stub
+		// 如果id为null，则设置id=-1，与数据库所有记录比较
+		if (record.getId() == null) {
+			record.setId(-1);
+		}
 		ypfllist = ypflMapperPro.checkrepeat(record);
 		return ypfllist;
 	}
@@ -57,33 +61,38 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 	 * 根据药品分类id获取药品分类信息
 	 */
 	@Override
-	public Yaopinfenlei getyaopinfenlei(Integer id) {
+	public Yaopinfenlei getyaopinfenlei(int id) {
 		// TODO Auto-generated method stub
 		ypfl = ypflMapper.selectByPrimaryKey(id);
 		return ypfl;
 	}
 
 	/**
-	 * 添加药品分类
+	 * 添加药品分类，添加药品分类，返回id
 	 */
 	@Override
-	public Integer addyaopinfenlei(Yaopinfenlei record) {
+	public int addyaopinfenlei(Yaopinfenlei record) {
 		// TODO Auto-generated method stub
-		ypflMapperPro.addyaopinfenlei(record);
-		return record.getId();
+		try {
+			ypflMapperPro.addyaopinfenlei(record);
+			return record.getId();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return -1;
+		}
 	}
 
 	/**
 	 * 更新药品分类
 	 */
 	@Override
-	public void updateyaopinfenlei(Yaopinfenlei record) {
+	public int updateyaopinfenlei(Yaopinfenlei record) {
 		// TODO Auto-generated method stub
 		try {
-			ypflMapperPro.updateyaopinfenlei(record);
+			return ypflMapperPro.updateyaopinfenlei(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
 
@@ -91,16 +100,16 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 	 * 更新药品分类名称
 	 */
 	@Override
-	public void updatemingchen(Yaopinfenlei record) {
+	public int updatemingchen(Yaopinfenlei record) {
 		// TODO Auto-generated method stub
 		ypfl = new Yaopinfenlei();
 		ypfl.setId(record.getId());
 		ypfl.setFlmc(record.getFlmc());
 		try {
-			ypflMapper.updateByPrimaryKeySelective(ypfl);
+			return ypflMapper.updateByPrimaryKeySelective(ypfl);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
 
@@ -108,16 +117,16 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 	 * 删除药品分类
 	 */
 	@Override
-	public void deleteyaopinfenlei(Integer id) {
+	public int deleteyaopinfenlei(int id) {
 		// TODO Auto-generated method stub
 		ypfl = new Yaopinfenlei();
 		ypfl.setId(id);
 		ypfl.setZt(1);
 		try {
-			ypflMapper.updateByPrimaryKeySelective(ypfl);
+			return ypflMapper.updateByPrimaryKeySelective(ypfl);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
 

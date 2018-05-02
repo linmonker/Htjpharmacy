@@ -106,7 +106,7 @@
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="${ctx}/cangku/add">添加仓库</a></li>
+								<li><a href="${ctx}/cangku/add?fdid=${cangkulist.get(0).fdid }">添加仓库</a></li>
 								<li><a onclick="return edit()">修改仓库</a></li>
 								<li><a onclick="return del()">删除仓库</a></li>
 								<li><a onclick="return huowei()">货位管理</a></li>
@@ -114,6 +114,7 @@
 							</ul>
 							<div class="nav navbar-nav navbar-right">
 								<form action="${ctx }/cangku/search" method="post">
+								    <input type="hidden" name="fdid" value="${cangkulist.get(0).fdid }" />
 									<input type="text" placeholder="请输入搜索关键字" name="searchword"
 										class="input"
 										style="width: 250px; line-height: 15px; display: inline-block;"
@@ -125,8 +126,7 @@
 					</div>
 					</nav>
 					<input type="hidden" id="tempid" />
-					<input type="hidden" name="fdid" value="${cangkulist.get(0).fdid }" />
-					<span>${addmsg}</span> <span>${editmsg}</span> <span>${deletemsg}</span>
+					<span>${waymsg}</span>
 				</div>
 				<div class="row">
 					<div class="col-sm-2 col-md-2 sidebar">

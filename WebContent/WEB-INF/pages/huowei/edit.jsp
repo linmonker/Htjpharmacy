@@ -70,7 +70,7 @@
 			        <label class="sub-header">修改货位</label>
 			        <button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
 				    <input id="hwzt" type="hidden" value="${huowei.zt }" />
-				    <span>${editmsg}</span> <span>${bhmsg }</span> <span>${mcmsg}</span>
+				    <span>${waymsg}</span> <span>${bhmsg }</span> <span>${mcmsg}</span>
 			    </div>
 				<form id="formpot" method="post" class="form-x"
 					action="${ctx }/huowei/doedit">

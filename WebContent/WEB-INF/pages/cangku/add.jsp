@@ -12,6 +12,13 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		if ("1" == $("#ckzt").val) {
+			$("select option:eq(1)").attr("selected", true);
+		}
+	})
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -51,7 +58,8 @@
 			<div class="col-sm-9 col-md-9 main">
 				<div class="field">
 					<label class="sub-header">添加仓库</label>
-					<span>${addmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
+					<input id="ckzt" type="hidden" value="${cangku.zt }" />
+					<span>${waymsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
 				<form method="post" class="form-x" action="${ctx}/cangku/doadd">
 					<input type="hidden" name="fdid" value="${cangku.fdid }" />

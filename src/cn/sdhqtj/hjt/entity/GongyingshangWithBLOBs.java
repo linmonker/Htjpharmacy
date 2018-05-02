@@ -1,7 +1,7 @@
 package cn.sdhqtj.hjt.entity;
 
 /**
- * 供应商类
+ * 供应商完整类
  */
 public class GongyingshangWithBLOBs extends Gongyingshang {
 	private String gysjyfw;

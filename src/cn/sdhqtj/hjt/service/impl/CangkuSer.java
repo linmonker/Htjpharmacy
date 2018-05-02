@@ -22,29 +22,29 @@ public class CangkuSer implements CangkuService {
 	private CangkuMapper cangkuMapper;
 	Cangku cangku;
 	List<Cangku> cangkulist;
-	
+
 	/**
 	 * 根据分店id获取仓库列表
 	 */
 	@Override
-	public List<Cangku> cangkuquery(Integer id) {
+	public List<Cangku> cangkuquery(int id) {
 		// TODO Auto-generated method stub
 		cangkulist = cangkuMapperPro.cangkuquery(id);
 		return cangkulist;
 	}
-	
+
 	/**
 	 * 通过仓库id获取仓库信息
 	 */
 	@Override
-	public Cangku getcangku(Integer id) {
+	public Cangku getcangku(int id) {
 		// TODO Auto-generated method stub
 		cangku = cangkuMapper.selectByPrimaryKey(id);
 		return cangku;
 	}
-	
+
 	/**
-	 * 搜索仓库
+	 * 模糊搜索仓库：仓库编号，仓库名称
 	 */
 	@Override
 	public List<Cangku> searchcangku(Cangku record) {
@@ -54,11 +54,15 @@ public class CangkuSer implements CangkuService {
 	}
 
 	/**
-	 * 检查重复，仓库编号每个分店唯一
+	 * 检查重复：仓库编号每个分店唯一
 	 */
 	@Override
 	public List<Cangku> checkrepeat(Cangku record) {
 		// TODO Auto-generated method stub
+		// 如果id为null，则设置id=-1，与数据库所有记录比较
+		if (record.getId() == null) {
+			record.setId(-1);
+		}
 		cangkulist = cangkuMapperPro.checkrepeat(record);
 		return cangkulist;
 	}
@@ -67,44 +71,44 @@ public class CangkuSer implements CangkuService {
 	 * 添加仓库
 	 */
 	@Override
-	public void addcangku(Cangku record) {
+	public int addcangku(Cangku record) {
 		// TODO Auto-generated method stub
 		try {
-			cangkuMapper.insertSelective(record);
+			return cangkuMapper.insertSelective(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
-	
+
 	/**
 	 * 根据仓库id删除仓库
 	 */
 	@Override
-	public void deletecangku(Integer id) {
+	public int deletecangku(int id) {
 		// TODO Auto-generated method stub
 		cangku = new Cangku();
 		cangku.setId(id);
 		cangku.setDm(1);
 		try {
-			cangkuMapper.updateByPrimaryKeySelective(cangku);
+			return cangkuMapper.updateByPrimaryKeySelective(cangku);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
-	
+
 	/**
-	 * 更新仓库信息
+	 * 更新仓库信息，部分字段
 	 */
 	@Override
-	public void updatecangku(Cangku record) {
+	public int updatecangku(Cangku record) {
 		// TODO Auto-generated method stub
 		try {
-			cangkuMapperPro.updatecangku(record);
+			return cangkuMapperPro.updatecangku(record);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
 

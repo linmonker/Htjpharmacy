@@ -12,10 +12,10 @@ public interface HuoweiMapperPro {
 	/**
 	 * 根据仓库id获取货位列表
 	 */
-	List<Huowei> huoweiquery(Integer id);
+	List<Huowei> huoweiquery(int id);
 	
 	/**
-	 * 搜索货位
+	 * 模糊搜索货位：货位名称
 	 */
 	List<Huowei> searchhuowei(Huowei record);
 
@@ -25,8 +25,8 @@ public interface HuoweiMapperPro {
 	List<Huowei> checkrepeat(Huowei record);
 
 	/**
-	 * 更新货物信息
+	 * 更新货物信息，部分字段
 	 */
-	void updatehuowei(Huowei record);
+	int updatehuowei(Huowei record);
 
 }

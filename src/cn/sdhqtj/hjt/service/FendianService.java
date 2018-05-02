@@ -20,32 +20,31 @@ public interface FendianService {
 	/**
 	 * 通过分店id获取分店信息
 	 */
-	public Fendian getfendian(Integer id);
-	
+	public Fendian getfendian(int id);
+
 	/**
-	 * 搜索分店
+	 * 模糊搜索分店：分店名称
 	 */
 	public List<Fendian> searchfendian(Fendian record);
 
-
 	/**
-	 * 检查重复，分店编号和分店名称
+	 * 检查重复：分店编号，分店名称
 	 */
 	public List<Fendian> checkrepeat(Fendian record);
 
 	/**
 	 * 添加分店
 	 */
-	public void addfendian(Fendian record);
+	public int addfendian(Fendian record);
 
 	/**
 	 * 根据分店id删除分店
 	 */
-	public void deletefendian(Integer id);
+	public int deletefendian(int id);
 
 	/**
-	 * 更新分店信息
+	 * 更新分店信息，部分字段
 	 */
-	public void updatefendian(Fendian record);
+	public int updatefendian(Fendian record);
 
 }

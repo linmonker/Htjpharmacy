@@ -152,13 +152,13 @@
 			url : "${ctx}/yaopinfenlei/editname ",
 			success : function(json) {
 				if (json == "success") {
-					alert('操作成功!');
+					alert('修改成功!');
 				} else {
-					alert('操作失败，请稍后再试！');
+					alert('修改失败，请稍后再试！');
 				}
 			},
 			error : function() {
-				alert('修改失败');
+				alert('修改失败！');
 			}
 		});
 
@@ -190,10 +190,10 @@
 					data : data,
 					contentType: 'application/json',
 					url : "${ctx}/yaopinfenlei/doadd",
-					success : function(flid) {
-						if (flid != "") {
+					success : function(id) {
+						if (id != "-1") {
 							treeNodes = zTree.addNodes(treeNode, {
-								id : (flid),
+								id : (id),
 								pId : treeNode.id,
 								name : "新分类"
 							});
@@ -324,7 +324,7 @@
 						</div>
 					</div>
 					</nav>
-					<span>${editmsg }</span>
+					<span>${waymsg }</span>
 				</div>
 				<div class="row">
 					<div class="content_wrap">

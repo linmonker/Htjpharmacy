@@ -64,7 +64,7 @@
 				<div class="field">
 					<label class="sub-header">修改分店</label>
 					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
-					<span>${editmsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
+					<span>${waymsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
 				<form id="formpot" method="post" class="form-x"
 					action="${ctx }/fendian/doedit">

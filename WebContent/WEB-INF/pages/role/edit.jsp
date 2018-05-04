@@ -166,7 +166,7 @@
 				<div class="field">
 					<label class="sub-header">修改角色</label>
 					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
-					<span>${editmsg}</span><span>${mcmsg}</span>
+					<span>${waymsg}</span><span>${mcmsg}</span>
 				</div>
 				<form id="formpot" method="post" class="form-x"
 					action="${ctx }/role/doedit" onsubmit="return jiluquanxian()">

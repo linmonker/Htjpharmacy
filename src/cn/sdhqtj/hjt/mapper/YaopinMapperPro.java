@@ -17,6 +17,11 @@ public interface YaopinMapperPro {
 	List<YaopinVo> yaopinquery();
 	
 	/**
+	 * 获取药品Excel列表
+	 */
+	List<YaopinVo> getexcellist();
+	
+	/**
 	 * 模糊搜索药品：药品编号，药品商品名，药品通用名
 	 */
 	List<YaopinVo> searchyaopin(Yaopin record);

@@ -58,6 +58,7 @@
 						</div>
 					</div>
 					</nav>
+					<span>${msgmsg}</span>
 				</div>
 				<div class="row">
 					<div class="col-sm-2 col-md-2 sidebar">
@@ -72,7 +73,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
-
 </html>

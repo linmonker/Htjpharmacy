@@ -38,8 +38,10 @@
 		select
 		<include refid="Base_Column_List" />
 		from hjt_fendian
-		where Id != #{id,jdbcType=INTEGER} and
-		(fdbh = #{fdbh,jdbcType=VARCHAR} or fdmc = #{fdmc,jdbcType=VARCHAR})
+		where (fdbh = #{fdbh,jdbcType=VARCHAR} or fdmc = #{fdmc,jdbcType=VARCHAR})
+		<if test="id != null">
+			and Id != #{id,jdbcType=INTEGER}
+		</if>
 	</select>
 	<update id="updatefendian" parameterType="cn.sdhqtj.hjt.entity.Fendian">
 		update hjt_fendian

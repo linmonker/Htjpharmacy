@@ -46,5 +46,10 @@ public interface FendianService {
 	 * 更新分店信息，部分字段
 	 */
 	public int updatefendian(Fendian record);
+	
+	/**
+	 * 生成分店列表Excel，返回文件路径
+	 */
+	public String writeexcel();
 
 }

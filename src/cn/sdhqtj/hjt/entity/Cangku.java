@@ -93,4 +93,5 @@ public class Cangku {
     public void setCkbz(String ckbz) {
         this.ckbz = ckbz == null ? null : ckbz.trim();
     }
+	
 }

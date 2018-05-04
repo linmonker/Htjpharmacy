@@ -23,25 +23,24 @@
 	</sql>
 
 	<select id="rolequery" resultMap="ResultMapWithBLOBs">
-		select
-		<include refid="Base_Column_List" />
-		,
-		<include refid="Blob_Column_List" />
+		select *
 		from hjt_role
 		where dm = 0
 	</select>
+	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.RoleVo">
+		select r.*,y.yhdlm
+		from hjt_role r left join hjt_yonghu y on r.user_id_create = y.id
+		where r.dm = 0
+	</select>
 	<select id="searchrole" resultMap="ResultMapWithBLOBs"
 		parameterType="cn.sdhqtj.hjt.entity.Role">
-		select *
-		from hjt_role
+		select * from hjt_role
 		where role_name like concat("%",#{role_name},"%") and dm = 0
 	</select>
 	<select id="rolenamelist" resultType="java.lang.String" parameterType="java.lang.Integer">
 		select role_name
-		from
-			hjt_role
-		where
-			role_id = #{role_id,jdbcType=INTEGER} and dm = 0
+		from hjt_role
+		where role_id = #{role_id,jdbcType=INTEGER} and dm = 0
 	</select>
 	<select id="urllist" resultType="java.lang.String" parameterType="java.lang.Integer">
 		select url
@@ -58,10 +57,11 @@
 		parameterType="cn.sdhqtj.hjt.entity.Role">
 		select
 		<include refid="Base_Column_List" />
-		,
-		<include refid="Blob_Column_List" />
 		from hjt_role
 		where role_name = #{role_name,jdbcType=VARCHAR}
+		<if test="role_id != null">
+			and role_id != #{role_id,jdbcType=INTEGER}
+		</if>
 	</select>
 	<select id="getmenunodes" resultType="cn.sdhqtj.hjt.entity.MenuNode">
 		select menu_id id, parent_id pId, name
@@ -72,7 +72,7 @@
 		from hjt_access
 		where roleid = #{roleid,jdbcType=INTEGER}
 	</select>
-	<delete id="deletequanxian" parameterType="cn.sdhqtj.hjt.entity.AccessNode">
+	<delete id="deletequanxian" parameterType="java.lang.Integer">
 	    delete from hjt_access
 	    where roleid = #{role_id,jdbcType=INTEGER}
 	</delete>

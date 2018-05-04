@@ -355,4 +355,5 @@ public class Gongyingshang {
     public void setDm(Integer dm) {
         this.dm = dm;
     }
+
 }

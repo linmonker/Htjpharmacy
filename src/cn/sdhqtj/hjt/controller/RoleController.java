@@ -1,5 +1,6 @@
 package cn.sdhqtj.hjt.controller;
 
+import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,6 +10,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +43,7 @@ public class RoleController {
 	List<Role> rolelist;
 
 	/**
-	 * 列表
+	 * 角色列表
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
@@ -47,11 +53,13 @@ public class RoleController {
 		// 操作提示信息
 		String waymsg = request.getParameter("waymsg");
 		if ("add".equals(waymsg)) {
-			model.addAttribute("addmsg", "角色添加成功");
+			model.addAttribute("waymsg", "角色添加成功");
 		} else if ("edit".equals(waymsg)) {
-			model.addAttribute("editmsg", "角色修改成功");
+			model.addAttribute("waymsg", "角色修改成功");
 		} else if ("delete".equals(waymsg)) {
-			model.addAttribute("deletemsg", "角色删除成功");
+			model.addAttribute("waymsg", "角色删除成功");
+		} else if ("error".equals(waymsg)) {
+			model.addAttribute("waymsg", "操作失误");
 		}
 		return "role/list";
 	}
@@ -63,8 +71,8 @@ public class RoleController {
 	@ResponseBody
 	public String menulist() {
 		List<MenuNode> mlist = roleservice.getmenunodes();
-		String str = JSON.toJSON(mlist).toString();
-		return str;
+		String menus = JSON.toJSON(mlist).toString();
+		return menus;
 	}
 
 	/**
@@ -72,7 +80,7 @@ public class RoleController {
 	 */
 	@RequestMapping("/getquanxian")
 	@ResponseBody
-	public String getquanxian(@RequestParam(value = "id") Integer id) {
+	public String getquanxian(@RequestParam(value = "id") int id) {
 		List<AccessNode> alist = roleservice.getquanxian(id);
 		String quanxians = JSON.toJSON(alist).toString();
 		return quanxians;
@@ -96,38 +104,49 @@ public class RoleController {
 		if (record.getRole_name() == null) {
 			// 角色名称不能为空
 			model.addAttribute("mcmsg", "此角色名称不能为空");
-			model.addAttribute("addmsg", "角色添加失败");
+			model.addAttribute("waymsg", "角色添加失败");
 			model.addAttribute("role", record);
 			quanxians = quanxians.replaceAll("\"", "&quot;");
 			model.addAttribute("quanxians", quanxians);
 			return "role/add";
 		}
+
+		// 检查重复
 		rolelist = roleservice.checkrepeat(record);
 		if (rolelist.size() > 0) {
 			// 添加失败，角色名称不能重复
 			model.addAttribute("mcmsg", "此角色名称已存在");
-			model.addAttribute("addmsg", "角色添加失败");
+			model.addAttribute("waymsg", "角色添加失败");
 			model.addAttribute("role", record);
 			quanxians = quanxians.replaceAll("\"", "&quot;");
 			model.addAttribute("quanxians", quanxians);
 			return "role/add";
 		}
-		// 添加成功
+
 		Login login = (Login) session.getAttribute("loginer");
 		record.setUser_id_create(Long.valueOf(login.getId()));
-		Integer roleid = roleservice.addrole(record);
-
-		// 将权限json字符串转换成Java对象list
-		List<AccessNode> alist = JSON.parseObject(quanxians, new TypeReference<ArrayList<AccessNode>>() {
-		});
-		for (AccessNode temp : alist) {
-			temp.setRoleid(roleid);
+		int roleid = roleservice.addrole(record);
+		if (roleid > 0) {
+			// 添加成功
+			// 将权限json字符串转换成Java对象list
+			List<AccessNode> alist = JSON.parseObject(quanxians, new TypeReference<ArrayList<AccessNode>>() {
+			});
+			for (AccessNode temp : alist) {
+				temp.setRoleid(roleid);
+			}
+			// 先根据角色role_id删除所有权限
+			roleservice.deletequanxian(roleid);
+			// 再重新添加角色权限
+			roleservice.addquanxian(alist);
+			return "redirect:list?waymsg=add";
+		} else {
+			// 添加失败
+			model.addAttribute("waymsg", "角色添加失败");
+			model.addAttribute("role", record);
+			quanxians = quanxians.replaceAll("\"", "&quot;");
+			model.addAttribute("quanxians", quanxians);
+			return "role/add";
 		}
-		// 先根据角色role_id删除所有权限
-		roleservice.deletequanxian(roleid);
-		// 再重新添加角色权限
-		roleservice.addquanxian(alist);
-		return "redirect:list?waymsg=add";
 	}
 
 	/**
@@ -135,10 +154,10 @@ public class RoleController {
 	 */
 	@RequestMapping("/edit")
 	public String edit(HttpServletRequest request, Model model) {
-		Integer id = Integer.valueOf(request.getParameter("id"));
+		int id = Integer.valueOf(request.getParameter("id"));
 		role = roleservice.getrole(id);
 		model.addAttribute("role", role);
-		
+
 		// 获取角色权限
 		List<AccessNode> alist = roleservice.getquanxian(id);
 		String quanxians = JSON.toJSON(alist).toString();
@@ -157,45 +176,53 @@ public class RoleController {
 		if (record.getRole_name() == null) {
 			// 角色名称不能为空
 			model.addAttribute("mcmsg", "此角色名称不能为空");
-			model.addAttribute("editmsg", "角色修改失败");
+			model.addAttribute("waymsg", "角色修改失败");
 			model.addAttribute("role", record);
 			quanxians = quanxians.replaceAll("\"", "&quot;");
 			model.addAttribute("quanxians", quanxians);
 			return "role/add";
 		}
-		role = roleservice.getrole(record.getRole_id());
-		// 判断角色名称修改
-		if (!role.getRole_name().equals(record.getRole_name())) {
-			rolelist = roleservice.checkrepeat(record);
-			if (rolelist.size() > 0) {
-				// 修改失败，角色名称不能重复
-				model.addAttribute("mcmsg", "此角色名称已存在");
-				model.addAttribute("editmsg", "角色修改失败");
-				model.addAttribute("role", record);
-				quanxians = quanxians.replaceAll("\"", "&quot;");
-				model.addAttribute("quanxians", quanxians);
-				return "role/edit";
-			}
+
+		// 检查重复
+		rolelist = roleservice.checkrepeat(record);
+		if (rolelist.size() > 0) {
+			// 修改失败，角色名称不能重复
+			model.addAttribute("mcmsg", "此角色名称已存在");
+			model.addAttribute("waymsg", "角色修改失败");
+			model.addAttribute("role", record);
+			quanxians = quanxians.replaceAll("\"", "&quot;");
+			model.addAttribute("quanxians", quanxians);
+			return "role/edit";
 		}
-		// 修改成功
+
 		try {
 			record.setGmt_modified(new Date());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		roleservice.updaterole(record);
-		
-		// 将权限json字符串转换成Java对象list
-		List<AccessNode> alist = JSON.parseObject(quanxians, new TypeReference<ArrayList<AccessNode>>() {});
-		for (AccessNode temp : alist) {
-			temp.setRoleid(record.getRole_id());
+		int res = roleservice.updaterole(record);
+		if (res >= 0) {
+			// 修改成功
+			// 将权限json字符串转换成Java对象list
+			List<AccessNode> alist = JSON.parseObject(quanxians, new TypeReference<ArrayList<AccessNode>>() {
+			});
+			for (AccessNode temp : alist) {
+				temp.setRoleid(record.getRole_id());
+			}
+			// 先根据角色role_id删除所有权限
+			roleservice.deletequanxian(record.getRole_id());
+			// 再重新添加角色权限
+			roleservice.addquanxian(alist);
+			return "redirect:list?waymsg=edit";
+		} else {
+			// 修改失败
+			model.addAttribute("waymsg", "角色修改失败");
+			model.addAttribute("role", record);
+			quanxians = quanxians.replaceAll("\"", "&quot;");
+			model.addAttribute("quanxians", quanxians);
+			return "role/edit";
 		}
-		// 先根据角色role_id删除所有权限
-		roleservice.deletequanxian(record.getRole_id());
-		// 再重新添加角色权限
-		roleservice.addquanxian(alist);
-		return "redirect:list?waymsg=edit";
 	}
 
 	/**
@@ -203,8 +230,14 @@ public class RoleController {
 	 */
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request) {
-		roleservice.deleterole(Integer.valueOf(request.getParameter("id")));
-		return "redirect:list?waymsg=delete";
+		int res = roleservice.deleterole(Integer.valueOf(request.getParameter("id")));
+		if (res > 0) {
+			// 删除成功
+			return "redirect:list?waymsg=delete";
+		} else {
+			// 删除失败
+			return "redirect:list?waymsg=error";
+		}
 	}
 
 	/**
@@ -217,6 +250,20 @@ public class RoleController {
 		rolelist = roleservice.searchrole(role);
 		model.addAttribute("rolelist", rolelist);
 		return "role/list";
+	}
+	
+	/**
+	 * 下载角色列表Excel
+	 */
+	@RequestMapping("/downloadexcel")
+	public ResponseEntity<byte[]> downloadexcel() throws Exception {
+		String path = roleservice.writeexcel();
+		File file = new File(path);
+		String fileName = new String("角色列表.xlsx".getBytes("UTF-8"), "iso-8859-1");// 为了解决中文名称乱码问题
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		headers.setContentDispositionFormData("attachment", fileName);
+		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
 	}
 
 }

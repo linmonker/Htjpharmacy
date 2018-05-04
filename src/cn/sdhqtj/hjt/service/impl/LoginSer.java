@@ -21,16 +21,17 @@ public class LoginSer implements LoginService {
 	private YonghuMapperPro yonghuMapperPro;
 	Yonghu yonghu;
 	List<Yonghu> yonghulist;
-	Login login;
-	YonghuVo yonghup;
-
+	YonghuVo yonghuvo;
+	List<YonghuVo> yonghuvolist;
+    Login login;
+    
 	/**
 	 * 登录验证
 	 */
 	@Override
 	public Login validatelogon(Login record) {
-		yonghu = yonghuMapperPro.validatelogon(record);
-		if (yonghu != null) {
+		yonghuvolist = yonghuMapperPro.getuserByUseranme(record.getUsername());
+		if (yonghuvolist != null) {
 			login = new Login();
 			login.setUsername(yonghu.getYhdlm());
 			login.setPassword(yonghu.getYhmm());
@@ -44,10 +45,10 @@ public class LoginSer implements LoginService {
 	 * 根据用户名获取用户信息
 	 */
 	@Override
-	public List<Yonghu> getuserByUseranme(String string) {
+	public List<YonghuVo> getuserByUseranme(String string) {
 		// TODO Auto-generated method stub
-		yonghulist = yonghuMapperPro.getuserByUseranme(string);
-		return yonghulist;
+		yonghuvolist = yonghuMapperPro.getuserByUseranme(string);
+		return yonghuvolist;
 	}
 
 	/**
@@ -56,12 +57,12 @@ public class LoginSer implements LoginService {
 	@Override
 	public Login getuserwithfdmc(String string) {
 		// TODO Auto-generated method stub
-		yonghup = yonghuMapperPro.getuser(string).get(0);
+		yonghuvo = yonghuMapperPro.getuserByUseranme(string).get(0);
 		login = new Login();
-		login.setId(yonghup.getId());
-		login.setUsername(yonghup.getYhdlm());
-		login.setFdid(yonghup.getFdid());
-		login.setFdmc(yonghup.getFdmc());
+		login.setId(yonghuvo.getId());
+		login.setUsername(yonghuvo.getYhdlm());
+		login.setFdid(yonghuvo.getFdid());
+		login.setFdmc(yonghuvo.getFdmc());
 		return login;
 	}
 }

@@ -44,5 +44,10 @@ public interface HuoweiService {
 	 * 更新货位信息，部分字段
 	 */
 	public int updatehuowei(Huowei record);
+	
+	/**
+	 * 根据仓库id生成货位列表Excel，返回文件路径
+	 */
+	public String writeexcel(int ckid);
 
 }

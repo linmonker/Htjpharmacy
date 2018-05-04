@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import cn.sdhqtj.hjt.entity.Gongyingshang;
+import cn.sdhqtj.hjt.entity.GongyingshangVo;
 import cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs;
 
 /**
@@ -16,11 +17,17 @@ public interface GongyingshangMapperPro {
 	 * 获取供应商列表
 	 */
 	List<Gongyingshang> gongyingshangquery();
-
+	
 	/**
 	 * 根据分店id获取供应商列表
 	 */
 	List<Gongyingshang> getquerybyfdid(@Param("fdid") int fdid);
+	
+	/**
+	 * 根据分店id获取供应商Excel列表
+	 */
+	List<GongyingshangVo> getexcellist(@Param("fdid") int fdid);
+
 
 	/**
 	 * 模糊搜索供应商：供应商编号，供应商名称

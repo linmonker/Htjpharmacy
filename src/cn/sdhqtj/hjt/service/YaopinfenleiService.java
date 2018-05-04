@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import cn.sdhqtj.hjt.entity.Yaopinfenlei;
-import cn.sdhqtj.hjt.entity.YaopinflNode;
+import cn.sdhqtj.hjt.entity.YaopinfenleiNode;
 
 /**
  * 药品分类service接口
@@ -21,7 +21,7 @@ public interface YaopinfenleiService {
 	/**
 	 * 获取药品分类节点
 	 */
-	List<YaopinflNode> getypflnodes();
+	List<YaopinfenleiNode> getypflnodes();
 
 	/**
 	 * 检查重复：药品分类编号
@@ -52,5 +52,10 @@ public interface YaopinfenleiService {
 	 * 删除药品分类
 	 */
 	public int deleteyaopinfenlei(int id);
+	
+	/**
+	 * 生成药品分类列表Excel，返回文件路径
+	 */
+	public String writeexcel();
 
 }

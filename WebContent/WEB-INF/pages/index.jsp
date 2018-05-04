@@ -49,6 +49,7 @@
 					<li><a href="${ctx}/role/list">角色管理</a></li>
 				</ul>
 			</div>
+			<span>${waymsg }</span>
 		</div>
 	</div>
 </body>

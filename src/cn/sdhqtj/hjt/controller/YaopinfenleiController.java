@@ -1,10 +1,16 @@
 package cn.sdhqtj.hjt.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 
 import cn.sdhqtj.hjt.entity.Yaopinfenlei;
-import cn.sdhqtj.hjt.entity.YaopinflNode;
+import cn.sdhqtj.hjt.entity.YaopinfenleiNode;
 import cn.sdhqtj.hjt.service.YaopinfenleiService;
 
 /**
@@ -29,8 +35,8 @@ public class YaopinfenleiController {
 	YaopinfenleiService ypflservice;
 	List<Yaopinfenlei> ypfllist;
 	Yaopinfenlei ypfl;
-	YaopinflNode ypflnode;
-	List<YaopinflNode> ypflnodelist;
+	YaopinfenleiNode ypflnode;
+	List<YaopinfenleiNode> ypflnodelist;
 
 	/**
 	 * 跳转药品分类页面
@@ -55,7 +61,7 @@ public class YaopinfenleiController {
 	@RequestMapping("/getlist")
 	@ResponseBody
 	public String getlist() {
-		List<YaopinflNode> nlist = ypflservice.getypflnodes();
+		List<YaopinfenleiNode> nlist = ypflservice.getypflnodes();
 		String str = JSON.toJSON(nlist).toString();
 		return str;
 	}
@@ -65,7 +71,7 @@ public class YaopinfenleiController {
 	 */
 	@RequestMapping("/doadd")
 	@ResponseBody
-	public String doadd(@RequestBody YaopinflNode record) {
+	public String doadd(@RequestBody YaopinfenleiNode record) {
 
 		ypfl = new Yaopinfenlei();
 		ypfl.setSjflid(record.getId());
@@ -85,7 +91,7 @@ public class YaopinfenleiController {
 	 */
 	@RequestMapping("/editname")
 	@ResponseBody
-	public String editname(@RequestBody YaopinflNode record) {
+	public String editname(@RequestBody YaopinfenleiNode record) {
 		if (record.getName() == null) {
 			// 药品分类名称不能为空
 			return "error";
@@ -173,6 +179,20 @@ public class YaopinfenleiController {
 			// 删除失败
 			return "error";
 		}
+	}
+	
+	/**
+	 * 下载药品分类列表Excel
+	 */
+	@RequestMapping("/downloadexcel")
+	public ResponseEntity<byte[]> downloadexcel() throws Exception {
+		String path = ypflservice.writeexcel();
+		File file = new File(path);
+		String fileName = new String("药品分类列表.xlsx".getBytes("UTF-8"), "iso-8859-1");// 为了解决中文名称乱码问题
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		headers.setContentDispositionFormData("attachment", fileName);
+		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
 	}
 
 }

@@ -2,6 +2,7 @@ package cn.sdhqtj.hjt.mapper;
 
 import java.util.List;
 import cn.sdhqtj.hjt.entity.Huowei;
+import cn.sdhqtj.hjt.entity.HuoweiVo;
 
 /**
  * 货位mapper补充
@@ -12,7 +13,12 @@ public interface HuoweiMapperPro {
 	/**
 	 * 根据仓库id获取货位列表
 	 */
-	List<Huowei> huoweiquery(int id);
+	List<Huowei> huoweiquery(int ckid);
+	
+	/**
+	 * 根据仓库id获取货位Excel列表
+	 */
+	List<HuoweiVo> getexcellist(int ckid);
 	
 	/**
 	 * 模糊搜索货位：货位名称

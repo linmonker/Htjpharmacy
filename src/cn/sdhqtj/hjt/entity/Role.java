@@ -1,7 +1,6 @@
 package cn.sdhqtj.hjt.entity;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -67,9 +66,7 @@ public class Role {
 	}
 
 	public void setGmt_create(Date gmt_create) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-		String dd = sdf.format(gmt_create);
-		this.gmt_create = sdf.parse(dd);
+		this.gmt_create = gmt_create;
 	}
 
 	public Date getGmt_modified() {
@@ -77,9 +74,7 @@ public class Role {
 	}
 
 	public void setGmt_modified(Date gmt_modified) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-		String dd = sdf.format(gmt_modified);
-		this.gmt_modified = sdf.parse(dd);
+		this.gmt_modified = gmt_modified;
 	}
 
 	public Integer getZt() {
@@ -105,4 +100,5 @@ public class Role {
 	public void setRemark(String remark) {
 		this.remark = remark == null ? null : remark.trim();
 	}
+	
 }

@@ -12,6 +12,18 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var sid = $("#yhjs").val;
+		if (sid != null) {
+			$("#yhjs option[value=sid]").attr("selected", true);
+		}
+		sid = $("#yhbm").val;
+		if (sid != null) {
+			$("#yhbn option[value=sid]").attr("selected", true);
+		}
+	})
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -51,7 +63,9 @@
 			<div class="col-sm-9 col-md-9 main">
 				<div class="field">
 					<label class="sub-header">添加用户</label>
-					<span>${addmsg}</span><span>${bhmsg}</span><span>${mcmsg}</span><span>${mmmsg}</span>
+					<input id="yhjs" type="hidden" value="${yonghu.yhjsid }" />
+					<input id="yhbm" type="hidden" value="${yonghu.yhbmid }" />
+					<span>${msgmsg}</span><span>${bhmsg}</span><span>${mcmsg}</span><span>${mmmsg}</span>
 				</div>
 				<form method="post" class="form-x" action="${ctx}/yonghu/doadd">
 					<input type="hidden" name="fdid" value="${yonghu.fdid }" />
@@ -72,6 +86,26 @@
 						<div class="field">
 							<input type="text" class="form-control" name="yhdlm"
 								value="${yonghu.yhdlm }" data-validate="required:请输入用户名" />
+							<div class="tips"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="label">
+							<label>密码：</label>
+						</div>
+						<div class="field">
+							<input id="yhmm" type="text" class="form-control" name="yhmm"
+							     placeholder="修改密码时输入" />
+							<div class="tips"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="label">
+							<label>确认密码：</label>
+						</div>
+						<div class="field">
+							<input type="text" class="form-control" name="confirmyhmm"
+								 data-validate="equalTo:'#yhmm'" />
 							<div class="tips"></div>
 						</div>
 					</div>

@@ -25,10 +25,17 @@
 
 	<select id="huoweiquery" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
+		select *
 		from hjt_cangku_huowei
 		where ckid = #{ckid,jdbcType=INTEGER} and dm = 0
+		order by hwbh asc
+	</select>
+	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.HuoweiVo"
+		parameterType="java.lang.Integer">
+		select h.*,f.fdbh,f.fdmc,c.ckbh,c.ckmc
+		from hjt_cangku_huowei h left join hjt_fendian f on h.fdid = f.id 
+		    left join hjt_cangku c on h.ckid = c.id 
+		where h.ckid = #{ckid,jdbcType=INTEGER} and h.dm = 0
 		order by hwbh asc
 	</select>
 	<select id="searchhuowei" resultMap="BaseResultMap"
@@ -42,7 +49,10 @@
 		select
 		<include refid="Base_Column_List" />
 		from hjt_cangku_huowei
-		where Id != #{id,jdbcType=INTEGER} and ckid = #{ckid,jdbcType=INTEGER} and hwbh = #{hwbh,jdbcType=VARCHAR}
+		where ckid = #{ckid,jdbcType=INTEGER} and hwbh = #{hwbh,jdbcType=VARCHAR}
+		<if test="id != null">
+			and Id != #{id,jdbcType=INTEGER}
+		</if>
 	</select>
 	<update id="updatehuowei" parameterType="cn.sdhqtj.hjt.entity.Huowei">
 		update hjt_cangku_huowei

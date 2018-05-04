@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import cn.sdhqtj.hjt.entity.AccessNode;
 import cn.sdhqtj.hjt.entity.MenuNode;
 import cn.sdhqtj.hjt.entity.Role;
+import cn.sdhqtj.hjt.entity.RoleVo;
 import cn.sdhqtj.hjt.mapper.RoleMapper;
 import cn.sdhqtj.hjt.mapper.RoleMapperPro;
 import cn.sdhqtj.hjt.service.RoleService;
+import cn.sdhqtj.hjt.tool.ExcelTool;
 
 /**
  * 角色service接口实现类
@@ -26,6 +28,7 @@ public class RoleSer implements RoleService {
 	private RoleMapper roleMapper;
 	Role role;
 	List<Role> rolelist;
+	List<RoleVo> roleVlist;
 
 	/**
 	 * 获取角色列表
@@ -41,7 +44,7 @@ public class RoleSer implements RoleService {
 	 * 根据角色id获取角色
 	 */
 	@Override
-	public Role getrole(Integer id) {
+	public Role getrole(int id) {
 		// TODO Auto-generated method stub
 		role = roleMapper.selectByPrimaryKey(id);
 		return role;
@@ -51,66 +54,14 @@ public class RoleSer implements RoleService {
 	 * 根据角色id获取角色名称
 	 */
 	@Override
-	public List<String> rolenamelist(Integer id) {
+	public List<String> rolenamelist(int id) {
 		// TODO Auto-generated method stub
 		List<String> sl = roleMapperPro.rolenamelist(id);
 		return sl;
 	}
 
 	/**
-	 * 检查重复，角色名称
-	 */
-	@Override
-	public List<Role> checkrepeat(Role record) {
-		// TODO Auto-generated method stub
-		// 如果id为null，则设置id=-1，与数据库所有记录比较
-		if (record.getRole_id() == null) {
-			record.setRole_id(-1);
-		}
-		rolelist = roleMapperPro.checkrepeat(record);
-		return rolelist;
-	}
-
-	/**
-	 * 添加角色
-	 */
-	@Override
-	public Integer addrole(Role record) {
-		// TODO Auto-generated method stub
-		Integer lastid = roleMapper.insertSelective(record);
-		return lastid;
-	}
-
-	/**
-	 * 更新角色信息
-	 */
-	@Override
-	public void updaterole(Role record) {
-		// TODO Auto-generated method stub
-		try {
-			roleMapperPro.updaterole(record);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	/**
-	 * 根据角色id删除角色
-	 */
-	@Override
-	public void deleterole(Integer id) {
-		// TODO Auto-generated method stub
-		role = new Role();
-		role.setRole_id(id);
-		role.setDm(1);
-		roleMapper.updateByPrimaryKeySelective(role);
-
-	}
-
-	/**
-	 * 搜索角色
+	 * 模糊搜索角色：角色名称
 	 */
 	@Override
 	public List<Role> searchrole(Role record) {
@@ -120,10 +71,94 @@ public class RoleSer implements RoleService {
 	}
 
 	/**
+	 * 检查重复：角色名称
+	 */
+	@Override
+	public List<Role> checkrepeat(Role record) {
+		// TODO Auto-generated method stub
+		rolelist = roleMapperPro.checkrepeat(record);
+		return rolelist;
+	}
+
+	/**
+	 * 添加角色,返回id
+	 */
+	@Override
+	public int addrole(Role record) {
+		// TODO Auto-generated method stub
+		try {
+			return roleMapper.insertSelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return -1;
+		}
+	}
+
+	/**
+	 * 更新角色信息
+	 */
+	@Override
+	public int updaterole(Role record) {
+		// TODO Auto-generated method stub
+		try {
+			return roleMapperPro.updaterole(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return -1;
+		}
+	}
+
+	/**
+	 * 根据角色id删除角色
+	 */
+	@Override
+	public int deleterole(Integer id) {
+		// TODO Auto-generated method stub
+		role = new Role();
+		role.setRole_id(id);
+		role.setDm(1);
+		try {
+			return roleMapper.updateByPrimaryKeySelective(role);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return -1;
+		}
+	}
+
+	/**
+	 * 生成角色列表Excel，返回文件路径
+	 */
+	@Override
+	public String writeexcel() {
+		// TODO Auto-generated method stub
+		// Excel模板文件路径
+		String inurl = "D:\\Users\\lenovo\\eclipse-workspace\\Htjpharmacy\\WebContent\\static\\excel\\mould\\角色列表模板.xlsx";
+		// 生成的Excel文件路径
+		String outurl = "D:\\Users\\lenovo\\eclipse-workspace\\Htjpharmacy\\WebContent\\static\\excel\\maked\\角色列表.xlsx";
+
+		// 获取角色列表list，并将其转化为二维数组
+		roleVlist = roleMapperPro.getexcellist();
+		String[][] datas = new String[roleVlist.size()][];
+		for (int i = 0; i < roleVlist.size(); i++) {
+			datas[i] = roleVlist.get(i).toExcelcol().split(",");
+		}
+
+		// 根据Excel模板文件生成Excel文件
+		ExcelTool et = new ExcelTool();
+		try {
+			et.WriteExcel(inurl, outurl, datas);
+			return outurl;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return inurl;
+		}
+	}
+
+	/**
 	 * 根据角色id获取相关权限url
 	 */
 	@Override
-	public List<String> urllist(Integer id) {
+	public List<String> urllist(int id) {
 		// TODO Auto-generated method stub
 		List<String> sl = roleMapperPro.urllist(id);
 		return sl;
@@ -143,7 +178,7 @@ public class RoleSer implements RoleService {
 	 * 根据角色id获取角色权限
 	 */
 	@Override
-	public List<AccessNode> getquanxian(Integer id) {
+	public List<AccessNode> getquanxian(int id) {
 		// TODO Auto-generated method stub
 		List<AccessNode> alist = roleMapperPro.getquanxian(id);
 		return alist;
@@ -153,13 +188,13 @@ public class RoleSer implements RoleService {
 	 * 批量添加角色权限
 	 */
 	@Override
-	public void addquanxian(List<AccessNode> list) {
+	public int addquanxian(List<AccessNode> list) {
 		// TODO Auto-generated method stub
 		try {
-			roleMapperPro.addquanxian(list);
+			return roleMapperPro.addquanxian(list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return -1;
 		}
 	}
 
@@ -167,9 +202,14 @@ public class RoleSer implements RoleService {
 	 * 根据角色id删除所有角色权限
 	 */
 	@Override
-	public void deletequanxian(Integer id) {
+	public int deletequanxian(int id) {
 		// TODO Auto-generated method stub
-		roleMapperPro.deletequanxian(id);
+		try {
+			return roleMapperPro.deletequanxian(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return -1;
+		}
 	}
 
 }

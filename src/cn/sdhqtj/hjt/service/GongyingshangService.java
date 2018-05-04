@@ -53,4 +53,9 @@ public interface GongyingshangService {
 	 */
 	public int deletegongyingshang(int id);
 
+	/**
+	 * 根据分店id生成供应商列表Excel，返回文件路径
+	 */
+	public String writeexcel(int fdid);
+	
 }

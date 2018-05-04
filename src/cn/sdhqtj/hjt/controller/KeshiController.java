@@ -1,11 +1,17 @@
 package cn.sdhqtj.hjt.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +35,7 @@ public class KeshiController {
 	Login login;
 
 	/**
-	 * 列表
+	 * 科室列表
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model, HttpSession session) {
@@ -41,11 +47,13 @@ public class KeshiController {
 		// 操作提示信息
 		String waymsg = request.getParameter("waymsg");
 		if ("add".equals(waymsg)) {
-			model.addAttribute("addmsg", "科室添加成功");
+			model.addAttribute("waymsg", "科室添加成功");
 		} else if ("edit".equals(waymsg)) {
-			model.addAttribute("editmsg", "科室修改成功");
+			model.addAttribute("waymsg", "科室修改成功");
 		} else if ("delete".equals(waymsg)) {
-			model.addAttribute("deletemsg", "科室删除成功");
+			model.addAttribute("waymsg", "科室删除成功");
+		} else if ("error".equals(waymsg)) {
+			model.addAttribute("waymsg", "操作失误");
 		}
 		return "keshi/list";
 	}
@@ -65,23 +73,35 @@ public class KeshiController {
 	public String doadd(Keshi record, Model model, HttpSession session) {
 		if (record.getKsbh() == null || record.getKsmc() == null) {
 			// 添加失败，科室编号、科室名称不能为空
-			model.addAttribute("addmsg", "科室添加失败");
+			model.addAttribute("waymsg", "科室添加失败");
 			model.addAttribute("bhmsg", "科室编号不能为空");
 			model.addAttribute("mcmsg", "科室名称不能为空");
 			model.addAttribute("keshi", record);
 			return "keshi/add";
 		}
+
+		// 检查重复
 		keshilist = keshiservice.checkrepeat(record);
 		if (keshilist.size() > 0) {
 			// 添加失败，科室编号不能重复
 			model.addAttribute("bhmsg", "此科室编号已存在");
-			model.addAttribute("addmsg", "科室添加失败");
+			model.addAttribute("waymsg", "科室添加失败");
 			model.addAttribute("keshi", record);
 			return "keshi/add";
 		}
-		// 添加成功
-		keshiservice.addkeshi(record);
-		return "redirect:list?waymsg=add";
+
+		Login login = (Login) session.getAttribute("loginer");
+		record.setFdid(login.getFdid());
+		int res = keshiservice.addkeshi(record);
+		if (res > 0) {
+			// 添加成功
+			return "redirect:list?waymsg=add";
+		} else {
+			// 添加失败
+			model.addAttribute("waymsg", "科室添加失败");
+			model.addAttribute("keshi", record);
+			return "keshi/add";
+		}
 	}
 
 	/**
@@ -102,27 +122,33 @@ public class KeshiController {
 	public String doedit(Keshi record, Model model) {
 		if (record.getKsbh() == null || record.getKsmc() == null) {
 			// 修改失败，科室编号、科室名称不能为空
-			model.addAttribute("editmsg", "科室修改失败");
+			model.addAttribute("waymsg", "科室修改失败");
 			model.addAttribute("bhmsg", "科室编号不能为空");
 			model.addAttribute("mcmsg", "科室名称不能为空");
 			model.addAttribute("keshi", record);
 			return "keshi/edit";
 		}
-		keshi = keshiservice.getkeshi(record.getId());
-		// 判断科室编号修改
-		if (!keshi.getKsbh().equals(record.getKsbh())) {
-			keshilist = keshiservice.checkrepeat(record);
-			if (keshilist.size() > 0) {
-				// 科室编号不能重复
-				model.addAttribute("bhmsg", "此科室编号已存在");
-				model.addAttribute("editmsg", "科室修改失败");
-				model.addAttribute("keshi", record);
-				return "keshi/edit";
-			}
+
+		// 检查重复
+		keshilist = keshiservice.checkrepeat(record);
+		if (keshilist.size() > 0) {
+			// 科室编号不能重复
+			model.addAttribute("bhmsg", "此科室编号已存在");
+			model.addAttribute("waymsg", "科室修改失败");
+			model.addAttribute("keshi", record);
+			return "keshi/edit";
 		}
-		// 修改成功
-		keshiservice.updatekeshi(keshi);
-		return "redirect:list?waymsg=edit";
+
+		int res = keshiservice.updatekeshi(keshi);
+		if (res >= 0) {
+			// 修改成功
+			return "redirect:list?waymsg=edit";
+		} else {
+			// 修改失败
+			model.addAttribute("waymsg", "科室修改失败");
+			model.addAttribute("keshi", record);
+			return "keshi/edit";
+		}
 	}
 
 	/**
@@ -130,9 +156,15 @@ public class KeshiController {
 	 */
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
-		Integer id = Integer.valueOf(request.getParameter("id"));
-		keshiservice.deletekeshi(id);
-		return "redirect:list?waymsg=delete";
+		int id = Integer.valueOf(request.getParameter("id"));
+		int res = keshiservice.deletekeshi(id);
+		if (res > 0) {
+			// 修改成功
+			return "redirect:list?waymsg=delete";
+		} else {
+			// 修改失败
+			return "redirect:list?waymsg=error";
+		}
 	}
 
 	/**
@@ -148,4 +180,20 @@ public class KeshiController {
 		model.addAttribute("keshilist", keshilist);
 		return "keshi/list";
 	}
+	
+	/**
+	 * 下载科室列表Excel
+	 */
+	@RequestMapping("/downloadexcel")
+	public ResponseEntity<byte[]> downloadexcel(HttpSession session) throws Exception {
+		login = (Login) session.getAttribute("loginer");
+		String path = keshiservice.writeexcel(login.getFdid());
+		File file = new File(path);
+		String fileName = new String("科室列表.xlsx".getBytes("UTF-8"), "iso-8859-1");// 为了解决中文名称乱码问题
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		headers.setContentDispositionFormData("attachment", fileName);
+		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
+	}
+	
 }

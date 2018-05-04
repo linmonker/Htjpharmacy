@@ -5,9 +5,11 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import cn.sdhqtj.hjt.entity.Cangku;
+import cn.sdhqtj.hjt.entity.CangkuVo;
 import cn.sdhqtj.hjt.mapper.CangkuMapper;
 import cn.sdhqtj.hjt.mapper.CangkuMapperPro;
 import cn.sdhqtj.hjt.service.CangkuService;
+import cn.sdhqtj.hjt.tool.ExcelTool;
 
 /**
  * 仓库service接口实现类
@@ -22,6 +24,7 @@ public class CangkuSer implements CangkuService {
 	private CangkuMapper cangkuMapper;
 	Cangku cangku;
 	List<Cangku> cangkulist;
+	List<CangkuVo> cangkuVlist;
 
 	/**
 	 * 根据分店id获取仓库列表
@@ -59,10 +62,6 @@ public class CangkuSer implements CangkuService {
 	@Override
 	public List<Cangku> checkrepeat(Cangku record) {
 		// TODO Auto-generated method stub
-		// 如果id为null，则设置id=-1，与数据库所有记录比较
-		if (record.getId() == null) {
-			record.setId(-1);
-		}
 		cangkulist = cangkuMapperPro.checkrepeat(record);
 		return cangkulist;
 	}
@@ -109,6 +108,35 @@ public class CangkuSer implements CangkuService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			return -1;
+		}
+	}
+
+	/**
+	 * 根据分店id生成仓库列表Excel，返回文件路径
+	 */
+	@Override
+	public String writeexcel(int fdid) {
+		// TODO Auto-generated method stub
+		// Excel模板文件路径
+		String inurl = "D:\\Users\\lenovo\\eclipse-workspace\\Htjpharmacy\\WebContent\\static\\excel\\mould\\仓库列表模板.xlsx";
+		// 生成的Excel文件路径
+		String outurl = "D:\\Users\\lenovo\\eclipse-workspace\\Htjpharmacy\\WebContent\\static\\excel\\maked\\仓库列表.xlsx";
+
+		// 获取仓库列表list，并将其转化为二维数组
+		cangkuVlist = cangkuMapperPro.getexcellist(fdid);
+		String[][] datas = new String[cangkuVlist.size()][];
+		for (int i = 0; i < cangkuVlist.size(); i++) {
+			datas[i] = cangkuVlist.get(i).toExcelcol().split(",");
+		}
+
+		// 根据Excel模板文件生成Excel文件
+		ExcelTool et = new ExcelTool();
+		try {
+			et.WriteExcel(inurl, outurl, datas);
+			return outurl;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return inurl;
 		}
 	}
 

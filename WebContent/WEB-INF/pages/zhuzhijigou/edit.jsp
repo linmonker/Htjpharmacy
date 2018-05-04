@@ -69,12 +69,11 @@
 				<div class="field">
 					<label class="sub-header">修改处室</label>
 					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
-					<input id="kszt" type="hidden" value="${chushi.zt }" />
-					<span>${editmsg }</span> <span>${bhmsg}</span><span>${mcmsg}</span>
+					<input id="cszt" type="hidden" value="${chushi.zt }" />
+					<span>${waymsg }</span> <span>${bhmsg}</span><span>${mcmsg}</span>
 				</div>
 				<form id="formpot" method="post" class="form-x"
 					action="${ctx }/zhuzhijigou/doedit">
-					<input type="hidden" name="fdid" value="${sessionScope.loginer.fdid }">
 					<input type="hidden" name="id" value="${chushi.id }" />
 					<div class="form-group">
 						<div class="label">

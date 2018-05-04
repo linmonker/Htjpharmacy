@@ -26,43 +26,43 @@
 	var zTree_Menu;
 	var setting = {
 		view : {
-			 addHoverDom: addHoverDom,  
-             removeHoverDom: removeHoverDom,  
-             selectedMulti: false,  
-             showLine: false,  
-             showIcon: false  
+			addHoverDom : addHoverDom,
+			removeHoverDom : removeHoverDom,
+			selectedMulti : false,
+			showLine : false,
+			showIcon : false
 		},
-		 edit: {  
-             enable: true,  
-             showRemoveBtn: setRemoveBtn,  
-             removeTitle:"删除分类",  
-             renameTitle:"编辑分类",  
-             editNameSelectAll: true,
-      
-         },  
-         data: {  
-             simpleData: {  
-                 enable: true  
-             },
-             key: {
-            	 title: "flbz"
-             }
-         
-         },  
-         callback: {  
-        	 beforeDrag: beforeDrag,
-             beforeEditName: beforeEditName,  
-             beforeRemove: beforeRemove,  
-             beforeRename: beforeRename, 
-             onRemove: onRemove,  
-             onRename: onRename,
-             onClick: onclick,
-         }  
+		edit : {
+			enable : true,
+			showRemoveBtn : setRemoveBtn,
+			removeTitle : "删除分类",
+			renameTitle : "编辑分类",
+			editNameSelectAll : true,
+
+		},
+		data : {
+			simpleData : {
+				enable : true
+			},
+			key : {
+				title : "flbz"
+			}
+
+		},
+		callback : {
+			beforeDrag : beforeDrag,
+			beforeEditName : beforeEditName,
+			beforeRemove : beforeRemove,
+			beforeRename : beforeRename,
+			onRemove : onRemove,
+			onRename : onRename,
+			onClick : onclick,
+		}
 	};
-	
+
 	//用于捕获节点拖拽事件，并且根据返回值确定是否允许进入拖拽状态  
 	function beforeDrag(treeId, treeNodes) {
-	    return false;
+		return false;
 	};
 
 	//用于捕获节点编辑按钮的 click 事件，并且根据返回值确定是否允许进入名称编辑状态  
@@ -87,7 +87,7 @@
 				async : false,
 				type : "post",
 				data : data,
-				contentType: 'application/json',
+				contentType : 'application/json',
 				url : "${ctx}/yaopinfenlei/delete ",
 				success : function(json) {
 					if (json == "success") {
@@ -148,7 +148,7 @@
 			async : false,
 			type : "post",
 			data : data,
-			contentType: 'application/json',
+			contentType : 'application/json',
 			url : "${ctx}/yaopinfenlei/editname ",
 			success : function(json) {
 				if (json == "success") {
@@ -188,7 +188,7 @@
 					async : true,
 					type : "post",
 					data : data,
-					contentType: 'application/json',
+					contentType : 'application/json',
 					url : "${ctx}/yaopinfenlei/doadd",
 					success : function(id) {
 						if (id != "-1") {
@@ -322,6 +322,18 @@
 						<div class="navbar-header">
 							<a class="navbar-brand">药品分类列表</a>
 						</div>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li class="dropdown"><a id="drop2" data-toggle="dropdown"
+								class="dropdown-toggle" role="button" aria-haspopup="true"
+								aria-expanded="false">导出Excel <span class="caret"></span>
+							</a>
+								<ul class="dropdown-menu" aria-labelledby="drop2">
+									<li><a
+										href="${ctx }/yaopinfenlei/downloadexcel">全部记录</a></li>
+								</ul></li>
+						</ul>
 					</div>
 					</nav>
 					<span>${waymsg }</span>

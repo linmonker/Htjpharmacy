@@ -13,36 +13,41 @@ public interface ChushiService {
 	/**
 	 * 根据分店id获取处室列表
 	 */
-	public List<Zuzhijigou> chushiquery(Integer id);
+	public List<Zuzhijigou> chushiquery(int id);
 
 	/**
 	 * 根据处室id获取处室信息
 	 */
-	public Zuzhijigou getchushi(Integer id);
+	public Zuzhijigou getchushi(int id);
 	
 	/**
-	 * 搜索处室
+	 * 模糊搜索处室：处室名称
 	 */
 	List<Zuzhijigou> searchchushi(Zuzhijigou record);
 
 	/**
-	 * 检查重复，处室编号同一分店唯一
+	 * 检查重复：处室编号同一分店唯一
 	 */
 	public List<Zuzhijigou> checkrepeat(Zuzhijigou record);
 
 	/**
 	 * 添加处室
 	 */
-	public void addchushi(Zuzhijigou record);
+	public int addchushi(Zuzhijigou record);
 
 	/**
 	 * 根据处室id删除处室
 	 */
-	public void deletechushi(Integer id);
+	public int deletechushi(int id);
 
 	/**
 	 * 更新处室信息
 	 */
-	public void updatechushi(Zuzhijigou record);
+	public int updatechushi(Zuzhijigou record);
+	
+	/**
+	 * 根据分店id生成处室列表Excel，返回文件路径
+	 */
+	public String writeexcel(int fdid);
 
 }

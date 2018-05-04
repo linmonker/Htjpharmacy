@@ -15,7 +15,7 @@ public interface CangkuService {
 	 * 根据分店id获取仓库列表
 	 */
 	public List<Cangku> cangkuquery(int id);
-
+	
 	/**
 	 * 通过仓库id获取仓库信息
 	 */
@@ -45,5 +45,10 @@ public interface CangkuService {
 	 * 更新仓库信息，部分字段
 	 */
 	public int updatecangku(Cangku record);
+	
+	/**
+	 * 根据分店id生成仓库列表Excel，返回文件路径
+	 */
+	public String writeexcel(int fdid);
 
 }

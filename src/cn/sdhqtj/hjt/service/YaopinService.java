@@ -48,5 +48,10 @@ public interface YaopinService {
 	 * 更新药品
 	 */
 	public int updateyaopin(YaopinWithBLOBs record);
+	
+	/**
+	 * 生成药品列表Excel，返回文件路径
+	 */
+	public String writeexcel();
 
 }

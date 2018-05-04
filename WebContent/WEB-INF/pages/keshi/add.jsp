@@ -12,6 +12,13 @@
 <script src="${ctx}/static/js/jquery.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		if ("1" == $("#kszt").val) {
+			$("select option:eq(1)").attr("selected", true);
+		}
+	})
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -51,10 +58,10 @@
 			<div class="col-sm-9 col-md-9 main">
 				<div class="field">
 					<label class="sub-header">添加科室</label>
-					<span>${addmsg }</span> <span>${bhmsg }</span> <span>${mcmsg}</span>
+					<input id="kszt" type="hidden" value="${keshi.zt }" />
+					<span>${waymsg }</span> <span>${bhmsg }</span> <span>${mcmsg}</span>
 				</div>
 				<form method="post" class="form-x" action="${ctx}/keshi/doadd">
-					<input type="hidden" name="fdid" value="${sessionScope.loginer.fdid }">
 					<div class="form-group">
 						<div class="label">
 							<label>科室编号：</label>

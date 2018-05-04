@@ -23,4 +23,5 @@ public class GongyingshangWithBLOBs extends Gongyingshang {
 	public void setGysbz(String gysbz) {
 		this.gysbz = gysbz == null ? null : gysbz.trim();
 	}
+
 }

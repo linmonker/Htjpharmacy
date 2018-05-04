@@ -4,10 +4,12 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import cn.sdhqtj.hjt.entity.Yaopinfenlei;
-import cn.sdhqtj.hjt.entity.YaopinflNode;
+import cn.sdhqtj.hjt.entity.YaopinfenleiVo;
+import cn.sdhqtj.hjt.entity.YaopinfenleiNode;
 import cn.sdhqtj.hjt.mapper.YaopinfenleiMapper;
 import cn.sdhqtj.hjt.mapper.YaopinfenleiMapperPro;
 import cn.sdhqtj.hjt.service.YaopinfenleiService;
+import cn.sdhqtj.hjt.tool.ExcelTool;
 
 /**
  * 药品分类service接口实现类
@@ -22,6 +24,7 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 	private YaopinfenleiMapper ypflMapper;
 	Yaopinfenlei ypfl;
 	List<Yaopinfenlei> ypfllist;
+	List<YaopinfenleiVo> ypVfllist;
 
 	/**
 	 * 获取药品分类列表
@@ -37,24 +40,10 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 	 * 获取药品分类节点
 	 */
 	@Override
-	public List<YaopinflNode> getypflnodes() {
+	public List<YaopinfenleiNode> getypflnodes() {
 		// TODO Auto-generated method stub
-		List<YaopinflNode> nodeslist = ypflMapperPro.getypflnodes();
+		List<YaopinfenleiNode> nodeslist = ypflMapperPro.getypflnodes();
 		return nodeslist;
-	}
-
-	/**
-	 * 检查重复：药品分类编号
-	 */
-	@Override
-	public List<Yaopinfenlei> checkrepeat(Yaopinfenlei record) {
-		// TODO Auto-generated method stub
-		// 如果id为null，则设置id=-1，与数据库所有记录比较
-		if (record.getId() == null) {
-			record.setId(-1);
-		}
-		ypfllist = ypflMapperPro.checkrepeat(record);
-		return ypfllist;
 	}
 
 	/**
@@ -65,6 +54,16 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 		// TODO Auto-generated method stub
 		ypfl = ypflMapper.selectByPrimaryKey(id);
 		return ypfl;
+	}
+
+	/**
+	 * 检查重复：药品分类编号
+	 */
+	@Override
+	public List<Yaopinfenlei> checkrepeat(Yaopinfenlei record) {
+		// TODO Auto-generated method stub
+		ypfllist = ypflMapperPro.checkrepeat(record);
+		return ypfllist;
 	}
 
 	/**
@@ -127,6 +126,35 @@ public class YaopinfenleiSer implements YaopinfenleiService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			return -1;
+		}
+	}
+
+	/**
+	 * 生成药品分类列表Excel，返回文件路径
+	 */
+	@Override
+	public String writeexcel() {
+		// TODO Auto-generated method stub
+		// Excel模板文件路径
+		String inurl = "D:\\Users\\lenovo\\eclipse-workspace\\Htjpharmacy\\WebContent\\static\\excel\\mould\\药品分类列表模板.xlsx";
+		// 生成的Excel文件路径
+		String outurl = "D:\\Users\\lenovo\\eclipse-workspace\\Htjpharmacy\\WebContent\\static\\excel\\maked\\药品分类列表.xlsx";
+
+		// 获取药品分类列表list，并将其转化为二维数组
+		ypVfllist = ypflMapperPro.getexcellist();
+		String[][] datas = new String[ypVfllist.size()][];
+		for (int i = 0; i < ypVfllist.size(); i++) {
+			datas[i] = ypVfllist.get(i).toExcelcol().split(",");
+		}
+
+		// 根据Excel模板文件生成Excel文件
+		ExcelTool et = new ExcelTool();
+		try {
+			et.WriteExcel(inurl, outurl, datas);
+			return outurl;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return inurl;
 		}
 	}
 

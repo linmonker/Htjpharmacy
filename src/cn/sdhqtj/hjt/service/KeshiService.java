@@ -13,36 +13,41 @@ public interface KeshiService {
 	/**
 	 * 根据分店id获取科室列表
 	 */
-	public List<Keshi> keshiquery(Integer id);
+	public List<Keshi> keshiquery(int id);
 
 	/**
 	 * 根据科室id获取科室信息
 	 */
-	public Keshi getkeshi(Integer id);
+	public Keshi getkeshi(int id);
 	
 	/**
-	 * 搜索科室
+	 * 模糊搜索科室：科室名称
 	 */
 	List<Keshi> searchkeshi(Keshi record);
 
 	/**
-	 * 检查重复检查重复，科室编号同一分店唯一
+	 * 检查重复：科室编号同一分店唯一
 	 */
 	public List<Keshi> checkrepeat(Keshi record);
 
 	/**
 	 * 添加科室
 	 */
-	public void addkeshi(Keshi record);
+	public int addkeshi(Keshi record);
 
 	/**
 	 * 根据科室id删除科室
 	 */
-	public void deletekeshi(Integer id);
+	public int deletekeshi(int id);
 
 	/**
 	 * 更新科室信息
 	 */
-	public void updatekeshi(Keshi record);
+	public int updatekeshi(Keshi record);
+	
+	/**
+	 * 根据分店id生成科室列表Excel，返回文件路径
+	 */
+	public String writeexcel(int fdid);
 
 }

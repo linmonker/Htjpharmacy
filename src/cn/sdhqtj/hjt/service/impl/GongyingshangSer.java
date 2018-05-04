@@ -4,10 +4,12 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import cn.sdhqtj.hjt.entity.Gongyingshang;
+import cn.sdhqtj.hjt.entity.GongyingshangVo;
 import cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs;
 import cn.sdhqtj.hjt.mapper.GongyingshangMapper;
 import cn.sdhqtj.hjt.mapper.GongyingshangMapperPro;
 import cn.sdhqtj.hjt.service.GongyingshangService;
+import cn.sdhqtj.hjt.tool.ExcelTool;
 
 /**
  * 供应商service接口实现类
@@ -23,6 +25,7 @@ public class GongyingshangSer implements GongyingshangService {
 	Gongyingshang gys;
 	GongyingshangWithBLOBs gysB;
 	List<Gongyingshang> gyslist;
+	List<GongyingshangVo> gysVlist;
 
 	/**
 	 * 获取供应商列表
@@ -70,10 +73,6 @@ public class GongyingshangSer implements GongyingshangService {
 	@Override
 	public List<Gongyingshang> checkrepeat(Gongyingshang record) {
 		// TODO Auto-generated method stub
-		// 如果id为null，则设置id=-1，与数据库所有记录比较
-		if (record.getId() == null) {
-			record.setId(-1);
-		}
 		gyslist = gysMapperPro.checkrepeat(record);
 		return gyslist;
 	}
@@ -122,4 +121,34 @@ public class GongyingshangSer implements GongyingshangService {
 			return -1;
 		}
 	}
+
+	/**
+	 * 根据分店id生成供应商列表Excel，返回文件路径
+	 */
+	@Override
+	public String writeexcel(int fdid) {
+		// TODO Auto-generated method stub
+		// Excel模板文件路径
+		String inurl = "D:\\Users\\lenovo\\eclipse-workspace\\Htjpharmacy\\WebContent\\static\\excel\\mould\\供应商列表模板.xlsx";
+		// 生成的Excel文件路径
+		String outurl = "D:\\Users\\lenovo\\eclipse-workspace\\Htjpharmacy\\WebContent\\static\\excel\\maked\\供应商列表.xlsx";
+
+		// 获取供应商列表list，并将其转化为二维数组
+		gysVlist = gysMapperPro.getexcellist(fdid);
+		String[][] datas = new String[gysVlist.size()][];
+		for (int i = 0; i < gysVlist.size(); i++) {
+			datas[i] = gysVlist.get(i).toExcelcol().split(",");
+		}
+
+		// 根据Excel模板文件生成Excel文件
+		ExcelTool et = new ExcelTool();
+		try {
+			et.WriteExcel(inurl, outurl, datas);
+			return outurl;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return inurl;
+		}
+	}
+	
 }

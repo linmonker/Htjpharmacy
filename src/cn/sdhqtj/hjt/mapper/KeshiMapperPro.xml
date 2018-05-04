@@ -24,13 +24,16 @@
 		ksbz
 	</sql>
 	<select id="keshiquery" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		,
-		<include refid="Blob_Column_List" />
+		select *
 		from hjt_keshi
 		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0
 		order by ksbh asc
+	</select>
+	<select id="keshiquery" resultType="cn.sdhqtj.hjt.entity.KeshiVo" parameterType="java.lang.Integer">
+		select k.*,f.fdbh,f.fdmc
+		from hjt_keshi k left join hjt_fendian f on k.fdid = f.id
+		where k.fdid = #{fdid,jdbcType=INTEGER} and k.dm = 0
+		order by k.ksbh asc
 	</select>
 	<select id="searchkeshi" resultMap="ResultMapWithBLOBs"
 		parameterType="cn.sdhqtj.hjt.entity.Keshi">
@@ -42,7 +45,10 @@
 		select
 		<include refid="Base_Column_List" />
 		from hjt_keshi
-		where fdid = #{fdid,jdbcType=INTEGER} and (ksbh = #{ksbh,jdbcType=VARCHAR}
+		where fdid = #{fdid,jdbcType=INTEGER} and ksbh = #{ksbh,jdbcType=VARCHAR}
+		<if test="id != null">
+			and Id != #{id,jdbcType=INTEGER}
+		</if>
 	</select>
 	<update id="updatekeshi" parameterType="cn.sdhqtj.hjt.entity.Keshi">
 		update hjt_keshi

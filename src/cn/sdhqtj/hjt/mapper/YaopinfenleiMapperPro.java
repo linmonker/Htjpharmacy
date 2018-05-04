@@ -3,7 +3,8 @@ package cn.sdhqtj.hjt.mapper;
 import java.util.List;
 
 import cn.sdhqtj.hjt.entity.Yaopinfenlei;
-import cn.sdhqtj.hjt.entity.YaopinflNode;
+import cn.sdhqtj.hjt.entity.YaopinfenleiVo;
+import cn.sdhqtj.hjt.entity.YaopinfenleiNode;
 
 /**
  * 药品分类mapper补充
@@ -18,7 +19,13 @@ public interface YaopinfenleiMapperPro {
 	/**
 	 * 获取药品分类节点
 	 */
-	List<YaopinflNode> getypflnodes();
+	List<YaopinfenleiNode> getypflnodes();
+	
+	/**
+	 * 获取药品分类Excel列表
+	 */
+	List<YaopinfenleiVo> getexcellist();
+
 
 	/**
 	 * 检查重复：药品分类编号

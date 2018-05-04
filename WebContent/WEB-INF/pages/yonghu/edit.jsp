@@ -76,7 +76,7 @@
 					<button class="btn btn-primary btn-sm" onclick="topdf()">打印</button>
 					<input id="yhjs" type="hidden" value="${yonghu.yhjsid }" />
 					<input id="yhbm" type="hidden" value="${yonghu.yhbmid }" />
-					<span>${editmsg}</span><span>${bhmsg}</span><span>${mcmsg}</span><span>${mmmsg}</span>
+					<span>${msgmsg}</span><span>${bhmsg}</span><span>${mcmsg}</span><span>${mmmsg}</span>
 				</div>
 				<form id="formpot" method="post" class="form-x"
 					action="${ctx }/yonghu/doedit">
@@ -99,6 +99,26 @@
 						<div class="field">
 							<input type="text" class="form-control" name="yhdlm"
 								value="${yonghu.yhdlm }" data-validate="required:请输入用户名" />
+							<div class="tips"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="label">
+							<label>密码：</label>
+						</div>
+						<div class="field">
+							<input id="yhmm" type="text" class="form-control" name="yhmm"
+							     placeholder="修改密码时输入" />
+							<div class="tips"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="label">
+							<label>确认密码：</label>
+						</div>
+						<div class="field">
+							<input type="text" class="form-control" name="confirmyhmm"
+								 placeholder="修改密码时输入" data-validate="equalTo:'#yhmm'" />
 							<div class="tips"></div>
 						</div>
 					</div>

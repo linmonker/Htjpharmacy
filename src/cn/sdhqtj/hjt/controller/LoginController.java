@@ -23,7 +23,7 @@ public class LoginController {
 	@Resource
 	LoginService loginService;
 	Login login;
-	
+
 	@Resource
 	YonghuService yonghuService;
 
@@ -39,8 +39,10 @@ public class LoginController {
 	 * 进入首页
 	 */
 	@RequestMapping("/index")
-	public void  index(HttpSession session) {
-		session.setAttribute("loginer", login);
+	public void index(HttpSession session) {
+		if (login != null) {
+			session.setAttribute("loginer", login);
+		}
 	}
 
 	/**
@@ -77,9 +79,9 @@ public class LoginController {
 	@RequestMapping("/outlogin")
 	public Object outlogin(HttpSession session, Model model) {
 		if (session.getAttribute("loginer") != null) {
-			session.removeAttribute("loginer");
 			Subject subject = SecurityUtils.getSubject();
 			subject.logout();
+			session.removeAttribute("loginer");
 		}
 		return "redirect:login";
 	}

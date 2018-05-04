@@ -1,11 +1,17 @@
 package cn.sdhqtj.hjt.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,13 +33,15 @@ public class GongyingshangController {
 	List<Gongyingshang> gyslist;
 	Gongyingshang gys;
 	GongyingshangWithBLOBs gysB;
+	
+	Login login;
 
 	/**
 	 * 供应商列表
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model, HttpSession session) {
-		Login login = (Login) session.getAttribute("loginer");
+		login = (Login) session.getAttribute("loginer");
 		gyslist = gysservice.getquerybyfdid(login.getFdid());
 		model.addAttribute("gyslist", gyslist);
 
@@ -83,7 +91,7 @@ public class GongyingshangController {
 			return "gongyingshang/add";
 		}
 
-		Login login = (Login) session.getAttribute("loginer");
+		login = (Login) session.getAttribute("loginer");
 		record.setFdid(login.getFdid());
 		// 尝试添加
 		int res = gysservice.addgongyingshang(record);
@@ -112,7 +120,7 @@ public class GongyingshangController {
 	 * 执行修改供应商
 	 */
 	@RequestMapping("/doedit")
-	public String doedit(GongyingshangWithBLOBs record, Model model, HttpSession session) {
+	public String doedit(GongyingshangWithBLOBs record, Model model) {
 		if (record.getGysbh() == null || record.getGysmc() == null) {
 			// 修改失败，供应商编号不能为空
 			model.addAttribute("waymsg", "供应商修改失败");
@@ -163,13 +171,11 @@ public class GongyingshangController {
 
 	/**
 	 * 搜索供应商
-	 * 
-	 * @param session
 	 */
 	@RequestMapping("/search")
 	public String search(String searchword, Model model, HttpSession session) {
 		gys = new Gongyingshang();
-		Login login = (Login) session.getAttribute("loginer");
+		login = (Login) session.getAttribute("loginer");
 		gys.setFdid(login.getFdid());
 		gys.setGysbh(searchword);
 		gys.setGysmc(searchword);
@@ -177,4 +183,20 @@ public class GongyingshangController {
 		model.addAttribute("gyslist", gyslist);
 		return "gongyingshang/list";
 	}
+
+	/**
+	 * 下载供应商列表Excel
+	 */
+	@RequestMapping("/downloadexcel")
+	public ResponseEntity<byte[]> downloadexcel(HttpSession session) throws Exception {
+		login = (Login) session.getAttribute("loginer");
+		String path = gysservice.writeexcel(login.getFdid());
+		File file = new File(path);
+		String fileName = new String("供应商列表.xlsx".getBytes("UTF-8"), "iso-8859-1");// 为了解决中文名称乱码问题
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		headers.setContentDispositionFormData("attachment", fileName);
+		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
+	}
+
 }

@@ -9,6 +9,7 @@ import cn.sdhqtj.hjt.entity.YaopinWithBLOBs;
 import cn.sdhqtj.hjt.mapper.YaopinMapper;
 import cn.sdhqtj.hjt.mapper.YaopinMapperPro;
 import cn.sdhqtj.hjt.service.YaopinService;
+import cn.sdhqtj.hjt.tool.ExcelTool;
 
 /**
  * 药品service接口实现类
@@ -24,7 +25,7 @@ public class YaopinSer implements YaopinService {
 	Yaopin yaopin;
 	List<Yaopin> yaopinlist;
 	YaopinWithBLOBs yaopinB;
-	List<YaopinVo> yaopinvolist;
+	List<YaopinVo> yaopinVlist;
 
 	/**
 	 * 获取药品列表
@@ -32,8 +33,8 @@ public class YaopinSer implements YaopinService {
 	@Override
 	public List<YaopinVo> yaopinquery() {
 		// TODO Auto-generated method stub
-		yaopinvolist = yaopinMapperPro.yaopinquery();
-		return yaopinvolist;
+		yaopinVlist = yaopinMapperPro.yaopinquery();
+		return yaopinVlist;
 	}
 
 	/**
@@ -52,8 +53,8 @@ public class YaopinSer implements YaopinService {
 	@Override
 	public List<YaopinVo> searchyaopin(Yaopin record) {
 		// TODO Auto-generated method stub
-		yaopinvolist = yaopinMapperPro.searchyaopin(record);
-		return yaopinvolist;
+		yaopinVlist = yaopinMapperPro.searchyaopin(record);
+		return yaopinVlist;
 	}
 
 	/**
@@ -62,10 +63,6 @@ public class YaopinSer implements YaopinService {
 	@Override
 	public List<Yaopin> checkrepeat(YaopinWithBLOBs record) {
 		// TODO Auto-generated method stub
-		// 如果id为null，则设置id=-1，与数据库所有记录比较
-		if (record.getId() == null) {
-			record.setId(-1);
-		}
 		yaopinlist = yaopinMapperPro.checkrepeat(record);
 		return yaopinlist;
 	}
@@ -112,6 +109,35 @@ public class YaopinSer implements YaopinService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			return -1;
+		}
+	}
+
+	/**
+	 * 生成药品列表Excel，返回文件路径
+	 */
+	@Override
+	public String writeexcel() {
+		// TODO Auto-generated method stub
+		// Excel模板文件路径
+		String inurl = "D:\\Users\\lenovo\\eclipse-workspace\\Htjpharmacy\\WebContent\\static\\excel\\mould\\药品列表模板.xlsx";
+		// 生成的Excel文件路径
+		String outurl = "D:\\Users\\lenovo\\eclipse-workspace\\Htjpharmacy\\WebContent\\static\\excel\\maked\\药品列表.xlsx";
+
+		// 获取药品列表list，并将其转化为二维数组
+		yaopinVlist = yaopinMapperPro.getexcellist();
+		String[][] datas = new String[yaopinVlist.size()][];
+		for (int i = 0; i < yaopinVlist.size(); i++) {
+			datas[i] = yaopinVlist.get(i).toExcelcol().split(",");
+		}
+
+		// 根据Excel模板文件生成Excel文件
+		ExcelTool et = new ExcelTool();
+		try {
+			et.WriteExcel(inurl, outurl, datas);
+			return outurl;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return inurl;
 		}
 	}
 

@@ -26,16 +26,25 @@
 		where zt=0
 		order by sjflid asc
 	</select>
-	<select id="getypflnodes" resultType="cn.sdhqtj.hjt.entity.YaopinflNode">
+	<select id="getypflnodes" resultType="cn.sdhqtj.hjt.entity.YaopinfenleiNode">
 		select id, sjflid pId, flmc name, flbz
 		from hjt_yaopinfenlei
 		where zt=0
+	</select>
+	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.YaopinfenleiVo">
+		select a.*,b.flmc
+		from hjt_yaopinfenlei a left join hjt_yaopinfenlei b on a.sjflid = b.id
+		where a.zt=0
+		order by a.flbh asc
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
 		select <include refid="Base_Column_List" />
 		from hjt_yaopinfenlei
-		where id != #{id,jdbcType=INTEGER} and flbh = #{flbh,jdbcType=VARCHAR}
+		where flbh = #{flbh,jdbcType=VARCHAR}
+		<if test="id != null">
+			and id != #{id,jdbcType=INTEGER}
+		</if>
 	</select>
 	<insert id="addyaopinfenlei" parameterType="cn.sdhqtj.hjt.entity.Yaopinfenlei">
 		insert into hjt_yaopinfenlei

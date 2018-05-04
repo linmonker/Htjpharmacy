@@ -1,8 +1,15 @@
 package cn.sdhqtj.hjt.controller;
 
+import java.io.File;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +44,7 @@ public class HuoweiController {
 		String ckidstr = request.getParameter("ckid");
 		int fdid, ckid;
 		if (ckidstr == null) {
-			// 仓库id都为空，返回仓库列表首页
+			// 仓库id为空，返回仓库列表首页
 			return "redirect:/Htjpharmacy/cangku/sylist?waymsg=error";
 		} else if (fdidstr == null) {
 			// 分店id为空，从数据库获取fdid
@@ -83,7 +90,7 @@ public class HuoweiController {
 		String ckidstr = request.getParameter("ckid");
 		int fdid, ckid;
 		if (ckidstr == null) {
-			// 仓库id都为空，返回仓库列表首页
+			// 仓库id为空，返回仓库列表首页
 			return "redirect:/Htjpharmacy/cangku/sylist?waymsg=error";
 		} else if (fdidstr == null) {
 			// 分店id为空，从数据库获取fdid
@@ -218,6 +225,21 @@ public class HuoweiController {
 		model.addAttribute("huoweilist", huoweilist);
 
 		return "huowei/list";
+	}
+
+	/**
+	 * 下载货位列表Excel
+	 */
+	@RequestMapping("/downloadexcel")
+	public ResponseEntity<byte[]> downloadexcel(HttpServletRequest request) throws Exception {
+		int ckid = Integer.valueOf(request.getParameter("ckid"));
+		String path = huoweiservice.writeexcel(ckid);
+		File file = new File(path);
+		String fileName = new String("货位列表.xlsx".getBytes("UTF-8"), "iso-8859-1");// 为了解决中文名称乱码问题
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		headers.setContentDispositionFormData("attachment", fileName);
+		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
 	}
 
 }

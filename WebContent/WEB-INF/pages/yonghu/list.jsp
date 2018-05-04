@@ -98,13 +98,20 @@
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="${ctx}/yonghu/add">添加用户</a></li>
+								<li><a href="${ctx}/yonghu/add?fdid=${yonghulist.get(0).fdid }">添加用户</a></li>
 								<li><a onclick="return edit()">修改用户</a></li>
 								<li><a onclick="return del()">删除用户</a></li>
-								<li><span id="tempid" style="display: none"></span></li>
+								<li class="dropdown"><a id="drop2" data-toggle="dropdown" class="dropdown-toggle"
+									role="button" aria-haspopup="true" aria-expanded="false">导出Excel <span class="caret"></span>
+								</a>
+									<ul class="dropdown-menu" aria-labelledby="drop2">
+										<li><a onclick="return toexcel()">本页记录</a></li>
+										<li><a href="${ctx }/yonghu/downloadexcel?fdid=${yonghulist.get(0).fdid }">全部记录</a></li>
+									</ul></li>
 							</ul>
 							<div class="nav navbar-nav navbar-right">
 								<form action="${ctx }/yonghu/search" method="post">
+								    <input type="hidden" name="fdid" value="${yonghulist.get(0).fdid }" />
 									<input type="text" placeholder="请输入搜索关键字" name="searchword"
 										class="input"
 										style="width: 250px; line-height: 15px; display: inline-block;"
@@ -116,8 +123,7 @@
 					</div>
 					</nav>
 					<input type="hidden" id="tempid" />
-					<input type="hidden" name="fdid" value="${yonghulist.get(0).fdid }" />
-					<span>${addmsg}</span> <span>${editmsg}</span> <span>${deletemsg}</span>
+					<span>${msgmsg}</span>
 				</div>
 				<div class="row">
 					<div class="col-sm-2 col-md-2 sidebar">
@@ -132,7 +138,6 @@
 					<div class="col-sm-10 col-md-10">
 						<h4>用户列表</h4>
 						<span>共${yonghulist.size() }条记录</span>
-					    <button class="btn btn-primary btn-sm" onclick="toexcel()">导出Excel</button>
 						<div class="table-responsive">
 							<table id="tablepot" class="table table-bordered table-condensed">
 								<thead>
@@ -151,7 +156,7 @@
 								<tbody>
 									<c:forEach items="${yonghulist }" var="yhlist">
 										<tr onclick="setid(this,${yhlist.id })">
-											<td>${yhlist.yhbh }</td>
+								        	<td>${yhlist.yhbh }</td>
 											<td>${yhlist.yhdlm }</td>
 											<td>${yhlist.yhxm }</td>
 											<td>${yhlist.yhxb }</td>

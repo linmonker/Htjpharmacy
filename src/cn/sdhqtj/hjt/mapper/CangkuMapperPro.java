@@ -3,6 +3,7 @@ package cn.sdhqtj.hjt.mapper;
 import java.util.List;
 
 import cn.sdhqtj.hjt.entity.Cangku;
+import cn.sdhqtj.hjt.entity.CangkuVo;
 
 /**
  * 仓库mapper补充
@@ -13,6 +14,11 @@ public interface CangkuMapperPro {
 	 * 根据分店id获取仓库列表
 	 */
 	List<Cangku> cangkuquery(int id);
+	
+	/**
+	 * 根据分店id获取仓库Excel列表
+	 */
+	List<CangkuVo> getexcellist(int id);
 	
 	/**
 	 * 模糊搜索仓库：仓库编号，仓库名称

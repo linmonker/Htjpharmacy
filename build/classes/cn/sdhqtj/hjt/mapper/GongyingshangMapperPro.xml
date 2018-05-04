@@ -60,29 +60,38 @@
 	</sql>
 
 	<select id="gongyingshangquery" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" />
+		select *
 		from hjt_gongyingshang
 		where dm = 0
 		order by gysbh asc
 	</select>
-	<select id="getquerybyfdid" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" />
+	<select id="getquerybyfdid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select *
 		from hjt_gongyingshang
 		where fdid = #{fdid} and dm = 0
 		order by gysbh asc
+	</select>
+	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.GongyingshangVo" parameterType="java.lang.Integer">
+		select g.*,f.fdbh,f.fdmc
+		from hjt_gongyingshang g left join hjt_fendian f on g.fdid = f.id
+		where g.fdid = #{fdid,jdbcType=INTEGER} and g.dm = 0
+		order by g.gysbh asc
 	</select>
 	<select id="searchgongyingshang" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Gongyingshang">
 		select <include refid="Base_Column_List" />
 		from hjt_gongyingshang
-		where fdid = #{fdid,jdbcType=INTEGER} dm = 0 and 
+		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0 and 
 		(gysbh like concat("%",#{gysbh},"%") or gysmc like concat("%",#{gysmc},"%"))
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Gongyingshang">
 		select <include refid="Base_Column_List" />
 		from hjt_gongyingshang
-		where Id != #{id,jdbcType=INTEGER} and gysbh = #{gysbh,jdbcType=VARCHAR}
+		where gysbh = #{gysbh,jdbcType=VARCHAR}
+		<if test="id != null">
+			and Id != #{id,jdbcType=INTEGER}
+		</if>
 	</select>
     <update id="updategongyingshang" parameterType="cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs">
 		update hjt_gongyingshang

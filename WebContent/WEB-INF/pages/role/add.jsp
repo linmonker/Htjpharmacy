@@ -131,7 +131,7 @@
 			<div class="col-sm-9 col-md-9 main">
 				<div class="field">
 					<label class="sub-header">添加角色</label>
-					<span>${addmsg}</span> <span>${mcmsg}</span>
+					<span>${waymsg}</span> <span>${mcmsg}</span>
 				</div>
 				<form method="post" class="form-x" action="${ctx}/role/doadd"
 					onsubmit="return jiluquanxian()">

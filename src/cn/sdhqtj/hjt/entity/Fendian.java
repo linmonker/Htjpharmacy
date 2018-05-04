@@ -94,10 +94,8 @@ public class Fendian {
 		this.fdbz = fdbz == null ? null : fdbz.trim();
 	}
 
-	@Override
-	public String toString() {
-		return "Fendian [id=" + id + ", jtid=" + jtid + ", fdbh=" + fdbh + ", fdmc=" + fdmc + ", fddz=" + fddz
-				+ ", fdlxdh=" + fdlxdh + ", fddzxm=" + fddzxm + ", zt=" + zt + ", fdbz=" + fdbz + "]";
+	public String toExcelcol() {
+		return fdbh + "," + fdmc + "," + fddz + "," + fdlxdh + "," + fddzxm + "," + fdbz;
 	}
 
 }

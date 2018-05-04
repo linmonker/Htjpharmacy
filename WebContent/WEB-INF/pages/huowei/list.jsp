@@ -96,10 +96,16 @@
 								<li><a href="${ctx}/huowei/add?fdid=${huoweilist.get(0).fdid }&&ckid=${huoweilist.get(0).ckid }">添加货位</a></li>
 								<li><a onclick="return edit()">修改货位</a></li>
 								<li><a onclick="return del()">删除货位</a></li>
+								<li class="dropdown"><a id="drop2" data-toggle="dropdown" class="dropdown-toggle"
+									role="button" aria-haspopup="true" aria-expanded="false">导出Excel <span class="caret"></span>
+								</a>
+									<ul class="dropdown-menu" aria-labelledby="drop2">
+										<li><a onclick="return toexcel()">本页记录</a></li>
+										<li><a href="${ctx }/huowei/downloadexcel?fdid=${huoweilist.get(0).fdid }">全部记录</a></li>
+									</ul></li>
 							</ul>
 							<div class="nav navbar-nav navbar-right">
 								<form action="${ctx }/huowei/search" method="post">
-								    <input type="hidden" name="fdid" value="${huoweilist.get(0).fdid }" />
 					                <input type="hidden" name="ckid" value="${huoweilist.get(0).ckid }" />
 									<input type="text" placeholder="请输入搜索关键字" name="searchword"
 										class="input"
@@ -116,7 +122,6 @@
 				</div>
 				<div class="row">
 				    <span>共${huoweilist.size() }条记录</span>
-					<button class="btn btn-primary btn-sm" onclick="toexcel()">导出Excel</button>
 					<div class="table-responsive">
 						<table id="tablepot" class="table table-bordered table-condensed">
 							<thead>

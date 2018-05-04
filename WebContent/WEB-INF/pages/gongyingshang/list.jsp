@@ -93,9 +93,19 @@
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="${ctx}/gongyingshang/add">添加供应商</a></li>
+								<li><a
+									href="${ctx}/gongyingshang/add">添加供应商</a></li>
 								<li><a onclick="return edit()">修改供应商</a></li>
 								<li><a onclick="return del()">删除供应商</a></li>
+								<li class="dropdown"><a id="drop2" data-toggle="dropdown"
+									class="dropdown-toggle" role="button" aria-haspopup="true"
+									aria-expanded="false">导出Excel <span class="caret"></span>
+								</a>
+									<ul class="dropdown-menu" aria-labelledby="drop2">
+										<li><a onclick="return toexcel()">本页记录</a></li>
+										<li><a
+											href="${ctx }/gongyingshang/downloadexcel">全部记录</a></li>
+									</ul></li>
 							</ul>
 							<div class="nav navbar-nav navbar-right">
 								<form action="${ctx }/gongyingshang/search" method="post">
@@ -113,8 +123,7 @@
 					<span>${waymsg}</span>
 				</div>
 				<div class="row">
-				    <span>共${gyslist.size() }条记录</span>
-					<button class="btn btn-primary btn-sm" onclick="toexcel()">导出Excel</button>
+					<span>共${gyslist.size() }条记录</span>
 					<div class="table-responsive">
 						<table id="tablepot" class="table table-bordered table-condensed">
 							<thead>
@@ -122,7 +131,7 @@
 									<th>供应商编号</th>
 									<th>供应商名称</th>
 									<th>供应商电话</th>
-									<th>联系人</th>				
+									<th>联系人</th>
 									<th>业务员</th>
 									<th>业务员电话</th>
 									<th>供应商地址</th>
@@ -141,10 +150,12 @@
 										<td>${list.gysywydh}</td>
 										<td>${list.gysxxdz}</td>
 										<td>${list.gysyzbm}</td>
-										<td><c:choose>
-													<c:when test="${list.zt == 0}">启用</c:when>
-													<c:otherwise>禁用</c:otherwise>
-												</c:choose></td>
+										<td>
+											<c:choose>
+												<c:when test="${list.zt == 0}">启用</c:when>
+												<c:otherwise>禁用</c:otherwise>
+											</c:choose>
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>

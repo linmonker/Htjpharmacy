@@ -14,7 +14,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.sdhqtj.hjt.entity.Login;
-import cn.sdhqtj.hjt.entity.Yonghu;
+import cn.sdhqtj.hjt.entity.YonghuVo;
 import cn.sdhqtj.hjt.service.LoginService;
 import cn.sdhqtj.hjt.service.RoleService;
 import cn.sdhqtj.hjt.service.YonghuService;
@@ -37,18 +37,15 @@ public class UserRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		String username = (String) principals.getPrimaryPrincipal();
 
-		// 角色的集合
-		List<Yonghu> yonghu = YonghuService.getuserByUseranme(username);
-		// System.out.println("----------------------账号"+user);
+		// 获取用户
+		List<YonghuVo> yonghuvolist = YonghuService.getuserByUseranme(username);
 
-		List<String> roles = roleService.rolenamelist(yonghu.get(0).getYhjsid());
-		// System.out.println("----------------------角色集合"+roles);
-
-		// 权限的集合
-		// System.out.println("-----------角色ID"+user.get(0).getRole_id());
-		List<String> permissions = roleService.urllist(yonghu.get(0).getYhjsid());
-		// System.out.println("-----------------------------权限集合"+permissions);
-
+		// 获取用户角色名称
+		List<String> roles = roleService.rolenamelist(yonghuvolist.get(0).getYhjsid());
+		
+		// 获取用户权限集合
+		List<String> permissions = roleService.urllist(yonghuvolist.get(0).getYhjsid());
+		
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		authorizationInfo.addRoles(roles);// 设置角色
 		authorizationInfo.addStringPermissions(permissions);// 设置权限
@@ -63,12 +60,13 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String username = (String) token.getPrincipal();
-		Login lo = new Login();
-		lo.setUsername(username);
-		Login login = loginService.validatelogon(lo);
+		Login login = new Login();
+		login.setUsername(username);
+		login = loginService.validatelogon(login);
 
 		if (login == null) {
-			throw new IncorrectCredentialsException();// 没找到帐号
+			// 没找到帐户
+			throw new IncorrectCredentialsException();
 		}
 
 		// if (Boolean.FALSE.equals(login.getEnable())) {

@@ -96,6 +96,13 @@
 								<li><a href="${ctx}/yaopin/add">添加药品</a></li>
 								<li><a onclick="return edit()">修改药品</a></li>
 								<li><a onclick="return del()">删除药品</a></li>
+								<li class="dropdown"><a id="drop2" data-toggle="dropdown" class="dropdown-toggle"
+									role="button" aria-haspopup="true" aria-expanded="false">导出Excel <span class="caret"></span>
+								</a>
+									<ul class="dropdown-menu" aria-labelledby="drop2">
+										<li><a onclick="return toexcel()">本页记录</a></li>
+										<li><a href="${ctx }/yaopin/downloadexcel">全部记录</a></li>
+									</ul></li>
 							</ul>
 
 							<div class="nav navbar-nav navbar-right">
@@ -116,7 +123,6 @@
 				</div>
 				<div class="row">
 				    <span>共${yaopinlist.size() }条记录</span>
-					<button class="btn btn-primary btn-sm" onclick="toexcel()">导出Excel</button>
 					<div class="table-responsive">
 						<table id="tablepot" class="table table-bordered table-condensed">
 							<thead>

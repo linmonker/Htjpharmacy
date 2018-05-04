@@ -2,7 +2,6 @@ package cn.sdhqtj.hjt.mapper;
 
 import java.util.List;
 
-import cn.sdhqtj.hjt.entity.Login;
 import cn.sdhqtj.hjt.entity.Yonghu;
 import cn.sdhqtj.hjt.entity.YonghuVo;
 
@@ -12,38 +11,33 @@ import cn.sdhqtj.hjt.entity.YonghuVo;
 public interface YonghuMapperPro {
 
 	/**
-	 * 获取用户列表
+	 * 根据分店id获取用户列表，包括处室名称
 	 */
-	List<YonghuVo> yonghuquery(Integer id);
+	List<YonghuVo> yonghuquery(int fdid);
 	
 	/**
-	 *根据用户名获取用户信息
+	 * 根据分店id获取用户Excel列表
 	 */
-	List<Yonghu> getuserByUseranme(String string);
-	
-	/**
-	 *根据用户名称获取用户信息,包括分店名称
-	 */
-	List<YonghuVo> getuser(String string);
+	List<YonghuVo> getexcellist(int fdid);
 
 	/**
-	 * 搜索用户
+	 * 根据用户名获取用户信息,包括分店名称
+	 */
+	List<YonghuVo> getuserByUseranme(String string);
+
+	/**
+	 * 模糊搜索用户：用户编号，登录名，姓名，姓名简拼，身份证号
 	 */
 	List<YonghuVo> searchyonghu(Yonghu record);
 
 	/**
-	 * 检查重复，用户编号，用户登录名
+	 * 检查重复：用户编号，用户登录名
 	 */
 	List<Yonghu> checkrepeat(Yonghu record);
 
 	/**
-	 * 登录验证
-	 */
-	Yonghu validatelogon(Login record);
-
-	/**
 	 * 更新用户信息
 	 */
-	void updateyonghu(Yonghu record);
+	int updateyonghu(Yonghu record);
 
 }

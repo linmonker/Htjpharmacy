@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import cn.sdhqtj.hjt.entity.Login;
-import cn.sdhqtj.hjt.entity.Yonghu;
+import cn.sdhqtj.hjt.entity.YonghuVo;
 
 /**
  *登录service接口
@@ -21,7 +21,7 @@ public interface LoginService {
 	/**
 	 *根据用户名获取用户信息
 	 */
-	List<Yonghu> getuserByUseranme(String string);
+	List<YonghuVo> getuserByUseranme(String string);
 	
 	/**
 	 *根据用户名获取用户信息,包括分店名称,并设置登录信息

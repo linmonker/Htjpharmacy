@@ -81,7 +81,6 @@ public class LoginController {
 		if (session.getAttribute("loginer") != null) {
 			Subject subject = SecurityUtils.getSubject();
 			subject.logout();
-			session.removeAttribute("loginer");
 		}
 		return "redirect:login";
 	}

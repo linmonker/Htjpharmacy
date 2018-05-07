@@ -69,10 +69,10 @@
 	<select id="yaopinquery" resultType="cn.sdhqtj.hjt.entity.YaopinVo">
 		select y.*,yf.flmc
 		from hjt_yaopin y,hjt_yaopinfenlei yf
-		where y.dm=0 and a.yplb = yf.id
+		where y.dm=0 and y.yplb = yf.id
 		order by y.ypbh asc
 	</select>
-	<select id="yaopinquery" resultType="cn.sdhqtj.hjt.entity.YaopinVo">
+	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.YaopinVo">
 		select yp.*,yf.flmc,g.gysbh,g.gysmc,yh.yhdlm
 		from hjt_yaopin yp left join hjt_yaopinfenlei yf on yp.yplb = yf.id left join 
 		hjt_gongyingshang g on yp.ypgys=g.id left join hjt_yonghu yh on yp.ypcjr = yh.id 

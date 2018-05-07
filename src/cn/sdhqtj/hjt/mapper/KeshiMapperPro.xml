@@ -29,7 +29,7 @@
 		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0
 		order by ksbh asc
 	</select>
-	<select id="keshiquery" resultType="cn.sdhqtj.hjt.entity.KeshiVo" parameterType="java.lang.Integer">
+	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.KeshiVo" parameterType="java.lang.Integer">
 		select k.*,f.fdbh,f.fdmc
 		from hjt_keshi k left join hjt_fendian f on k.fdid = f.id
 		where k.fdid = #{fdid,jdbcType=INTEGER} and k.dm = 0

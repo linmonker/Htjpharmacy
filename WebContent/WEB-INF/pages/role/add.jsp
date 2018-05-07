@@ -1,19 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../commons/taglib.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>添加角色</title>
-<link rel="stylesheet" href="${ctx}/static/css/pintuer.css">
-<link rel="stylesheet" href="${ctx}/static/css/admin.css">
 <link rel="stylesheet" href="${ctx}/static/css/bootstrap.min.css">
 <link rel="stylesheet" href="${ctx}/static/css/metroStyle.css" />
+<link rel="stylesheet" href="${ctx}/static/css/pintuer.css">
 <script src="${ctx}/static/js/jquery.js"></script>
-<script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script src="${ctx}/static/js/jquery.jqprint-0.3.js"></script>
+<script src="${ctx}/static/js/jquery-migrate-1.2.1.min.js"></script>
 <script src="${ctx}/static/js/jquery.ztree.all.min.js"></script>
+<script src="${ctx}/static/js/pintuer.js"></script>
 <script type="text/javascript">
 	var zTree_Menu;
 	var setting = {
@@ -37,7 +38,7 @@
 		},
 	};
 
-	//加载ztree  
+	// 加载ztree  
 	function onloadZTree() {
 		var ztreeNodes;
 		$.ajax({
@@ -60,7 +61,7 @@
 	// 从input获取角色权限，并勾选权限复选框
 	function getquanxianfrompaga() {
 		var qxs = $("#quanxians").val();
-		if(qxs.length > 0){
+		if (qxs.length > 0) {
 			qxs = $.parseJSON(qxs);
 			for (var i = 0; i < qxs.length; i++) {
 				var nodes = zTree_Menu.getNodesByParam("id", qxs[i].id);
@@ -87,102 +88,111 @@
 		return true;
 	}
 
-	//初始化操作  
+	// 初始化操作  
 	$(document).ready(function() {
+		var sid = $("#rolezt").val();
+		if (sid != '') {
+			$("#zt option[value=" + sid + "]").attr("selected", true);
+		}
 		onloadZTree();
 	});
 </script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand">宏济堂药房管理</a>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand">宏济堂药房管理</a>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="${ctx }/index">首页</a></li>
+					<li><a>当前用户：</a></li>
+					<li><a>${sessionScope.loginer.username }</a></li>
+					<li><a>${sessionScope.loginer.fdmc }</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="${ctx}/outlogin">退出</a></li>
+				</ul>
+			</div>
 		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav">
-				<li><a href="${ctx}/index">首页</a></li>
-				<li><a>当前用户：</a></li>
-				<li><a>${sessionScope.loginer.username }</a></li>
-				<li><a>${sessionScope.loginer.fdmc }</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="${ctx}/outlogin">退出</a></li>
-			</ul>
-		</div>
-	</div>
 	</nav>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-2 col-md-2 sidebar">
+			<div class="col-md-2 sidebar">
 				<h4>管理项目</h4>
-				<ul class="nav nav-sidebar">
-					<li><a href="${ctx}/fendian/list">分店管理</a></li>
-					<li><a href="${ctx}/yaopinfenlei/list">药品分类</a></li>
-					<li><a href="${ctx}/yaopin/list">药品信息管理</a></li>
-					<li><a href="${ctx}/gongyingshang/list">供应商管理</a></li>
+				<ul class="nav nav-stacked">
+					<li><a href="${ctx }/fendian/list">分店管理</a></li>
+					<li><a href="${ctx }/yaopinfenlei/list">药品分类</a></li>
+					<li><a href="${ctx }/yaopin/list">药品信息管理</a></li>
+					<li><a href="${ctx }/gongyingshang/list">供应商管理</a></li>
 					<li><a href="${ctx}/cangku/sylist">仓库管理</a></li>
 					<li><a href="${ctx}/keshi/list">科室管理</a></li>
-					<li><a href="${ctx}/zhuzhijigou/list">组织机构</a></li>
+					<li><a href="${ctx}/zuzhijigou/list">组织机构</a></li>
 					<li><a href="${ctx}/yonghu/sylist">用户管理</a></li>
 					<li class="active"><a href="${ctx}/role/list">角色管理</a></li>
 				</ul>
 			</div>
-			<div class="col-sm-9 col-md-9 main">
-				<div class="field">
-					<label class="sub-header">添加角色</label>
-					<span>${waymsg}</span> <span>${mcmsg}</span>
+			<div class="col-md-10 maincon">
+				<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a class="navbar-brand">添加角色</a>
+						</div>
+						<div class="collapse navbar-collapse">
+							<ul class="nav navbar-nav">
+								<li><a onclick="return topdf()">打印</a></li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+				<div>
+					<input id="rolezt" type="hidden" value="${role.zt }" />
+					<span>${waymsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
-				<form method="post" class="form-x" action="${ctx}/role/doadd"
-					onsubmit="return jiluquanxian()">
-					<input id="quanxians" name="quanxians" type="hidden"
-						value="${quanxians }">
+				<form id="formpot" class="form-horizontal" action="${ctx }/role/doadd"
+					method="post" onsubmit="return jiluquanxian()">
 					<div class="form-group">
-						<div class="label">
-							<label>角色名称：</label>
-						</div>
-						<div class="field">
-							<input type="text" class="form-control" name="role_name"
-								value="${role.role_name }" data-validate="required:请输入角色名称" />
-							<div class="tips"></div>
+						<input type="hidden" id="quanxians" name="quanxians"
+							value="${quanxians }">
+					</div>
+					<div class="form-group">
+						<label for="role_name" class="col-md-2 control-label">名称</label>
+						<div class="col-md-5">
+							<input type="text" class="form-control" id="role_name"
+								name="role_name" value="${role.role_name }" />
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label>备注信息：</label>
-						</div>
-						<div class="field">
-							<textarea class="form-control" rows="3" name="remark">${role.remark }</textarea>
+						<label for="remark" class="col-md-2 control-label">备注信息</label>
+						<div class="col-md-5">
+							<textarea class="form-control" rows="4" id="remark" name="remark">${role.remark }</textarea>
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label>角色状态：</label>
-						</div>
-						<div class="field">
-							<select class="form-control" name="zt">
+						<label for="zt" class="col-md-2 control-label">状态</label>
+						<div class="col-md-5">
+							<select class="form-control" id="zt" name="zt">
 								<option value="0">启用</option>
 								<option value="1">禁用</option>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="label">
-							<label>权限：</label>
-						</div>
-						<div class="field">
+						<label class="col-md-2 control-label">权限</label>
+						<div class="col-md-5 pre-scrollable">
 							<div class="content_wrap">
-								<div class="zTreeDemoBackground ">
-									<ul id="treeDemo" class="ztree"></ul>
-								</div>
+							<div class="zTreeDemoBackground ">
+								<ul id="treeDemo" class="ztree"></ul>
 							</div>
+						</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="field">
-							<button class="button bg-main" type="submit">提交</button>
-							<a class="button bg-red" href="${ctx}/role/list"
-								style="margin-left: 10px;"> 取消</a>
+						<div class="col-md-offset-3">
+							<button class="btn btn-primary" type="submit">提交</button>
+							<button class="btn btn-primary" type="button"
+								onclick="window.history.back(-1)">取消</button>
 						</div>
 					</div>
 				</form>

@@ -1,28 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../commons/taglib.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>药品分类列表</title>
-<link rel="stylesheet" href="${ctx}/static/css/pintuer.css">
-<link rel="stylesheet" href="${ctx}/static/css/admin.css">
 <link rel="stylesheet" href="${ctx}/static/css/bootstrap.min.css">
 <link rel="stylesheet" href="${ctx}/static/css/metroStyle.css" />
+<link rel="stylesheet" href="${ctx}/static/css/pintuer.css">
 <script src="${ctx}/static/js/jquery.js"></script>
-<script src="${ctx}/static/js/pintuer.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
 <script src="${ctx}/static/js/jquery.ztree.all.min.js"></script>
-<style>
-#treeDemo, #treeDemo ul, #treeDemo li {
-	margin: 0;
-	padding: 0 0 0 5px;
-	list-style-type: none;
-}
-</style>
+<script src="${ctx}/static/js/pintuer.js"></script>
 <script type="text/javascript">
-	var dragId;
 	var zTree_Menu;
 	var setting = {
 		view : {
@@ -47,7 +38,6 @@
 			key : {
 				title : "flbz"
 			}
-
 		},
 		callback : {
 			beforeDrag : beforeDrag,
@@ -60,19 +50,19 @@
 		}
 	};
 
-	//用于捕获节点拖拽事件，并且根据返回值确定是否允许进入拖拽状态  
+	// 用于捕获节点拖拽事件，并且根据返回值确定是否允许进入拖拽状态  
 	function beforeDrag(treeId, treeNodes) {
 		return false;
 	};
 
-	//用于捕获节点编辑按钮的 click 事件，并且根据返回值确定是否允许进入名称编辑状态  
+	// 用于捕获节点编辑按钮的 click 事件，并且根据返回值确定是否允许进入名称编辑状态  
 	function beforeEditName(treeId, treeNode) {
 		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 		zTree.selectNode(treeNode);
 		return true;
 	}
 
-	//用于捕获节点被删除之前的事件回调函数，并且根据返回值确定是否允许删除操作  
+	// 用于捕获节点被删除之前的事件回调函数，并且根据返回值确定是否允许删除操作  
 	function beforeRemove(treeId, treeNode) {
 		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 		zTree.selectNode(treeNode);
@@ -104,13 +94,12 @@
 		return confirmVal;
 	}
 
-	//用于捕获删除节点之后的事件回调函数  
+	// 用于捕获删除节点之后的事件回调函数  
 	function onRemove(e, treeId, treeNode) {
 		alert('删除成功！');
-
 	}
 
-	//更新节点名称数据之前的事件回调函数，并且根据返回值确定是否允许更改名称的操作  
+	// 更新节点名称数据之前的事件回调函数，并且根据返回值确定是否允许更改名称的操作  
 	function beforeRename(treeId, treeNode, newName) {
 		if (newName.length == 0 || newName.indexOf("请输入名称") >= 0) {
 			alert('请输入分类名称！');
@@ -132,7 +121,7 @@
 		return true;
 	}
 
-	//用于捕获节点编辑名称结束之后的事件回调函数  
+	// 用于捕获节点编辑名称结束之后的事件回调函数  
 	function onRename(e, treeId, treeNode) {
 		if (native_name == treeNode.name) {
 			return;
@@ -164,7 +153,7 @@
 
 	}
 
-	//用于当鼠标移动到节点上时，显示用户自定义控件   添加子节点
+	// 用于当鼠标移动到节点上时，显示用户自定义控件   添加子节点
 	var newCount = 1;
 	function addHoverDom(treeId, treeNode) {
 		var sObj = $("#" + treeNode.tId + "_span");
@@ -210,24 +199,24 @@
 			});
 	}
 
-	//父分类去掉删除功能
+	// 父分类去掉删除功能
 	function setRemoveBtn(treeId, treeNode) {
 		return !treeNode.isParent;
 	}
 
-	//鼠标移开按钮消失  
+	// 鼠标移开按钮消失  
 	function removeHoverDom(treeId, treeNode) {
 		$("#addBtn_" + treeNode.tId).unbind().remove();
 	};
 
-	//添加按钮点击事件  
+	// 添加按钮点击事件  
 	function onclick(event, treeId, treeNode) {
 		$("#addParent").bind("click", {
 			isParent : true
 		}, location = "${ctx}/yaopinfenlei/edit?id=" + treeNode.id);
 	}
 
-	//移除分类  
+	// 移除分类  
 	function remove(e) {
 		var zTree = $.fn.zTree.getZTreeObj("treeDemo"), nodes = zTree
 				.getSelectedNodes(), treeNode = nodes[0];
@@ -239,11 +228,11 @@
 		zTree.removeNode(treeNode, callbackFlag);
 	};
 
-	//展开全部分类  
+	// 展开全部分类  
 	function expandAllFlag() {
 		zTree_Menu.expandAll(true);
 	}
-	//合并全部分类  
+	// 合并全部分类  
 	function combineAllFlag() {
 		zTree_Menu.expandAll(false);
 	}
@@ -253,15 +242,15 @@
 		zTree.setting.edit.editNameSelectAll = $("#selectAll").attr("checked");
 	};
 
-	//加载ztree  
+	// 加载ztree  
 	function onloadZTree() {
 		var ztreeNodes;
 		$.ajax({
-			async : true, //是否异步  
-			cache : false, //是否使用缓存  
-			type : 'post', //请求方式,post  
-			dataType : "json", //数据传输格式  
-			url : "${ctx}/yaopinfenlei/getlist", //请求链接  
+			async : true, // 是否异步  
+			cache : false, // 是否使用缓存  
+			type : 'post', // 请求方式,post  
+			dataType : "json", // 数据传输格式  
+			url : "${ctx}/yaopinfenlei/getlist", // 请求链接  
 			error : function() {
 				alert('获取页面数据失败，请刷新');
 			},
@@ -273,76 +262,72 @@
 		});
 	}
 
-	//初始化操作  
+	// 初始化操作  
 	$(document).ready(function() {
 		onloadZTree();
 	});
 </script>
 </head>
 <body>
-<body>
 	<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand">宏济堂药房管理</a>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand">宏济堂药房管理</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="${ctx }/index">首页</a></li>
+					<li><a>当前用户：</a></li>
+					<li><a>${sessionScope.loginer.username }</a></li>
+					<li><a>${sessionScope.loginer.fdmc }</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="${ctx}/outlogin">退出</a></li>
+				</ul>
+			</div>
 		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav">
-				<li><a href="${ctx }/index">首页</a></li>
-				<li><a>当前用户：</a></li>
-				<li><a>${sessionScope.loginer.username }</a></li>
-				<li><a>${sessionScope.loginer.fdmc }</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="${ctx}/outlogin">退出</a></li>
-			</ul>
-		</div>
-	</div>
 	</nav>
 	<div class="container-fluid">
-		<div id="navbar" class="row navbar-collapse collapse">
-			<div class="col-sm-2 col-md-2 sidebar">
+		<div class="row">
+			<div class="col-md-2 sidebar">
 				<h4>管理项目</h4>
-				<ul class="nav nav-sidebar">
+				<ul class="nav nav-stacked">
 					<li><a href="${ctx }/fendian/list">分店管理</a></li>
 					<li class="active"><a href="${ctx }/yaopinfenlei/list">药品分类</a></li>
 					<li><a href="${ctx }/yaopin/list">药品信息管理</a></li>
 					<li><a href="${ctx }/gongyingshang/list">供应商管理</a></li>
 					<li><a href="${ctx}/cangku/sylist">仓库管理</a></li>
 					<li><a href="${ctx}/keshi/list">科室管理</a></li>
-					<li><a href="${ctx}/zhuzhijigou/list">组织机构</a></li>
+					<li><a href="${ctx}/zuzhijigou/list">组织机构</a></li>
 					<li><a href="${ctx}/yonghu/sylist">用户管理</a></li>
 					<li><a href="${ctx}/role/list">角色管理</a></li>
 				</ul>
 			</div>
-			<div class="col-sm-9 col-md-9 main">
-				<div class="row">
-					<nav class="navbar navbar-default">
+			<div class="col-md-10 maincon">
+				<nav class="navbar navbar-default">
 					<div class="container-fluid">
 						<div class="navbar-header">
-							<a class="navbar-brand">药品分类列表</a>
+							<a class="navbar-brand">药品分类目录</a>
+						</div>
+						<div class="collapse navbar-collapse">
+							<ul class="nav navbar-nav">
+								<li class="dropdown"><a id="drop1" data-toggle="dropdown"
+									class="dropdown-toggle" role="button" aria-haspopup="true"
+									aria-expanded="false">导出Excel <span class="caret"></span>
+								</a>
+									<ul class="dropdown-menu" aria-labelledby="drop1">
+										<li><a href="${ctx }/yaopinfenlei/downloadexcel">全部记录</a></li>
+									</ul></li>
+							</ul>
 						</div>
 					</div>
-					<div id="navbar" class="navbar-collapse collapse">
-						<ul class="nav navbar-nav">
-							<li class="dropdown"><a id="drop2" data-toggle="dropdown"
-								class="dropdown-toggle" role="button" aria-haspopup="true"
-								aria-expanded="false">导出Excel <span class="caret"></span>
-							</a>
-								<ul class="dropdown-menu" aria-labelledby="drop2">
-									<li><a
-										href="${ctx }/yaopinfenlei/downloadexcel">全部记录</a></li>
-								</ul></li>
-						</ul>
-					</div>
-					</nav>
+				</nav>
+				<div>
 					<span>${waymsg }</span>
 				</div>
-				<div class="row">
-					<div class="content_wrap">
-						<div class="zTreeDemoBackground ">
-							<ul id="treeDemo" class="ztree"></ul>
-						</div>
+				<div class="content_wrap">
+					<div class="zTreeDemoBackground ">
+						<ul id="treeDemo" class="ztree"></ul>
 					</div>
 				</div>
 			</div>

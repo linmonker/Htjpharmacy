@@ -23,18 +23,18 @@ public class LoginSer implements LoginService {
 	List<Yonghu> yonghulist;
 	YonghuVo yonghuvo;
 	List<YonghuVo> yonghuvolist;
-    Login login;
-    
+	Login login;
+
 	/**
 	 * 登录验证
 	 */
 	@Override
 	public Login validatelogon(Login record) {
 		yonghuvolist = yonghuMapperPro.getuserByUseranme(record.getUsername());
-		if (yonghuvolist != null) {
+		if (yonghuvolist.size() > 0) {
 			login = new Login();
-			login.setUsername(yonghu.getYhdlm());
-			login.setPassword(yonghu.getYhmm());
+			login.setUsername(yonghuvolist.get(0).getYhdlm());
+			login.setPassword(yonghuvolist.get(0).getYhmm());
 			return login;
 		} else {
 			return null;
@@ -57,12 +57,18 @@ public class LoginSer implements LoginService {
 	@Override
 	public Login getuserwithfdmc(String string) {
 		// TODO Auto-generated method stub
-		yonghuvo = yonghuMapperPro.getuserByUseranme(string).get(0);
-		login = new Login();
-		login.setId(yonghuvo.getId());
-		login.setUsername(yonghuvo.getYhdlm());
-		login.setFdid(yonghuvo.getFdid());
-		login.setFdmc(yonghuvo.getFdmc());
-		return login;
+		yonghuvolist = yonghuMapperPro.getuserByUseranme(string);
+		if (yonghuvolist.size() > 0) {
+			yonghuvo = yonghuvolist.get(0);
+			login = new Login();
+			login.setId(yonghuvo.getId());
+			login.setUsername(yonghuvo.getYhdlm());
+			login.setFdid(yonghuvo.getFdid());
+			login.setFdmc(yonghuvo.getFdmc());
+			return login;
+		} else {
+			return null;
+		}
 	}
+
 }

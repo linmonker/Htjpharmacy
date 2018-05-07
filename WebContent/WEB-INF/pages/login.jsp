@@ -1,51 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="commons/taglib.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登录</title>
+<link rel="stylesheet" href="${ctx}/static/css/bootstrap.min.css">
 <link rel="stylesheet" href="${ctx}/static/css/pintuer.css">
-<link rel="stylesheet" href="${ctx}/static/css/admin.css">
 <script src="${ctx}/static/js/jquery.js"></script>
+<script src="${ctx}/static/js/bootstrap.min.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 </head>
 <body>
-	<div class="bg"></div>
-	<div class="container">
-		<div class="line bouncein">
-			<div class="xs6 xm4 xs3-move xm4-move">
-				<div style="height: 150px;"></div>
-				<div class="media media-y margin-big-bottom"></div>
-				<form action="dologin" method="post">
-					<div class="panel loginbox">
-						<div class="text-center margin-big padding-big-top">
-							<h1>宏济堂药房管理系统</h1>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4"
+				style="border: 2px solid #a1a1a1; border-radius: 10px; position: absolute; left: 33%; top: 30%;">
+				<form class="form-horizontal" action="dologin" method="post">
+					<div class="col-md-offset-2">
+						<h2>宏济堂药房管理系统</h2>
+					</div>
+					<div class="form-group">
+						<label for="username" class="col-md-2 control-label">用户名</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" name="username"
+								placeholder="登录账号" value="${username }">
+							<span class="icon icon-user margin-small"></span>
 						</div>
-						<div class="panel-body"
-							style="padding: 30px; padding-bottom: 10px; padding-top: 10px;">
-							<span style="margin-left: 50px; color: red; font-size: 20px">${loginmsg }</span>
-							<div class="form-group">
-								<div class="field field-icon-right">
-									<input type="text" class="input input-big" name="username"
-										placeholder="登录账号" data-validate="required:请填写账号"
-										value="${username }" /> <span
-										class="icon icon-user margin-small"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="field field-icon-right">
-									<input type="password" class="input input-big" name="password"
-										placeholder="登录密码" data-validate="required:请填写密码" /> <span
-										class="icon icon-key margin-small"></span>
-								</div>
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="password" class="col-md-2 control-label">密码</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" name="password"
+								placeholder="登录密码">
+							<span class="icon icon-key margin-small"></span>
 						</div>
-						<div style="padding: 30px;">
-							<input type="submit"
-								class="button button-block bg-main text-big input-big"
-								value="登录">
+					</div>
+					<div class="form-group">
+						<div class="col-md-offset-3">
+							<button class="btn btn-primary" type="submit">登录</button>
+							<span class="bg-warning">${loginmsg }</span>
 						</div>
 					</div>
 				</form>

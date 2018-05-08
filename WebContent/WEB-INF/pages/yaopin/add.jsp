@@ -270,8 +270,8 @@
 												开
 											</label>
 											<label class="radio-inline">
-												<input type="radio" name="ypyytx" id="ypyytx2"
-													<c:if test="${yaopin.ypyytx == 1 }">checked</c:if> value="1">
+												<input type="radio" name="ypyytx" id="ypyytx2" checked
+													value="1">
 												关
 											</label>
 										</div>
@@ -324,8 +324,8 @@
 												是
 											</label>
 											<label class="radio-inline">
-												<input type="radio" name="ypsfdz" id="ypsfdz2"
-													<c:if test="${yaopin.ypsfdz == 1 }">checked</c:if> value="1">
+												<input type="radio" name="ypsfdz" id="ypsfdz2" checked
+													value="1">
 												否
 											</label>
 										</div>
@@ -340,8 +340,7 @@
 												是
 											</label>
 											<label class="radio-inline">
-												<input type="radio" name="ypsfcyhyjf" id="ypsfcyhyjf2"
-													<c:if test="${yaopin.ypsfcyhyjf == 1 }">checked</c:if>
+												<input type="radio" name="ypsfcyhyjf" id="ypsfcyhyjf2" checked
 													value="1">
 												否
 											</label>

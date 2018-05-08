@@ -35,8 +35,16 @@ public class FendianController {
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
-		fendianlist = fendianservice.fendianquery();
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+
+		fendianlist = fendianservice.getlist((conpage-1)*20);
 		model.addAttribute("fendianlist", fendianlist);
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("count", fendianservice.getcount());
 
 		// 操作提示信息
 		String waymsg = request.getParameter("waymsg");

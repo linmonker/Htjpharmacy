@@ -124,6 +124,7 @@ public class YonghuController {
 		model.addAttribute("yonghu", yonghu);
 
 		rolelist = roleservice.rolequery();
+		rolelist.remove(0);
 		model.addAttribute("rolelist", rolelist);
 		chushilist = chushiservice.chushiquery(fdid);
 		model.addAttribute("chushilist", chushilist);
@@ -167,6 +168,9 @@ public class YonghuController {
 			return "yonghu/add";
 		}
 
+		if (record.getYhjsid() == 1) {
+			record.setYhjsid(5);
+		}
 		int res = yonghuservice.addyonghu(record);
 		if (res > 0) {
 			// 添加成功
@@ -236,6 +240,10 @@ public class YonghuController {
 			model.addAttribute("chushilist", chushilist);
 			return "yonghu/edit";
 		}
+
+		if (record.getYhjsid() == 1) {
+			record.setYhjsid(null);
+		}
 		int res = yonghuservice.updateyonghu(record);
 		if (res >= 0) {
 			// 修改成功
@@ -275,13 +283,13 @@ public class YonghuController {
 	 */
 	@RequestMapping("/search")
 	public String search(HttpServletRequest request, String searchword, Model model) {
-		String fdidstr = request.getParameter("fdid");;
-		if(fdidstr ==null) {
+		String fdidstr = request.getParameter("fdid");
+		if (fdidstr == null) {
 			// 分店id获取失败，返回用户列表首页
 			return "redirect:sylist?waymsg=error";
 		}
-		int fdid=Integer.valueOf(fdidstr);
-		
+		int fdid = Integer.valueOf(fdidstr);
+
 		yonghu = new Yonghu();
 		yonghu.setFdid(fdid);
 		yonghu.setYhbh(searchword);
@@ -295,7 +303,7 @@ public class YonghuController {
 		model.addAttribute("fendianlist", fendianlist);
 		return "yonghu/list";
 	}
-	
+
 	/**
 	 * 下载用户列表Excel
 	 */

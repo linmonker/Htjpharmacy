@@ -142,8 +142,7 @@
 						<label for="yhxmjp" class="col-md-2 control-label">性别</label>
 						<div class="col-md-5">
 							<label class="radio-inline">
-								<input type="radio" name="yhxb" id="yhxb1"
-									<c:if test="${yonghu.yhxb == '1' }">checked</c:if> value="1">
+								<input type="radio" name="yhxb" id="yhxb1" checked value="1">
 								男
 							</label>
 							<label class="radio-inline">

@@ -16,6 +16,17 @@ public interface FendianService {
 	 * 获取分店列表
 	 */
 	public List<Fendian> fendianquery();
+	
+	/**
+	 * 获取分店列表,从start位置开始20条记录
+	 */
+	List<Fendian> getlist(int start);
+
+	/**
+	 * 获取分店列表记录数
+	 */
+	int getcount();
+
 
 	/**
 	 * 通过分店id获取分店信息

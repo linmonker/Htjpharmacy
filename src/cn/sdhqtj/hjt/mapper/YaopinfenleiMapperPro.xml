@@ -32,7 +32,7 @@
 		where zt=0
 	</select>
 	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.YaopinfenleiVo">
-		select a.*,b.flmc
+		select a.*,b.flmc sjflmc
 		from hjt_yaopinfenlei a left join hjt_yaopinfenlei b on a.sjflid = b.id
 		where a.zt=0
 		order by a.flbh asc

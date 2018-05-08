@@ -145,8 +145,7 @@
 						<label for="yhxmjp" class="col-md-2 control-label">性别</label>
 						<div class="col-md-5">
 							<label class="radio-inline">
-								<input type="radio" name="yhxb" id="yhxb1"
-									<c:if test="${yonghu.yhxb == '1' }">checked</c:if> value="1">
+								<input type="radio" name="yhxb" id="yhxb1" checked value="1">
 								男
 							</label>
 							<label class="radio-inline">
@@ -240,7 +239,7 @@
 							<textarea class="form-control" rows="4" id="yhbz" name="yhbz">${yonghu.yhbz }</textarea>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group no-print">
 						<div class="col-md-offset-3">
 							<button class="btn btn-primary" type="submit">提交</button>
 							<button class="btn btn-primary" type="reset">重置</button>

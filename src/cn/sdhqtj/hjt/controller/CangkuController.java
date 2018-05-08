@@ -238,7 +238,7 @@ public class CangkuController {
 	 */
 	@RequestMapping("/downloadexcel")
 	public ResponseEntity<byte[]> downloadexcel(HttpServletRequest request) throws Exception {
-		int fdid = Integer.valueOf(request.getParameter("id"));
+		int fdid = Integer.valueOf(request.getParameter("fdid"));
 		String path = cangkuservice.writeexcel(fdid);
 		File file = new File(path);
 		String fileName = new String("仓库列表.xlsx".getBytes("UTF-8"), "iso-8859-1");// 为了解决中文名称乱码问题

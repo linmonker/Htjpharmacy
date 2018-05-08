@@ -88,6 +88,16 @@
 		return true;
 	}
 
+	// 打印pdf
+	function topdf() {
+		$("#formpot").jqprint({
+			debug : false,
+			importCSS : true,
+			printContainer : true,
+			operaSupport : true
+		});
+	}
+	
 	// 初始化操作  
 	$(document).ready(function() {
 		var sid = $("#rolezt").val();

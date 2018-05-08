@@ -93,7 +93,9 @@
 		yhcsrq = #{yhcsrq,jdbcType=DATE},
 		yhdz = #{yhdz,jdbcType=VARCHAR},
 		yhyb = #{yhyb,jdbcType=VARCHAR},
-		yhjsid = #{yhjsid,jdbcType=INTEGER},
+		<if test="yhjsid != null" >
+		  yhjsid = #{yhjsid,jdbcType=INTEGER},
+		</if>>
 		yhrzrq = #{yhrzrq,jdbcType=DATE},
 		yhbz = #{yhbz,jdbcType=LONGVARCHAR}
 		where id = #{id,jdbcType=INTEGER}

@@ -35,6 +35,25 @@ public class FendianSer implements FendianService {
 	}
 
 	/**
+	 * 获取分店列表,从start位置开始20条记录
+	 */
+	@Override
+	public List<Fendian> getlist(int start) {
+		// TODO Auto-generated method stub
+		fendianlist = fendianMapperPro.getlist(start);
+		return fendianlist;
+	}
+
+	/**
+	 * 获取分店列表记录数
+	 */
+	@Override
+	public int getcount() {
+		// TODO Auto-generated method stub
+		return fendianMapperPro.getcount();
+	}
+
+	/**
 	 * 通过分店id获取分店信息
 	 */
 	@Override

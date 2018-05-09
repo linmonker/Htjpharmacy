@@ -85,7 +85,6 @@
 				<form id="formpot" class="form-horizontal"
 					action="${ctx }/huowei/doadd" method="post">
 					<div class="form-group">
-						<input type="hidden" name="fdid" value="${huowei.fdid }" />
 						<input type="hidden" name="ckid" value="${huowei.ckid }" />
 					</div>
 					<div class="form-group">

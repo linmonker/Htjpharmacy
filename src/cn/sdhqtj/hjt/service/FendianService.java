@@ -16,7 +16,7 @@ public interface FendianService {
 	 * 获取分店列表
 	 */
 	public List<Fendian> fendianquery();
-	
+
 	/**
 	 * 获取分店列表,从start位置开始20条记录
 	 */
@@ -27,7 +27,6 @@ public interface FendianService {
 	 */
 	int getcount();
 
-
 	/**
 	 * 通过分店id获取分店信息
 	 */
@@ -36,7 +35,12 @@ public interface FendianService {
 	/**
 	 * 模糊搜索分店：分店名称
 	 */
-	public List<Fendian> searchfendian(Fendian record);
+	public List<Fendian> searchfendian(Fendian record, int start);
+
+	/**
+	 * 获取分店列表搜索记录数
+	 */
+	int getsearchcount(Fendian record);
 
 	/**
 	 * 检查重复：分店编号，分店名称
@@ -57,7 +61,7 @@ public interface FendianService {
 	 * 更新分店信息，部分字段
 	 */
 	public int updatefendian(Fendian record);
-	
+
 	/**
 	 * 生成分店列表Excel，返回文件路径
 	 */

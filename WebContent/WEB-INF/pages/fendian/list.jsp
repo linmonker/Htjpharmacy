@@ -47,13 +47,13 @@
 		});
 	}
 	function walkpage(conpage) {
-		if(conpage>0||conpage<=$("#zonpage").val()){
+		if(conpage>0||conpage<=$("#zonpage").text()){
 			location="${ctx }/fendian/list?conpage="+conpage;
 		}
 	}
 	function turnpage() {
-		var conpage = $("#conpage").val();
-		if(Number.isInteger(conpage)&&conpage>0&&conpage<=$("#zonpage").val()){
+		var conpage = Number($("#conpage").val());
+		if(Number.isInteger(conpage) && conpage>0 && conpage<=$("#zonpage").text()){
 			return true;
 		}else{
 			return false;
@@ -158,7 +158,7 @@
 				<form class="form-inline" action="${ctx }/fendian/list"
 					onsubmit="return turnpage()">
 					<div class="form-group">
-						<p id="zonpage" class="form-control-static">共${count }条记录</p>
+						<p class="form-control-static">共${count }条记录</p>
 					</div>
 					<c:if test="${count >0 }">
 						<button type="button" class="btn btn-default"
@@ -166,10 +166,9 @@
 						<div class="form-group">
 							<input type="text" class="form-control" style="width: 60px"
 								id="conpage" name="conpage" value="${conpage }">
-							<p id="zonpage" class="form-control-static">
-								/
-								<fmt:formatNumber value="${count/20 + 0.5}" pattern="#,###,###,###" />
-								页
+							<p class="form-control-static">
+								/<span id="zonpage"><fmt:formatNumber
+										value="${count/20 + 0.5}" pattern="#,###,###,###" /></span> 页
 							</p>
 						</div>
 						<button type="submit" class="btn btn-default">跳转</button>

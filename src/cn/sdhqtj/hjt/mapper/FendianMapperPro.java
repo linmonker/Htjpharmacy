@@ -2,6 +2,8 @@ package cn.sdhqtj.hjt.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.sdhqtj.hjt.entity.Fendian;
 
 /**
@@ -27,7 +29,12 @@ public interface FendianMapperPro {
 	/**
 	 * 模糊搜索分店：分店名称
 	 */
-	List<Fendian> searchfendian(Fendian record);
+	List<Fendian> searchfendian(@Param("fendian") Fendian record, @Param("start") int start);
+
+	/**
+	 * 获取分店列表搜索记录数
+	 */
+	int getsearchcount(@Param("fendian") Fendian record);
 
 	/**
 	 * 检查重复：分店编号，分店名称

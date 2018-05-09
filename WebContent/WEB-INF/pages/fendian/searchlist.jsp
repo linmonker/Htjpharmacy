@@ -47,13 +47,15 @@
 		});
 	}
 	function walkpage(conpage) {
-		if(conpage>0||conpage<=$("#zonpage").val()){
-			location="${ctx }/fendian/list?conpage="+conpage;
+		if(conpage>0||conpage<=$("#zonpage").text()){
+			var searchword = $("#searchword2").val()
+			location="${ctx }/fendian/search?conpage="+conpage
+					+"&&searchword="+searchword;
 		}
 	}
 	function turnpage() {
-		var conpage = $("#conpage").val();
-		if(Number.isInteger(conpage)&&conpage>0&&conpage<=$("#zonpage").val()){
+		var conpage = Number($("#conpage").val());
+		if(Number.isInteger(conpage) && conpage>0 && conpage<=$("#zonpage").text()){
 			return true;
 		}else{
 			return false;
@@ -104,7 +106,6 @@
 						</div>
 						<div class="collapse navbar-collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="${ctx}/fendian/add">添加分店</a></li>
 								<li><a onclick="return edit()">查看修改</a></li>
 								<li><a onclick="return del()">删除分店</a></li>
 								<li class="dropdown"><a id="drop1" data-toggle="dropdown"
@@ -113,7 +114,6 @@
 								</a>
 									<ul class="dropdown-menu" aria-labelledby="drop1">
 										<li><a onclick="return toexcel()">本页记录</a></li>
-										<li><a href="${ctx }/fendian/downloadexcel">全部记录</a></li>
 									</ul></li>
 							</ul>
 							<form class="navbar-form navbar-right"
@@ -129,7 +129,7 @@
 				</nav>
 				<div>
 					<input type="hidden" id="tempid" />
-					<span>${waymsg }</span> <span>共${fendianlist.size() }条记录</span>
+					<span>${waymsg }</span>
 				</div>
 				<table id="tablepot" class="table table-bordered table-condensed">
 					<thead>
@@ -155,20 +155,27 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<form class="form-inline" action="${ctx }/fendian/list"
+				<form class="form-inline" action="${ctx }/fendian/search"
 					onsubmit="return turnpage()">
-					<button type="button" class="btn btn-default"
-						onclick="walkpage(${conpage-1 })">上一页</button>
 					<div class="form-group">
-						<input type="hidden" id="searchword" name="searchword"
-							value="${searchword }">
-						<input type="text" class="form-control" style="width: 60px"
-							id="conpage" name="conpage" value="${conpage }">
-						<p id="zonpage" class="form-control-static">/${zonpage }页</p>
+						<p class="form-control-static">共${count }条记录</p>
 					</div>
-					<button type="submit" class="btn btn-default">跳转</button>
-					<button type="button" class="btn btn-default"
-						onclick="walkpage(${conpage+1 })">下一页</button>
+					<c:if test="${count >0 }">
+						<button type="button" class="btn btn-default"
+							onclick="walkpage(${conpage-1 })">上一页</button>
+						<div class="form-group">
+							<input type="hidden" id="searchword2" name="searchword" value="${searchword }">
+							<input type="text" class="form-control" style="width: 60px"
+								id="conpage" name="conpage" value="${conpage }">
+							<p class="form-control-static">
+								/<span id="zonpage"><fmt:formatNumber
+										value="${count/20 + 0.5}" pattern="#,###,###,###" /></span> 页
+							</p>
+						</div>
+						<button type="submit" class="btn btn-default">跳转</button>
+						<button type="button" class="btn btn-default"
+							onclick="walkpage(${conpage+1 })">下一页</button>
+					</c:if>
 				</form>
 			</div>
 		</div>

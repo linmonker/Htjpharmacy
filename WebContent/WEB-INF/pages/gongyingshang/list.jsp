@@ -46,6 +46,19 @@
 		    exclude_inputs: true
 		});
 	}
+	function walkpage(conpage) {
+		if(conpage>0||conpage<=$("#zonpage").text()){
+			location="${ctx }/gongyingshang/list?conpage="+conpage;
+		}
+	}
+	function turnpage() {
+		var conpage = Number($("#conpage").val());
+		if(Number.isInteger(conpage) && conpage>0 && conpage<=$("#zonpage").text()){
+			return true;
+		}else{
+			return false;
+		}
+	}
 </script>
 </head>
 <body>
@@ -114,7 +127,7 @@
 				</nav>
 				<div>
 					<input type="hidden" id="tempid" />
-					<span>${waymsg}</span> <span>共${gyslist.size() }条记录</span>
+					<span>${waymsg}</span>
 				</div>
 				<table id="tablepot" class="table table-bordered table-condensed">
 					<thead>
@@ -151,6 +164,27 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<form class="form-inline" action="${ctx }/gongyingshang/list"
+					onsubmit="return turnpage()">
+					<div class="form-group">
+						<p class="form-control-static">共${count }条记录</p>
+					</div>
+					<c:if test="${count >0 }">
+						<button type="button" class="btn btn-default"
+							onclick="walkpage(${conpage-1 })">上一页</button>
+						<div class="form-group">
+							<input type="text" class="form-control" style="width: 60px"
+								id="conpage" name="conpage" value="${conpage }">
+							<p class="form-control-static">
+								/<span id="zonpage"><fmt:formatNumber
+										value="${count/20 + 0.5}" pattern="#,###,###,###" /></span> 页
+							</p>
+						</div>
+						<button type="submit" class="btn btn-default">跳转</button>
+						<button type="button" class="btn btn-default"
+							onclick="walkpage(${conpage+1 })">下一页</button>
+					</c:if>
+				</form>
 			</div>
 		</div>
 	</div>

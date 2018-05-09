@@ -37,6 +37,44 @@ public class CangkuSer implements CangkuService {
 	}
 
 	/**
+	 * 根据分店id获取仓库列表，从start开始20条记录
+	 */
+	@Override
+	public List<Cangku> getlist(int fdid, int start) {
+		// TODO Auto-generated method stub
+		cangkulist = cangkuMapperPro.getlist(fdid, start);
+		return cangkulist;
+	}
+
+	/**
+	 * 根据分店id获取仓库列表记录数
+	 */
+	@Override
+	public int getcount(int fdid) {
+		// TODO Auto-generated method stub
+		return cangkuMapperPro.getcount(fdid);
+	}
+
+	/**
+	 * 模糊搜索仓库：仓库编号，仓库名称，从start开始20条记录
+	 */
+	@Override
+	public List<Cangku> searchcangku(Cangku record, int start) {
+		// TODO Auto-generated method stub
+		cangkulist = cangkuMapperPro.searchcangku(record, start);
+		return cangkulist;
+	}
+
+	/**
+	 * 搜索仓库列表记录数
+	 */
+	@Override
+	public int getsearchcount(Cangku record) {
+		// TODO Auto-generated method stub
+		return cangkuMapperPro.getsearchcount(record);
+	}
+
+	/**
 	 * 通过仓库id获取仓库信息
 	 */
 	@Override
@@ -44,16 +82,6 @@ public class CangkuSer implements CangkuService {
 		// TODO Auto-generated method stub
 		cangku = cangkuMapper.selectByPrimaryKey(id);
 		return cangku;
-	}
-
-	/**
-	 * 模糊搜索仓库：仓库编号，仓库名称
-	 */
-	@Override
-	public List<Cangku> searchcangku(Cangku record) {
-		// TODO Auto-generated method stub
-		cangkulist = cangkuMapperPro.searchcangku(record);
-		return cangkulist;
 	}
 
 	/**

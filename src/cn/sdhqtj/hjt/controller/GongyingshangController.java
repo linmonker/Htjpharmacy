@@ -33,7 +33,7 @@ public class GongyingshangController {
 	List<Gongyingshang> gyslist;
 	Gongyingshang gys;
 	GongyingshangWithBLOBs gysB;
-	
+
 	Login login;
 
 	/**
@@ -41,9 +41,18 @@ public class GongyingshangController {
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model, HttpSession session) {
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+
 		login = (Login) session.getAttribute("loginer");
-		gyslist = gysservice.getquerybyfdid(login.getFdid());
+		gyslist = gysservice.getlist(login.getFdid(), (conpage - 1) * 20);
 		model.addAttribute("gyslist", gyslist);
+		model.addAttribute("count", gysservice.getcount(login.getFdid()));
 
 		// 操作提示信息
 		String waymsg = request.getParameter("waymsg");
@@ -173,15 +182,25 @@ public class GongyingshangController {
 	 * 搜索供应商
 	 */
 	@RequestMapping("/search")
-	public String search(String searchword, Model model, HttpSession session) {
+	public String search(HttpServletRequest request, Model model, HttpSession session) {
+		String searchword = request.getParameter("searchword");
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("searchword", searchword);
+
 		gys = new Gongyingshang();
 		login = (Login) session.getAttribute("loginer");
 		gys.setFdid(login.getFdid());
-		gys.setGysbh(searchword);
 		gys.setGysmc(searchword);
-		gyslist = gysservice.searchgongyingshang(gys);
+		gyslist = gysservice.searchgongyingshang(gys, (conpage - 1) * 20);
 		model.addAttribute("gyslist", gyslist);
-		return "gongyingshang/list";
+		model.addAttribute("count", gysservice.getsearchcount(gys));
+		return "gongyingshang/searchlist";
 	}
 
 	/**

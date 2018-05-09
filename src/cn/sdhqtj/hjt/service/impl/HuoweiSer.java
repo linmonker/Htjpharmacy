@@ -36,6 +36,44 @@ public class HuoweiSer implements HuoweiService {
 	}
 
 	/**
+	 * 根据仓库id获取货位列表，从start开始20条记录
+	 */
+	@Override
+	public List<Huowei> getlist(int ckid, int start) {
+		// TODO Auto-generated method stub
+		huoweilist = huoweiMapperPro.getlist(ckid, start);
+		return huoweilist;
+	}
+
+	/**
+	 * 根据仓库id获取货位列表记录数
+	 */
+	@Override
+	public int getcount(int ckid) {
+		// TODO Auto-generated method stub
+		return huoweiMapperPro.getcount(ckid);
+	}
+
+	/**
+	 * 模糊搜索货位：货位名称，从start开始20条记录
+	 */
+	@Override
+	public List<Huowei> searchhuowei(Huowei record, int start) {
+		// TODO Auto-generated method stub
+		huoweilist = huoweiMapperPro.searchhuowei(record, start);
+		return huoweilist;
+	}
+
+	/**
+	 * 搜索仓库列表记录数
+	 */
+	@Override
+	public int getsearchcount(Huowei record) {
+		// TODO Auto-generated method stub
+		return huoweiMapperPro.getsearchcount(record);
+	}
+
+	/**
 	 * 通过货位id获取货位信息
 	 */
 	@Override
@@ -43,16 +81,6 @@ public class HuoweiSer implements HuoweiService {
 		// TODO Auto-generated method stub
 		huowei = huoweiMapper.selectByPrimaryKey(id);
 		return huowei;
-	}
-
-	/**
-	 * 模糊搜索货位：货位名称
-	 */
-	@Override
-	public List<Huowei> searchhuowei(Huowei record) {
-		// TODO Auto-generated method stub
-		huoweilist = huoweiMapperPro.searchhuowei(record);
-		return huoweilist;
 	}
 
 	/**

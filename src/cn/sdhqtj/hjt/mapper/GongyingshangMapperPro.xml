@@ -59,11 +59,17 @@
 		gysjyfw, gysbz
 	</sql>
 
-	<select id="gongyingshangquery" resultMap="BaseResultMap">
+	<select id="gongyingshangquery" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
 		select *
 		from hjt_gongyingshang
-		where dm = 0
+		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0
 		order by gysbh asc
+	</select>
+	<select id="gongyingshanAllgquery" resultType="cn.sdhqtj.hjt.entity.GongyingshangVo">
+		select g.*,f.fdbh,f.fdmc
+		from hjt_gongyingshang g left join hjt_fendian f on g.fdid = f.id
+		where g.dm = 0
+		order by g.gysbh asc
 	</select>
 	<select id="getquerybyfdid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select *
@@ -71,18 +77,36 @@
 		where fdid = #{fdid} and dm = 0
 		order by gysbh asc
 	</select>
+	<select id="getlist" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select *
+		from hjt_gongyingshang
+		where fdid = #{fdid} and dm = 0
+		order by gysbh asc
+		limit #{start},20
+	</select>
+	<select id="getcount" resultType="java.lang.Integer">
+		select count(*)
+		from hjt_gongyingshang
+		where fdid = #{fdid} and dm = 0
+	</select>
+	<select id="searchgongyingshang" resultMap="BaseResultMap">
+		select *
+		from hjt_gongyingshang
+		where fdid = #{gys.fdid} and dm = 0 and 
+		(gysbh like concat("%",#{gys.gysmc},"%") or gysmc like concat("%",#{gys.gysmc},"%"))
+		limit #{start},20
+	</select>
+	<select id="getsearchcount" resultType="java.lang.Integer">
+		select count(*)
+		from hjt_gongyingshang
+		where fdid = #{gys.fdid} and dm = 0 and 
+		(gysbh like concat("%",#{gys.gysmc},"%") or gysmc like concat("%",#{gys.gysmc},"%"))
+	</select>
 	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.GongyingshangVo" parameterType="java.lang.Integer">
 		select g.*,f.fdbh,f.fdmc
 		from hjt_gongyingshang g left join hjt_fendian f on g.fdid = f.id
 		where g.fdid = #{fdid,jdbcType=INTEGER} and g.dm = 0
 		order by g.gysbh asc
-	</select>
-	<select id="searchgongyingshang" resultMap="BaseResultMap"
-		parameterType="cn.sdhqtj.hjt.entity.Gongyingshang">
-		select <include refid="Base_Column_List" />
-		from hjt_gongyingshang
-		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0 and 
-		(gysbh like concat("%",#{gysbh},"%") or gysmc like concat("%",#{gysmc},"%"))
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Gongyingshang">

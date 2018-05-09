@@ -14,25 +14,39 @@ import cn.sdhqtj.hjt.entity.GongyingshangWithBLOBs;
 public interface GongyingshangMapperPro {
 
 	/**
-	 * 获取供应商列表
-	 */
-	List<Gongyingshang> gongyingshangquery();
-	
-	/**
 	 * 根据分店id获取供应商列表
 	 */
-	List<Gongyingshang> getquerybyfdid(@Param("fdid") int fdid);
+	List<Gongyingshang> gongyingshangquery(int fdid);
 	
 	/**
-	 * 根据分店id获取供应商Excel列表
+	 * 获取全部供应商列表
 	 */
-	List<GongyingshangVo> getexcellist(@Param("fdid") int fdid);
+	List<GongyingshangVo> gongyingshanAllgquery();
 
+	/**
+	 * 获取供应商列表,从start位置开始20条记录
+	 */
+	List<Gongyingshang> getlist(@Param("fdid") int fdid, @Param("start") int start);
+
+	/**
+	 * 获取供应商列表记录数
+	 */
+	int getcount(@Param("fdid") int fdid);
 
 	/**
 	 * 模糊搜索供应商：供应商编号，供应商名称
 	 */
-	List<Gongyingshang> searchgongyingshang(Gongyingshang record);
+	List<Gongyingshang> searchgongyingshang(@Param("gys") Gongyingshang record, @Param("start") int start);
+
+	/**
+	 * 获取分店列表搜索记录数
+	 */
+	int getsearchcount(@Param("gys") Gongyingshang record);
+	
+	/**
+	 * 根据分店id获取供应商Excel列表
+	 */
+	List<GongyingshangVo> getexcellist(int fdid);
 
 	/**
 	 * 检查重复：供应商编号

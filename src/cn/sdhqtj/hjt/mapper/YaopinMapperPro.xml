@@ -72,18 +72,37 @@
 		where y.dm=0 and y.yplb = yf.id
 		order by y.ypbh asc
 	</select>
+	<select id="getlist" resultType="cn.sdhqtj.hjt.entity.YaopinVo">
+		select y.*,yf.flmc
+		from hjt_yaopin y,hjt_yaopinfenlei yf
+		where y.dm=0 and y.yplb = yf.id
+		order by y.ypbh asc
+		limit #{start},20
+	</select>
+	<select id="getcount" resultType="java.lang.Integer">
+		select count(*)
+		from hjt_yaopin
+		where dm=0
+	</select>
+	<select id="searchyaopin" resultType="cn.sdhqtj.hjt.entity.YaopinVo">
+		select a.*,b.flmc
+		from hjt_yaopin a left join hjt_yaopinfenlei b on a.yplb = b.id
+		where a.dm=0 and (a.ypbh like concat("%",#{yaopin.ypspm},"%") or
+		a.ypspm like concat("%",#{yaopin.ypspm},"%") or a.yptym like concat("%",#{yaopin.ypspm},"%"))
+		limit #{start},20
+	</select>
+	<select id="getsearchcount" resultType="java.lang.Integer">
+		select count(*)
+		from hjt_yaopin a left join hjt_yaopinfenlei b on a.yplb = b.id
+		where a.dm=0 and (a.ypbh like concat("%",#{yaopin.ypspm},"%") or
+		a.ypspm like concat("%",#{yaopin.ypspm},"%") or a.yptym like concat("%",#{yaopin.ypspm},"%"))
+	</select>
 	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.YaopinVo">
 		select yp.*,yf.flmc,g.gysbh,g.gysmc,yh.yhdlm
 		from hjt_yaopin yp left join hjt_yaopinfenlei yf on yp.yplb = yf.id left join 
 		hjt_gongyingshang g on yp.ypgys=g.id left join hjt_yonghu yh on yp.ypcjr = yh.id 
 		where yp.dm=0
 		order by yp.ypbh asc
-	</select>
-	<select id="searchyaopin" resultType="cn.sdhqtj.hjt.entity.YaopinVo" parameterType="cn.sdhqtj.hjt.entity.Yaopin">
-		select a.*,b.flmc
-		from hjt_yaopin a left join hjt_yaopinfenlei b on a.yplb = b.id
-		where a.dm=0 and (a.ypbh like concat("%",#{ypbh},"%") or
-		a.ypspm like concat("%",#{ypspm},"%") or a.yptym like concat("%",#{yptym},"%"))
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap" parameterType="cn.sdhqtj.hjt.entity.YaopinWithBLOBs">
 		select <include refid="Base_Column_List" />

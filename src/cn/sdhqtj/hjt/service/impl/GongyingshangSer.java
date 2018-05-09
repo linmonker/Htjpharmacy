@@ -28,23 +28,61 @@ public class GongyingshangSer implements GongyingshangService {
 	List<GongyingshangVo> gysVlist;
 
 	/**
-	 * 获取供应商列表
+	 * 根据分店id获取供应商列表
 	 */
 	@Override
-	public List<Gongyingshang> gongyingshangquery() {
+	public List<Gongyingshang> gongyingshangquery(int fdid) {
 		// TODO Auto-generated method stub
-		gyslist = gysMapperPro.gongyingshangquery();
+		gyslist = gysMapperPro.gongyingshangquery(fdid);
 		return gyslist;
 	}
 
 	/**
-	 * 根据分店id获取供应商列表
+	 * 获取全部供应商列表
 	 */
 	@Override
-	public List<Gongyingshang> getquerybyfdid(int fdid) {
+	public List<GongyingshangVo> gongyingshanAllgquery() {
 		// TODO Auto-generated method stub
-		gyslist = gysMapperPro.getquerybyfdid(fdid);
+		gysVlist = gysMapperPro.gongyingshanAllgquery();
+		return gysVlist;
+	}
+
+	/**
+	 * 获取供应商列表,从start位置开始20条记录
+	 */
+	@Override
+	public List<Gongyingshang> getlist(int fdid, int start) {
+		// TODO Auto-generated method stub
+		gyslist = gysMapperPro.getlist(fdid, start);
 		return gyslist;
+	}
+
+	/**
+	 * 获取供应商列表记录数
+	 */
+	@Override
+	public int getcount(int fdid) {
+		// TODO Auto-generated method stub
+		return gysMapperPro.getcount(fdid);
+	}
+
+	/**
+	 * 模糊搜索供应商：供应商编号，供应商名称
+	 */
+	@Override
+	public List<Gongyingshang> searchgongyingshang(Gongyingshang record, int start) {
+		// TODO Auto-generated method stub
+		gyslist = gysMapperPro.searchgongyingshang(record, start);
+		return gyslist;
+	}
+
+	/**
+	 * 获取分店列表搜索记录数
+	 */
+	@Override
+	public int getsearchcount(Gongyingshang record) {
+		// TODO Auto-generated method stub
+		return gysMapperPro.getsearchcount(record);
 	}
 
 	/**
@@ -55,16 +93,6 @@ public class GongyingshangSer implements GongyingshangService {
 		// TODO Auto-generated method stub
 		gysB = gysMapper.selectByPrimaryKey(id);
 		return gysB;
-	}
-
-	/**
-	 * 模糊搜索供应商：供应商编号，供应商名称
-	 */
-	@Override
-	public List<Gongyingshang> searchgongyingshang(Gongyingshang record) {
-		// TODO Auto-generated method stub
-		gyslist = gysMapperPro.searchgongyingshang(record);
-		return gyslist;
 	}
 
 	/**
@@ -150,5 +178,5 @@ public class GongyingshangSer implements GongyingshangService {
 			return inurl;
 		}
 	}
-	
+
 }

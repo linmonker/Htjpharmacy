@@ -67,10 +67,19 @@ public class FendianSer implements FendianService {
 	 * 模糊搜索分店：分店名称
 	 */
 	@Override
-	public List<Fendian> searchfendian(Fendian record) {
+	public List<Fendian> searchfendian(Fendian record, int start) {
 		// TODO Auto-generated method stub
-		fendianlist = fendianMapperPro.searchfendian(record);
+		fendianlist = fendianMapperPro.searchfendian(record, start);
 		return fendianlist;
+	}
+
+	/**
+	 * 获取分店列表搜索记录数
+	 */
+	@Override
+	public int getsearchcount(Fendian record) {
+		// TODO Auto-generated method stub
+		return fendianMapperPro.getsearchcount(record);
 	}
 
 	/**
@@ -157,5 +166,5 @@ public class FendianSer implements FendianService {
 			return inurl;
 		}
 	}
-	
+
 }

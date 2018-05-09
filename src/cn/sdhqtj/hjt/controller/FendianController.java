@@ -35,16 +35,17 @@ public class FendianController {
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
+		// 获取分页信息
 		int conpage = 1;
 		String conpagestr = request.getParameter("conpage");
 		if (conpagestr != null) {
 			conpage = Integer.valueOf(conpagestr);
 		}
-
-		fendianlist = fendianservice.getlist((conpage-1)*20);
-		model.addAttribute("fendianlist", fendianlist);
 		model.addAttribute("conpage", conpage);
 		model.addAttribute("count", fendianservice.getcount());
+
+		fendianlist = fendianservice.getlist((conpage - 1) * 20);
+		model.addAttribute("fendianlist", fendianlist);
 
 		// 操作提示信息
 		String waymsg = request.getParameter("waymsg");
@@ -186,12 +187,23 @@ public class FendianController {
 	 * 搜索分店
 	 */
 	@RequestMapping("/search")
-	public String search(HttpServletRequest request, String searchword, Model model) {
+	public String search(HttpServletRequest request, Model model) {
+		String searchword = request.getParameter("searchword");
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("searchword", searchword);
+
 		fendian = new Fendian();
 		fendian.setFdmc(searchword);
-		fendianlist = fendianservice.searchfendian(fendian);
+		fendianlist = fendianservice.searchfendian(fendian, (conpage - 1) * 20);
 		model.addAttribute("fendianlist", fendianlist);
-		return "fendian/list";
+		model.addAttribute("count", fendianservice.getsearchcount(fendian));
+		return "fendian/searchlist";
 	}
 
 	/**

@@ -39,11 +39,16 @@
 		from hjt_fendian
 		where zt = 0
 	</select>
-	<select id="searchfendian" resultMap="ResultMapWithBLOBs"
-		parameterType="cn.sdhqtj.hjt.entity.Fendian">
+	<select id="searchfendian" resultMap="ResultMapWithBLOBs">
 		select *
 		from hjt_fendian
-		where fdmc like concat("%",#{fdmc},"%") and zt = 0
+		where fdmc like concat("%",#{fendian.fdmc},"%") and zt = 0
+		limit #{start}, 20
+	</select>
+	<select id="getsearchcount" resultType="java.lang.Integer">
+		select count(*)
+		from hjt_fendian
+		where fdmc like concat("%",#{fendian.fdmc},"%") and zt = 0
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Fendian">

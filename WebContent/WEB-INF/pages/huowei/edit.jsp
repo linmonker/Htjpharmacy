@@ -86,8 +86,6 @@
 					action="${ctx }/huowei/doedit" method="post">
 					<div class="form-group">
 						<input type="hidden" name="id" value="${huowei.id }" />
-						<input type="hidden" name="fdid" value="${huowei.fdid }" />
-						<input type="hidden" name="ckid" value="${huowei.ckid }" />
 					</div>
 					<div class="form-group">
 						<label for="hwbh" class="col-md-2 control-label">编号</label>

@@ -30,6 +30,31 @@
 		where ckid = #{ckid,jdbcType=INTEGER} and dm = 0
 		order by hwbh asc
 	</select>
+	<select id="getlist" resultMap="BaseResultMap">
+		select *
+		from hjt_cangku_huowei
+		where ckid = #{ckid} and dm = 0
+		order by hwbh asc
+		limit #{start},20
+	</select>
+	<select id="getcount" resultType="java.lang.Integer">
+		select count(*)
+		from hjt_cangku_huowei
+		where ckid = #{ckid} and dm = 0
+	</select>
+	<select id="searchhuowei" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" />
+		from hjt_cangku_huowei
+		where ckid = #{huowei.ckid,jdbcType=INTEGER} and dm = 0 
+		  and hwmc like concat("%",#{huowei.hwmc},"%")
+		limit #{start},20
+	</select>
+	<select id="getsearchcount" resultType="java.lang.Integer">
+		select count(*)
+		from hjt_cangku_huowei
+		where ckid = #{huowei.ckid,jdbcType=INTEGER} and dm = 0 
+		  and hwmc like concat("%",#{huowei.hwmc},"%")
+	</select>
 	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.HuoweiVo"
 		parameterType="java.lang.Integer">
 		select h.*,f.fdbh,f.fdmc,c.ckbh,c.ckmc
@@ -37,12 +62,6 @@
 		    left join hjt_cangku c on h.ckid = c.id 
 		where h.ckid = #{ckid,jdbcType=INTEGER} and h.dm = 0
 		order by hwbh asc
-	</select>
-	<select id="searchhuowei" resultMap="BaseResultMap"
-		parameterType="cn.sdhqtj.hjt.entity.Huowei">
-		select <include refid="Base_Column_List" />
-		from hjt_cangku_huowei
-		where ckid = #{ckid,jdbcType=INTEGER} and dm = 0 and hwmc like concat("%",#{hwmc},"%")
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Huowei">

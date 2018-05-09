@@ -36,6 +36,20 @@
 			alert("请先选择货位");
 		}
 	}
+	function walkpage(conpage) {
+		if(conpage>0||conpage<=$("#zonpage").text()){
+			var ckid = $("#ckid1").val();
+			location="${ctx }/cangku/list?conpage="+conpage+"&&ckid="+ckid;
+		}
+	}
+	function turnpage() {
+		var conpage = Number($("#conpage").val());
+		if(Number.isInteger(conpage) && conpage>0 && conpage<=$("#zonpage").text()){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	function toexcel() {
 	    $("#tablepot").table2excel({
 		    exclude: ".noExl",
@@ -92,7 +106,7 @@
 						<div id="navbar" class="collapse navbar-collapse">
 							<ul class="nav navbar-nav">
 								<li><a
-									href="${ctx}/huowei/add?fdid=${huoweilist.get(0).fdid }&&ckid=${huoweilist.get(0).ckid }">添加货位</a></li>
+									href="${ctx}/huowei/add?ckid=${huoweilist.get(0).ckid }">添加货位</a></li>
 								<li><a onclick="return edit()">修改货位</a></li>
 								<li><a onclick="return del()">删除货位</a></li>
 								<li class="dropdown"><a id="drop1" data-toggle="dropdown"
@@ -107,7 +121,8 @@
 							</ul>
 							<form class="navbar-form navbar-right"
 								action="${ctx }/huowei/search" method="post">
-								<input type="hidden" name="ckid" value="${huoweilist.get(0).ckid }" />
+								<input type="hidden" id="ckid1" name="ckid"
+									value="${huoweilist.get(0).ckid }" />
 								<input class="form-control" type="text" placeholder="请输入搜索关键字"
 									name="searchword" />
 								<button type="submit" class="btn btn-primary">搜索</button>
@@ -117,7 +132,7 @@
 				</nav>
 				<div>
 					<input type="hidden" id="tempid" />
-					<span>${waymsg}</span> <span>共${huoweilist.size() }条记录</span>
+					<span>${waymsg}</span>
 				</div>
 				<table id="tablepot" class="table table-bordered table-condensed">
 					<thead>
@@ -146,6 +161,28 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<form class="form-inline" action="${ctx }/huowei/list"
+					onsubmit="return turnpage()">
+					<div class="form-group">
+						<p class="form-control-static">共${count }条记录</p>
+					</div>
+					<c:if test="${count >0 }">
+						<button type="button" class="btn btn-default"
+							onclick="walkpage(${conpage-1 })">上一页</button>
+						<div class="form-group">
+							<input type="hidden" name="ckid" value="${huoweilist.get(0).ckid }" />
+							<input type="text" class="form-control" style="width: 60px"
+								id="conpage" name="conpage" value="${conpage }">
+							<p class="form-control-static">
+								/<span id="zonpage"><fmt:formatNumber
+										value="${count/20 + 0.5}" pattern="#,###,###,###" /></span> 页
+							</p>
+						</div>
+						<button type="submit" class="btn btn-default">跳转</button>
+						<button type="button" class="btn btn-default"
+							onclick="walkpage(${conpage+1 })">下一页</button>
+					</c:if>
+				</form>
 			</div>
 		</div>
 	</div>

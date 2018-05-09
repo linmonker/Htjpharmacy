@@ -40,27 +40,26 @@ public class HuoweiController {
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
-		String fdidstr = request.getParameter("fdid");
 		String ckidstr = request.getParameter("ckid");
-		int fdid, ckid;
 		if (ckidstr == null) {
 			// 仓库id为空，返回仓库列表首页
 			return "redirect:/Htjpharmacy/cangku/sylist?waymsg=error";
-		} else if (fdidstr == null) {
-			// 分店id为空，从数据库获取fdid
-			ckid = Integer.valueOf(ckidstr);
-			cangku = cangkuservice.getcangku(ckid);
-			fdid = cangku.getFdid();
-		} else {
-			fdid = Integer.valueOf(fdidstr);
-			ckid = Integer.valueOf(ckidstr);
 		}
+		int ckid = Integer.valueOf(ckidstr);
 
-		huoweilist = huoweiservice.huoweiquery(ckid);
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("count", cangkuservice.getcount(ckid));
+
+		huoweilist = huoweiservice.getlist(ckid, (conpage - 1) * 20);
 		if (huoweilist.size() < 1) {
 			// 货位列表为空，添加一个货位传递分店id、仓库id
 			huowei = new Huowei();
-			huowei.setFdid(fdid);
 			huowei.setCkid(ckid);
 			huoweilist.add(huowei);
 		}
@@ -86,24 +85,14 @@ public class HuoweiController {
 	 */
 	@RequestMapping("/add")
 	public String add(HttpServletRequest request, Model model) {
-		String fdidstr = request.getParameter("fdid");
 		String ckidstr = request.getParameter("ckid");
-		int fdid, ckid;
 		if (ckidstr == null) {
 			// 仓库id为空，返回仓库列表首页
 			return "redirect:/Htjpharmacy/cangku/sylist?waymsg=error";
-		} else if (fdidstr == null) {
-			// 分店id为空，从数据库获取fdid
-			ckid = Integer.valueOf(ckidstr);
-			cangku = cangkuservice.getcangku(ckid);
-			fdid = cangku.getFdid();
-		} else {
-			fdid = Integer.valueOf(fdidstr);
-			ckid = Integer.valueOf(ckidstr);
 		}
+		int ckid = Integer.valueOf(ckidstr);
 
 		huowei = new Huowei();
-		huowei.setFdid(fdid);
 		huowei.setCkid(ckid);
 		model.addAttribute("huowei", huowei);
 
@@ -134,10 +123,15 @@ public class HuoweiController {
 			return "huowei/add";
 		}
 
+		// 从数据库获取fdid
+		cangku = cangkuservice.getcangku(record.getCkid());
+		int fdid = cangku.getFdid();
+		record.setFdid(fdid);
+
 		int res = huoweiservice.addhuowei(record);
 		if (res > 0) {
 			// 添加成功
-			return "redirect:list?waymsg=add&&fdid=" + record.getFdid() + "&&ckid=" + record.getCkid();
+			return "redirect:list?waymsg=add&&ckid=" + record.getCkid();
 		} else {
 			// 添加失败
 			model.addAttribute("waymsg", "货位添加失败");
@@ -151,8 +145,8 @@ public class HuoweiController {
 	 */
 	@RequestMapping("/edit")
 	public String edit(HttpServletRequest request, Model model) {
-		int id = Integer.valueOf(request.getParameter("id"));
-		huowei = huoweiservice.gethuowei(id);
+		int ckid = Integer.valueOf(request.getParameter("ckid"));
+		huowei = huoweiservice.gethuowei(ckid);
 		model.addAttribute("huowei", huowei);
 		return "huowei/edit";
 	}
@@ -184,7 +178,7 @@ public class HuoweiController {
 		int res = huoweiservice.addhuowei(record);
 		if (res >= 0) {
 			// 修改成功
-			return "redirect:list?waymsg=edit&&fdid=" + record.getFdid() + "&&ckid=" + record.getCkid();
+			return "redirect:list?waymsg=edit&&ckid=" + record.getCkid();
 		} else {
 			// 修改失败
 			model.addAttribute("waymsg", "货位修改失败");
@@ -199,16 +193,15 @@ public class HuoweiController {
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
 		int id = Integer.valueOf(request.getParameter("id"));
-		String fdid = request.getParameter("fdid");
 		String ckid = request.getParameter("ckid");
 
 		int res = huoweiservice.deletehuowei(id);
 		if (res > 0) {
 			// 删除成功
-			return "redirect:list?waymsg=delete&&fdid=" + fdid + "&&ckid=" + ckid;
+			return "redirect:list?waymsg=delete&&ckid=" + ckid;
 		} else {
 			// 删除失败
-			return "redirect:list?waymsg=error&&fdid=" + fdid + "&&ckid=" + ckid;
+			return "redirect:list?waymsg=error&&ckid=" + ckid;
 		}
 	}
 
@@ -216,15 +209,32 @@ public class HuoweiController {
 	 * 搜索货位
 	 */
 	@RequestMapping("/search")
-	public String search(HttpServletRequest request, String searchword, Model model) {
-		int ckid = Integer.valueOf(request.getParameter("ckid"));
+	public String search(HttpServletRequest request, Model model) {
+		String ckidstr = request.getParameter("ckid");
+		if (ckidstr == null) {
+			// 仓库id为空，返回仓库列表首页
+			return "redirect:/Htjpharmacy/cangku/sylist?waymsg=error";
+		}
+		int ckid = Integer.valueOf(ckidstr);
+
+		String searchword = request.getParameter("searchword");
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("searchword", searchword);
+
 		huowei = new Huowei();
 		huowei.setCkid(ckid);
 		huowei.setHwmc(searchword);
-		huoweilist = huoweiservice.searchhuowei(huowei);
+		huoweilist = huoweiservice.searchhuowei(huowei, (conpage - 1) * 20);
 		model.addAttribute("huoweilist", huoweilist);
+		model.addAttribute("count", huoweiservice.getsearchcount(huowei));
 
-		return "huowei/list";
+		return "huowei/searchlist";
 	}
 
 	/**

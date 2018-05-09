@@ -38,6 +38,44 @@ public class YaopinSer implements YaopinService {
 	}
 
 	/**
+	 * 获取药品列表，从start开始20条记录
+	 */
+	@Override
+	public List<YaopinVo> getlist(int start) {
+		// TODO Auto-generated method stub
+		yaopinVlist = yaopinMapperPro.getlist(start);
+		return yaopinVlist;
+	}
+
+	/**
+	 * 获取药品列表记录数
+	 */
+	@Override
+	public int getcount() {
+		// TODO Auto-generated method stub
+		return yaopinMapperPro.getcount();
+	}
+
+	/**
+	 * 模糊搜索药品：药品编号，药品商品名，药品通用名，从start开始20条记录
+	 */
+	@Override
+	public List<YaopinVo> searchyaopin(Yaopin record, int start) {
+		// TODO Auto-generated method stub
+		yaopinVlist = yaopinMapperPro.searchyaopin(record, start);
+		return yaopinVlist;
+	}
+
+	/**
+	 * 搜索药品列表记录数
+	 */
+	@Override
+	public int getsearchcount(Yaopin record) {
+		// TODO Auto-generated method stub
+		return yaopinMapperPro.getsearchcount(record);
+	}
+
+	/**
 	 * 根据药品id获取药品信息
 	 */
 	@Override
@@ -45,16 +83,6 @@ public class YaopinSer implements YaopinService {
 		// TODO Auto-generated method stub
 		yaopinB = yaopinMapper.selectByPrimaryKey(id);
 		return yaopinB;
-	}
-
-	/**
-	 * 模糊搜索药品：药品编号，药品商品名，药品通用名
-	 */
-	@Override
-	public List<YaopinVo> searchyaopin(Yaopin record) {
-		// TODO Auto-generated method stub
-		yaopinVlist = yaopinMapperPro.searchyaopin(record);
-		return yaopinVlist;
 	}
 
 	/**

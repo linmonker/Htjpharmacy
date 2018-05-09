@@ -140,7 +140,7 @@
 										<div class="col-md-8">
 											<select id="ypgys" class="form-control" name="ypgys">
 												<c:forEach items="${gyslist }" var="glist">
-													<option value="${glist.id }">${glist.gysmc }</option>
+													<option value="${glist.id }">${glist.gysmc }(${glist.fdmc })</option>
 												</c:forEach>
 											</select>
 										</div>

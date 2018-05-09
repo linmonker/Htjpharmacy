@@ -86,7 +86,6 @@
 					action="${ctx }/cangku/doedit" method="post">
 					<div class="form-group">
 						<input type="hidden" name="id" value="${cangku.id }" />
-						<input type="hidden" name="fdid" value="${cangku.fdid }" />
 					</div>
 					<div class="form-group">
 						<label for="ckbh" class="col-md-2 control-label">编号</label>

@@ -22,13 +22,36 @@
 		ckbz
 	</sql>
 
-	<select id="cangkuquery" resultMap="ResultMapWithBLOBs"
-		parameterType="java.lang.Integer">
+	<select id="cangkuquery" resultMap="ResultMapWithBLOBs">
 		select *
 		from hjt_cangku
-		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0
-		order
-		by ckbh asc
+		where fdid = #{fdid} and dm = 0
+		order by ckbh asc
+	</select>
+	<select id="getlist" resultMap="ResultMapWithBLOBs">
+		select *
+		from hjt_cangku
+		where fdid = #{fdid} and dm = 0
+		order by ckbh asc
+		limit #{start},20
+	</select>
+	<select id="getcount" resultType="java.lang.Integer">
+		select count(*)
+		from hjt_cangku
+		where fdid = #{fdid} and dm = 0
+	</select>
+	<select id="searchcangku" resultMap="ResultMapWithBLOBs">
+		select *
+		from hjt_cangku
+		where fdid = #{cangku.fdid} and dm = 0 and
+		(ckbh like concat("%",#{cangku.ckmc},"%") or ckmc like concat("%",#{cangku.ckmc},"%"))
+		limit #{start},20
+	</select>
+	<select id="getsearchcount" resultType="java.lang.Integer">
+		select count(*)
+		from hjt_cangku
+		where fdid = #{cangku.fdid} and dm = 0 and
+		(ckbh like concat("%",#{cangku.ckmc},"%") or ckmc like concat("%",#{cangku.ckmc},"%"))
 	</select>
 	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.CangkuVo"
 		parameterType="java.lang.Integer">
@@ -36,13 +59,6 @@
 		from hjt_cangku c left join hjt_fendian f on c.fdid = f.id 
 		where c.fdid = #{fdid,jdbcType=INTEGER} and c.dm = 0
 		order by c.ckbh asc
-	</select>
-	<select id="searchcangku" resultMap="ResultMapWithBLOBs"
-		parameterType="cn.sdhqtj.hjt.entity.Cangku">
-		select *
-		from hjt_cangku
-		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0 and
-		(ckbh like concat("%",#{ckbh},"%") or ckmc like concat("%",#{ckmc},"%"))
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Cangku">

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cn.sdhqtj.hjt.entity.Gongyingshang;
+import cn.sdhqtj.hjt.entity.GongyingshangVo;
 import cn.sdhqtj.hjt.entity.Login;
 import cn.sdhqtj.hjt.entity.Yaopin;
 import cn.sdhqtj.hjt.entity.YaopinVo;
@@ -46,14 +46,23 @@ public class YaopinController {
 
 	@Resource
 	GongyingshangService gysservice;
-	List<Gongyingshang> gyslist;
+	List<GongyingshangVo> gysVlist;
 
 	/**
 	 * 药品列表
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
-		yaopinvolist = yaopinservice.yaopinquery();
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("count", yaopinservice.getcount());
+
+		yaopinvolist = yaopinservice.getlist((conpage-1)*20);
 		model.addAttribute("yaopinlist", yaopinvolist);
 
 		// 操作提示信息
@@ -76,9 +85,9 @@ public class YaopinController {
 	@RequestMapping("/add")
 	public String add(Model model) {
 		ypfllist = ypflservice.Yaopinfenleiquery();
-		gyslist = gysservice.gongyingshangquery();
+		gysVlist = gysservice.gongyingshanAllgquery();
 		model.addAttribute("ypfllist", ypfllist);
-		model.addAttribute("gyslist", gyslist);
+		model.addAttribute("gyslist", gysVlist);
 		return "yaopin/add";
 	}
 
@@ -95,9 +104,9 @@ public class YaopinController {
 			model.addAttribute("yaopin", record);
 
 			ypfllist = ypflservice.Yaopinfenleiquery();
-			gyslist = gysservice.gongyingshangquery();
+			gysVlist = gysservice.gongyingshanAllgquery();
 			model.addAttribute("ypfllist", ypfllist);
-			model.addAttribute("gyslist", gyslist);
+			model.addAttribute("gyslist", gysVlist);
 
 			return "yaopin/add";
 		}
@@ -111,9 +120,9 @@ public class YaopinController {
 			model.addAttribute("yaopin", record);
 
 			ypfllist = ypflservice.Yaopinfenleiquery();
-			gyslist = gysservice.gongyingshangquery();
+			gysVlist = gysservice.gongyingshanAllgquery();
 			model.addAttribute("ypfllist", ypfllist);
-			model.addAttribute("gyslist", gyslist);
+			model.addAttribute("gyslist", gysVlist);
 
 			return "yaopin/add";
 		}
@@ -131,9 +140,9 @@ public class YaopinController {
 			model.addAttribute("yaopin", record);
 
 			ypfllist = ypflservice.Yaopinfenleiquery();
-			gyslist = gysservice.gongyingshangquery();
+			gysVlist = gysservice.gongyingshanAllgquery();
 			model.addAttribute("ypfllist", ypfllist);
-			model.addAttribute("gyslist", gyslist);
+			model.addAttribute("gyslist", gysVlist);
 
 			return "yaopin/add";
 		}
@@ -148,9 +157,9 @@ public class YaopinController {
 		model.addAttribute("yaopin", yaopinB);
 
 		ypfllist = ypflservice.Yaopinfenleiquery();
-		gyslist = gysservice.gongyingshangquery();
+		gysVlist = gysservice.gongyingshanAllgquery();
 		model.addAttribute("ypfllist", ypfllist);
-		model.addAttribute("gyslist", gyslist);
+		model.addAttribute("gyslist", gysVlist);
 
 		return "yaopin/edit";
 	}
@@ -168,9 +177,9 @@ public class YaopinController {
 			model.addAttribute("yaopin", record);
 
 			ypfllist = ypflservice.Yaopinfenleiquery();
-			gyslist = gysservice.gongyingshangquery();
+			gysVlist = gysservice.gongyingshanAllgquery();
 			model.addAttribute("ypfllist", ypfllist);
-			model.addAttribute("gyslist", gyslist);
+			model.addAttribute("gyslist", gysVlist);
 
 			return "yaopin/edit";
 		}
@@ -184,9 +193,9 @@ public class YaopinController {
 			model.addAttribute("yaopin", record);
 
 			ypfllist = ypflservice.Yaopinfenleiquery();
-			gyslist = gysservice.gongyingshangquery();
+			gysVlist = gysservice.gongyingshanAllgquery();
 			model.addAttribute("ypfllist", ypfllist);
-			model.addAttribute("gyslist", gyslist);
+			model.addAttribute("gyslist", gysVlist);
 
 			return "yaopin/edit";
 		}
@@ -201,9 +210,9 @@ public class YaopinController {
 			model.addAttribute("yaopin", record);
 
 			ypfllist = ypflservice.Yaopinfenleiquery();
-			gyslist = gysservice.gongyingshangquery();
+			gysVlist = gysservice.gongyingshanAllgquery();
 			model.addAttribute("ypfllist", ypfllist);
-			model.addAttribute("gyslist", gyslist);
+			model.addAttribute("gyslist", gysVlist);
 
 			return "yaopin/edit";
 		}
@@ -229,16 +238,25 @@ public class YaopinController {
 	 * 搜索药品
 	 */
 	@RequestMapping("/search")
-	public String search(String searchword, Model model) {
+	public String search(HttpServletRequest request,Model model) {
+		String searchword = request.getParameter("searchword");
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("searchword", searchword);
+
 		yaopin = new Yaopin();
-		yaopin.setYpbh(searchword);
 		yaopin.setYpspm(searchword);
-		yaopin.setYptym(searchword);
-		yaopinvolist = yaopinservice.searchyaopin(yaopin);
+		yaopinvolist = yaopinservice.searchyaopin(yaopin, (conpage - 1) * 20);
 		model.addAttribute("yaopinlist", yaopinvolist);
-		return "yaopin/list";
+		model.addAttribute("count", yaopinservice.getsearchcount(yaopin));
+		return "yaopin/searchlist";
 	}
-	
+
 	/**
 	 * 下载药品列表Excel
 	 */

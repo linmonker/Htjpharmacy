@@ -54,6 +54,20 @@
 		    exclude_inputs: true
 		});
 	}
+	function walkpage(conpage) {
+		if(conpage>0||conpage<=$("#zonpage").text()){
+			var fdid = $("#fdid1").val();
+			location="${ctx }/cangku/list?conpage="+conpage+"&&fdid="+fdid;
+		}
+	}
+	function turnpage() {
+		var conpage = Number($("#conpage").val());
+		if(Number.isInteger(conpage) && conpage>0 && conpage<=$("#zonpage").text()){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	$(document).ready(function(){
 		 var fdid = $("input[name='fdid']").val();
 		 $("#fdid" + fdid).addClass("active");
@@ -120,7 +134,8 @@
 							</ul>
 							<form class="navbar-form navbar-right"
 								action="${ctx }/cangku/search" method="post">
-								<input type="hidden" name="fdid" value="${cangkulist.get(0).fdid }" />
+								<input type="hidden" id="fdid1" name="fdid"
+									value="${cangkulist.get(0).fdid }" />
 								<input class="form-control" type="text" placeholder="请输入搜索关键字"
 									name="searchword" />
 								<button type="submit" class="btn btn-primary">搜索</button>
@@ -130,7 +145,7 @@
 				</nav>
 				<div>
 					<input type="hidden" id="tempid" />
-					<span>共${cangkulist.size() }条记录</span> <span>${waymsg}</span>
+					<span>${waymsg}</span>
 				</div>
 				<div class="row">
 					<div class="col-md-2">
@@ -171,6 +186,29 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<form class="form-inline" action="${ctx }/cangku/list"
+							onsubmit="return turnpage()">
+							<div class="form-group">
+								<p class="form-control-static">共${count }条记录</p>
+							</div>
+							<c:if test="${count >0 }">
+								<button type="button" class="btn btn-default"
+									onclick="walkpage(${conpage-1 })">上一页</button>
+								<div class="form-group">
+									<input type="hidden" name="fdid"
+										value="${cangkulist.get(0).fdid }" />
+									<input type="text" class="form-control" style="width: 60px"
+										id="conpage" name="conpage" value="${conpage }">
+									<p class="form-control-static">
+										/<span id="zonpage"><fmt:formatNumber
+												value="${count/20 + 0.5}" pattern="#,###,###,###" /></span> 页
+									</p>
+								</div>
+								<button type="submit" class="btn btn-default">跳转</button>
+								<button type="button" class="btn btn-default"
+									onclick="walkpage(${conpage+1 })">下一页</button>
+							</c:if>
+						</form>
 					</div>
 				</div>
 			</div>

@@ -56,14 +56,23 @@ public class CangkuController {
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
-		String fdidstr = request.getParameter("fdid");;
-		if(fdidstr ==null) {
+		String fdidstr = request.getParameter("fdid");
+		if (fdidstr == null) {
 			// 分店id获取失败，返回仓库列表首页
 			return "redirect:sylist?waymsg=error";
 		}
-		int fdid=Integer.valueOf(fdidstr);
-		
-		cangkulist = cangkuservice.cangkuquery(fdid);
+		int fdid = Integer.valueOf(fdidstr);
+
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("count", cangkuservice.getcount(fdid));
+
+		cangkulist = cangkuservice.getlist(fdid, (conpage - 1) * 20);
 		if (cangkulist.size() < 1) {
 			// 仓库列表为空，添加一个仓库传递分店id
 			cangku = new Cangku();
@@ -94,12 +103,12 @@ public class CangkuController {
 	 */
 	@RequestMapping("/add")
 	public String add(HttpServletRequest request, Model model) {
-		String fdidstr = request.getParameter("fdid");;
-		if(fdidstr ==null) {
+		String fdidstr = request.getParameter("fdid");
+		if (fdidstr == null) {
 			// 分店id获取失败，返回仓库列表首页
 			return "redirect:sylist?waymsg=error";
 		}
-		int fdid=Integer.valueOf(fdidstr);
+		int fdid = Integer.valueOf(fdidstr);
 
 		// 添加一个仓库传递分店id
 		cangku = new Cangku();
@@ -213,26 +222,36 @@ public class CangkuController {
 	 * 搜索仓库
 	 */
 	@RequestMapping("/search")
-	public String search(HttpServletRequest request, String searchword, Model model) {
-		String fdidstr = request.getParameter("fdid");;
-		if(fdidstr ==null) {
+	public String search(HttpServletRequest request, Model model) {
+		String fdidstr = request.getParameter("fdid");
+		if (fdidstr == null) {
 			// 分店id获取失败，返回仓库列表首页
 			return "redirect:sylist?waymsg=error";
 		}
-		int fdid=Integer.valueOf(fdidstr);
-		
+		int fdid = Integer.valueOf(fdidstr);
+
+		String searchword = request.getParameter("searchword");
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("searchword", searchword);
+
 		cangku = new Cangku();
 		cangku.setFdid(fdid);
-		cangku.setCkbh(searchword);
 		cangku.setCkmc(searchword);
-		cangkulist = cangkuservice.searchcangku(cangku);
+		cangkulist = cangkuservice.searchcangku(cangku, (conpage - 1) * 20);
+		model.addAttribute("count", cangkuservice.getsearchcount(cangku));
 		fendianlist = fendianservice.fendianquery();
 		model.addAttribute("cangkulist", cangkulist);
 		model.addAttribute("fendianlist", fendianlist);
 
-		return "cangku/list?fdid=" + fdid;
+		return "cangku/searchlist";
 	}
-	
+
 	/**
 	 * 下载供应商列表Excel
 	 */

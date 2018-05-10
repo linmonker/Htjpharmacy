@@ -13,11 +13,14 @@
 <script src="${ctx}/static/js/jquery.table2excel.min.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script>
+	// 记录所选货位
 	function setid(element,id) {
 		$("#tablepot .success").removeClass("success");
 		$(element).addClass("success");
 		$("#tempid").val(id);
 	}
+	
+	// 仓库修改
 	function edit() {
 		if($("#tablepot .success").length > 0){
 			var id = $("#tempid").val();
@@ -26,6 +29,8 @@
 			alert("请先选择货位");
 		}
 	}
+	
+	// 删除货位
 	function del() {
 		if($("#tablepot .success").length > 0){	
 			if (confirm("您确定要删除 " + $("#tablepot .success td:eq(1)").text() + " 吗?")) {	
@@ -36,6 +41,8 @@
 			alert("请先选择货位");
 		}
 	}
+	
+	// 上下页
 	function walkpage(conpage) {
 		if(conpage>0||conpage<=$("#zonpage").text()){
 			var ckid = $("#ckid1").val();
@@ -44,6 +51,8 @@
 					+"&&searchword="+searchword+"&&ckid="+ckid;
 		}
 	}
+	
+	// 跳页
 	function turnpage() {
 		var conpage = Number($("#conpage").val());
 		if(Number.isInteger(conpage) && conpage>0 && conpage<=$("#zonpage").text()){
@@ -52,6 +61,8 @@
 			return false;
 		}
 	}
+	
+	// 本页表格导出Excel
 	function toexcel() {
 	    $("#tablepot").table2excel({
 		    exclude: ".noExl",

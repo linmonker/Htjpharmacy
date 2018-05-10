@@ -39,6 +39,54 @@ public class YonghuSer implements YonghuService {
 	}
 
 	/**
+	 *根据分店id获取用户列表，包括处室名，从start开始20条记录
+	 */
+	@Override
+	public List<YonghuVo> getlist(int fdid, int start) {
+		// TODO Auto-generated method stub
+		yonghuVlist = yonghuMapperPro.getlist(fdid, start);
+		return yonghuVlist;
+	}
+
+	/**
+	 *根据分店id获取用户列表记录数
+	 */
+	@Override
+	public int getcount(int fdid) {
+		// TODO Auto-generated method stub
+		return yonghuMapperPro.getcount(fdid);
+	}
+
+	/**
+	 *模糊搜索用户：用户编号，登录名，姓名，姓名简拼，身份证号，仓库名称，从start开始20条记录
+	 */
+	@Override
+	public List<YonghuVo> searchyonghu(Yonghu record, int start) {
+		// TODO Auto-generated method stub
+		yonghuVlist = yonghuMapperPro.searchyonghu(record, start);
+		return yonghuVlist;
+	}
+
+	/**
+	 *搜索用户列表记录数
+	 */
+	@Override
+	public int getsearchcount(Yonghu record) {
+		// TODO Auto-generated method stub
+		return yonghuMapperPro.getsearchcount(record);
+	}
+
+	/**
+	 * 检查重复：用户编号，用户登录名
+	 */
+	@Override
+	public List<Yonghu> checkrepeat(Yonghu record) {
+		// TODO Auto-generated method stub
+		yonghulist = yonghuMapperPro.checkrepeat(record);
+		return yonghulist;
+	}
+
+	/**
 	 * 根据用户id获取用户信息
 	 */
 	@Override
@@ -56,26 +104,6 @@ public class YonghuSer implements YonghuService {
 		// TODO Auto-generated method stub
 		yonghuVlist = yonghuMapperPro.getuserByUseranme(string);
 		return yonghuVlist;
-	}
-
-	/**
-	 * 模糊搜索用户：用户编号，登录名，姓名，姓名简拼，身份证号
-	 */
-	@Override
-	public List<YonghuVo> searchyonghu(Yonghu record) {
-		// TODO Auto-generated method stub
-		yonghuVlist = yonghuMapperPro.searchyonghu(record);
-		return yonghuVlist;
-	}
-
-	/**
-	 * 检查重复：用户编号，用户登录名
-	 */
-	@Override
-	public List<Yonghu> checkrepeat(Yonghu record) {
-		// TODO Auto-generated method stub
-		yonghulist = yonghuMapperPro.checkrepeat(record);
-		return yonghulist;
 	}
 
 	/**

@@ -45,6 +45,25 @@ public class FendianSer implements FendianService {
 	}
 
 	/**
+	 * 模糊搜索分店：分店名称,从start位置开始20条记录
+	 */
+	@Override
+	public List<Fendian> searchfendian(Fendian record, int start) {
+		// TODO Auto-generated method stub
+		fendianlist = fendianMapperPro.searchfendian(record, start);
+		return fendianlist;
+	}
+
+	/**
+	 * 获取分店列表搜索记录数
+	 */
+	@Override
+	public int getsearchcount(Fendian record) {
+		// TODO Auto-generated method stub
+		return fendianMapperPro.getsearchcount(record);
+	}
+
+	/**
 	 * 获取分店列表记录数
 	 */
 	@Override
@@ -61,25 +80,6 @@ public class FendianSer implements FendianService {
 		// TODO Auto-generated method stub
 		fendian = fendianMapper.selectByPrimaryKey(id);
 		return fendian;
-	}
-
-	/**
-	 * 模糊搜索分店：分店名称
-	 */
-	@Override
-	public List<Fendian> searchfendian(Fendian record, int start) {
-		// TODO Auto-generated method stub
-		fendianlist = fendianMapperPro.searchfendian(record, start);
-		return fendianlist;
-	}
-
-	/**
-	 * 获取分店列表搜索记录数
-	 */
-	@Override
-	public int getsearchcount(Fendian record) {
-		// TODO Auto-generated method stub
-		return fendianMapperPro.getsearchcount(record);
 	}
 
 	/**

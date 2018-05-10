@@ -82,7 +82,16 @@ public class YonghuController {
 		}
 		int fdid = Integer.valueOf(fdidstr);
 
-		yhvolist = yonghuservice.yonghuquery(fdid);
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("count", yonghuservice.getcount(fdid));
+
+		yhvolist = yonghuservice.getlist(fdid, (conpage - 1) * 20);
 		if (yhvolist.size() < 1) {
 			// 用户列表为空，添加一个用户传递分店id
 			yhvo = new YonghuVo();
@@ -282,7 +291,7 @@ public class YonghuController {
 	 * 搜索用户
 	 */
 	@RequestMapping("/search")
-	public String search(HttpServletRequest request, String searchword, Model model) {
+	public String search(HttpServletRequest request, Model model) {
 		String fdidstr = request.getParameter("fdid");
 		if (fdidstr == null) {
 			// 分店id获取失败，返回用户列表首页
@@ -290,18 +299,25 @@ public class YonghuController {
 		}
 		int fdid = Integer.valueOf(fdidstr);
 
+		String searchword = request.getParameter("searchword");
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("searchword", searchword);
+
 		yonghu = new Yonghu();
 		yonghu.setFdid(fdid);
-		yonghu.setYhbh(searchword);
 		yonghu.setYhdlm(searchword);
-		yonghu.setYhxm(searchword);
-		yonghu.setYhxmjp(searchword);
-		yonghu.setYhsfzh(searchword);
-		yhvolist = yonghuservice.searchyonghu(yonghu);
-		fendianlist = fendianservice.fendianquery();
+		yhvolist = yonghuservice.searchyonghu(yonghu, (conpage - 1) * 20);
 		model.addAttribute("yonghulist", yhvolist);
+		model.addAttribute("count", yonghuservice.getsearchcount(yonghu));
+		fendianlist = fendianservice.fendianquery();
 		model.addAttribute("fendianlist", fendianlist);
-		return "yonghu/list";
+		return "yonghu/searchlist";
 	}
 
 	/**

@@ -15,11 +15,14 @@
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		// 设置状态下拉列表
 		var sid = $("#ckzt").val();
 		if (sid != '') {
 			$("#zt option[value=" + sid + "]").attr("selected", true);
 		}
 	})
+	
+	// 打印PDF
 	function topdf() {
 		$("#formpot").jqprint({
 			debug : false,
@@ -78,7 +81,7 @@
 						</div>
 					</div>
 				</nav>
-				<div>
+				<div class="errormsg">
 					<input id="ckzt" type="hidden" value="${cangku.zt }" />
 					<span>${waymsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
@@ -91,14 +94,14 @@
 						<label for="ckbh" class="col-md-2 control-label">编号</label>
 						<div class="col-md-5">
 							<input type="text" class="form-control" id="ckbh" name="ckbh"
-								value="${cangku.ckbh }" />
+								value="${cangku.ckbh }" data-validate="required:请输入编号"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="ckmc" class="col-md-2 control-label">名称</label>
 						<div class="col-md-5">
 							<input type="text" class="form-control" id="ckmc" name="ckmc"
-								value="${cangku.ckmc }" />
+								value="${cangku.ckmc }" data-validate="required:请输入名称"/>
 						</div>
 					</div>
 					<div class="form-group">

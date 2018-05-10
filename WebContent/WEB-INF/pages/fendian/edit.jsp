@@ -14,6 +14,7 @@
 <script src="${ctx}/static/js/jquery-migrate-1.2.1.min.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script>
+	// 打印PDF
 	function topdf() {
 		$("#formpot").jqprint({
 			debug : false,
@@ -72,7 +73,7 @@
 						</div>
 					</div>
 				</nav>
-				<div>
+				<div class="errormsg">
 					<span>${waymsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
 				<form id="formpot" class="form-horizontal"
@@ -84,14 +85,14 @@
 						<label for="fdbh" class="col-md-2 control-label">编号</label>
 						<div class="col-md-5">
 							<input type="text" class="form-control" id="fdbh" name="fdbh"
-								value="${fendian.fdbh }" />
+								value="${fendian.fdbh }" data-validate="required:请输入编号"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="fdmc" class="col-md-2 control-label">名称</label>
 						<div class="col-md-5">
 							<input type="text" class="form-control" id="fdmc" name="fdmc"
-								value="${fendian.fdmc }" />
+								value="${fendian.fdmc }" data-validate="required:请输入名称"/>
 						</div>
 					</div>
 					<div class="form-group">

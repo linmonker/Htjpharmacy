@@ -36,6 +36,44 @@ public class ChushiSer implements ChushiService {
 	}
 
 	/**
+	 * 根据分店id获取处室列表，从start开始20条记录
+	 */
+	@Override
+	public List<Zuzhijigou> getlist(int fdid, int start) {
+		// TODO Auto-generated method stub
+		chushilist = zuzhijigouMapperPro.getlist(fdid, start);
+		return chushilist;
+	}
+
+	/**
+	 * 根据分店id获取处室列表记录数
+	 */
+	@Override
+	public int getcount(int fdid) {
+		// TODO Auto-generated method stub
+		return zuzhijigouMapperPro.getcount(fdid);
+	}
+
+	/**
+	 * 模糊搜索处室：处室名称，从start开始20条记录
+	 */
+	@Override
+	public List<Zuzhijigou> searchchushi(Zuzhijigou record, int start) {
+		// TODO Auto-generated method stub
+		chushilist = zuzhijigouMapperPro.searchchushi(record, start);
+		return chushilist;
+	}
+
+	/**
+	 * 搜索处室列表记录数
+	 */
+	@Override
+	public int getsearchcount(Zuzhijigou record) {
+		// TODO Auto-generated method stub
+		return zuzhijigouMapperPro.getsearchcount(record);
+	}
+
+	/**
 	 * 根据处室id获取处室信息
 	 */
 	@Override
@@ -43,16 +81,6 @@ public class ChushiSer implements ChushiService {
 		// TODO Auto-generated method stub
 		chushi = zuzhijigouMapper.selectByPrimaryKey(id);
 		return chushi;
-	}
-
-	/**
-	 * 模糊搜索处室：处室名称
-	 */
-	@Override
-	public List<Zuzhijigou> searchchushi(Zuzhijigou record) {
-		// TODO Auto-generated method stub
-		chushilist = zuzhijigouMapperPro.searchchushi(record);
-		return chushilist;
 	}
 
 	/**

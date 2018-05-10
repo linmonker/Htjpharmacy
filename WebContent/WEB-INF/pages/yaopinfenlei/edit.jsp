@@ -15,11 +15,14 @@
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script>
 	$(document).ready(function() {
+		// 设置上级药品分类下拉列表
 		var sid = $("#flsjflid").val();
 		if (sid != '') {
 			$("#sjflid option[value=" + sid + "]").attr("selected", true);
 		}
 	})
+	
+	// 打印PDF
 	function topdf() {
 		$("#formpot").jqprint({
 			debug : false,
@@ -91,14 +94,14 @@
 						<label for="flbh" class="col-md-2 control-label">编号</label>
 						<div class="col-md-5">
 							<input type="text" class="form-control" id="flbh" name="flbh"
-								value="${ypfl.flbh }" />
+								value="${ypfl.flbh }" data-validate="required:请输入编号"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="flmc" class="col-md-2 control-label">名称</label>
 						<div class="col-md-5">
 							<input type="text" class="form-control" id="flmc" name="flmc"
-								value="${ypfl.flmc }" />
+								value="${ypfl.flmc }" data-validate="required:请输入名称"/>
 						</div>
 					</div>
 					<div class="form-group">

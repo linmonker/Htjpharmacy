@@ -30,19 +30,37 @@
 		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0
 		order by csbh asc
 	</select>
+	<select id="getlist" resultMap="ResultMapWithBLOBs">
+		select *
+		from hjt_zuzhijigou
+		where fdid = #{fdid} and dm = 0
+		order by csbh asc
+		limit #{start},20
+	</select>
+	<select id="getcount" resultType="java.lang.Integer">
+		select count(*)
+		from hjt_zuzhijigou
+		where fdid = #{fdid} and dm = 0
+	</select>
+	<select id="searchchushi" resultMap="ResultMapWithBLOBs">
+		select *
+		from hjt_zuzhijigou
+		where fdid = #{chushi.fdid} and dm = 0 and 
+		csmc like concat("%",#{chushi.csmc},"%")
+		limit #{start},20
+	</select>
+	<select id="getsearchcount" resultType="java.lang.Integer">
+		select count(*)
+		from hjt_zuzhijigou
+		where fdid = #{chushi.fdid} and dm = 0 and 
+		csmc like concat("%",#{chushi.csmc},"%")
+	</select>
 	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.ZuzhijigouVo"
 		parameterType="java.lang.Integer">
 		select z.*,f.fdbh,f.fdmc
 		from hjt_zuzhijigou z left join hjt_fendian f on z.fdid = f.id
 		where z.fdid = #{fdid,jdbcType=INTEGER} and z.dm = 0
 		order by z.csbh asc
-	</select>
-	<select id="searchchushi" resultMap="ResultMapWithBLOBs"
-		parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">
-		select *
-		from hjt_zuzhijigou
-		where fdid = #{fdid,jdbcType=INTEGER} and dm = 0 and 
-		csmc like concat("%",#{csmc},"%")
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap" 
 	    parameterType="cn.sdhqtj.hjt.entity.Zuzhijigou">

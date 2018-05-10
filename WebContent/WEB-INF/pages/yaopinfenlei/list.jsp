@@ -14,6 +14,7 @@
 <script src="${ctx}/static/js/jquery.ztree.all.min.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script type="text/javascript">
+	// 设置ztree
 	var zTree_Menu;
 	var setting = {
 		view : {
@@ -237,6 +238,7 @@
 		zTree_Menu.expandAll(false);
 	}
 
+	// 全选
 	function selectAll() {
 		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 		zTree.setting.edit.editNameSelectAll = $("#selectAll").attr("checked");

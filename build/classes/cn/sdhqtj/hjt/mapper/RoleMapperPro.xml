@@ -27,34 +27,35 @@
 		from hjt_role
 		where dm = 0
 	</select>
+	<select id="getlist" resultMap="ResultMapWithBLOBs">
+		select *
+		from hjt_role
+		where dm = 0
+		order by role_id asc
+		limit #{start},20
+	</select>
+	<select id="getcount" resultType="java.lang.Integer">
+		select *
+		from hjt_role
+		where dm = 0
+	</select>
+	<select id="searchrole" resultMap="ResultMapWithBLOBs">
+		select * 
+		from hjt_role
+		where role_name like concat("%",#{role.role_name},"%") and dm = 0
+		limit #{start},20
+	</select>
+	<select id="getsearchcount" resultType="java.lang.Integer">
+		select count(*) 
+		from hjt_role
+		where role_name like concat("%",#{role.role_name},"%") and dm = 0
+	</select>
 	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.RoleVo">
 		select r.*,y.yhdlm
 		from hjt_role r left join hjt_yonghu y on r.user_id_create = y.id
 		where r.dm = 0
 	</select>
-	<select id="searchrole" resultMap="ResultMapWithBLOBs"
-		parameterType="cn.sdhqtj.hjt.entity.Role">
-		select * from hjt_role
-		where role_name like concat("%",#{role_name},"%") and dm = 0
-	</select>
-	<select id="rolenamelist" resultType="java.lang.String" parameterType="java.lang.Integer">
-		select role_name
-		from hjt_role
-		where role_id = #{role_id,jdbcType=INTEGER} and dm = 0
-	</select>
-	<select id="urllist" resultType="java.lang.String" parameterType="java.lang.Integer">
-		select url
-		from
-			hjt_useable u
-		join
-			hjt_access a
-		on
-			u.id=a.useableid
-		where
-			a.roleid = #{id,jdbcType=INTEGER}
-	</select>
-	<select id="checkrepeat" resultMap="ResultMapWithBLOBs"
-		parameterType="cn.sdhqtj.hjt.entity.Role">
+	<select id="checkrepeat" resultMap="ResultMapWithBLOBs" parameterType="cn.sdhqtj.hjt.entity.Role">
 		select
 		<include refid="Base_Column_List" />
 		from hjt_role
@@ -63,26 +64,11 @@
 			and role_id != #{role_id,jdbcType=INTEGER}
 		</if>
 	</select>
-	<select id="getmenunodes" resultType="cn.sdhqtj.hjt.entity.MenuNode">
-		select menu_id id, parent_id pId, name
-		from hjt_menu
+	<select id="rolenamelist" resultType="java.lang.String" parameterType="java.lang.Integer">
+		select role_name
+		from hjt_role
+		where role_id = #{role_id,jdbcType=INTEGER} and dm = 0
 	</select>
-	<select id="getquanxian" resultType="cn.sdhqtj.hjt.entity.AccessNode" parameterType="java.lang.Integer">
-		select roleid, useableid id
-		from hjt_access
-		where roleid = #{roleid,jdbcType=INTEGER}
-	</select>
-	<delete id="deletequanxian" parameterType="java.lang.Integer">
-	    delete from hjt_access
-	    where roleid = #{role_id,jdbcType=INTEGER}
-	</delete>
-	<insert id="addquanxian" parameterType="java.util.List">
-        insert into hjt_access (roleid, useableid)
-        values
-        <foreach collection="list" item="item" separator=",">
-            (#{item.roleid,jdbcType=INTEGER}, #{item.id,jdbcType=INTEGER})
-        </foreach>
-    </insert>
 	<insert id="addrole" parameterType="cn.sdhqtj.hjt.entity.Role">
 		insert into hjt_role
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -131,5 +117,36 @@
 		remark = #{remark,jdbcType=LONGVARCHAR}
 		where role_id = #{role_id,jdbcType=INTEGER}
 	</update>
-
+	<select id="urllist" resultType="java.lang.String" parameterType="java.lang.Integer">
+		select url
+		from
+			hjt_useable u
+		join
+			hjt_access a
+		on
+			u.id=a.useableid
+		where
+			a.roleid = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="getmenunodes" resultType="cn.sdhqtj.hjt.entity.MenuNode">
+		select menu_id id, parent_id pId, name
+		from hjt_menu
+	</select>
+	<select id="getquanxian" resultType="cn.sdhqtj.hjt.entity.AccessNode" parameterType="java.lang.Integer">
+		select roleid, useableid id
+		from hjt_access
+		where roleid = #{roleid,jdbcType=INTEGER}
+	</select>
+	<delete id="deletequanxian" parameterType="java.lang.Integer">
+	    delete from hjt_access
+	    where roleid = #{role_id,jdbcType=INTEGER}
+	</delete>
+	<insert id="addquanxian" parameterType="java.util.List">
+        insert into hjt_access (roleid, useableid)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.roleid,jdbcType=INTEGER}, #{item.id,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+	
 </mapper>

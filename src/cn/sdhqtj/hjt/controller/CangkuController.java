@@ -244,9 +244,9 @@ public class CangkuController {
 		cangku.setFdid(fdid);
 		cangku.setCkmc(searchword);
 		cangkulist = cangkuservice.searchcangku(cangku, (conpage - 1) * 20);
+		model.addAttribute("cangkulist", cangkulist);
 		model.addAttribute("count", cangkuservice.getsearchcount(cangku));
 		fendianlist = fendianservice.fendianquery();
-		model.addAttribute("cangkulist", cangkulist);
 		model.addAttribute("fendianlist", fendianlist);
 
 		return "cangku/searchlist";

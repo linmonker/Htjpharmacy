@@ -15,11 +15,14 @@
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		// 设置状态下拉列表
 		var sid = $("#gyszt").val();
 		if (sid != '') {
 			$("#zt option[value=" + sid + "]").attr("selected", true);
 		}
 	})
+	
+	// 打印PDF
 	function topdf() {
 		$("#formpot").jqprint({
 			debug : false,
@@ -78,7 +81,7 @@
 						</div>
 					</div>
 				</nav>
-				<div>
+				<div class="errormsg">
 					<input id="gyszt" type="hidden" value="${gys.zt }" />
 					<span>${waymsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
@@ -101,14 +104,14 @@
 										<label for="gysbh" class="col-md-3 control-label">编号</label>
 										<div class="col-md-8">
 											<input type="text" class="form-control" id="gysbh" name="gysbh"
-												value="${gys.gysbh }" />
+												value="${gys.gysbh }" data-validate="required:请输入编号"/>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="gysmc" class="col-md-3 control-label">名称</label>
 										<div class="col-md-8">
 											<input type="text" class="form-control" id="gysmc" name="gysmc"
-												value="${gys.gysmc }" />
+												value="${gys.gysmc }" data-validate="required:请输入名称"/>
 										</div>
 									</div>
 									<div class="form-group">

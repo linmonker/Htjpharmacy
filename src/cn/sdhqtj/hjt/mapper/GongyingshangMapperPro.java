@@ -17,7 +17,7 @@ public interface GongyingshangMapperPro {
 	 * 根据分店id获取供应商列表
 	 */
 	List<Gongyingshang> gongyingshangquery(int fdid);
-	
+
 	/**
 	 * 获取全部供应商列表
 	 */
@@ -42,7 +42,7 @@ public interface GongyingshangMapperPro {
 	 * 获取分店列表搜索记录数
 	 */
 	int getsearchcount(@Param("gys") Gongyingshang record);
-	
+
 	/**
 	 * 根据分店id获取供应商Excel列表
 	 */

@@ -15,11 +15,14 @@
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		// 设置状态下拉列表
 		var sid = $("#hwzt").val();
 		if (sid != '') {
 			$("#zt option[value=" + sid + "]").attr("selected", true);
 		}
 	})
+	
+	// 打印PDF
 	function topdf() {
 		$("#formpot").jqprint({
 			debug : false,
@@ -78,7 +81,7 @@
 						</div>
 					</div>
 				</nav>
-				<div>
+				<div class="errormsg">
 					<input id="hwzt" type="hidden" value="${huowei.zt }" />
 					<span>${waymsg}</span> <span>${bhmsg }</span> <span>${mcmsg}</span>
 				</div>
@@ -91,14 +94,14 @@
 						<label for="hwbh" class="col-md-2 control-label">编号</label>
 						<div class="col-md-5">
 							<input type="text" class="form-control" id="hwbh" name="hwbh"
-								value="${huowei.hwbh }" />
+								value="${huowei.hwbh }" data-validate="required:请输入编号"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="hwmc" class="col-md-2 control-label">名称</label>
 						<div class="col-md-5">
 							<input type="text" class="form-control" id="hwmc" name="hwmc"
-								value="${huowei.hwmc }" />
+								value="${huowei.hwmc }" data-validate="required:请输入名称"/>
 						</div>
 					</div>
 					<div class="form-group">

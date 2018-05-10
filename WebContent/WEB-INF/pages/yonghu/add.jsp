@@ -15,19 +15,24 @@
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		// 设置状态下拉列表
 		var sid = $("#yhzt").val();
 		if (sid != '') {
 			$("#zt option[value=" + sid + "]").attr("selected", true);
 		}
-		sid = $("#yhjs").val;
+		// 设置角色下拉列表
+		sid = $("#yhjs").val();
 		if (sid != '') {
 			$("#yhjsid option[value=" + sid + "]").attr("selected", true);
 		}
-		sid = $("#yhbm").val;
+		// 设置部门处室下拉列表
+		sid = $("#yhbm").val();
 		if (sid != '') {
 			$("#yhbmid option[value=" + sid + "]").attr("selected", true);
 		}
 	})
+
+	// 打印PDF
 	function topdf() {
 		$("#formpot").jqprint({
 			debug : false,
@@ -86,7 +91,7 @@
 						</div>
 					</div>
 				</nav>
-				<div>
+				<div class="errormsg">
 					<input id="yhzt" type="hidden" value="${yonghu.zt }" />
 					<input id="yhjs" type="hidden" value="${yonghu.yhjsid }" />
 					<input id="yhbm" type="hidden" value="${yonghu.yhbmid }" />
@@ -101,27 +106,28 @@
 						<label for="yhbh" class="col-md-2 control-label">编号</label>
 						<div class="col-md-5">
 							<input type="text" class="form-control" id="yhbh" name="yhbh"
-								value="${yonghu.yhbh }" />
+								value="${yonghu.yhbh }" data-validate="required:请输入编号"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="yhdlm" class="col-md-2 control-label">用户名</label>
 						<div class="col-md-5">
 							<input type="text" class="form-control" id="yhdlm" name="yhdlm"
-								value="${yonghu.yhdlm }" />
+								value="${yonghu.yhdlm }" data-validate="required:请输入用户名"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="yhmm" class="col-md-2 control-label">密码</label>
 						<div class="col-md-5">
-							<input type="password" class="form-control" id="yhmm" name="yhmm" />
+							<input type="password" class="form-control" id="yhmm" name="yhmm"
+								data-validate="required:请输入密码" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="confirmyhmm" class="col-md-2 control-label">确认密码</label>
 						<div class="col-md-5">
 							<input type="password" class="form-control" id="confirmyhmm"
-								name="confirmyhmm" data-validate="equalTo:'#yhmm'" />
+								name="confirmyhmm" data-validate="equalTo:#yhmm" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -202,9 +208,9 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="ypjsid" class="col-md-2 control-label">角色</label>
+						<label for="yhjsid" class="col-md-2 control-label">角色</label>
 						<div class="col-md-5">
-							<select class="form-control" id="ypjsid" name="ypjsid">
+							<select class="form-control" id="yhjsid" name="yhjsid">
 								<c:forEach items="${rolelist }" var="rlist">
 									<option value="${rlist.role_id }">${rlist.role_name }</option>
 								</c:forEach>

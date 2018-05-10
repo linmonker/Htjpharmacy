@@ -19,7 +19,7 @@ public interface FendianMapperPro {
 	/**
 	 * 获取分店列表,从start位置开始20条记录
 	 */
-	List<Fendian> getlist(int start);
+	List<Fendian> getlist(@Param("start") int start);
 
 	/**
 	 * 获取分店列表记录数
@@ -27,7 +27,7 @@ public interface FendianMapperPro {
 	int getcount();
 
 	/**
-	 * 模糊搜索分店：分店名称
+	 * 模糊搜索分店：分店名称,从start位置开始20条记录
 	 */
 	List<Fendian> searchfendian(@Param("fendian") Fendian record, @Param("start") int start);
 

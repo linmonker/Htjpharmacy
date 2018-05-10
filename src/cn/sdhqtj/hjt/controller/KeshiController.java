@@ -41,7 +41,17 @@ public class KeshiController {
 	public String list(HttpServletRequest request, Model model, HttpSession session) {
 
 		login = (Login) session.getAttribute("loginer");
-		keshilist = keshiservice.keshiquery(login.getFdid());
+		
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("count", keshiservice.getcount(login.getFdid()));
+		
+		keshilist = keshiservice.getlist(login.getFdid(), (conpage-1)*20);
 		model.addAttribute("keshilist", keshilist);
 
 		// 操作提示信息
@@ -171,16 +181,27 @@ public class KeshiController {
 	 * 搜索科室
 	 */
 	@RequestMapping("/search")
-	public String search(String searchword, Model model, HttpSession session) {
+	public String search(HttpServletRequest request, Model model, HttpSession session) {
+		String searchword = request.getParameter("searchword");
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("searchword", searchword);
+		
 		keshi = new Keshi();
 		login = (Login) session.getAttribute("loginer");
 		keshi.setFdid(login.getFdid());
 		keshi.setKsmc(searchword);
-		keshilist = keshiservice.searchkeshi(keshi);
+		keshilist = keshiservice.searchkeshi(keshi,(conpage - 1) * 20);
 		model.addAttribute("keshilist", keshilist);
-		return "keshi/list";
+		model.addAttribute("count", keshiservice.getsearchcount(keshi));
+		return "keshi/searchlist";
 	}
-	
+
 	/**
 	 * 下载科室列表Excel
 	 */
@@ -195,5 +216,5 @@ public class KeshiController {
 		headers.setContentDispositionFormData("attachment", fileName);
 		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
 	}
-	
+
 }

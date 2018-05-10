@@ -41,13 +41,51 @@ public class RoleSer implements RoleService {
 	}
 
 	/**
-	 * 根据角色id获取角色
+	 * 获取角色列表，从start开始20条记录
 	 */
 	@Override
-	public Role getrole(int id) {
+	public List<Role> getlist(int start) {
 		// TODO Auto-generated method stub
-		role = roleMapper.selectByPrimaryKey(id);
-		return role;
+		rolelist = roleMapperPro.getlist(start);
+		return rolelist;
+	}
+
+	/**
+	 * 获取角色列表记录数
+	 */
+	@Override
+	public int getcount() {
+		// TODO Auto-generated method stub
+		return roleMapperPro.getcount();
+	}
+
+	/**
+	 * 模糊搜索角色：角色名称，从start开始20条记录
+	 */
+	@Override
+	public List<Role> searchrole(Role record, int start) {
+		// TODO Auto-generated method stub
+		rolelist = roleMapperPro.searchrole(record, start);
+		return rolelist;
+	}
+
+	/**
+	 * 搜索角色列表记录数
+	 */
+	@Override
+	public int getsearchcount(Role record) {
+		// TODO Auto-generated method stub
+		return roleMapperPro.getsearchcount(record);
+	}
+
+	/**
+	 * 检查重复：角色名称
+	 */
+	@Override
+	public List<Role> checkrepeat(Role record) {
+		// TODO Auto-generated method stub
+		rolelist = roleMapperPro.checkrepeat(record);
+		return rolelist;
 	}
 
 	/**
@@ -61,23 +99,13 @@ public class RoleSer implements RoleService {
 	}
 
 	/**
-	 * 模糊搜索角色：角色名称
+	 * 根据角色id获取角色
 	 */
 	@Override
-	public List<Role> searchrole(Role record) {
+	public Role getrole(int id) {
 		// TODO Auto-generated method stub
-		rolelist = roleMapperPro.searchrole(record);
-		return rolelist;
-	}
-
-	/**
-	 * 检查重复：角色名称
-	 */
-	@Override
-	public List<Role> checkrepeat(Role record) {
-		// TODO Auto-generated method stub
-		rolelist = roleMapperPro.checkrepeat(record);
-		return rolelist;
+		role = roleMapper.selectByPrimaryKey(id);
+		return role;
 	}
 
 	/**

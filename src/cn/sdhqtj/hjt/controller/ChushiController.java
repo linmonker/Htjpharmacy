@@ -40,7 +40,16 @@ public class ChushiController {
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model, HttpSession session) {
 		login = (Login) session.getAttribute("loginer");
-		chushilist = chushiservice.chushiquery(login.getFdid());
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("count", chushiservice.getcount(login.getFdid()));
+
+		chushilist = chushiservice.getlist(login.getFdid(),  (conpage - 1) * 20);
 		model.addAttribute("chushilist", chushilist);
 
 		// 操作提示信息
@@ -89,7 +98,7 @@ public class ChushiController {
 			return "zuzhijigou/add";
 		}
 
-		Login login=(Login) session.getAttribute("loginer");
+		Login login = (Login) session.getAttribute("loginer");
 		record.setFdid(login.getFdid());
 		int res = chushiservice.addchushi(record);
 		if (res > 0) {
@@ -170,16 +179,27 @@ public class ChushiController {
 	 * 搜索处室
 	 */
 	@RequestMapping("/search")
-	public String search(String searchword, Model model, HttpSession session) {
+	public String search(HttpServletRequest request, Model model, HttpSession session) {
+		String searchword = request.getParameter("searchword");
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("searchword", searchword);
+		
 		chushi = new Zuzhijigou();
 		login = (Login) session.getAttribute("loginer");
 		chushi.setFdid(login.getFdid());
 		chushi.setCsmc(searchword);
-		chushilist = chushiservice.searchchushi(chushi);
+		chushilist = chushiservice.searchchushi(chushi,(conpage - 1) * 20);
 		model.addAttribute("chushilist", chushilist);
-		return "zuzhijigou/list";
+		model.addAttribute("count", chushiservice.getsearchcount(chushi));
+		return "zuzhijigou/searchlist";
 	}
-	
+
 	/**
 	 * 下载处室列表Excel
 	 */

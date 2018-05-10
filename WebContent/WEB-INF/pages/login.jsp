@@ -40,7 +40,7 @@
 					<div class="form-group">
 						<div class="col-md-offset-3">
 							<button class="btn btn-primary" type="submit">登录</button>
-							<span class="bg-warning">${loginmsg }</span>
+							<span class="errormsg">${loginmsg }</span>
 						</div>
 					</div>
 				</form>

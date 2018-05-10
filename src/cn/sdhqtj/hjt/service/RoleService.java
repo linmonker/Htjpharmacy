@@ -20,14 +20,24 @@ public interface RoleService {
 	List<Role> rolequery();
 
 	/**
-	 * 根据角色id获取角色
+	 * 获取角色列表，从start开始20条记录
 	 */
-	Role getrole(int id);
+	List<Role> getlist(int start);
 
 	/**
-	 * 根据角色id获取角色名称
+	 * 获取角色列表记录数
 	 */
-	List<String> rolenamelist(int id);
+	int getcount();
+
+	/**
+	 * 模糊搜索角色：角色名称，从start开始20条记录
+	 */
+	List<Role> searchrole(Role record, int start);
+
+	/**
+	 * 搜索角色列表记录数
+	 */
+	int getsearchcount(Role record);
 
 	/**
 	 * 检查重复：角色名称
@@ -35,9 +45,14 @@ public interface RoleService {
 	List<Role> checkrepeat(Role record);
 
 	/**
-	 * 模糊搜索角色：角色名称
+	 * 根据角色id获取角色名称
 	 */
-	List<Role> searchrole(Role record);
+	List<String> rolenamelist(int id);
+
+	/**
+	 * 根据角色id获取角色
+	 */
+	Role getrole(int id);
 
 	/**
 	 * 添加角色,返回id
@@ -53,7 +68,7 @@ public interface RoleService {
 	 * 根据角色id删除角色
 	 */
 	int deleterole(Integer id);
-	
+
 	/**
 	 * 生成角色列表Excel，返回文件路径
 	 */

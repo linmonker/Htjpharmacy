@@ -47,7 +47,16 @@ public class RoleController {
 	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
-		rolelist = roleservice.rolequery();
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("count", roleservice.getcount());
+
+		rolelist = roleservice.getlist((conpage - 1) * 20);
 		model.addAttribute("rolelist", rolelist);
 
 		// 操作提示信息
@@ -244,14 +253,25 @@ public class RoleController {
 	 * 搜索角色
 	 */
 	@RequestMapping("/search")
-	public String search(String searchword, Model model) {
+	public String search(HttpServletRequest request, Model model) {
+		String searchword = request.getParameter("searchword");
+		// 获取分页信息
+		int conpage = 1;
+		String conpagestr = request.getParameter("conpage");
+		if (conpagestr != null) {
+			conpage = Integer.valueOf(conpagestr);
+		}
+		model.addAttribute("conpage", conpage);
+		model.addAttribute("searchword", searchword);
+
 		role = new Role();
 		role.setRole_name(searchword);
-		rolelist = roleservice.searchrole(role);
+		rolelist = roleservice.searchrole(role, (conpage - 1) * 20);
 		model.addAttribute("rolelist", rolelist);
-		return "role/list";
+		model.addAttribute("count", roleservice.getsearchcount(role));
+		return "role/searchlist";
 	}
-	
+
 	/**
 	 * 下载角色列表Excel
 	 */

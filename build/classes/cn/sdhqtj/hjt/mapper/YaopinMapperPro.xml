@@ -93,9 +93,9 @@
 	</select>
 	<select id="getsearchcount" resultType="java.lang.Integer">
 		select count(*)
-		from hjt_yaopin a left join hjt_yaopinfenlei b on a.yplb = b.id
-		where a.dm=0 and (a.ypbh like concat("%",#{yaopin.ypspm},"%") or
-		a.ypspm like concat("%",#{yaopin.ypspm},"%") or a.yptym like concat("%",#{yaopin.ypspm},"%"))
+		from hjt_yaopin
+		where dm=0 and (ypbh like concat("%",#{yaopin.ypspm},"%") or
+		ypspm like concat("%",#{yaopin.ypspm},"%") or yptym like concat("%",#{yaopin.ypspm},"%"))
 	</select>
 	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.YaopinVo">
 		select yp.*,yf.flmc,g.gysbh,g.gysmc,yh.yhdlm

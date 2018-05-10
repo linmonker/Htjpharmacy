@@ -13,11 +13,14 @@
 <script src="${ctx}/static/js/jquery.table2excel.min.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script>
+	// 记录所选用户
 	function setid(element,id) {
 		$("#tablepot .success").removeClass("success");
 		$(element).addClass("success");
 		$("#tempid").val(id);
 	}
+	
+	// 查看修改
 	function edit() {
 		if($("#tablepot .success").length > 0){
 			var id = $("#tempid").val();
@@ -26,6 +29,8 @@
 			alert("请先选择用户");
 		}
 	}
+	
+	// 删除用户
 	function del() {
 		if($("#tablepot .success").length > 0){	
 			if (confirm("您确定要删除 " + $("#tablepot .success td:eq(1)").text() + " 吗?")) {	
@@ -36,6 +41,8 @@
 			alert("请先选择用户");
 		}
 	}
+	
+	// 本页表格导出Excel
 	function toexcel() {
 	    $("#tablepot").table2excel({
 		    exclude: ".noExl",
@@ -46,9 +53,28 @@
 		    exclude_inputs: true
 		});
 	}
+	
+	// 上下页
+	function walkpage(conpage) {
+		if(conpage>0||conpage<=$("#zonpage").text()){
+			var fdid = $("#fdid1").val();
+			location="${ctx }/yonghu/list?conpage="+conpage+"&&fdid="+fdid;
+		}
+	}
+	
+	// 跳页
+	function turnpage() {
+		var conpage = Number($("#conpage").val());
+		if(Number.isInteger(conpage) && conpage>0 && conpage<=$("#zonpage").text()){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	$(document).ready(function(){
-		 var fdid = $("input[name='fdid']").val();
-		 $("#fdid"+fdid).addClass("active");
+		// 设置分店列表所选分店active
+		var fdid = $("input[name='fdid']").val();
+		 	$("#fdid"+fdid).addClass("active");
 		});
 </script>
 </head>
@@ -111,7 +137,8 @@
 							</ul>
 							<form class="navbar-form navbar-right"
 								action="${ctx }/yonghu/search" method="post">
-								<input type="hidden" name="fdid" value="${yonghulist.get(0).fdid }" />
+								<input type="hidden" id="fdid1" name="fdid"
+									value="${yonghulist.get(0).fdid }" />
 								<input class="form-control" type="text" placeholder="请输入搜索关键字"
 									name="searchword" />
 								<button type="submit" class="btn btn-primary">搜索</button>
@@ -121,7 +148,7 @@
 				</nav>
 				<div>
 					<input type="hidden" id="tempid" />
-					<span>${msgmsg}</span> <span>共${yonghulist.size() }条记录</span>
+					<span>${msgmsg}</span>
 				</div>
 				<div class="row">
 					<div class="col-md-2">
@@ -172,6 +199,29 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<form class="form-inline" action="${ctx }/yonghu/list"
+							onsubmit="return turnpage()">
+							<div class="form-group">
+								<p class="form-control-static">共${count }条记录</p>
+							</div>
+							<c:if test="${count >0 }">
+								<button type="button" class="btn btn-default"
+									onclick="walkpage(${conpage-1 })">上一页</button>
+								<div class="form-group">
+									<input type="hidden" name="fdid"
+										value="${yonghulist.get(0).fdid }" />
+									<input type="text" class="form-control" style="width: 60px"
+										id="conpage" name="conpage" value="${conpage }">
+									<p class="form-control-static">
+										/<span id="zonpage"><fmt:formatNumber
+												value="${count/20 + 0.5}" pattern="#,###,###,###" /></span> 页
+									</p>
+								</div>
+								<button type="submit" class="btn btn-default">跳转</button>
+								<button type="button" class="btn btn-default"
+									onclick="walkpage(${conpage+1 })">下一页</button>
+							</c:if>
+						</form>
 					</div>
 				</div>
 			</div>

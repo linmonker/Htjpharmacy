@@ -19,6 +19,31 @@ public interface YonghuService {
 	List<YonghuVo> yonghuquery(int fdid);
 
 	/**
+	 * 根据分店id获取用户列表，包括处室名，从start开始20条记录
+	 */
+	List<YonghuVo> getlist(int fdid, int start);
+
+	/**
+	 * 根据分店id获取用户列表记录数
+	 */
+	int getcount(int fdid);
+
+	/**
+	 * 模糊搜索用户：用户编号，登录名，姓名，姓名简拼，身份证号，仓库名称，从start开始20条记录
+	 */
+	List<YonghuVo> searchyonghu(Yonghu record, int start);
+
+	/**
+	 * 搜索用户列表记录数
+	 */
+	int getsearchcount(Yonghu record);
+
+	/**
+	 * 检查重复：用户编号，用户登录名
+	 */
+	List<Yonghu> checkrepeat(Yonghu record);
+
+	/**
 	 * 根据用户id获取用户信息
 	 */
 	Yonghu getuser(int id);
@@ -27,16 +52,6 @@ public interface YonghuService {
 	 * 根据用户名获取用户信息,包括分店名称
 	 */
 	List<YonghuVo> getuserByUseranme(String string);
-
-	/**
-	 * 模糊搜索用户：用户编号，登录名，姓名，姓名简拼，身份证号
-	 */
-	List<YonghuVo> searchyonghu(Yonghu record);
-
-	/**
-	 * 检查重复：用户编号，用户登录名
-	 */
-	List<Yonghu> checkrepeat(Yonghu record);
 
 	/**
 	 * 添加用户

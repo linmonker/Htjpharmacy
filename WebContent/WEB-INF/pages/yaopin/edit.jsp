@@ -15,19 +15,24 @@
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script>
 	$(document).ready(function() {
+		// 设置状态下拉列表
 		var sid = $("#ypzt").val();
 		if (sid != '') {
 			$("#zt option[value=" + sid + "]").attr("selected", true);
 		}
+		// 设置分店下拉列表
 		sid = $("#flid").val();
 		if (sid != '') {
 			$("#yplb option[value=" + sid + "]").attr("selected", true);
 		}
+		// 设置供应商下拉列表
 		sid = $("#gysid").val();
 		if (sid != '') {
 			$("#ypgys option[value=" + sid + "]").attr("selected", true);
 		}
 	})
+	
+	// 打印PDF
 	function topdf() {
 		$("#formpot").jqprint({
 			debug : false,
@@ -86,7 +91,7 @@
 						</div>
 					</div>
 				</nav>
-				<div>
+				<div class="errormsg">
 					<input id="flid" type="hidden" value="${yaopin.yplb }" />
 					<input id="gysid" type="hidden" value="${yaopin.ypgys }" />
 					<input id="ypzt" type="hidden" value="${yaopin.zt }" />
@@ -111,14 +116,14 @@
 										<label for="ypbh" class="col-md-3 control-label">编号</label>
 										<div class="col-md-8">
 											<input type="text" class="form-control" id="ypbh" name="ypbh"
-												value="${yaopin.ypbh }" />
+												value="${yaopin.ypbh }" data-validate="required:请输入编号"/>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="ypspm" class="col-md-3 control-label">商品名</label>
 										<div class="col-md-8">
 											<input type="text" class="form-control" id="ypspm" name="ypspm"
-												value="${yaopin.ypspm }" />
+												value="${yaopin.ypspm }" data-validate="required:请输入商品名"/>
 										</div>
 									</div>
 									<div class="form-group">

@@ -71,13 +71,7 @@
 		where g.dm = 0
 		order by g.gysbh asc
 	</select>
-	<select id="getquerybyfdid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-		select *
-		from hjt_gongyingshang
-		where fdid = #{fdid} and dm = 0
-		order by gysbh asc
-	</select>
-	<select id="getlist" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+	<select id="getlist" resultMap="BaseResultMap">
 		select *
 		from hjt_gongyingshang
 		where fdid = #{fdid} and dm = 0

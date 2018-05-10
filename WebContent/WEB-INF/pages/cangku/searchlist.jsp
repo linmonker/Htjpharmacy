@@ -13,11 +13,14 @@
 <script src="${ctx}/static/js/jquery.table2excel.min.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script>
+	// 记录所选仓库
 	function setid(element,id) {
 		$("#tablepot .success").removeClass("success");
 		$(element).addClass("success");
 		$("#tempid").val(id);
 	}
+	
+	// 查看修改
 	function edit() {
 		if($("#tablepot .success").length > 0){
 			var id = $("#tempid").val();
@@ -26,6 +29,8 @@
 			alert("请先选择仓库");
 		}
 	}
+	
+	// 删除仓库
 	function del() {
 		if($("#tablepot .success").length > 0){	
 			if (confirm("您确定要删除 " + $("#tablepot .success td:eq(1)").text() + " 吗?")) {	
@@ -36,6 +41,8 @@
 			alert("请先选择仓库");
 		}
 	}
+	
+	// 进入货位管理
 	function huowei() {
 		if($("#tablepot .success").length > 0){	
 			var id = $("#tempid").val();
@@ -44,6 +51,8 @@
 			alert("请先选择仓库");
 		}
 	}
+	
+	// 本页表格导出Excel
 	function toexcel() {
 	    $("#tablepot").table2excel({
 		    exclude: ".noExl",
@@ -54,6 +63,8 @@
 		    exclude_inputs: true
 		});
 	}
+	
+	// 上下页
 	function walkpage(conpage) {
 		if(conpage>0||conpage<=$("#zonpage").text()){
 			var fdid = $("#fdid1").val();
@@ -62,6 +73,8 @@
 					+"&&searchword="+searchword+"&&fdid="+fdid;
 		}
 	}
+	
+	// 跳页
 	function turnpage() {
 		var conpage = Number($("#conpage").val());
 		if(Number.isInteger(conpage) && conpage>0 && conpage<=$("#zonpage").text()){
@@ -71,8 +84,9 @@
 		}
 	}
 	$(document).ready(function(){
-		 var fdid = $("#fdid1").val();
-		 $("#fdid" + fdid).addClass("active");
+		// 设置分店列表所选分店active
+		var fdid = $("#fdid1").val();
+		 	$("#fdid" + fdid).addClass("active");
 		});
 </script>
 </head>

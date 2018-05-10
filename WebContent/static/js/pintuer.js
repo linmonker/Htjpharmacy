@@ -20,6 +20,38 @@ $(function() {
 	$(".win-close").click(function() {
 		window.close();
 	});
+	
+	$('textarea, input, select').blur(function(){
+		var e=$(this);
+		if(e.attr("data-validate")){
+			e.closest('.form-group').find(".input-help").remove();
+			var $checkdata=e.attr("data-validate").split(',');
+			var $checkvalue=e.val();
+			var $checkstate=true;
+			var $checktext="";
+			if(e.attr("placeholder")==$checkvalue){$checkvalue="";}
+			if($checkvalue!="" || e.attr("data-validate").indexOf("required")>=0){
+				for(var i=0;i<$checkdata.length;i++){
+					var $checktype=$checkdata[i].split(':');
+					if($checktype[0]=="equalTo"){
+						var $compareval = $($checktype[1]).val();
+						if($compareval!='' && $checkvalue!=$compareval){
+							$checkstate=false;
+							$checktext=$checktext+"密码不一致";
+						}
+					}else if(!$pintuercheck(e,$checktype[0],$checkvalue)){
+						$checkstate=false;
+						$checktext=$checktext+$checktype[1];
+					}
+				}
+			};
+			if($checkstate){
+				e.parent().find(".input-help").remove();
+			}else{
+				e.closest('.form-group').append('<span class="input-help errormsg">'+$checktext+'</span>');
+			}
+		}
+	});
 	$pintuercheck = function(element, type, value) {
 		$pintu = value.replace(/(^\s*)|(\s*$)/g, "");
 		switch (type) {

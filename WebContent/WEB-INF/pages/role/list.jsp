@@ -13,11 +13,14 @@
 <script src="${ctx}/static/js/jquery.table2excel.min.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script>
+	// 记录所选角色
 	function setid(element,id) {
 		$("#tablepot .success").removeClass("success");
 		$(element).addClass("success");
 		$("#tempid").val(id);
 	}
+	
+	// 查看修改
 	function edit() {
 		if($("#tablepot .success").length > 0){
 			var id = $("#tempid").val();
@@ -26,6 +29,8 @@
 			alert("请先选择角色");
 		}
 	}
+	
+	// 删除角色
 	function del() {
 		if($("#tablepot .success").length > 0){	
 			if (confirm("您确定要删除 " + $("#tablepot .success td:eq(1)").text() + " 吗?")) {	
@@ -36,6 +41,8 @@
 			alert("请先选择角色");
 		}
 	}
+	
+	// 本页表格导出Excel
 	function toexcel() {
 	    $("#tablepot").table2excel({
 		    exclude: ".noExl",
@@ -45,6 +52,23 @@
 		    exclude_links: true,
 		    exclude_inputs: true
 		});
+	}
+	
+	// 上下页
+	function walkpage(conpage) {
+		if(conpage>0||conpage<=$("#zonpage").text()){
+			location="${ctx }/role/list?conpage="+conpage;
+		}
+	}
+	
+	// 跳页
+	function turnpage() {
+		var conpage = Number($("#conpage").val());
+		if(Number.isInteger(conpage) && conpage>0 && conpage<=$("#zonpage").text()){
+			return true;
+		}else{
+			return false;
+		}
 	}
 </script>
 </head>
@@ -114,7 +138,7 @@
 				</nav>
 				<div>
 					<input type="hidden" id="tempid" />
-					<span>${waymsg }</span> <span>共${rolelist.size() }条记录</span>
+					<span>${waymsg }</span>
 				</div>
 				<table id="tablepot" class="table table-bordered table-condensed">
 					<thead>
@@ -139,6 +163,27 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<form class="form-inline" action="${ctx }/role/list"
+					onsubmit="return turnpage()">
+					<div class="form-group">
+						<p class="form-control-static">共${count }条记录</p>
+					</div>
+					<c:if test="${count >0 }">
+						<button type="button" class="btn btn-default"
+							onclick="walkpage(${conpage-1 })">上一页</button>
+						<div class="form-group">
+							<input type="text" class="form-control" style="width: 60px"
+								id="conpage" name="conpage" value="${conpage }">
+							<p class="form-control-static">
+								/<span id="zonpage"><fmt:formatNumber
+										value="${count/20 + 0.5}" pattern="#,###,###,###" /></span> 页
+							</p>
+						</div>
+						<button type="submit" class="btn btn-default">跳转</button>
+						<button type="button" class="btn btn-default"
+							onclick="walkpage(${conpage+1 })">下一页</button>
+					</c:if>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -45,26 +45,41 @@
 		where a.fdid = #{fdid,jdbcType=INTEGER} and a.yhbmid = b.Id and a.dm = 0
 		order by yhbh asc
 	</select>
+	<select id="getlist" resultType="cn.sdhqtj.hjt.entity.YonghuVo">
+		select a.*, b.csmc
+		from hjt_yonghu a,hjt_zuzhijigou b
+		where a.fdid = #{fdid} and a.yhbmid = b.Id and a.dm = 0
+		order by yhbh asc
+		limit #{start},20
+	</select>
+	<select id="getcount" resultType="java.lang.Integer">
+		select count(*)
+		from hjt_yonghu
+		where fdid = #{fdid} and dm = 0
+	</select>
+	<select id="searchyonghu" resultType="cn.sdhqtj.hjt.entity.YonghuVo">
+		select a.*, b.csmc
+		from hjt_yonghu a,hjt_zuzhijigou b
+		where a.fdid = #{yonghu.fdid} and a.dm = 0 and a.bmid = b.Id and (a.yhbh
+		like concat("%",#{yonghu.yhdlm},"%") or a.yhdlm like concat("%",#{yonghu.yhdlm},"%")
+		or a.yhxm like concat("%",#{yonghu.yhdlm},"%") or a.yhxmjp like
+		concat("%",#{yonghu.yhdlm},"%") or a.yhsfzh like concat("%",#{yonghu.yhdlm},"%"))
+		limit #{start},20
+	</select>
+	<select id="getsearchcount" resultType="java.lang.Integer">
+		select count(*)
+		from hjt_yonghu
+		where fdid = #{yonghu.fdid} and dm = 0 and (yhbh like concat("%",#{yonghu.yhdlm},"%") 
+		or yhdlm like concat("%",#{yonghu.yhdlm},"%") or yhxm like concat("%",#{yonghu.yhdlm},"%") 
+		or yhxmjp like concat("%",#{yonghu.yhdlm},"%") or yhsfzh like concat("%",#{yonghu.yhdlm},"%"))
+		limit #{start},20
+	</select>
 	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.YonghuVo" parameterType="java.lang.Integer">
 		select y.*, z.csmc,f.fdbh,f.fdmc,r.role_name rolename
 		from hjt_yonghu y left join hjt_zuzhijigou z on y.yhbmid = z.Id left join
 		  hjt_fendian f on y.fdid = f.id left join hjt_role r on y.yhjsid = r.role_id
 		where y.fdid = #{fdid,jdbcType=INTEGER} and y.dm = 0
 		order by y.yhbh asc
-	</select>
-	<select id="searchyonghu" resultType="cn.sdhqtj.hjt.entity.YonghuVo"
-		parameterType="cn.sdhqtj.hjt.entity.Yonghu">
-		select a.*, b.csmc
-		from hjt_yonghu a,hjt_zuzhijigou b
-		where a.fdid = #{fdid,jdbcType=INTEGER} and a.dm = 0 and a.bmid = b.Id and (a.yhbh
-		like concat("%",#{yhbh},"%") or a.yhdlm like concat("%",#{yhdlm},"%")
-		or a.yhxm like concat("%",#{yhxm},"%") or a.yhxmjp like
-		concat("%",#{yhxmjp},"%") or a.yhsfzh like concat("%",#{yhsfzh},"%"))
-	</select>
-	<select id="getuserByUseranme" resultType="cn.sdhqtj.hjt.entity.YonghuVo" parameterType="java.lang.String">
-		select a.*, b.fdmc
-		from hjt_yonghu a,hjt_fendian b
-		where a.yhdlm = #{yhdlm,jdbcType=VARCHAR} and a.dm = 0 and a.fdid = b.Id
 	</select>
 	<select id="checkrepeat" resultMap="BaseResultMap"
 		parameterType="cn.sdhqtj.hjt.entity.Yonghu">
@@ -75,6 +90,10 @@
 		<if test="id != null">
 			and id != #{id,jdbcType=INTEGER}
 		</if>
+	</select><select id="getuserByUseranme" resultType="cn.sdhqtj.hjt.entity.YonghuVo" parameterType="java.lang.String">
+		select a.*, b.fdmc
+		from hjt_yonghu a,hjt_fendian b
+		where a.yhdlm = #{yhdlm,jdbcType=VARCHAR} and a.dm = 0 and a.fdid = b.Id
 	</select>
 	<update id="updateyonghu" parameterType="cn.sdhqtj.hjt.entity.Yonghu">
 		update hjt_yonghu

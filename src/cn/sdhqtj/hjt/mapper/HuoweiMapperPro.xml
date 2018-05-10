@@ -43,16 +43,16 @@
 		where ckid = #{ckid} and dm = 0
 	</select>
 	<select id="searchhuowei" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" />
+		select *
 		from hjt_cangku_huowei
-		where ckid = #{huowei.ckid,jdbcType=INTEGER} and dm = 0 
+		where ckid = #{huowei.ckid} and dm = 0 
 		  and hwmc like concat("%",#{huowei.hwmc},"%")
 		limit #{start},20
 	</select>
 	<select id="getsearchcount" resultType="java.lang.Integer">
 		select count(*)
 		from hjt_cangku_huowei
-		where ckid = #{huowei.ckid,jdbcType=INTEGER} and dm = 0 
+		where ckid = #{huowei.ckid} and dm = 0 
 		  and hwmc like concat("%",#{huowei.hwmc},"%")
 	</select>
 	<select id="getexcellist" resultType="cn.sdhqtj.hjt.entity.HuoweiVo"

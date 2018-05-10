@@ -16,6 +16,7 @@
 <script src="${ctx}/static/js/jquery.ztree.all.min.js"></script>
 <script src="${ctx}/static/js/pintuer.js"></script>
 <script>
+	// 设置ztree
 	var zTree_Menu;
 	var setting = {
 		view : {
@@ -110,7 +111,7 @@
 		return true;
 	}
 
-	// 打印pdf
+	// 打印PDF
 	function topdf() {
 		$("#formpot").jqprint({
 			debug : false,
@@ -120,13 +121,14 @@
 		});
 	}
 
-	// 初始化操作  
 	$(document).ready(function() {
+		// ztree初始化操作  
+		onloadZTree();
+		// 设置状态下拉列表
 		var sid = $("#rolezt").val();
 		if (sid != '') {
 			$("#zt option[value=" + sid + "]").attr("selected", true);
 		}
-		onloadZTree();
 	});
 </script>
 </head>
@@ -178,7 +180,7 @@
 						</div>
 					</div>
 				</nav>
-				<div>
+				<div class="errormsg">
 					<input id="rolezt" type="hidden" value="${role.zt }" />
 					<span>${waymsg}</span> <span>${bhmsg}</span> <span>${mcmsg}</span>
 				</div>
@@ -193,7 +195,8 @@
 						<label for="role_name" class="col-md-2 control-label">名称</label>
 						<div class="col-md-5">
 							<input type="text" class="form-control" id="role_name"
-								name="role_name" value="${role.role_name }" />
+								name="role_name" value="${role.role_name }"
+								data-validate="required:请输入名称" />
 						</div>
 					</div>
 					<div class="form-group">

@@ -27,7 +27,7 @@
 		where zt = 0
 		order by fdbh asc
 	</select>
-	<select id="getlist" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+	<select id="getlist" resultMap="ResultMapWithBLOBs">
 		select *
 		from hjt_fendian
 		where zt = 0

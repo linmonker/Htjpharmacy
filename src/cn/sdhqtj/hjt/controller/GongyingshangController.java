@@ -5,9 +5,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.io.FileUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -40,7 +41,7 @@ public class GongyingshangController {
 	 * 供应商列表
 	 */
 	@RequestMapping("/list")
-	public String list(HttpServletRequest request, Model model, HttpSession session) {
+	public String list(HttpServletRequest request, Model model) {
 		// 获取分页信息
 		int conpage = 1;
 		String conpagestr = request.getParameter("conpage");
@@ -49,6 +50,8 @@ public class GongyingshangController {
 		}
 		model.addAttribute("conpage", conpage);
 
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		login = (Login) session.getAttribute("loginer");
 		gyslist = gysservice.getlist(login.getFdid(), (conpage - 1) * 20);
 		model.addAttribute("gyslist", gyslist);
@@ -80,7 +83,7 @@ public class GongyingshangController {
 	 * 执行添加供应商
 	 */
 	@RequestMapping("/doadd")
-	public String doadd(GongyingshangWithBLOBs record, Model model, HttpSession session) {
+	public String doadd(GongyingshangWithBLOBs record, Model model) {
 		if (record.getGysbh() == null || record.getGysmc() == null) {
 			// 添加失败，供应商编号不能为空
 			model.addAttribute("waymsg", "供应商添加失败");
@@ -100,6 +103,8 @@ public class GongyingshangController {
 			return "gongyingshang/add";
 		}
 
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		login = (Login) session.getAttribute("loginer");
 		record.setFdid(login.getFdid());
 		// 尝试添加
@@ -182,7 +187,7 @@ public class GongyingshangController {
 	 * 搜索供应商
 	 */
 	@RequestMapping("/search")
-	public String search(HttpServletRequest request, Model model, HttpSession session) {
+	public String search(HttpServletRequest request, Model model) {
 		String searchword = request.getParameter("searchword");
 		// 获取分页信息
 		int conpage = 1;
@@ -194,6 +199,8 @@ public class GongyingshangController {
 		model.addAttribute("searchword", searchword);
 
 		gys = new Gongyingshang();
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		login = (Login) session.getAttribute("loginer");
 		gys.setFdid(login.getFdid());
 		gys.setGysmc(searchword);
@@ -207,7 +214,9 @@ public class GongyingshangController {
 	 * 下载供应商列表Excel
 	 */
 	@RequestMapping("/downloadexcel")
-	public ResponseEntity<byte[]> downloadexcel(HttpSession session) throws Exception {
+	public ResponseEntity<byte[]> downloadexcel() throws Exception {
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		login = (Login) session.getAttribute("loginer");
 		String path = gysservice.writeexcel(login.getFdid());
 		File file = new File(path);

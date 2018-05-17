@@ -47,7 +47,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand">宏济堂药房管理</a>
+				<a class="navbar-brand">宏济堂中医馆药房管理</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
@@ -68,14 +68,14 @@
 				<h4>管理项目</h4>
 				<ul class="nav nav-stacked">
 					<li><a href="${ctx }/fendian/list">分店管理</a></li>
-					<li><a href="${ctx }/yaopinfenlei/list">药品分类</a></li>
-					<li class="active"><a href="${ctx }/yaopin/list">药品信息管理</a></li>
 					<li><a href="${ctx }/gongyingshang/list">供应商管理</a></li>
-					<li><a href="${ctx}/cangku/sylist">仓库管理</a></li>
-					<li><a href="${ctx}/keshi/list">科室管理</a></li>
-					<li><a href="${ctx}/zuzhijigou/list">组织机构</a></li>
-					<li><a href="${ctx}/yonghu/sylist">用户管理</a></li>
-					<li><a href="${ctx}/role/list">角色管理</a></li>
+					<li><a href="${ctx }/yaopinfenlei/list">药品分类管理</a></li>
+					<li class="active"><a href="${ctx }/yaopin/list">药品管理</a></li>
+					<li><a href="${ctx }/cangku/sylist">仓库管理</a></li>
+					<li><a href="${ctx }/keshi/list">科室管理</a></li>
+					<li><a href="${ctx }/chushi/list">处室管理</a></li>
+					<li><a href="${ctx }/yonghu/sylist">用户管理</a></li>
+					<li><a href="${ctx }/role/list">角色管理</a></li>
 				</ul>
 			</div>
 			<div class="col-md-10 maincon">
@@ -157,7 +157,7 @@
 										<label for="ypgg" class="col-md-3 control-label">药品规格</label>
 										<div class="col-md-8">
 											<input type="text" class="form-control" id="ypgg" name="ypgg"
-												value="${yaopin.ypgg }" />
+												value="${yaopin.ypgg }" data-validate="required:请输入药品规格"/>
 										</div>
 									</div>
 									<div class="form-group">
@@ -171,14 +171,14 @@
 										<label for="ypcd" class="col-md-3 control-label">产地</label>
 										<div class="col-md-8">
 											<input type="text" class="form-control" id="ypcd" name="ypcd"
-												value="${yaopin.ypcd }" />
+												value="${yaopin.ypcd }" data-validate="required:请输入产地"/>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="ypscdw" class="col-md-3 control-label">生产单位</label>
 										<div class="col-md-8">
-											<input type="text" class="form-control" id="ypscdw"
-												name="ypscdw" value="${yaopin.ypscdw }" />
+											<input type="text" class="form-control" id="ypscdw" name="ypscdw" 
+												value="${yaopin.ypscdw }" data-validate="required:请输入生产单位"/>
 										</div>
 									</div>
 									<div class="form-group">
@@ -192,7 +192,7 @@
 										<label for="ypdw" class="col-md-3 control-label">计量单位</label>
 										<div class="col-md-8">
 											<input type="text" class="form-control" id="ypdw" name="ypdw"
-												value="${yaopin.ypdw }" />
+												value="${yaopin.ypdw }" data-validate="required:请输入计量单位"/>
 										</div>
 									</div>
 									<div class="form-group">

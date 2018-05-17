@@ -5,9 +5,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.io.FileUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,8 +39,9 @@ public class KeshiController {
 	 * 科室列表
 	 */
 	@RequestMapping("/list")
-	public String list(HttpServletRequest request, Model model, HttpSession session) {
-
+	public String list(HttpServletRequest request, Model model) {
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		login = (Login) session.getAttribute("loginer");
 		
 		// 获取分页信息
@@ -80,7 +82,7 @@ public class KeshiController {
 	 * 执行添加科室
 	 */
 	@RequestMapping("/doadd")
-	public String doadd(Keshi record, Model model, HttpSession session) {
+	public String doadd(Keshi record, Model model) {
 		if (record.getKsbh() == null || record.getKsmc() == null) {
 			// 添加失败，科室编号、科室名称不能为空
 			model.addAttribute("waymsg", "科室添加失败");
@@ -99,7 +101,9 @@ public class KeshiController {
 			model.addAttribute("keshi", record);
 			return "keshi/add";
 		}
-
+		
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		Login login = (Login) session.getAttribute("loginer");
 		record.setFdid(login.getFdid());
 		int res = keshiservice.addkeshi(record);
@@ -181,7 +185,7 @@ public class KeshiController {
 	 * 搜索科室
 	 */
 	@RequestMapping("/search")
-	public String search(HttpServletRequest request, Model model, HttpSession session) {
+	public String search(HttpServletRequest request, Model model) {
 		String searchword = request.getParameter("searchword");
 		// 获取分页信息
 		int conpage = 1;
@@ -193,6 +197,8 @@ public class KeshiController {
 		model.addAttribute("searchword", searchword);
 		
 		keshi = new Keshi();
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		login = (Login) session.getAttribute("loginer");
 		keshi.setFdid(login.getFdid());
 		keshi.setKsmc(searchword);
@@ -206,7 +212,9 @@ public class KeshiController {
 	 * 下载科室列表Excel
 	 */
 	@RequestMapping("/downloadexcel")
-	public ResponseEntity<byte[]> downloadexcel(HttpSession session) throws Exception {
+	public ResponseEntity<byte[]> downloadexcel() throws Exception {
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		login = (Login) session.getAttribute("loginer");
 		String path = keshiservice.writeexcel(login.getFdid());
 		File file = new File(path);

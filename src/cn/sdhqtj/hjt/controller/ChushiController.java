@@ -5,9 +5,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.io.FileUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,7 +25,7 @@ import cn.sdhqtj.hjt.service.ChushiService;
  * 处室controller
  */
 @Controller
-@RequestMapping("/zuzhijigou")
+@RequestMapping("/chushi")
 public class ChushiController {
 
 	@Resource
@@ -38,7 +39,9 @@ public class ChushiController {
 	 * 处室列表
 	 */
 	@RequestMapping("/list")
-	public String list(HttpServletRequest request, Model model, HttpSession session) {
+	public String list(HttpServletRequest request, Model model) {
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		login = (Login) session.getAttribute("loginer");
 		// 获取分页信息
 		int conpage = 1;
@@ -63,7 +66,7 @@ public class ChushiController {
 		} else if ("error".equals(waymsg)) {
 			model.addAttribute("waymsg", "操作失误");
 		}
-		return "zuzhijigou/list";
+		return "chushi/list";
 	}
 
 	/**
@@ -71,21 +74,21 @@ public class ChushiController {
 	 */
 	@RequestMapping("/add")
 	public String add() {
-		return "zuzhijigou/add";
+		return "chushi/add";
 	}
 
 	/**
 	 * 执行添加处室
 	 */
 	@RequestMapping("/doadd")
-	public String doadd(Zuzhijigou record, Model model, HttpSession session) {
+	public String doadd(Zuzhijigou record, Model model) {
 		if (record.getCsbh() == null || record.getCsmc() == null) {
 			// 添加失败，处室编号、处室名称不能为空
 			model.addAttribute("waymsg", "处室添加失败");
 			model.addAttribute("bhmsg", "处室编号不能为空");
 			model.addAttribute("mcmsg", "处室名称不能为空");
 			model.addAttribute("chushi", record);
-			return "zuzhijigou/add";
+			return "chushi/add";
 		}
 
 		// 检查重复
@@ -95,9 +98,11 @@ public class ChushiController {
 			model.addAttribute("bhmsg", "此处室编号已存在");
 			model.addAttribute("waymsg", "处室添加失败");
 			model.addAttribute("chushi", record);
-			return "zuzhijigou/add";
+			return "chushi/add";
 		}
 
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		Login login = (Login) session.getAttribute("loginer");
 		record.setFdid(login.getFdid());
 		int res = chushiservice.addchushi(record);
@@ -108,7 +113,7 @@ public class ChushiController {
 			// 添加失败
 			model.addAttribute("waymsg", "处室添加失败");
 			model.addAttribute("chushi", record);
-			return "zuzhijigou/add";
+			return "chushi/add";
 		}
 	}
 
@@ -120,7 +125,7 @@ public class ChushiController {
 		Integer id = Integer.valueOf(request.getParameter("id"));
 		chushi = chushiservice.getchushi(id);
 		model.addAttribute("chushi", chushi);
-		return "zuzhijigou/edit";
+		return "chushi/edit";
 	}
 
 	/**
@@ -134,7 +139,7 @@ public class ChushiController {
 			model.addAttribute("bhmsg", "处室编号不能为空");
 			model.addAttribute("mcmsg", "处室名称不能为空");
 			model.addAttribute("chushi", record);
-			return "zuzhijigou/edit";
+			return "chushi/edit";
 		}
 
 		// 检查重复
@@ -144,7 +149,7 @@ public class ChushiController {
 			model.addAttribute("bhmsg", "此科室编号已存在");
 			model.addAttribute("waymsg", "处室修改失败");
 			model.addAttribute("chushi", record);
-			return "zuzhijigou/edit";
+			return "chushi/edit";
 		}
 
 		int res = chushiservice.updatechushi(record);
@@ -155,7 +160,7 @@ public class ChushiController {
 			// 修改失败
 			model.addAttribute("waymsg", "处室修改失败");
 			model.addAttribute("chushi", record);
-			return "zuzhijigou/edit";
+			return "chushi/edit";
 		}
 	}
 
@@ -179,7 +184,7 @@ public class ChushiController {
 	 * 搜索处室
 	 */
 	@RequestMapping("/search")
-	public String search(HttpServletRequest request, Model model, HttpSession session) {
+	public String search(HttpServletRequest request, Model model) {
 		String searchword = request.getParameter("searchword");
 		// 获取分页信息
 		int conpage = 1;
@@ -191,20 +196,24 @@ public class ChushiController {
 		model.addAttribute("searchword", searchword);
 		
 		chushi = new Zuzhijigou();
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		login = (Login) session.getAttribute("loginer");
 		chushi.setFdid(login.getFdid());
 		chushi.setCsmc(searchword);
 		chushilist = chushiservice.searchchushi(chushi,(conpage - 1) * 20);
 		model.addAttribute("chushilist", chushilist);
 		model.addAttribute("count", chushiservice.getsearchcount(chushi));
-		return "zuzhijigou/searchlist";
+		return "chushi/searchlist";
 	}
 
 	/**
 	 * 下载处室列表Excel
 	 */
 	@RequestMapping("/downloadexcel")
-	public ResponseEntity<byte[]> downloadexcel(HttpSession session) throws Exception {
+	public ResponseEntity<byte[]> downloadexcel() throws Exception {
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		login = (Login) session.getAttribute("loginer");
 		String path = chushiservice.writeexcel(login.getFdid());
 		File file = new File(path);

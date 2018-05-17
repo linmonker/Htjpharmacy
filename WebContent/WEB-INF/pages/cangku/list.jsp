@@ -67,7 +67,7 @@
 	// 上下页
 	function walkpage(conpage) {
 		if(conpage>0||conpage<=$("#zonpage").text()){
-			var fdid = $("#fdid1").val();
+			var fdid = $("#tempfdid").val();
 			location="${ctx }/cangku/list?conpage="+conpage+"&&fdid="+fdid;
 		}
 	}
@@ -83,7 +83,7 @@
 	}
 	$(document).ready(function(){
 		// 设置分店列表所选分店active
-		var fdid = $("input[name='fdid']").val();
+		var fdid = $("#tempfdid").val();
 			$("#fdid" + fdid).addClass("active");
 		});
 </script>
@@ -92,7 +92,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand">宏济堂药房管理</a>
+				<a class="navbar-brand">宏济堂中医馆药房管理</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
@@ -113,14 +113,14 @@
 				<h4>管理项目</h4>
 				<ul class="nav nav-stacked">
 					<li><a href="${ctx }/fendian/list">分店管理</a></li>
-					<li><a href="${ctx }/yaopinfenlei/list">药品分类</a></li>
-					<li><a href="${ctx }/yaopin/list">药品信息管理</a></li>
 					<li><a href="${ctx }/gongyingshang/list">供应商管理</a></li>
-					<li class="active"><a href="${ctx}/cangku/sylist">仓库管理</a></li>
-					<li><a href="${ctx}/keshi/list">科室管理</a></li>
-					<li><a href="${ctx}/zuzhijigou/list">组织机构</a></li>
-					<li><a href="${ctx}/yonghu/sylist">用户管理</a></li>
-					<li><a href="${ctx}/role/list">角色管理</a></li>
+					<li><a href="${ctx }/yaopinfenlei/list">药品分类管理</a></li>
+					<li><a href="${ctx }/yaopin/list">药品管理</a></li>
+					<li class="active"><a href="${ctx }/cangku/sylist">仓库管理</a></li>
+					<li><a href="${ctx }/keshi/list">科室管理</a></li>
+					<li><a href="${ctx }/chushi/list">处室管理</a></li>
+					<li><a href="${ctx }/yonghu/sylist">用户管理</a></li>
+					<li><a href="${ctx }/role/list">角色管理</a></li>
 				</ul>
 			</div>
 			<div class="col-md-10 maincon">
@@ -131,11 +131,14 @@
 						</div>
 						<div class="collapse navbar-collapse">
 							<ul class="nav navbar-nav">
-								<li><a
-									href="${ctx}/cangku/add?fdid=${cangkulist.get(0).fdid }">添加仓库</a></li>
-								<li><a onclick="return edit()">修改仓库</a></li>
-								<li><a onclick="return del()">删除仓库</a></li>
-								<li><a onclick="return huowei()">货位管理</a></li>
+								<c:if
+									test="${cangkulist.get(0).fdid == sessionScope.loginer.fdid }">
+									<li><a
+										href="${ctx}/cangku/add?fdid=${cangkulist.get(0).fdid }">添加仓库</a></li>
+									<li><a onclick="return edit()">查看修改</a></li>
+									<li><a onclick="return del()">删除仓库</a></li>
+									<li><a onclick="return huowei()">货位管理</a></li>
+								</c:if>
 								<li class="dropdown"><a id="drop1" data-toggle="dropdown"
 									class="dropdown-toggle" role="button" aria-haspopup="true"
 									aria-expanded="false">导出Excel <span class="caret"></span>
@@ -148,7 +151,7 @@
 							</ul>
 							<form class="navbar-form navbar-right"
 								action="${ctx }/cangku/search" method="post">
-								<input type="hidden" id="fdid1" name="fdid"
+								<input type="hidden" id="tempfdid" name="fdid"
 									value="${cangkulist.get(0).fdid }" />
 								<input class="form-control" type="text" placeholder="请输入搜索关键字"
 									name="searchword" />

@@ -5,11 +5,17 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
 
 	<!-- 注解驱动 -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven conversion-service="conversionService" />
 	<mvc:default-servlet-handler />
 
-	<!-- 可以扫描controller、service、..., 这里让扫描controller，指定controller的包 -->
-	<cxt:component-scan base-package="cn.sdhqtj.hjt" />
+	<!-- 可以扫描controller、service、..., 这里让扫描controller，指定controller的包
+	 -->
+	<cxt:component-scan base-package="cn.sdhqtj.hjt.controller" />
+	
+	<!-- 自定义参数绑定 -->
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	</bean>
 
 	<!-- 视图解析器. 解析jsp，默认使用jstl标签，classpath下的得有jstl的包 -->
 	<bean

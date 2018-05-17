@@ -5,9 +5,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.io.FileUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -95,7 +96,7 @@ public class YaopinController {
 	 * 执行添加药品
 	 */
 	@RequestMapping("/doadd")
-	public String doadd(YaopinWithBLOBs record, Model model, HttpSession session) {
+	public String doadd(YaopinWithBLOBs record, Model model) {
 		if (record.getYpbh() == null || record.getYpspm() == null) {
 			// 添加失败，药品编号、药品名称不能为空
 			model.addAttribute("waymsg", "药品添加失败");
@@ -126,7 +127,8 @@ public class YaopinController {
 
 			return "yaopin/add";
 		}
-
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		Login loginer = (Login) session.getAttribute("loginer");
 		record.setYpcjr(loginer.getId());
 

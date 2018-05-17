@@ -8,9 +8,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.io.FileUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -107,7 +108,7 @@ public class RoleController {
 	 * 执行添加角色
 	 */
 	@RequestMapping("/doadd")
-	public String doadd(HttpServletRequest request, Role record, Model model, HttpSession session) {
+	public String doadd(HttpServletRequest request, Role record, Model model) {
 		// 获取前端权限useableid json字符串
 		String quanxians = request.getParameter("quanxians");
 		if (record.getRole_name() == null) {
@@ -132,6 +133,8 @@ public class RoleController {
 			return "role/add";
 		}
 
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		Login login = (Login) session.getAttribute("loginer");
 		record.setUser_id_create(Long.valueOf(login.getId()));
 		int roleid = roleservice.addrole(record);

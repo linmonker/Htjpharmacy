@@ -78,7 +78,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand">宏济堂药房管理</a>
+				<a class="navbar-brand">宏济堂中医馆药房管理</a>
 			</div>
 			<div class="collapse navbar-collapse ">
 				<ul class="nav navbar-nav">
@@ -99,14 +99,14 @@
 				<h4>管理项目</h4>
 				<ul class="nav nav-stacked">
 					<li><a href="${ctx }/fendian/list">分店管理</a></li>
-					<li><a href="${ctx }/yaopinfenlei/list">药品分类</a></li>
-					<li><a href="${ctx }/yaopin/list">药品信息管理</a></li>
 					<li><a href="${ctx }/gongyingshang/list">供应商管理</a></li>
-					<li><a href="${ctx}/cangku/sylist">仓库管理</a></li>
-					<li><a href="${ctx}/keshi/list">科室管理</a></li>
-					<li><a href="${ctx}/zuzhijigou/list">组织机构</a></li>
-					<li><a href="${ctx}/yonghu/sylist">用户管理</a></li>
-					<li class="active"><a href="${ctx}/role/list">角色管理</a></li>
+					<li><a href="${ctx }/yaopinfenlei/list">药品分类管理</a></li>
+					<li><a href="${ctx }/yaopin/list">药品管理</a></li>
+					<li><a href="${ctx }/cangku/sylist">仓库管理</a></li>
+					<li><a href="${ctx }/keshi/list">科室管理</a></li>
+					<li><a href="${ctx }/chushi/list">处室管理</a></li>
+					<li><a href="${ctx }/yonghu/sylist">用户管理</a></li>
+					<li class="active"><a href="${ctx }/role/list">角色管理</a></li>
 				</ul>
 			</div>
 			<div class="col-md-10 maincon">

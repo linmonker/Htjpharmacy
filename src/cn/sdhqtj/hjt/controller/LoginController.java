@@ -1,11 +1,10 @@
 package cn.sdhqtj.hjt.controller;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,8 +38,10 @@ public class LoginController {
 	 * 进入首页
 	 */
 	@RequestMapping("/index")
-	public void index(HttpSession session) {
+	public void index() {
 		if (login != null) {
+			Subject subject = SecurityUtils.getSubject();
+			Session session = subject.getSession(true);
 			session.setAttribute("loginer", login);
 		}
 	}
@@ -77,11 +78,9 @@ public class LoginController {
 	 * 退出登录
 	 */
 	@RequestMapping("/outlogin")
-	public Object outlogin(HttpSession session, Model model) {
-		if (session.getAttribute("loginer") != null) {
-			Subject subject = SecurityUtils.getSubject();
-			subject.logout();
-		}
+	public Object outlogin(Model model) {
+		Subject subject = SecurityUtils.getSubject();
+		subject.logout();
 		return "redirect:login";
 	}
 }

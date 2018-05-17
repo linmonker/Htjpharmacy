@@ -18,11 +18,11 @@
 			<div class="col-md-4"
 				style="border: 2px solid #a1a1a1; border-radius: 10px; position: absolute; left: 33%; top: 30%;">
 				<form class="form-horizontal" action="dologin" method="post">
-					<div class="col-md-offset-2">
-						<h2>宏济堂药房管理系统</h2>
+					<div class="form-group">
+						<h2 class="col-md-offset-2">宏济堂中医馆药房管理</h2>
 					</div>
 					<div class="form-group">
-						<label for="username" class="col-md-2 control-label">用户名</label>
+						<label for="username" class="col-md-2 control-label col-md-offset-1">用户名</label>
 						<div class="col-md-8">
 							<input type="text" class="form-control" name="username"
 								placeholder="登录账号" value="${username }">
@@ -30,7 +30,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="password" class="col-md-2 control-label">密码</label>
+						<label for="password" class="col-md-2 control-label col-md-offset-1">密码</label>
 						<div class="col-md-8">
 							<input type="text" class="form-control" name="password"
 								placeholder="登录密码">
@@ -38,7 +38,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-md-offset-3">
+						<div class="col-md-offset-4">
 							<button class="btn btn-primary" type="submit">登录</button>
 							<span class="errormsg">${loginmsg }</span>
 						</div>

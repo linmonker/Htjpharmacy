@@ -35,7 +35,7 @@
 		limit #{start},20
 	</select>
 	<select id="getcount" resultType="java.lang.Integer">
-		select *
+		select count(*)
 		from hjt_role
 		where dm = 0
 	</select>

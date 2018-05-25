@@ -251,7 +251,7 @@
 			async : true, // 是否异步  
 			cache : false, // 是否使用缓存  
 			type : 'post', // 请求方式,post  
-			dataType : "json", // 数据传输格式  
+			dataType : "json", //数据传输格式  
 			url : "${ctx}/yaopinfenlei/getlist", // 请求链接  
 			error : function() {
 				alert('获取页面数据失败，请刷新');

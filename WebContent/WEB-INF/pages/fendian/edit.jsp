@@ -48,7 +48,7 @@
 		<div class="row">
 			<div class="col-md-2 sidebar">
 				<h4>管理项目</h4>
-				<ul class="nav navbar-nav">
+				<ul class="nav nav-stacked">
 					<li class="active"><a href="${ctx }/fendian/list">分店管理</a></li>
 					<li><a href="${ctx }/gongyingshang/list">供应商管理</a></li>
 					<li><a href="${ctx }/yaopinfenlei/list">药品分类管理</a></li>

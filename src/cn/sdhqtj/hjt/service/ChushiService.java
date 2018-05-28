@@ -14,7 +14,7 @@ public interface ChushiService {
 	/**
 	 * 根据分店id获取处室列表
 	 */
-	public List<Zuzhijigou> chushiquery(int id);
+	public List<Zuzhijigou> chushiquery(int fdid);
 
 	/**
 	 * 根据分店id获取处室列表，从start开始20条记录

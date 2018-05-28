@@ -29,9 +29,9 @@ public class KeshiSer implements KeshiService {
 	 * 根据分店id获取科室列表
 	 */
 	@Override
-	public List<Keshi> keshiquery(int id) {
+	public List<Keshi> keshiquery(int fdid) {
 		// TODO Auto-generated method stub
-		keshilist = keshiMapperPro.keshiquery(id);
+		keshilist = keshiMapperPro.keshiquery(fdid);
 		return keshilist;
 	}
 

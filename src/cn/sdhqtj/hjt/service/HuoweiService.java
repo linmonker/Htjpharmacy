@@ -14,7 +14,7 @@ public interface HuoweiService {
 	/**
 	 * 根据仓库id获取货位列表
 	 */
-	public List<Huowei> huoweiquery(int id);
+	public List<Huowei> huoweiquery(int ckid);
 
 	/**
 	 * 根据仓库id获取货位列表，从start开始20条记录

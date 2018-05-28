@@ -139,7 +139,7 @@
 	</select>
 	<delete id="deletequanxian" parameterType="java.lang.Integer">
 	    delete from hjt_access
-	    where roleid = #{role_id,jdbcType=INTEGER}
+	    where roleid = #{role_id,jdbcType=INTEGER} and acid > 0
 	</delete>
 	<insert id="addquanxian" parameterType="java.util.List">
         insert into hjt_access (roleid, useableid)

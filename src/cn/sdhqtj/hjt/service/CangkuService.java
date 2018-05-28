@@ -14,7 +14,7 @@ public interface CangkuService {
 	/**
 	 * 根据分店id获取仓库列表
 	 */
-	public List<Cangku> cangkuquery(int id);
+	public List<Cangku> cangkuquery(int fdid);
 
 	/**
 	 * 根据分店id获取仓库列表，从start开始20条记录

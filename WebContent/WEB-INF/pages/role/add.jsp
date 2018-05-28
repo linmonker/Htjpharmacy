@@ -65,8 +65,8 @@
 		if (qxs.length > 0) {
 			qxs = $.parseJSON(qxs);
 			for (var i = 0; i < qxs.length; i++) {
-				var nodes = zTree_Menu.getNodesByParam("id", qxs[i].id);
-				zTree_Menu.checkNode(nodes[0], true, true);
+				var node = zTree_Menu.getNodeByParam("id", qxs[i].id);
+				zTree_Menu.checkNode(node, true, true);
 			}
 		}
 	}
@@ -114,7 +114,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand">宏济堂中医馆药房管理</a>
+				<a class="navbar-brand">某中医馆药房管理</a>
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">

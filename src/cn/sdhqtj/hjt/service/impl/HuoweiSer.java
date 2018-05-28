@@ -29,9 +29,9 @@ public class HuoweiSer implements HuoweiService {
 	 * 根据仓库id获取货位列表
 	 */
 	@Override
-	public List<Huowei> huoweiquery(int id) {
+	public List<Huowei> huoweiquery(int ckid) {
 		// TODO Auto-generated method stub
-		huoweilist = huoweiMapperPro.huoweiquery(id);
+		huoweilist = huoweiMapperPro.huoweiquery(ckid);
 		return huoweilist;
 	}
 

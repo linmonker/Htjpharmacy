@@ -19,7 +19,7 @@
 				style="border: 2px solid #a1a1a1; border-radius: 10px; position: absolute; left: 33%; top: 30%;">
 				<form class="form-horizontal" action="dologin" method="post">
 					<div class="form-group">
-						<h2 class="col-md-offset-2">宏济堂中医馆药房管理</h2>
+						<h2 class="col-md-offset-2">某中医馆药房管理</h2>
 					</div>
 					<div class="form-group">
 						<label for="username" class="col-md-2 control-label col-md-offset-1">用户名</label>
@@ -32,7 +32,7 @@
 					<div class="form-group">
 						<label for="password" class="col-md-2 control-label col-md-offset-1">密码</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" name="password"
+							<input type="password" class="form-control" name="password"
 								placeholder="登录密码">
 							<span class="icon icon-key margin-small"></span>
 						</div>

@@ -30,9 +30,9 @@ public class CangkuSer implements CangkuService {
 	 * 根据分店id获取仓库列表
 	 */
 	@Override
-	public List<Cangku> cangkuquery(int id) {
+	public List<Cangku> cangkuquery(int fdid) {
 		// TODO Auto-generated method stub
-		cangkulist = cangkuMapperPro.cangkuquery(id);
+		cangkulist = cangkuMapperPro.cangkuquery(fdid);
 		return cangkulist;
 	}
 

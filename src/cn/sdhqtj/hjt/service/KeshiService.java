@@ -14,7 +14,7 @@ public interface KeshiService {
 	/**
 	 * 根据分店id获取科室列表
 	 */
-	public List<Keshi> keshiquery(int id);
+	public List<Keshi> keshiquery(int fdid);
 
 	/**
 	 * 根据分店id获取科室列表，从start开始20条记录

@@ -29,9 +29,9 @@ public class ChushiSer implements ChushiService {
 	 * 根据分店id获取处室列表
 	 */
 	@Override
-	public List<Zuzhijigou> chushiquery(int id) {
+	public List<Zuzhijigou> chushiquery(int fdid) {
 		// TODO Auto-generated method stub
-		chushilist = zuzhijigouMapperPro.chushiquery(id);
+		chushilist = zuzhijigouMapperPro.chushiquery(fdid);
 		return chushilist;
 	}
 

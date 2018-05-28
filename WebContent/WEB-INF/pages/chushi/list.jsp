@@ -76,7 +76,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand">宏济堂中医馆药房管理</a>
+				<a class="navbar-brand">某中医馆药房管理</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">

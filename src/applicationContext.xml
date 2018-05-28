@@ -160,6 +160,9 @@
 				/static/** = anon
 				/info/** = anon
 				/** = authc
+				/yaopinfenlei/getlist = perms[/yaopinfenlei/list]
+				/role/menulist = authc
+				/role/getquanxian = authc
 				/** = perms
 			</value>
 		</property>

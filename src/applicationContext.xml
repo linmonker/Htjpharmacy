@@ -148,25 +148,30 @@
 				<entry key="perms">
 					<bean class="cn.sdhqtj.hjt.shiro.PermFilter"></bean>
 				</entry>
+				<entry key="ajaxperms">
+					<bean class="cn.sdhqtj.hjt.shiro.AjaxPermFilter"></bean>
+				</entry>
 			</map>
 		</property>
 		<!-- Shiro连接约束配置,即过滤链的定义 -->
 		<property name="filterChainDefinitions">
 			<value>
-				<!-- 匿名anon -->
-				<!-- authc登录验证 -->
-				<!-- perms权限过滤验证 -->
+				<!-- anon 匿名 -->
+				<!-- authc 登录验证 -->
+				<!-- ajaxperms ajax请求权限过滤验证 -->
+				<!-- perms 普通请求权限过滤验证 -->
 				/*login = anon
 				/static/** = anon
 				/info/** = anon
 				/** = authc
-				/yaopinfenlei/getlist = perms[/yaopinfenlei/list]
-				/role/menulist = authc
-				/role/getquanxian = authc
+				/yaopinfenlei/getlist = ajaxperms[/yaopinfenlei/list]
+				/role/menulist = ajaxperms["/role/add,/role/edit"]
+				/role/getquanxian = ajaxperms[/role/edit]
 				/** = perms
 			</value>
 		</property>
 	</bean>
+	
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
 	<bean id="lifecycleBeanPostProcessor"
 		class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />

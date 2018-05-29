@@ -14,24 +14,13 @@ public class PermFilter extends AuthorizationFilter {
 	protected boolean isAccessAllowed(ServletRequest req, ServletResponse res, Object mappedValue) throws Exception {
 
 		HttpServletRequest request = (HttpServletRequest) req;
-		Subject subject = SecurityUtils.getSubject();
+		
+		// 如果是Ajax请求
 		if("XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"))) {
 			return true;
 		}
-		// 取到参数 ，强制转换判断。
-		String[] arra = (String[]) mappedValue;
-		if (arra == null || arra.length == 0) {
-			System.out.println("-----b--------" + request.getServletPath());
-			return subject.isPermitted(request.getServletPath());
-		} else {
-			for (String reqpath : arra) {
-				System.out.println("-----a--------" + reqpath);
-				if (subject.isPermitted(reqpath)) {
-					return true;
-				}
-			}
-		}
-		return false;
-
+		Subject subject = SecurityUtils.getSubject();
+		return subject.isPermitted(request.getServletPath());
 	}
+
 }
